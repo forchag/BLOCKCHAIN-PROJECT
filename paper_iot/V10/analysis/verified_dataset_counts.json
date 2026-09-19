@@ -1,0 +1,66 @@
+{
+  "sensor_transactions": {
+    "expected": 146400,
+    "observed": 146400,
+    "match": true
+  },
+  "authorization_decisions": {
+    "expected": 209000,
+    "observed": 209000,
+    "match": true
+  },
+  "peer_scaling_runs": {
+    "expected": 32,
+    "observed": 32,
+    "match": true,
+    "expected_per_config": 8,
+    "observed_per_config": {
+      "4": 8,
+      "8": 8,
+      "16": 8,
+      "32": 8
+    }
+  },
+  "throughput_runs": {
+    "expected": 100,
+    "observed": 100,
+    "match": true
+  },
+  "authorization_boundary_attempts": {
+    "expected": 8000,
+    "observed": 8000,
+    "match": true,
+    "expected_blocked": 8000,
+    "observed_blocked": 7955,
+    "blocked_match": false
+  },
+  "revocation_stages": {
+    "expected": 200,
+    "observed": 200,
+    "match": true
+  },
+  "revocation_denials": {
+    "expected": 973,
+    "observed": 973,
+    "match": true
+  },
+  "connectivity_outages": {
+    "expected": 3,
+    "observed": 3,
+    "match": true
+  },
+  "energy_measurements": {
+    "expected": "derive_from_real_file",
+    "observed": 300
+  },
+  "cryptographic_timings": {
+    "expected": "derive_from_real_file",
+    "observed": 900
+  },
+  "total_rows_10_traces": {
+    "expected": 377414,
+    "observed": 381876,
+    "match": false,
+    "difference": 4462
+  }
+}

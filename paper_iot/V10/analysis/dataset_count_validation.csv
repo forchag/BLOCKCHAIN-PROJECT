@@ -1,0 +1,12 @@
+dataset,expected,observed,difference,match
+sensor_transactions,146400,146400,0,True
+authorization_decisions,209000,209000,0,True
+peer_scaling_runs,32,32,0,True
+throughput_runs,100,100,0,True
+authorization_boundary_attempts,8000,8000,0,True
+revocation_stages,200,200,0,True
+revocation_denials,973,973,0,True
+connectivity_outages,3,3,0,True
+energy_measurements,derive_from_real_file,300,n/a,n/a
+cryptographic_timings,derive_from_real_file,900,n/a,n/a
+total_rows_10_traces,377414,381876,4462,False

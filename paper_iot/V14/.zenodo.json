@@ -1,0 +1,38 @@
+{
+  "title": "Blockchain access control for agricultural edge IoT: research artifact",
+  "upload_type": "dataset",
+  "description": "Pseudonymised field traces, historical and corrected implementations, benchmark harnesses, formal specification, tests and analysis code supporting the accompanying journal article.",
+  "creators": [
+    {
+      "name": "Beloa, Forcha Glen",
+      "orcid": "0009-0003-1972-6100"
+    },
+    {
+      "name": "Sone, Michael Ekonde"
+    },
+    {
+      "name": "Tagne, Elie Fute"
+    },
+    {
+      "name": "Mvogo Asse, André Paul"
+    }
+  ],
+  "keywords": [
+    "Hyperledger Fabric",
+    "agricultural IoT",
+    "access control",
+    "edge computing",
+    "reproducible research"
+  ],
+  "access_right": "open",
+  "doi": "10.5281/zenodo.22667556",
+  "version": "1.0.0",
+  "license": "cc-by-4.0",
+  "related_identifiers": [
+    {
+      "identifier": "10.5281/zenodo.22667556",
+      "relation": "isIdenticalTo",
+      "scheme": "doi"
+    }
+  ]
+}

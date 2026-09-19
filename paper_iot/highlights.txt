@@ -1,0 +1,7 @@
+Highlights
+
+- A 61-day field deployment recorded 209,000 authorization decisions.
+- Eight counterbalanced runs found no detected peer-campaign order effect.
+- Logical peer multiplicity was associated with 388 ms lower write latency.
+- A corrected chaincode package removes two audited policy defects.
+- Missing episode keys prevented end-to-end revocation-exposure analysis.

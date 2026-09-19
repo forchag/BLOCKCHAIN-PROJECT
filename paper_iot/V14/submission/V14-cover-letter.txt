@@ -1,0 +1,12 @@
+Dear Editor,
+
+Please consider the manuscript "Blockchain access control for agricultural edge IoT: a 61-day Hyperledger Fabric field study" for publication in Internet of Things. The article reports a 61-day agricultural edge deployment, controlled latency and throughput campaigns, and an implementation audit grounded in released real measurements.
+
+The manuscript separates field observations from controlled experiments and scripted conformance tests. It uses runs as the experimental unit and reports estimates with confidence intervals. The implementation audit identifies four defects involving policy, residue recovery, signature verification and on-ledger revocation, plus one revocation-observability gap. The released corrected implementation addresses these defects with regression tests and an isolated chaincode benchmark. Historical performance is not presented as corrected-code performance.
+
+The supporting data and code are publicly archived in Zenodo at https://doi.org/10.5281/zenodo.22667556. All authors have approved the manuscript, and the work is not under consideration elsewhere.
+
+Sincerely,
+
+Forcha Glen Beloa
+Corresponding author

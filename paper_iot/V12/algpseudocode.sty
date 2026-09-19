@@ -1,0 +1,29 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{algpseudocode}[2026/09/07 Minimal self-contained pseudocode commands]
+\newcommand{\algorithmicrequire}{\textbf{Require:}}
+\newcommand{\algorithmicensure}{\textbf{Ensure:}}
+\newcommand{\algrenewcommand}[2]{\renewcommand{#1}{#2}}
+\newcommand{\textproc}[1]{\textsc{#1}}
+\newenvironment{algorithmic}[1][]{\begin{list}{}{\setlength{\leftmargin}{1.5em}\setlength{\itemsep}{0.15ex}\setlength{\parsep}{0pt}\setlength{\topsep}{0.2ex}}}{\end{list}}
+\newcommand{\State}{\item}
+\newcommand{\Statex}{\item[]}
+\newcommand{\Require}{\item\algorithmicrequire\ }
+\newcommand{\Ensure}{\item\algorithmicensure\ }
+\newcommand{\If}[1]{\item\textbf{if }#1\textbf{ then}}
+\newcommand{\ElsIf}[1]{\item\textbf{else if }#1\textbf{ then}}
+\newcommand{\Else}{\item\textbf{else}}
+\newcommand{\EndIf}{\item\textbf{end if}}
+\newcommand{\For}[1]{\item\textbf{for }#1\textbf{ do}}
+\newcommand{\ForAll}[1]{\item\textbf{for all }#1\textbf{ do}}
+\newcommand{\EndFor}{\item\textbf{end for}}
+\newcommand{\While}[1]{\item\textbf{while }#1\textbf{ do}}
+\newcommand{\EndWhile}{\item\textbf{end while}}
+\newcommand{\Repeat}{\item\textbf{repeat}}
+\newcommand{\Until}[1]{\item\textbf{until }#1}
+\newcommand{\Return}{\item\textbf{return}\ }
+\newcommand{\Procedure}[2]{\item\textbf{procedure }#1(#2)}
+\newcommand{\EndProcedure}{\item\textbf{end procedure}}
+\newcommand{\Function}[2]{\item\textbf{function }#1(#2)}
+\newcommand{\EndFunction}{\item\textbf{end function}}
+\newcommand{\Comment}[1]{\hfill\textcolor{gray}{\scriptsize\textit{#1}}}
+\endinput

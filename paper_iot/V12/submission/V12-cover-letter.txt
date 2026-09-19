@@ -1,0 +1,14 @@
+Version 12 submission
+
+Dear Editor,
+
+Please consider the manuscript "Blockchain access control for agricultural edge IoT: a 61-day Hyperledger Fabric field study" for publication in Internet of Things. The article reports a 61-day agricultural edge deployment, controlled latency and throughput campaigns, and an implementation audit grounded in released real measurements.
+
+The manuscript separates field observations from controlled experiments and scripted conformance tests. It uses runs as the experimental unit and reports bounded estimates with confidence intervals. The implementation audit identifies three cross-layer defect classes and an outage-observability boundary. Historical performance is not presented as corrected-code performance.
+
+The Version 12 artifact is available at https://github.com/forchag/project-fet2/tree/main/paper_iot/V12. All authors have approved the manuscript, and the work is not under consideration elsewhere.
+
+Sincerely,
+
+Forcha Glen Beloa
+Corresponding author

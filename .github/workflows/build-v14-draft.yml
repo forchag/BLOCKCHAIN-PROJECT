@@ -1,0 +1,31 @@
+name: Build V14 draft PDF
+
+on:
+  push:
+    paths:
+      - "paper_iot/V14/**"
+      - ".github/workflows/build-v14-draft.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile manuscript
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: hrbac_iot_cas.tex
+          working_directory: paper_iot/V14
+          latexmk_use_xelatex: false
+      - name: Name draft
+        run: cp paper_iot/V14/hrbac_iot_cas.pdf paper_iot/V14/V14-draft.pdf
+      - name: Upload draft
+        uses: actions/upload-artifact@v4
+        with:
+          name: V14-draft-pdf
+          path: paper_iot/V14/V14-draft.pdf
+          if-no-files-found: error

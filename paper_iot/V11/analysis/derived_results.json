@@ -1,0 +1,4999 @@
+{
+  "_meta": {
+    "bootstrap_resamples": 10000,
+    "seed": 20250801,
+    "source": "data/raw"
+  },
+  "crypto": {
+    "component_sum_us": 900.2442,
+    "components": {
+      "ed25519_sign": {
+        "ci_high": 860.802622121297,
+        "ci_low": 859.6979778787029,
+        "maximum": 887.0,
+        "mean": 860.2502999999999,
+        "minimum": 835.8,
+        "n": 1000,
+        "p50": 860.1,
+        "p95": 875.6,
+        "p99": 881.303,
+        "sd": 8.90057077215108
+      },
+      "efuse_key_read": {
+        "ci_high": 8.0,
+        "ci_low": 8.0,
+        "maximum": 8.0,
+        "mean": 8.0,
+        "minimum": 8.0,
+        "n": 1000,
+        "p50": 8.0,
+        "p95": 8.0,
+        "p99": 8.0,
+        "sd": 0.0
+      },
+      "key_context": {
+        "ci_high": 20.073679895079227,
+        "ci_low": 19.946920104920775,
+        "maximum": 23.0,
+        "mean": 20.0103,
+        "minimum": 17.0,
+        "n": 1000,
+        "p50": 20.0,
+        "p95": 21.8,
+        "p99": 22.4,
+        "sd": 1.0213555096424933
+      },
+      "sha256_hardware": {
+        "ci_high": 12.045421652965837,
+        "ci_low": 11.921778347034161,
+        "maximum": 15.0,
+        "mean": 11.9836,
+        "minimum": 9.0,
+        "n": 1000,
+        "p50": 12.0,
+        "p95": 13.6,
+        "p99": 14.401,
+        "sd": 0.9962447207105007
+      }
+    },
+    "duty_cycle_share_pct": 4.998367777777778e-05,
+    "residual_us": -0.5379999999998972,
+    "total": {
+      "ci_high": 900.2597857591467,
+      "ci_low": 899.1526142408535,
+      "maximum": 926.1,
+      "mean": 899.7062000000001,
+      "minimum": 873.0,
+      "n": 1000,
+      "p50": 899.45,
+      "p95": 914.405,
+      "p99": 919.601,
+      "sd": 8.920934066824204
+    }
+  },
+  "decisions": {
+    "by_operation": {
+      "ControlAll": 8898,
+      "ControlZone": 8744,
+      "ManageRoles": 9027,
+      "ReadAll": 9070,
+      "ReadAudit": 8944,
+      "ReadOwn": 9030,
+      "ReadZone": 8887,
+      "WriteSensor": 146400
+    },
+    "by_role": {
+      "Admin": 12649,
+      "Agronomist": 12567,
+      "Certifier": 12715,
+      "Farmer": 12158,
+      "Sensor": 146400,
+      "Supply": 12511
+    },
+    "denials_per_day_mean": 79.67213114754098,
+    "denied": 4860,
+    "deny_rate": 0.02325358851674641,
+    "deny_reasons": {
+      "CERT_REVOKED": 973,
+      "OP_NOT_PERMITTED": 985,
+      "POLICY_VIOLATION": 985,
+      "ROLE_INSUFFICIENT": 981,
+      "ZONE_MISMATCH": 936
+    },
+    "granted": 204140,
+    "total": 209000
+  },
+  "decomposition": {
+    "access_control_by_peers": {
+      "4": 321.54557692307685,
+      "8": 320.39259615384617,
+      "16": 322.9046153846154,
+      "32": 316.7679807692308
+    },
+    "access_control_ms": 320.4026923076923,
+    "access_control_share_at_max_pct": 39.02041828670029,
+    "access_control_spread_ms": 6.136634615384594,
+    "endorser_sensitive_ms": 388.1871153846156,
+    "invariance": {
+      "anova_f": 1.9206758736937743,
+      "anova_p": 0.14913913508130716,
+      "equivalence": {
+        "ci90_high": 0.21702205793327423,
+        "ci90_low": -9.77221436562537,
+        "df": 13.263218295496593,
+        "equivalent": true,
+        "margin": 10.0,
+        "mean_diff": -4.777596153846048,
+        "n_a": 8,
+        "n_b": 8,
+        "p": 0.04344164923916738
+      },
+      "extreme_welch": {
+        "cohens_d": -0.8457085520702532,
+        "df": 13.263218295496593,
+        "diff": -4.777596153846048,
+        "diff_ci_high": 1.3123183063057633,
+        "diff_ci_low": -10.867510613997858,
+        "mean_a": 316.7679807692308,
+        "mean_b": 321.54557692307685,
+        "n_a": 8,
+        "n_b": 8,
+        "p": 0.11410580696042706,
+        "t": -1.6914171041405064
+      },
+      "slope_ms_per_doubling": -1.1820769230768917,
+      "trend_p": 0.4201188873712553
+    },
+    "observed_total_ms": 1204.7652884615386,
+    "order_effect": {
+      "recorded_span": {
+        "ci_high": {
+          "intercept": 331.2139345295964,
+          "log2_peers": 0.6343484530781589,
+          "sequence": 0.2534483439263496
+        },
+        "ci_low": {
+          "intercept": 317.86598854732733,
+          "log2_peers": -2.9985022992320456,
+          "sequence": -0.18645308112463682
+        },
+        "coef": {
+          "intercept": 324.53996153846185,
+          "log2_peers": -1.1820769230769432,
+          "sequence": 0.033497631400856376
+        },
+        "dof": 29,
+        "p": {
+          "intercept": 0.0,
+          "log2_peers": 0.193567044059757,
+          "sequence": 0.7576636405058634
+        },
+        "r_squared": 0.06053149317085316,
+        "se": {
+          "intercept": 3.263190036779969,
+          "log2_peers": 0.8881278359827551,
+          "sequence": 0.10754328413514255
+        },
+        "t": {
+          "intercept": 99.45481503697818,
+          "log2_peers": -1.3309760995937252,
+          "sequence": 0.31148045803364266
+        }
+      },
+      "total_latency": {
+        "ci_high": {
+          "intercept": 1565.2714581617934,
+          "log2_peers": -109.58594281237276,
+          "sequence": 2.873687185698802
+        },
+        "ci_low": {
+          "intercept": 1436.220330299749,
+          "log2_peers": -144.70921103378146,
+          "sequence": -1.379384794541577
+        },
+        "coef": {
+          "intercept": 1500.7458942307712,
+          "log2_peers": -127.14757692307711,
+          "sequence": 0.7471511955786125
+        },
+        "dof": 29,
+        "p": {
+          "intercept": 0.0,
+          "log2_peers": 4.6629367034256575e-15,
+          "sequence": 0.47814717757493685
+        },
+        "r_squared": 0.8834320599066823,
+        "se": {
+          "intercept": 31.5493001870132,
+          "log2_peers": 8.586631911119582,
+          "sequence": 1.0397541412037734
+        },
+        "t": {
+          "intercept": 47.56827838763064,
+          "log2_peers": -14.807619359858965,
+          "sequence": 0.7185844864379185
+        }
+      }
+    },
+    "peer_counts": [
+      4,
+      8,
+      16,
+      32
+    ],
+    "residual_at_max_peers_ms": 495.03259615384616,
+    "residual_by_peers": {
+      "4": 883.2197115384618,
+      "8": 829.0740384615383,
+      "16": 733.9803846153845,
+      "32": 495.03259615384616
+    },
+    "residual_still_falling": true,
+    "run_order": [
+      {
+        "peers": 4,
+        "replicate": 1,
+        "run_id": "PSR-01",
+        "sequence": 1,
+        "span_mean": 323.59538461538455,
+        "total_mean": 1188.0192307692307
+      },
+      {
+        "peers": 8,
+        "replicate": 1,
+        "run_id": "PSR-02",
+        "sequence": 2,
+        "span_mean": 315.36769230769227,
+        "total_mean": 1156.872307692308
+      },
+      {
+        "peers": 16,
+        "replicate": 1,
+        "run_id": "PSR-03",
+        "sequence": 3,
+        "span_mean": 327.5976923076923,
+        "total_mean": 1034.7223076923078
+      },
+      {
+        "peers": 32,
+        "replicate": 1,
+        "run_id": "PSR-04",
+        "sequence": 4,
+        "span_mean": 312.22538461538466,
+        "total_mean": 809.0692307692308
+      },
+      {
+        "peers": 8,
+        "replicate": 2,
+        "run_id": "PSR-05",
+        "sequence": 5,
+        "span_mean": 327.9553846153847,
+        "total_mean": 1144.4792307692308
+      },
+      {
+        "peers": 16,
+        "replicate": 2,
+        "run_id": "PSR-06",
+        "sequence": 6,
+        "span_mean": 324.3976923076923,
+        "total_mean": 1054.2615384615385
+      },
+      {
+        "peers": 32,
+        "replicate": 2,
+        "run_id": "PSR-07",
+        "sequence": 7,
+        "span_mean": 312.4369230769231,
+        "total_mean": 824.3407692307693
+      },
+      {
+        "peers": 4,
+        "replicate": 2,
+        "run_id": "PSR-08",
+        "sequence": 8,
+        "span_mean": 321.8,
+        "total_mean": 1207.9969230769232
+      },
+      {
+        "peers": 16,
+        "replicate": 3,
+        "run_id": "PSR-09",
+        "sequence": 9,
+        "span_mean": 326.95692307692303,
+        "total_mean": 1042.0446153846153
+      },
+      {
+        "peers": 32,
+        "replicate": 3,
+        "run_id": "PSR-10",
+        "sequence": 10,
+        "span_mean": 319.19076923076926,
+        "total_mean": 781.1838461538463
+      },
+      {
+        "peers": 4,
+        "replicate": 3,
+        "run_id": "PSR-11",
+        "sequence": 11,
+        "span_mean": 313.12692307692305,
+        "total_mean": 1189.8123076923077
+      },
+      {
+        "peers": 8,
+        "replicate": 3,
+        "run_id": "PSR-12",
+        "sequence": 12,
+        "span_mean": 324.3584615384616,
+        "total_mean": 1149.880769230769
+      },
+      {
+        "peers": 32,
+        "replicate": 4,
+        "run_id": "PSR-13",
+        "sequence": 13,
+        "span_mean": 315.83230769230767,
+        "total_mean": 821.313846153846
+      },
+      {
+        "peers": 4,
+        "replicate": 4,
+        "run_id": "PSR-14",
+        "sequence": 14,
+        "span_mean": 323.86999999999995,
+        "total_mean": 1202.643076923077
+      },
+      {
+        "peers": 8,
+        "replicate": 4,
+        "run_id": "PSR-15",
+        "sequence": 15,
+        "span_mean": 322.9953846153847,
+        "total_mean": 1146.24
+      },
+      {
+        "peers": 16,
+        "replicate": 4,
+        "run_id": "PSR-16",
+        "sequence": 16,
+        "span_mean": 316.6476923076923,
+        "total_mean": 1085.1684615384613
+      },
+      {
+        "peers": 32,
+        "replicate": 5,
+        "run_id": "PSR-17",
+        "sequence": 17,
+        "span_mean": 320.096923076923,
+        "total_mean": 789.8753846153846
+      },
+      {
+        "peers": 16,
+        "replicate": 5,
+        "run_id": "PSR-18",
+        "sequence": 18,
+        "span_mean": 327.12000000000006,
+        "total_mean": 1036.9153846153847
+      },
+      {
+        "peers": 8,
+        "replicate": 5,
+        "run_id": "PSR-19",
+        "sequence": 19,
+        "span_mean": 320.46000000000004,
+        "total_mean": 1143.043846153846
+      },
+      {
+        "peers": 4,
+        "replicate": 5,
+        "run_id": "PSR-20",
+        "sequence": 20,
+        "span_mean": 317.7076923076923,
+        "total_mean": 1202.8792307692306
+      },
+      {
+        "peers": 4,
+        "replicate": 6,
+        "run_id": "PSR-21",
+        "sequence": 21,
+        "span_mean": 313.746923076923,
+        "total_mean": 1206.1653846153847
+      },
+      {
+        "peers": 32,
+        "replicate": 6,
+        "run_id": "PSR-22",
+        "sequence": 22,
+        "span_mean": 309.66153846153844,
+        "total_mean": 830.8192307692308
+      },
+      {
+        "peers": 16,
+        "replicate": 6,
+        "run_id": "PSR-23",
+        "sequence": 23,
+        "span_mean": 314.0892307692308,
+        "total_mean": 1084.479230769231
+      },
+      {
+        "peers": 8,
+        "replicate": 6,
+        "run_id": "PSR-24",
+        "sequence": 24,
+        "span_mean": 317.80384615384617,
+        "total_mean": 1131.713076923077
+      },
+      {
+        "peers": 8,
+        "replicate": 7,
+        "run_id": "PSR-25",
+        "sequence": 25,
+        "span_mean": 312.09846153846144,
+        "total_mean": 1133.136153846154
+      },
+      {
+        "peers": 4,
+        "replicate": 7,
+        "run_id": "PSR-26",
+        "sequence": 26,
+        "span_mean": 328.5630769230769,
+        "total_mean": 1212.5176923076924
+      },
+      {
+        "peers": 32,
+        "replicate": 7,
+        "run_id": "PSR-27",
+        "sequence": 27,
+        "span_mean": 321.7569230769231,
+        "total_mean": 799.8761538461538
+      },
+      {
+        "peers": 16,
+        "replicate": 7,
+        "run_id": "PSR-28",
+        "sequence": 28,
+        "span_mean": 322.2,
+        "total_mean": 1040.822307692308
+      },
+      {
+        "peers": 16,
+        "replicate": 8,
+        "run_id": "PSR-29",
+        "sequence": 29,
+        "span_mean": 324.2276923076923,
+        "total_mean": 1076.666153846154
+      },
+      {
+        "peers": 8,
+        "replicate": 8,
+        "run_id": "PSR-30",
+        "sequence": 30,
+        "span_mean": 322.10153846153844,
+        "total_mean": 1190.3676923076923
+      },
+      {
+        "peers": 4,
+        "replicate": 8,
+        "run_id": "PSR-31",
+        "sequence": 31,
+        "span_mean": 329.9546153846154,
+        "total_mean": 1228.0884615384616
+      },
+      {
+        "peers": 32,
+        "replicate": 8,
+        "run_id": "PSR-32",
+        "sequence": 32,
+        "span_mean": 322.94307692307694,
+        "total_mean": 837.9261538461539
+      }
+    ],
+    "runs_per_peer_count": {
+      "4": 8,
+      "8": 8,
+      "16": 8,
+      "32": 8
+    },
+    "shares_pct": {
+      "access_control": 26.594615181587788,
+      "endorser_sensitive": 32.22097441737576,
+      "residual_at_max_peers": 41.08954672706358
+    }
+  },
+  "deployment": {
+    "days": 61,
+    "duty_cycle_minutes": 30,
+    "first_day": "2025-08-01",
+    "gateways": 4,
+    "last_day": "2025-09-30",
+    "outage_count": 3,
+    "outage_hours_max": 8.7,
+    "outage_hours_min": 0.2,
+    "outage_hours_total": 9.3,
+    "outages": [
+      {
+        "component": "gw-north-01",
+        "day_index": 13,
+        "hours": 8.7,
+        "note": "LoRa link failure, delayed sync on recovery",
+        "start": "2025-08-13T00:00:00Z"
+      },
+      {
+        "component": "gw-east-01",
+        "day_index": 29,
+        "hours": 0.4,
+        "note": "Brief power fluctuation, buffered data re-synced",
+        "start": "2025-08-29T00:00:00Z"
+      },
+      {
+        "component": "gw-south-01",
+        "day_index": 48,
+        "hours": 0.2,
+        "note": "Firmware watchdog reset, no data loss",
+        "start": "2025-09-17T00:00:00Z"
+      }
+    ],
+    "sensor_writes": 146400,
+    "sensors": 50,
+    "sensors_per_zone": {
+      "East": 12,
+      "North": 13,
+      "South": 13,
+      "West": 12
+    },
+    "total_hours": 1464.0,
+    "uptime_gateway_hours_pct": 99.841,
+    "uptime_pct": 99.365,
+    "uptime_sli": "fraction of deployment hours in which the online authorization path was reachable for all zones",
+    "writes_per_day": [
+      2400
+    ],
+    "zones": [
+      "East",
+      "North",
+      "South",
+      "West"
+    ]
+  },
+  "energy": {
+    "airtime_crt_ms": 31.490805,
+    "airtime_single_ms": 36.134935,
+    "crt": {
+      "ci_high": 12.42844478563443,
+      "ci_low": 12.392855214365571,
+      "maximum": 13.817,
+      "mean": 12.41065,
+      "minimum": 11.0,
+      "n": 2000,
+      "p50": 12.41,
+      "p95": 13.06505,
+      "p99": 13.38908,
+      "sd": 0.4057856003812092
+    },
+    "crt_daily_mj": 595.7112,
+    "deep_sleep_daily_mj": 9590.400000000001,
+    "payload_crt_bytes": 10.4585,
+    "payload_single_bytes": 20.4525,
+    "reduction_ci_high": 48.82049796992445,
+    "reduction_ci_low": 48.6109798778547,
+    "reduction_pct": 48.715573179963606,
+    "single": {
+      "ci_high": 24.235573186894875,
+      "ci_low": 24.163719813105132,
+      "maximum": 26.841,
+      "mean": 24.199646500000004,
+      "minimum": 20.82,
+      "n": 2000,
+      "p50": 24.206,
+      "p95": 25.5564,
+      "p99": 26.10901,
+      "sd": 0.8192586587352657
+    },
+    "single_daily_mj": 1161.5830320000002,
+    "test": {
+      "cohens_d": 18.235955327020857,
+      "df": 2924.1486449279178,
+      "diff": 11.788996500000003,
+      "diff_ci_high": 11.829080975882334,
+      "diff_ci_low": 11.748912024117672,
+      "mean_a": 24.199646500000004,
+      "mean_b": 12.41065,
+      "n_a": 2000,
+      "n_b": 2000,
+      "p": 0.0,
+      "t": 576.6715414246662
+    },
+    "tx_per_day": 48,
+    "tx_share_of_daily_pct": 5.848269160855027
+  },
+  "integrity": {
+    "packed_value": {
+      "exceed_count": 146400,
+      "exceed_rate": 1.0,
+      "max": 466795,
+      "min": 178382,
+      "n": 146400,
+      "smallest_bound": 9797
+    },
+    "quantization_error": {
+      "max_fs_pct": 0.3663003663003663,
+      "rms_fs_pct": 0.21445575307036568
+    },
+    "recovered_by_crt": 131795,
+    "residues_received": {
+      "2": 131795,
+      "3": 14605
+    },
+    "signature_ci_high": 1.0,
+    "signature_ci_low": 0.9999737612156607,
+    "signature_valid": 146400,
+    "signature_valid_rate": 1.0,
+    "single_residue_loss": 131795,
+    "single_residue_loss_rate": 0.9002390710382514,
+    "transactions": 146400
+  },
+  "latency": {
+    "by_operation": {
+      "ControlAll": {
+        "ci_high": 281.1537292446766,
+        "ci_low": 279.49030312214734,
+        "maximum": 421.6,
+        "mean": 280.32201618341196,
+        "minimum": 150.0,
+        "n": 8898,
+        "p50": 280.4,
+        "p95": 346.015,
+        "p95_ci_high": 347.9,
+        "p95_ci_low": 344.4,
+        "p99": 373.10300000000007,
+        "sd": 40.02326784345882
+      },
+      "ControlZone": {
+        "ci_high": 281.1093141470172,
+        "ci_low": 279.4301872253524,
+        "maximum": 435.4,
+        "mean": 280.2697506861848,
+        "minimum": 150.0,
+        "n": 8744,
+        "p50": 280.8,
+        "p95": 346.1,
+        "p95_ci_high": 348.1,
+        "p95_ci_low": 344.3,
+        "p99": 371.91399999999993,
+        "sd": 40.04980313298992
+      },
+      "ManageRoles": {
+        "ci_high": 280.7291485360101,
+        "ci_low": 279.09214314450406,
+        "maximum": 422.2,
+        "mean": 279.9106458402571,
+        "minimum": 150.0,
+        "n": 9027,
+        "p50": 279.7,
+        "p95": 344.8699999999999,
+        "p95_ci_high": 346.5,
+        "p95_ci_low": 343.3,
+        "p99": 372.87399999999997,
+        "sd": 39.6721285658754
+      },
+      "ReadAll": {
+        "ci_high": 281.20313961836007,
+        "ci_low": 279.55317791195966,
+        "maximum": 420.1,
+        "mean": 280.37815876515987,
+        "minimum": 150.0,
+        "n": 9070,
+        "p50": 280.1,
+        "p95": 346.25499999999994,
+        "p95_ci_high": 348.1,
+        "p95_ci_low": 344.5,
+        "p99": 375.73099999999994,
+        "sd": 40.08126836835419
+      },
+      "ReadAudit": {
+        "ci_high": 281.156979868897,
+        "ci_low": 279.50797988065585,
+        "maximum": 432.4,
+        "mean": 280.3324798747764,
+        "minimum": 150.0,
+        "n": 8944,
+        "p50": 279.8,
+        "p95": 345.3,
+        "p95_ci_high": 348.0,
+        "p95_ci_low": 344.2,
+        "p99": 372.25699999999995,
+        "sd": 39.778616926655516
+      },
+      "ReadOwn": {
+        "ci_high": 281.3882877410388,
+        "ci_low": 279.7439160241882,
+        "maximum": 429.1,
+        "mean": 280.5661018826135,
+        "minimum": 150.0,
+        "n": 9030,
+        "p50": 280.6,
+        "p95": 345.8,
+        "p95_ci_high": 347.6,
+        "p95_ci_low": 343.9,
+        "p99": 371.8839999999997,
+        "sd": 39.85727145875268
+      },
+      "ReadZone": {
+        "ci_high": 280.82984862462587,
+        "ci_low": 279.16558290457414,
+        "maximum": 419.9,
+        "mean": 279.9977157646,
+        "minimum": 150.0,
+        "n": 8887,
+        "p50": 279.9,
+        "p95": 346.3,
+        "p95_ci_high": 348.3,
+        "p95_ci_low": 344.3,
+        "p99": 374.7,
+        "sd": 40.0187032624358
+      },
+      "WriteSensor": {
+        "ci_high": 1220.15675761517,
+        "ci_low": 1219.5422942973985,
+        "maximum": 1510.4,
+        "mean": 1219.8495259562842,
+        "minimum": 976.6,
+        "n": 146400,
+        "p50": 1220.0,
+        "p95": 1318.6,
+        "p95_ci_high": 1319.2,
+        "p95_ci_low": 1317.9,
+        "p99": 1358.9,
+        "sd": 59.977011555169284
+      }
+    },
+    "non_write": {
+      "anova_f": 0.2891756960444321,
+      "anova_p": 0.9423805859414826,
+      "max_of_means": 280.5661018826135,
+      "mean_of_means": 280.2538384281434,
+      "min_of_means": 279.9106458402571,
+      "n": 62600,
+      "operations": 7,
+      "spread_of_means": 0.655456042356434,
+      "summary": {
+        "ci_high": 280.5669500441042,
+        "ci_low": 279.9414397322535,
+        "maximum": 435.4,
+        "mean": 280.25419488817886,
+        "minimum": 150.0,
+        "n": 62600,
+        "p50": 280.2,
+        "p95": 345.8,
+        "p99": 373.4010000000002,
+        "sd": 39.92410198572388
+      }
+    },
+    "operation_day_level": {
+      "days": 61,
+      "equivalence": {
+        "ci90_high": 1.6833659201366509,
+        "ci90_low": -0.3758123902011128,
+        "equivalent": true,
+        "margin": 10.0,
+        "mean_diff": 0.653776764967769,
+        "n": 61,
+        "p": 1.7039675364760762e-22
+      },
+      "friedman_chi2": 1.5878220140514259,
+      "friedman_df": 6,
+      "friedman_p": 0.9534489084891029,
+      "highest": "ReadOwn",
+      "lowest": "ManageRoles",
+      "margin_ms": 10.0,
+      "means": {
+        "ControlAll": 280.27823027524965,
+        "ControlZone": 280.24730135902047,
+        "ManageRoles": 279.9229482314995,
+        "ReadAll": 280.34460752312003,
+        "ReadAudit": 280.3060411869391,
+        "ReadOwn": 280.5767249964673,
+        "ReadZone": 279.99520910531555
+      },
+      "operations": 7
+    },
+    "peer_4_vs_32": {
+      "cohens_d": 23.282119587272238,
+      "df": 11.7803864874213,
+      "diff": 392.96471153846164,
+      "diff_ci_high": 411.39022863259873,
+      "diff_ci_low": 374.53919444432455,
+      "mean_a": 1204.7652884615386,
+      "mean_b": 811.800576923077,
+      "n_a": 8,
+      "n_b": 8,
+      "p": 1.0077036598480495e-14,
+      "t": 46.56423917454448
+    },
+    "peer_counts": [
+      4.0,
+      8.0,
+      16.0,
+      32.0
+    ],
+    "peer_scaling": {
+      "4": {
+        "ci_high": 1208.1242844831056,
+        "ci_low": 1201.4062924399716,
+        "maximum": 1368.9,
+        "mean": 1204.7652884615386,
+        "minimum": 1035.7,
+        "n": 1040,
+        "n_runs": 8,
+        "p50": 1203.2,
+        "p95": 1296.82,
+        "p95_ci_high": 1309.0,
+        "p95_ci_low": 1287.42,
+        "p99": 1336.127,
+        "sd": 55.20416683120827
+      },
+      "8": {
+        "ci_high": 1153.018015352199,
+        "ci_low": 1145.91525387857,
+        "maximum": 1323.5,
+        "mean": 1149.4666346153845,
+        "minimum": 949.4,
+        "n": 1040,
+        "n_runs": 8,
+        "p50": 1148.25,
+        "p95": 1249.11,
+        "p95_ci_high": 1263.0027499999999,
+        "p95_ci_low": 1224.0,
+        "p99": 1290.0269999999998,
+        "sd": 58.36595620163552
+      },
+      "16": {
+        "ci_high": 1060.4817492494903,
+        "ci_low": 1053.28825075051,
+        "maximum": 1217.9,
+        "mean": 1056.8850000000002,
+        "minimum": 887.4,
+        "n": 1040,
+        "n_runs": 8,
+        "p50": 1057.9,
+        "p95": 1151.205,
+        "p95_ci_high": 1166.9,
+        "p95_ci_low": 1135.6095,
+        "p99": 1190.6,
+        "sd": 59.11157510875773
+      },
+      "32": {
+        "ci_high": 815.3416418920631,
+        "ci_low": 808.2595119540906,
+        "maximum": 971.0,
+        "mean": 811.8005769230768,
+        "minimum": 627.7,
+        "n": 1040,
+        "n_runs": 8,
+        "p50": 811.3499999999999,
+        "p95": 906.43,
+        "p95_ci_high": 920.705,
+        "p95_ci_low": 893.265,
+        "p99": 947.4149999999998,
+        "sd": 58.19641942203634
+      }
+    },
+    "peer_scaling_trend": {
+      "intercept": 1500.7458942307692,
+      "p": 0.05492457539756202,
+      "r_squared": 0.8931675581874784,
+      "slope_ms_per_doubling": -127.14757692307694,
+      "stderr": 31.09411480467212
+    },
+    "policy_label_diagnostic": {
+      "cells": 35,
+      "grant_rate_max": 0.9323349972268441,
+      "grant_rate_min": 0.9075829383886256,
+      "grant_rate_spread": 0.024752058838218516,
+      "labels_separate_policy": false
+    },
+    "rbac_overhead": {
+      "ci_high": 320.09812113087446,
+      "ci_low": 319.7899963554644,
+      "maximum": 473.0,
+      "mean": 319.9440587431694,
+      "minimum": 200.0,
+      "n": 146400,
+      "p50": 319.9,
+      "p95": 369.5,
+      "p99": 390.2,
+      "sd": 30.07568178720754
+    },
+    "rbac_overhead_share_of_write": 0.26228157812526404,
+    "runs_per_peer_count": {
+      "4": 8,
+      "8": 8,
+      "16": 8,
+      "32": 8
+    },
+    "scale_latency_drop_pct": 32.61753266814898,
+    "write_vs_read": {
+      "cohens_d": 17.16256232547085,
+      "df": 172874.25570591667,
+      "diff": 939.5953310681053,
+      "diff_ci_high": 940.033742322374,
+      "diff_ci_low": 939.1569198138367,
+      "mean_a": 1219.8495259562842,
+      "mean_b": 280.25419488817886,
+      "n_a": 146400,
+      "n_b": 62600,
+      "p": 0.0,
+      "t": 4200.589936305879
+    }
+  },
+  "provenance": {
+    "files": {
+      "raw_access_decisions.csv": {
+        "bytes": 21557379,
+        "rows": 209000,
+        "sha256": "0c9a30e7125ff9913743489d3713f484eb052ae8e101aba80ec9c26a21ad2bb7"
+      },
+      "raw_crl_revocation_events.csv": {
+        "bytes": 15552,
+        "rows": 200,
+        "sha256": "6d16d72303391cc8179f685724658b7260d37669b1a7a07c6310438c621bb007"
+      },
+      "raw_crypto_timing_samples.csv": {
+        "bytes": 151014,
+        "rows": 5000,
+        "sha256": "6a922af8f24af021a4909e5ff8241af3ee33a14ecb9569234e38823792ff906c"
+      },
+      "raw_energy_samples.csv": {
+        "bytes": 142577,
+        "rows": 4000,
+        "sha256": "3b81a1fa808a166aafa7001a04b5718519b3f38c2770f41cdf2ceb622e1906fb"
+      },
+      "raw_field_topology.csv": {
+        "bytes": 4302,
+        "rows": 50,
+        "sha256": "d76b0d0ec675ae0694eabecbd9b0b7a6fe0c3c263811cc895465e2f412348475"
+      },
+      "raw_latency_samples.csv": {
+        "bytes": 344308,
+        "rows": 4660,
+        "sha256": "045b5802026ddf8922fc8333b16cb08c00fabd96830b7adc3ec6014b765bdbe5"
+      },
+      "raw_security_attempts.csv": {
+        "bytes": 983241,
+        "rows": 8000,
+        "sha256": "ff130411cd86861269b351f96cc1508084e5e4d8759ca69a70b669875e675201"
+      },
+      "raw_sensor_transactions.csv": {
+        "bytes": 20474682,
+        "rows": 146400,
+        "sha256": "7830d3daf75e092bd5888b65a36c20f5bafe974a10e8d28d3d1a9156439d525a"
+      },
+      "raw_throughput_samples.csv": {
+        "bytes": 6057,
+        "rows": 100,
+        "sha256": "af95ec7bf48d7a17534a16fd0d9f8862ba64f3905f0ad1343cd197e57b81bce1"
+      },
+      "raw_uptime_events.csv": {
+        "bytes": 528,
+        "rows": 4,
+        "sha256": "f7d083425641743e2e98550036d9da44285726dc7225720daaca7f634306c655"
+      }
+    },
+    "total_rows": 377414,
+    "trace_count": 10
+  },
+  "revocation": {
+    "by_type": {
+      "CACHE_INVALIDATE": {
+        "delayed": 17,
+        "delayed_rate": 0.3090909090909091,
+        "gossip_mean_min": 4.236363636363636,
+        "n": 55,
+        "publication_mean_s": 59.95818181818182
+      },
+      "CERT_REVOKE": {
+        "delayed": 13,
+        "delayed_rate": 0.24528301886792453,
+        "gossip_mean_min": 4.152830188679245,
+        "n": 53,
+        "publication_mean_s": 60.79811320754717
+      },
+      "CRL_PUBLISH": {
+        "delayed": 18,
+        "delayed_rate": 0.391304347826087,
+        "gossip_mean_min": 4.2402173913043475,
+        "n": 46,
+        "publication_mean_s": 60.90217391304349
+      },
+      "GOSSIP_COMPLETE": {
+        "delayed": 11,
+        "delayed_rate": 0.2391304347826087,
+        "gossip_mean_min": 4.219782608695652,
+        "n": 46,
+        "publication_mean_s": 59.9608695652174
+      }
+    },
+    "cache_ttl_s": {
+      "ci_high": 301.895,
+      "ci_low": 299.165,
+      "maximum": 330.0,
+      "mean": 300.55,
+      "minimum": 278.0,
+      "n": 200,
+      "p50": 300.0,
+      "p95": 315.0,
+      "p99": 322.03999999999996,
+      "sd": 9.833666916523338
+    },
+    "campaign_revoked_denials": 1340,
+    "delayed": 59,
+    "delayed_ci_high": 0.36158714526246366,
+    "delayed_ci_low": 0.23613943855577374,
+    "delayed_rate": 0.295,
+    "deployment_days": 61,
+    "distinct_days": 58,
+    "episode_resolution": {
+      "distinct_subjects": 132,
+      "resolves_end_to_end": false,
+      "rows": 200,
+      "subjects_with_all_four_stages": 0,
+      "subjects_with_single_stage": 87
+    },
+    "events": 200,
+    "gossip_min": {
+      "ci_high": 4.26295,
+      "ci_low": 4.15869875,
+      "maximum": 5.54,
+      "mean": 4.2113,
+      "minimum": 2.9,
+      "n": 200,
+      "p50": 4.2,
+      "p95": 4.8119999999999985,
+      "p99": 5.081399999999999,
+      "sd": 0.3798879893101525
+    },
+    "gossip_success_vs_delayed": {
+      "cohens_d": -0.13809915717903481,
+      "df": 123.74602161562065,
+      "diff": -0.05248948190888303,
+      "diff_ci_high": 0.05783323173601894,
+      "diff_ci_low": -0.162812195553785,
+      "mean_a": 4.19581560283688,
+      "mean_b": 4.248305084745763,
+      "n_a": 141,
+      "n_b": 59,
+      "p": 0.3481690380710345,
+      "t": -0.9417234718131664
+    },
+    "operational_denials_per_day_max": 26,
+    "operational_denials_per_day_mean": 15.950819672131148,
+    "operational_revoked_denials": 973,
+    "publication_s": {
+      "ci_high": 61.0485375,
+      "ci_low": 59.7305,
+      "maximum": 71.6,
+      "mean": 60.39849999999999,
+      "minimum": 47.6,
+      "n": 200,
+      "p50": 61.0,
+      "p95": 67.41,
+      "p99": 71.10399999999998,
+      "sd": 4.785787979310677
+    },
+    "publication_success_vs_delayed": {
+      "cohens_d": -0.1779151008353815,
+      "df": 96.64987340084502,
+      "diff": -0.8507873542493201,
+      "diff_ci_high": 0.7064892686556463,
+      "diff_ci_low": -2.4080639771542867,
+      "mean_a": 60.147517730496446,
+      "mean_b": 60.998305084745766,
+      "n_a": 141,
+      "n_b": 59,
+      "p": 0.2809010112026822,
+      "t": -1.0843639588153078
+    }
+  },
+  "security": {
+    "block_rate": 1.0,
+    "blocked": 8000,
+    "by_deny_reason": {
+      "CERT_REVOKED": {
+        "count": 1340,
+        "identities": 462,
+        "roles": [
+          "Agronomist",
+          "Certifier",
+          "Farmer",
+          "Gateway",
+          "Sensor",
+          "Supply"
+        ],
+        "zones": [
+          "East",
+          "North",
+          "South",
+          "West"
+        ]
+      },
+      "IDS_BLOCKED": {
+        "count": 1304,
+        "identities": 456,
+        "roles": [
+          "Agronomist",
+          "Certifier",
+          "Farmer",
+          "Gateway",
+          "Sensor",
+          "Supply"
+        ],
+        "zones": [
+          "East",
+          "North",
+          "South",
+          "West"
+        ]
+      },
+      "OP_NOT_PERMITTED": {
+        "count": 1313,
+        "identities": 463,
+        "roles": [
+          "Agronomist",
+          "Certifier",
+          "Farmer",
+          "Gateway",
+          "Sensor",
+          "Supply"
+        ],
+        "zones": [
+          "East",
+          "North",
+          "South",
+          "West"
+        ]
+      },
+      "POLICY_VIOLATION": {
+        "count": 1416,
+        "identities": 467,
+        "roles": [
+          "Agronomist",
+          "Certifier",
+          "Farmer",
+          "Gateway",
+          "Sensor",
+          "Supply"
+        ],
+        "zones": [
+          "East",
+          "North",
+          "South",
+          "West"
+        ]
+      },
+      "ROLE_INSUFFICIENT": {
+        "count": 1353,
+        "identities": 464,
+        "roles": [
+          "Agronomist",
+          "Certifier",
+          "Farmer",
+          "Gateway",
+          "Sensor",
+          "Supply"
+        ],
+        "zones": [
+          "East",
+          "North",
+          "South",
+          "West"
+        ]
+      },
+      "ZONE_MISMATCH": {
+        "count": 1274,
+        "identities": 465,
+        "roles": [
+          "Agronomist",
+          "Certifier",
+          "Farmer",
+          "Gateway",
+          "Sensor",
+          "Supply"
+        ],
+        "zones": [
+          "East",
+          "North",
+          "South",
+          "West"
+        ]
+      }
+    },
+    "ci_high": 0.9999999999999999,
+    "ci_low": 0.9995200481116148,
+    "deny_reasons": {
+      "CERT_REVOKED": 1340,
+      "IDS_BLOCKED": 1304,
+      "OP_NOT_PERMITTED": 1313,
+      "POLICY_VIOLATION": 1416,
+      "ROLE_INSUFFICIENT": 1353,
+      "ZONE_MISMATCH": 1274
+    },
+    "input_variation": {
+      "attacker_id": 499,
+      "deny_reason": 6,
+      "operation": 5,
+      "resource": 4,
+      "zone": 4
+    },
+    "interval_caveat": "repetitions of deterministic scenarios are not independent draws from an attack population",
+    "interval_valid": false,
+    "oracle_check": {
+      "consistent": 2149,
+      "discrepant": [
+        {
+          "attempt_id": "SA-0000014",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000041",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000062",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000079",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000091",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000094",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000115",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000146",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000155",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000161",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000178",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000193",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000196",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000258",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000272",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000275",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000285",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000289",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000292",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000294",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000300",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000303",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000338",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000346",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000380",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000391",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000393",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000403",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000408",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000435",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000499",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000510",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000511",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000513",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000527",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000538",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000556",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000561",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000609",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000634",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000649",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000681",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000754",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000769",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000775",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000781",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000784",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000788",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000798",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000808",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000809",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000822",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000835",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000852",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000892",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000894",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000896",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000905",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000909",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000932",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000949",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000969",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000972",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000978",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000980",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0000998",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001004",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001024",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001061",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001075",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001078",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001079",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001080",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001085",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001088",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001100",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001111",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001141",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001156",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001165",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001174",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001175",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001202",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001218",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001230",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001241",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001244",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001249",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001264",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001271",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001279",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001327",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001329",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001335",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001342",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001354",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001369",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001388",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001398",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001410",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001419",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001432",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001445",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001451",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001456",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001460",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001487",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001519",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001574",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001582",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001620",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001639",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001657",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001663",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001666",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001667",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001689",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001709",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001716",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001723",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001734",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001747",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001748",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001761",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001777",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001790",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001812",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001823",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001825",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001827",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001828",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001860",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001873",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001880",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001947",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001962",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001984",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001992",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0001998",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0002009",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002025",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002030",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002035",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002047",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002053",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002054",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002055",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002058",
+          "operation": "ControlZone",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002094",
+          "operation": "ControlZone",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002106",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002113",
+          "operation": "ControlZone",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002117",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002139",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002142",
+          "operation": "ControlZone",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002149",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002161",
+          "operation": "ControlZone",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002166",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002196",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002203",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002204",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002215",
+          "operation": "ControlZone",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002218",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002222",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002247",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002260",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002262",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002266",
+          "operation": "ControlZone",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002271",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002286",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002289",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002292",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002293",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002299",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002303",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002307",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002331",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002337",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002350",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002351",
+          "operation": "ControlZone",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002355",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002360",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002363",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002376",
+          "operation": "ControlZone",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002381",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002394",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002396",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002413",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002427",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002440",
+          "operation": "ControlZone",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002445",
+          "operation": "ControlZone",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002449",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002464",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002468",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002476",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002480",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002488",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002496",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002511",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002519",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002530",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002534",
+          "operation": "ControlZone",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002540",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002544",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002547",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002568",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002573",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002575",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002585",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002595",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002603",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002607",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002608",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002609",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002618",
+          "operation": "ControlZone",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002631",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002660",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002663",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002664",
+          "operation": "ControlZone",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002669",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002671",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002673",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002680",
+          "operation": "ControlZone",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002689",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002700",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002703",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002705",
+          "operation": "ControlZone",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002719",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002727",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002729",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002738",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002740",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002747",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002756",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002780",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002791",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002792",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002795",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002801",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002803",
+          "operation": "ControlZone",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002807",
+          "operation": "ControlZone",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002808",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002815",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002816",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002825",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002830",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002833",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002842",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002853",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002861",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002864",
+          "operation": "ControlZone",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002873",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002875",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002877",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002910",
+          "operation": "ControlZone",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002912",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002919",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002935",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002942",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002952",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002965",
+          "operation": "ControlZone",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002970",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002982",
+          "operation": "ControlZone",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002990",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0002996",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Gateway"
+        },
+        {
+          "attempt_id": "SA-0003002",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003020",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003024",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003030",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003036",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003054",
+          "operation": "ControlZone",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003057",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003069",
+          "operation": "ControlZone",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003075",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003077",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003087",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003090",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003091",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003110",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003113",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003126",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003134",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003135",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003144",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003155",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003163",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003178",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003191",
+          "operation": "ControlZone",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003214",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003221",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003228",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003239",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003248",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003265",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003268",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003270",
+          "operation": "ControlZone",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003274",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003278",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003282",
+          "operation": "ControlZone",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003286",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003287",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003299",
+          "operation": "ControlZone",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003309",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003310",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003315",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003319",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003320",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003331",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003351",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003363",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003371",
+          "operation": "ControlZone",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003374",
+          "operation": "ControlZone",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003381",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003383",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003386",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003392",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003419",
+          "operation": "ControlZone",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003421",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003426",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003439",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003454",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003459",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003463",
+          "operation": "ControlZone",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003471",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003473",
+          "operation": "ControlZone",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003494",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003511",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003524",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003535",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003545",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003549",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003553",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003565",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003571",
+          "operation": "ControlZone",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003581",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003590",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003591",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003601",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003607",
+          "operation": "ControlZone",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003614",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003615",
+          "operation": "ControlZone",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003616",
+          "operation": "ControlZone",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003622",
+          "operation": "ControlZone",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003627",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003639",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003645",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003648",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003662",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003663",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003669",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003685",
+          "operation": "ControlZone",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003704",
+          "operation": "ControlZone",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003706",
+          "operation": "ControlZone",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003712",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003714",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003730",
+          "operation": "ControlZone",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003733",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003750",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003766",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003775",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003776",
+          "operation": "ControlZone",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003780",
+          "operation": "ControlZone",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003781",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003790",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003797",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003833",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003850",
+          "operation": "ControlZone",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003853",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003858",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003859",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003889",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003896",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003898",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003903",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003907",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003931",
+          "operation": "ControlZone",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003938",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003969",
+          "operation": "ControlZone",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003980",
+          "operation": "ControlZone",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003983",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003990",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0003999",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Farmer"
+        },
+        {
+          "attempt_id": "SA-0005013",
+          "operation": "ReadAudit",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005016",
+          "operation": "ReadAudit",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005030",
+          "operation": "ReadAudit",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005039",
+          "operation": "ReadAudit",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005083",
+          "operation": "ReadAudit",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005090",
+          "operation": "ReadAudit",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005099",
+          "operation": "ReadAudit",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005111",
+          "operation": "ReadAudit",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005124",
+          "operation": "ReadAudit",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005158",
+          "operation": "ReadAudit",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005171",
+          "operation": "ReadAudit",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005172",
+          "operation": "ReadAudit",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005175",
+          "operation": "ReadAudit",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005202",
+          "operation": "ReadAudit",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005205",
+          "operation": "ReadAudit",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005210",
+          "operation": "ReadAudit",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005222",
+          "operation": "ReadAudit",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005237",
+          "operation": "ReadAudit",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005263",
+          "operation": "ReadAudit",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005269",
+          "operation": "ReadAudit",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005315",
+          "operation": "ReadAudit",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005360",
+          "operation": "ReadAudit",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005401",
+          "operation": "ReadAudit",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005412",
+          "operation": "ReadAudit",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005418",
+          "operation": "ReadAudit",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005446",
+          "operation": "ReadAudit",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005449",
+          "operation": "ReadAudit",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005454",
+          "operation": "ReadAudit",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005506",
+          "operation": "ReadAudit",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005507",
+          "operation": "ReadAudit",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005509",
+          "operation": "ReadAudit",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005541",
+          "operation": "ReadAudit",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005556",
+          "operation": "ReadAudit",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005598",
+          "operation": "ReadAudit",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005608",
+          "operation": "ReadAudit",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005609",
+          "operation": "ReadAudit",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005639",
+          "operation": "ReadAudit",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005647",
+          "operation": "ReadAudit",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005657",
+          "operation": "ReadAudit",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005685",
+          "operation": "ReadAudit",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005698",
+          "operation": "ReadAudit",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005713",
+          "operation": "ReadAudit",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005717",
+          "operation": "ReadAudit",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005719",
+          "operation": "ReadAudit",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005727",
+          "operation": "ReadAudit",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005730",
+          "operation": "ReadAudit",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005739",
+          "operation": "ReadAudit",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005745",
+          "operation": "ReadAudit",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005754",
+          "operation": "ReadAudit",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005806",
+          "operation": "ReadAudit",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005819",
+          "operation": "ReadAudit",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005852",
+          "operation": "ReadAudit",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005860",
+          "operation": "ReadAudit",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005872",
+          "operation": "ReadAudit",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005873",
+          "operation": "ReadAudit",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005889",
+          "operation": "ReadAudit",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005891",
+          "operation": "ReadAudit",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005907",
+          "operation": "ReadAudit",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005939",
+          "operation": "ReadAudit",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005956",
+          "operation": "ReadAudit",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0005985",
+          "operation": "ReadAudit",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Certifier"
+        },
+        {
+          "attempt_id": "SA-0007033",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007045",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007057",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007072",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007088",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007123",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007136",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007141",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007146",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007149",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007194",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007195",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007202",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007211",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007214",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007230",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007241",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007244",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007247",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007249",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007267",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007272",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007274",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007278",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007293",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007297",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007303",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007314",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007334",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007336",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007352",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007355",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007373",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007374",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007378",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007379",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007389",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007430",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007434",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007440",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007492",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007498",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007504",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007506",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007507",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007513",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007526",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007558",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007568",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007570",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007583",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007596",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007610",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007616",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007623",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007628",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007634",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007647",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007650",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007664",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007665",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007670",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007672",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007685",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007689",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007735",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007748",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007752",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007780",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007841",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007849",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007902",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007922",
+          "operation": "WriteSensor",
+          "reason": "OP_NOT_PERMITTED",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007947",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        },
+        {
+          "attempt_id": "SA-0007964",
+          "operation": "WriteSensor",
+          "reason": "ROLE_INSUFFICIENT",
+          "role": "Sensor"
+        }
+      ],
+      "in_scope": 2666,
+      "out_of_scope_reasons": {
+        "CERT_REVOKED": 1340,
+        "IDS_BLOCKED": 1304,
+        "POLICY_VIOLATION": 1416,
+        "ZONE_MISMATCH": 1274
+      },
+      "total_attempts": 8000
+    },
+    "repetitions_per_scenario": 1000,
+    "scenarios": {
+      "agronomist_irrigate": {
+        "attacker_roles": {
+          "Agronomist": 1000
+        },
+        "attempts": 1000,
+        "blocked": 1000,
+        "ci_high": 0.9999999999999999,
+        "ci_low": 0.9961732415126555,
+        "deny_reasons": {
+          "CERT_REVOKED": 151,
+          "IDS_BLOCKED": 163,
+          "OP_NOT_PERMITTED": 174,
+          "POLICY_VIOLATION": 192,
+          "ROLE_INSUFFICIENT": 153,
+          "ZONE_MISMATCH": 167
+        },
+        "rate": 1.0
+      },
+      "certifier_irrigate": {
+        "attacker_roles": {
+          "Certifier": 1000
+        },
+        "attempts": 1000,
+        "blocked": 1000,
+        "ci_high": 0.9999999999999999,
+        "ci_low": 0.9961732415126555,
+        "deny_reasons": {
+          "CERT_REVOKED": 173,
+          "IDS_BLOCKED": 176,
+          "OP_NOT_PERMITTED": 158,
+          "POLICY_VIOLATION": 149,
+          "ROLE_INSUFFICIENT": 183,
+          "ZONE_MISMATCH": 161
+        },
+        "rate": 1.0
+      },
+      "farmer_assign_role": {
+        "attacker_roles": {
+          "Farmer": 1000
+        },
+        "attempts": 1000,
+        "blocked": 1000,
+        "ci_high": 0.9999999999999999,
+        "ci_low": 0.9961732415126555,
+        "deny_reasons": {
+          "CERT_REVOKED": 173,
+          "IDS_BLOCKED": 162,
+          "OP_NOT_PERMITTED": 145,
+          "POLICY_VIOLATION": 187,
+          "ROLE_INSUFFICIENT": 175,
+          "ZONE_MISMATCH": 158
+        },
+        "rate": 1.0
+      },
+      "gateway_wrong_zone": {
+        "attacker_roles": {
+          "Gateway": 1000
+        },
+        "attempts": 1000,
+        "blocked": 1000,
+        "ci_high": 0.9999999999999999,
+        "ci_low": 0.9961732415126555,
+        "deny_reasons": {
+          "CERT_REVOKED": 157,
+          "IDS_BLOCKED": 158,
+          "OP_NOT_PERMITTED": 180,
+          "POLICY_VIOLATION": 176,
+          "ROLE_INSUFFICIENT": 166,
+          "ZONE_MISMATCH": 163
+        },
+        "rate": 1.0
+      },
+      "sensor_cross_sensor": {
+        "attacker_roles": {
+          "Sensor": 1000
+        },
+        "attempts": 1000,
+        "blocked": 1000,
+        "ci_high": 0.9999999999999999,
+        "ci_low": 0.9961732415126555,
+        "deny_reasons": {
+          "CERT_REVOKED": 180,
+          "IDS_BLOCKED": 146,
+          "OP_NOT_PERMITTED": 165,
+          "POLICY_VIOLATION": 192,
+          "ROLE_INSUFFICIENT": 160,
+          "ZONE_MISMATCH": 157
+        },
+        "rate": 1.0
+      },
+      "sensor_irrigation": {
+        "attacker_roles": {
+          "Sensor": 1000
+        },
+        "attempts": 1000,
+        "blocked": 1000,
+        "ci_high": 0.9999999999999999,
+        "ci_low": 0.9961732415126555,
+        "deny_reasons": {
+          "CERT_REVOKED": 177,
+          "IDS_BLOCKED": 146,
+          "OP_NOT_PERMITTED": 166,
+          "POLICY_VIOLATION": 172,
+          "ROLE_INSUFFICIENT": 181,
+          "ZONE_MISMATCH": 158
+        },
+        "rate": 1.0
+      },
+      "sensor_read_audit": {
+        "attacker_roles": {
+          "Sensor": 1000
+        },
+        "attempts": 1000,
+        "blocked": 1000,
+        "ci_high": 0.9999999999999999,
+        "ci_low": 0.9961732415126555,
+        "deny_reasons": {
+          "CERT_REVOKED": 143,
+          "IDS_BLOCKED": 183,
+          "OP_NOT_PERMITTED": 154,
+          "POLICY_VIOLATION": 181,
+          "ROLE_INSUFFICIENT": 158,
+          "ZONE_MISMATCH": 181
+        },
+        "rate": 1.0
+      },
+      "supply_write_sensor": {
+        "attacker_roles": {
+          "Supply": 1000
+        },
+        "attempts": 1000,
+        "blocked": 1000,
+        "ci_high": 0.9999999999999999,
+        "ci_low": 0.9961732415126555,
+        "deny_reasons": {
+          "CERT_REVOKED": 186,
+          "IDS_BLOCKED": 170,
+          "OP_NOT_PERMITTED": 171,
+          "POLICY_VIOLATION": 167,
+          "ROLE_INSUFFICIENT": 177,
+          "ZONE_MISMATCH": 129
+        },
+        "rate": 1.0
+      }
+    },
+    "total_attempts": 8000
+  },
+  "throughput": {
+    "factorial_model": {
+      "ci_high": {
+        "concurrency_c": 0.12590407404301932,
+        "condition_hrbac": -3.199031945725462,
+        "condition_x_concurrency": 0.10371742049859159,
+        "intercept": 65.42924797934124,
+        "position_c": 0.5177641251720655
+      },
+      "ci_low": {
+        "concurrency_c": -0.011474983133928258,
+        "condition_hrbac": -8.865918054274548,
+        "condition_x_concurrency": -0.09056590534707651,
+        "intercept": 61.45262702065875,
+        "position_c": -0.46871412517206584
+      },
+      "coef": {
+        "concurrency_c": 0.057214545454545525,
+        "condition_hrbac": -6.032475000000005,
+        "condition_x_concurrency": 0.006575757575757547,
+        "intercept": 63.4409375,
+        "position_c": 0.024524999999999797
+      },
+      "dof": 95,
+      "p": {
+        "concurrency_c": 0.10150900674256813,
+        "condition_hrbac": 5.449552199987551e-05,
+        "condition_x_concurrency": 0.8933812464743305,
+        "intercept": 0.0,
+        "position_c": 0.9215754743270823
+      },
+      "position_concurrency_corr": 0.9950371902099892,
+      "r_squared": 0.20645636422279068,
+      "se": {
+        "concurrency_c": 0.034599921353614144,
+        "condition_hrbac": 1.4272467558365833,
+        "condition_x_concurrency": 0.04893167803532358,
+        "intercept": 1.0015411027776044,
+        "position_c": 0.24845176972640665
+      },
+      "t": {
+        "concurrency_c": 1.6536033382795294,
+        "condition_hrbac": -4.2266517512341855,
+        "condition_x_concurrency": 0.13438651278238475,
+        "intercept": 63.3433189352462,
+        "position_c": 0.09871131136238859
+      }
+    },
+    "holm_significant": 10,
+    "knee_clients_baseline": 40,
+    "knee_clients_hrbac": 40,
+    "levels": [
+      10,
+      20,
+      30,
+      40,
+      50,
+      60,
+      70,
+      80,
+      90,
+      100
+    ],
+    "order_effect": {
+      "p": 0.9628251122972719,
+      "r_squared": 2.2280168782556528e-05,
+      "slope_tps_per_run": 0.00023546354635460104
+    },
+    "peak_baseline_tps": 70.392,
+    "peak_hrbac_tps": 63.51800000000001,
+    "per_level": {
+      "10": {
+        "baseline": {
+          "ci_high": 45.992,
+          "ci_low": 42.95,
+          "maximum": 46.94,
+          "mean": 44.525999999999996,
+          "minimum": 41.66,
+          "n": 5,
+          "p50": 44.26,
+          "p95": 46.733999999999995,
+          "p99": 46.898799999999994,
+          "sd": 2.029231381582692
+        },
+        "hrbac": {
+          "ci_high": 40.932,
+          "ci_low": 39.036,
+          "maximum": 41.12,
+          "mean": 40.084,
+          "minimum": 38.13,
+          "n": 5,
+          "p50": 40.38,
+          "p95": 41.1,
+          "p99": 41.116,
+          "sd": 1.2200122950200123
+        },
+        "p_holm": 0.01108870377109025,
+        "reduction_pct": 9.976193684588765,
+        "test": {
+          "cohens_d": 2.653132081948045,
+          "df": 6.557552942045724,
+          "diff": 4.441999999999993,
+          "diff_ci_high": 6.980527856481627,
+          "diff_ci_low": 1.9034721435183588,
+          "mean_a": 44.525999999999996,
+          "mean_b": 40.084,
+          "n_a": 5,
+          "n_b": 5,
+          "p": 0.004695328978659601,
+          "t": 4.194970156110162
+        }
+      },
+      "20": {
+        "baseline": {
+          "ci_high": 65.41,
+          "ci_low": 60.248000000000005,
+          "maximum": 67.49,
+          "mean": 62.74400000000001,
+          "minimum": 59.09,
+          "n": 5,
+          "p50": 61.44,
+          "p95": 66.97,
+          "p99": 67.386,
+          "sd": 3.388300458932174
+        },
+        "hrbac": {
+          "ci_high": 56.760000000000005,
+          "ci_low": 53.79,
+          "maximum": 58.4,
+          "mean": 54.96,
+          "minimum": 53.7,
+          "n": 5,
+          "p50": 54.05,
+          "p95": 57.699999999999996,
+          "p99": 58.26,
+          "sd": 1.982233588656997
+        },
+        "p_holm": 0.01108870377109025,
+        "reduction_pct": 12.405967104424336,
+        "test": {
+          "cohens_d": 2.804264029371604,
+          "df": 6.450922837510775,
+          "diff": 7.784000000000006,
+          "diff_ci_high": 12.00793607663859,
+          "diff_ci_low": 3.5600639233614224,
+          "mean_a": 62.74400000000001,
+          "mean_b": 54.96,
+          "n_a": 5,
+          "n_b": 5,
+          "p": 0.003696234590363417,
+          "t": 4.4339307466477935
+        }
+      },
+      "30": {
+        "baseline": {
+          "ci_high": 67.742,
+          "ci_low": 67.084,
+          "maximum": 68.09,
+          "mean": 67.35999999999999,
+          "minimum": 67.04,
+          "n": 5,
+          "p50": 67.2,
+          "p95": 67.952,
+          "p99": 68.0624,
+          "sd": 0.43203009154456024
+        },
+        "hrbac": {
+          "ci_high": 62.94,
+          "ci_low": 61.372,
+          "maximum": 63.69,
+          "mean": 62.04200000000001,
+          "minimum": 61.29,
+          "n": 5,
+          "p50": 61.5,
+          "p95": 63.42,
+          "p99": 63.635999999999996,
+          "sd": 1.0110736867310903
+        },
+        "p_holm": 0.0006471861357578465,
+        "reduction_pct": 7.894893111638922,
+        "test": {
+          "cohens_d": 6.8401330525572535,
+          "df": 5.41354761394733,
+          "diff": 5.3179999999999765,
+          "diff_ci_high": 6.55349692012601,
+          "diff_ci_low": 4.082503079873943,
+          "mean_a": 67.35999999999999,
+          "mean_b": 62.04200000000001,
+          "n_a": 5,
+          "n_b": 5,
+          "p": 7.190957063976072e-05,
+          "t": 10.815199972340572
+        }
+      },
+      "40": {
+        "baseline": {
+          "ci_high": 71.74199999999999,
+          "ci_low": 68.568,
+          "maximum": 72.09,
+          "mean": 70.392,
+          "minimum": 66.82,
+          "n": 5,
+          "p50": 70.99,
+          "p95": 72.026,
+          "p99": 72.0772,
+          "sd": 2.11596786365011
+        },
+        "hrbac": {
+          "ci_high": 64.122,
+          "ci_low": 63.013999999999996,
+          "maximum": 64.61,
+          "mean": 63.51800000000001,
+          "minimum": 62.69,
+          "n": 5,
+          "p50": 63.39,
+          "p95": 64.41,
+          "p99": 64.57,
+          "sd": 0.6990851164200256
+        },
+        "p_holm": 0.00548301523757476,
+        "reduction_pct": 9.765314240254558,
+        "test": {
+          "cohens_d": 4.3623390715040635,
+          "df": 4.86295480085633,
+          "diff": 6.873999999999988,
+          "diff_ci_high": 9.457705333553362,
+          "diff_ci_low": 4.290294666446615,
+          "mean_a": 70.392,
+          "mean_b": 63.51800000000001,
+          "n_a": 5,
+          "n_b": 5,
+          "p": 0.001096603047514952,
+          "t": 6.897463695948486
+        }
+      },
+      "50": {
+        "baseline": {
+          "ci_high": 70.17399999999999,
+          "ci_low": 67.776,
+          "maximum": 70.52,
+          "mean": 69.09,
+          "minimum": 66.47,
+          "n": 5,
+          "p50": 69.19,
+          "p95": 70.47999999999999,
+          "p99": 70.512,
+          "sd": 1.6164621863811088
+        },
+        "hrbac": {
+          "ci_high": 63.705999999999996,
+          "ci_low": 62.577999999999996,
+          "maximum": 64.02,
+          "mean": 63.141999999999996,
+          "minimum": 62.4,
+          "n": 5,
+          "p50": 63.29,
+          "p95": 63.936,
+          "p99": 64.00319999999999,
+          "sd": 0.7252034197382136
+        },
+        "p_holm": 0.0024980554378203563,
+        "reduction_pct": 8.60906064553482,
+        "test": {
+          "cohens_d": 4.747875180808527,
+          "df": 5.547503837231879,
+          "diff": 5.9480000000000075,
+          "diff_ci_high": 7.925728007503762,
+          "diff_ci_low": 3.9702719924962526,
+          "mean_a": 69.09,
+          "mean_b": 63.141999999999996,
+          "n_a": 5,
+          "n_b": 5,
+          "p": 0.00041634257297005936,
+          "t": 7.507049808769355
+        }
+      },
+      "60": {
+        "baseline": {
+          "ci_high": 70.376,
+          "ci_low": 67.9369,
+          "maximum": 70.78,
+          "mean": 69.286,
+          "minimum": 66.65,
+          "n": 5,
+          "p50": 69.76,
+          "p95": 70.68,
+          "p99": 70.76,
+          "sd": 1.6201481413747312
+        },
+        "hrbac": {
+          "ci_high": 61.722,
+          "ci_low": 60.424,
+          "maximum": 62.43,
+          "mean": 60.998000000000005,
+          "minimum": 60.11,
+          "n": 5,
+          "p50": 60.66,
+          "p95": 62.176,
+          "p99": 62.3792,
+          "sd": 0.8824794615173772
+        },
+        "p_holm": 0.0004680068581369711,
+        "reduction_pct": 11.962012527783386,
+        "test": {
+          "cohens_d": 6.353196570617334,
+          "df": 6.181480820151787,
+          "diff": 8.287999999999997,
+          "diff_ci_high": 10.292577151551862,
+          "diff_ci_low": 6.283422848448131,
+          "mean_a": 69.286,
+          "mean_b": 60.998000000000005,
+          "n_a": 5,
+          "n_b": 5,
+          "p": 4.6800685813697105e-05,
+          "t": 10.04528579296078
+        }
+      },
+      "70": {
+        "baseline": {
+          "ci_high": 66.67,
+          "ci_low": 65.296,
+          "maximum": 66.78,
+          "mean": 66.09400000000001,
+          "minimum": 64.59,
+          "n": 5,
+          "p50": 66.55,
+          "p95": 66.748,
+          "p99": 66.7736,
+          "sd": 0.9005720404276373
+        },
+        "hrbac": {
+          "ci_high": 60.956,
+          "ci_low": 58.456,
+          "maximum": 61.06,
+          "mean": 59.784000000000006,
+          "minimum": 57.52,
+          "n": 5,
+          "p50": 60.62,
+          "p95": 61.052,
+          "p99": 61.0584,
+          "sd": 1.5933863310572227
+        },
+        "p_holm": 0.0015495295510222274,
+        "reduction_pct": 9.547008805640454,
+        "test": {
+          "cohens_d": 4.8755968461281265,
+          "df": 6.3189191688146975,
+          "diff": 6.310000000000002,
+          "diff_ci_high": 8.288606762145825,
+          "diff_ci_low": 4.331393237854178,
+          "mean_a": 66.09400000000001,
+          "mean_b": 59.784000000000006,
+          "n_a": 5,
+          "n_b": 5,
+          "p": 0.00019369119387777843,
+          "t": 7.7089954932491915
+        }
+      },
+      "80": {
+        "baseline": {
+          "ci_high": 66.26,
+          "ci_low": 63.215999999999994,
+          "maximum": 66.82,
+          "mean": 64.738,
+          "minimum": 62.37,
+          "n": 5,
+          "p50": 64.44,
+          "p95": 66.77799999999999,
+          "p99": 66.8116,
+          "sd": 1.948992047187467
+        },
+        "hrbac": {
+          "ci_high": 60.93000000000001,
+          "ci_low": 58.779999999999994,
+          "maximum": 62.18,
+          "mean": 59.65599999999999,
+          "minimum": 58.5,
+          "n": 5,
+          "p50": 59.08,
+          "p95": 61.666,
+          "p99": 62.0772,
+          "sd": 1.4660593439557628
+        },
+        "p_holm": 0.007913724149885415,
+        "reduction_pct": 7.850103494083858,
+        "test": {
+          "cohens_d": 2.9469164931671203,
+          "df": 7.428835576357206,
+          "diff": 5.082000000000008,
+          "diff_ci_high": 7.631169811699887,
+          "diff_ci_low": 2.532830188300129,
+          "mean_a": 64.738,
+          "mean_b": 59.65599999999999,
+          "n_a": 5,
+          "n_b": 5,
+          "p": 0.001978431037471354,
+          "t": 4.659484096362064
+        }
+      },
+      "90": {
+        "baseline": {
+          "ci_high": 63.50200000000001,
+          "ci_low": 59.251999999999995,
+          "maximum": 65.25,
+          "mean": 61.282000000000004,
+          "minimum": 57.86,
+          "n": 5,
+          "p50": 61.34,
+          "p95": 64.508,
+          "p99": 65.1016,
+          "sd": 2.6583867288263385
+        },
+        "hrbac": {
+          "ci_high": 56.71,
+          "ci_low": 55.286,
+          "maximum": 57.06,
+          "mean": 55.998000000000005,
+          "minimum": 55.0,
+          "n": 5,
+          "p50": 55.71,
+          "p95": 57.02,
+          "p99": 57.052,
+          "sd": 0.9160895152767556
+        },
+        "p_holm": 0.01108870377109025,
+        "reduction_pct": 8.622433993668611,
+        "test": {
+          "cohens_d": 2.657619550734824,
+          "df": 4.9368021446016455,
+          "diff": 5.283999999999999,
+          "diff_ci_high": 8.528932953995358,
+          "diff_ci_low": 2.0390670460046403,
+          "mean_a": 61.282000000000004,
+          "mean_b": 55.998000000000005,
+          "n_a": 5,
+          "n_b": 5,
+          "p": 0.0087106807785606,
+          "t": 4.202065467257729
+        }
+      },
+      "100": {
+        "baseline": {
+          "ci_high": 59.126,
+          "ci_low": 58.95,
+          "maximum": 59.23,
+          "mean": 59.02,
+          "minimum": 58.93,
+          "n": 5,
+          "p50": 58.97,
+          "p95": 59.186,
+          "p99": 59.221199999999996,
+          "sd": 0.12083045973594446
+        },
+        "hrbac": {
+          "ci_high": 54.508,
+          "ci_low": 53.052,
+          "maximum": 54.78,
+          "mean": 53.78000000000001,
+          "minimum": 52.59,
+          "n": 5,
+          "p50": 53.64,
+          "p95": 54.758,
+          "p99": 54.775600000000004,
+          "sd": 0.9409303906240885
+        },
+        "p_holm": 0.0015495295510222274,
+        "reduction_pct": 8.878346323280235,
+        "test": {
+          "cohens_d": 7.811547791851721,
+          "df": 4.131889361100753,
+          "diff": 5.239999999999995,
+          "diff_ci_high": 6.4032320890839385,
+          "diff_ci_low": 4.076767910916051,
+          "mean_a": 59.02,
+          "mean_b": 53.78000000000001,
+          "n_a": 5,
+          "n_b": 5,
+          "p": 0.00020411131163860146,
+          "t": 12.351141536755165
+        }
+      }
+    },
+    "pooled_test": {
+      "cohens_d": 0.8484283205627684,
+      "df": 96.98013108981756,
+      "diff": 6.056999999999995,
+      "diff_ci_high": 8.890827949922596,
+      "diff_ci_low": 3.223172050077395,
+      "mean_a": 63.453199999999995,
+      "mean_b": 57.3962,
+      "n_a": 50,
+      "n_b": 50,
+      "p": 5.064194745182034e-05,
+      "t": 4.242141602813842
+    },
+    "post_knee_decline_pct": 15.331087250858022,
+    "reduction_max_pct": 12.405967104424336,
+    "reduction_mean_pct": 9.551133393089795,
+    "reduction_min_pct": 7.850103494083858,
+    "reduction_sd_pct": 1.5644751013637024,
+    "reduction_trend": {
+      "p": 0.25532033477136673,
+      "r_squared": 0.15800904189135603,
+      "slope_pct_per_client": -0.020540163961476305
+    }
+  }
+}
+

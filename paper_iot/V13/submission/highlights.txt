@@ -1,0 +1,6 @@
+- A 61-day farm deployment recorded 209,000 access decisions.
+- Eight-run tests linked configured peers with lower write latency.
+- Access control reduced tested throughput by 9.6% on average.
+- A code audit found policy, residue, signature and CRL defects.
+- Outage records did not prove zero sensor-data loss.
+

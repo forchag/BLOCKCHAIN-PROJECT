@@ -1,0 +1,3 @@
+Version 12 artifact merge commit: 8175b9240236afa90c345d14a025e9e853b16342
+Repository: https://github.com/forchag/project-fet2
+Artifact path: paper_iot/V12

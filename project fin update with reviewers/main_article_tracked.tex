@@ -1,0 +1,2574 @@
+\documentclass[pdflatex,sn-mathphys-num]{sn-jnl}
+
+\usepackage{silence}
+\WarningFilter{fixltx2e}{fixltx2e is not required}
+\WarningFilter{caption}{Unknown document class}
+\WarningFilter{caption}{The option `hypcap=true'}
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{amsthm}
+\usepackage[title]{appendix}
+\usepackage{xcolor}
+\usepackage{textcomp}
+\usepackage{manyfoot}
+\usepackage{booktabs}
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+\usepackage{listings}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{placeins}
+\usepackage{dblfloatfix}
+\usepackage{rotating}
+\usepackage{pdflscape}
+\usepackage{tikz}
+\usetikzlibrary{
+    patterns,
+    positioning,
+    arrows.meta,
+    shapes,
+\textcolor{blue}{    shapes.symbols,}
+    calc,
+    intersections,
+    fit,
+    backgrounds,
+    decorations.pathreplacing,
+    matrix
+}
+\usepackage{pgfplots}
+\usepackage[compatibility=false]{caption}
+\usepackage{subcaption}
+\providecommand{\oauthor}[1]{#1}
+\pgfplotsset{compat=1.18}
+\usepgfplotslibrary{
+    groupplots,
+    dateplot,
+    fillbetween
+}
+
+\theoremstyle{thmstyleone}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{thmstyletwo}
+\newtheorem{example}{Example}
+\newtheorem{remark}{Remark}
+
+\theoremstyle{thmstylethree}
+\newtheorem{definition}{Definition}
+
+\raggedbottom
+
+\setcounter{topnumber}{5}
+\setcounter{bottomnumber}{5}
+\setcounter{totalnumber}{10}
+\renewcommand{\topfraction}{0.95}
+\renewcommand{\bottomfraction}{0.95}
+\renewcommand{\textfraction}{0.05}
+\renewcommand{\floatpagefraction}{0.85}
+\renewcommand{\dbltopfraction}{0.95}
+\renewcommand{\dblfloatpagefraction}{0.85}
+\floatplacement{figure}{htbp}
+\hbadness=10000
+\vbadness=10000
+\hfuzz=500pt
+\vfuzz=20pt
+\AtBeginDocument{\hbadness=10000\vbadness=10000\hfuzz=500pt\vfuzz=20pt}
+
+\usepackage[normalem]{ulem}
+\begin{document}
+\hbadness=10000\vbadness=10000\hfuzz=500pt\vfuzz=20pt
+
+\textcolor{red}{\sout{CRT-Based Parallel Residue Transmission for Distributed Edge Blockchain Computing: A Scalable IoT Cluster Architecture for Arid Agriculture}}
+\title[CRT-Based Multi-Channel Residue Transmission for Distributed Edge Blockchain Computing]{
+\textcolor{blue}{  CRT-Based Multi-Channel Residue Transmission with Gateway-Side Parallel Demodulation for Distributed Edge Blockchain Computing: A Scalable IoT Cluster Architecture for Arid Agriculture}
+}
+
+\author*[1]{\fnm{Forcha Glen} \sur{Beloa}}\email{glenbeloa@gmail.com}
+\author[1]{\fnm{Michael Ekonde} \sur{Sone}}\email{ekonde.sone@gmail.com }
+\author[1]{\fnm{Elie Fute} \sur{Tagne}}\email{eliefute@yahoo.fr }
+\author[2]{\fnm{André Paul} \sur{MVOGO ASSE}}\email{mvogoasseandre@gmail.com }
+
+\affil[1]{\orgdiv{Department of Computer Engineering}, \orgname{Faculty of Engineering and Technology (FET), University of Buea}, \orgaddress{\city{Buea}, \country{Cameroon}}}
+\affil[2]{\orgdiv{École Nationale Supérieure polytechnique de Douala}, \orgname{Université de Douala}, \orgaddress{\city{Douala}, \country{Cameroon}}}
+
+\abstract{
+\textcolor{red}{\sout{This paper presents a distributed edge computing framework for resource-constrained IoT clusters that employs Chinese Remainder Theorem (CRT)-based parallel residue transmission to reduce communication latency and energy overhead. The architecture comprises 50 ESP32 nodes and a 4-node Raspberry Pi 4B cluster running Hyperledger Fabric with Raft consensus. CRT decomposition reduces effective latency from 372 ms sequential to 124 ms parallel (66.7 reduction) with complexity and lower memory footprint than compression baselines. The blockchain layer sustains 63 TPS with 1.7 s latency and 99.4 integrity on ARM64 hardware. Scalability analysis shows a theoretical node capacity of 484 full readings under LoRa parameters (and packet capacity of 1,451 CRT residue packets), with latency constant below saturation and degrading predictably under an M/D/1 queuing model. The framework was validated in a 61‑day agricultural deployment, confirming its suitability for large‑scale heterogeneous IoT environments requiring low‑power sensing, distributed verification, and resilient edge actuation.}}
+\textcolor{blue}{This paper presents a distributed edge computing framework for resource-constrained IoT clusters that employs Chinese Remainder Theorem (CRT)-based parallel residue transmission to reduce communication latency and energy overhead. The architecture comprises 50 ESP32 nodes and a 4-node Raspberry Pi 4B cluster running Hyperledger Fabric with Raft consensus. CRT residue packets reduce per-packet airtime by 49.8\% (247\,ms raw $\to$ 124\,ms residue), enabling the gateway's SX1302 multi-channel concentrator to double network packet capacity through simultaneous demodulation, with $O(k)$ reconstruction complexity and lower memory footprint than compression baselines. The blockchain layer sustains 63 TPS with 1.7 s latency and 99.4\% integrity on ARM64 hardware. Scalability analysis shows a theoretical node capacity of 484 full readings under LoRa parameters (and packet capacity of 1,451 CRT residue packets), with latency constant below saturation and degrading predictably under an M/D/1 queuing model. The framework was validated in a 61‑day agricultural deployment, confirming its suitability for large‑scale heterogeneous IoT environments requiring low‑power sensing, distributed verification, and resilient edge actuation.}
+}
+
+\keywords{Chinese Remainder Theorem \sep Edge computing \sep Blockchain \sep Precision agriculture \sep Smart irrigation \sep LoRa}
+
+\maketitle
+
+\section{Introduction}
+\label{sec:introduction}
+
+\subsection{Motivation and Context}
+\label{subsec:computing_problem}
+
+\textcolor{red}{\sout{Resource-constrained edge clusters face a fundamental tradeoff between computational capability and communication energy cost. As node count increases, transmission becomes the dominant energy consumer, yet most low-power IoT systems still rely on sequential packet transmission that fails to exploit the parallel reception capability of modern multi-channel radio hardware . This sequential bottleneck becomes increasingly severe under strict power budgets typical of battery-operated or solar-harvesting deployments, where every millijoule expended on communication directly impacts node lifetime and network sustainability. The challenge is compounded by the need for deterministic latency bounds in cyber-physical systems requiring real-time actuation, where unpredictable channel contention and queuing delays can violate application requirements .}}
+\textcolor{blue}{Resource-constrained edge clusters face a fundamental tradeoff: sequential packet transmission fails to exploit multi-channel radio hardware \cite{rathi2025smart, wang2025lora, chen2025compression, marcelloni2009energy}, while deploying blockchain on ARM64 introduces memory and processing constraints with no existing field characterization \cite{tar2023fabric, jayaram2023hyperledger, dube2024fabricIrrigation}. The Chinese Remainder Theorem (CRT) addresses the first gap: decomposing a reading into residues modulo pairwise coprime values lets the SX1302 demodulate all channels concurrently \cite{garner1959residue, ding1996remainder}, with $O(k)$ deterministic reconstruction ($k \leq 3$). Per-packet occupancy falls 49.8%, doubling gateway packet capacity, even though total node airtime rises from 247 to 372\,ms.}
+
+\textcolor{blue}{We validate the architecture through a 61‑day deployment on a 2\,ha farm in Sfax, Tunisia (31–32\,°C, 55–65\% RH), monitoring tomato and pepper cultivation under environmental stress \cite{mohammed2025loraEnergy, raza2018lorawan, brooks2019precisionWater, williams2022savings, miller2020climateImpact}.}
+
+\textcolor{red}{\sout{Edge architectures increasingly incorporate distributed ledger technologies to provide verifiable data integrity across untrusted administrative domains . However, deploying blockchain components on ARM64 edge hardware introduces new constraints: limited memory (1–4 GB), modest processing capacity, and the absence of hardware acceleration for cryptographic primitives. Existing characterizations of Hyperledger Fabric and similar permissioned platforms focus on cloud-scale deployments with abundant resources, leaving a gap in understanding their real-time performance at the edge . Furthermore, the integration of blockchain verification with low-power sensor networks requires careful orchestration of communication scheduling, signature validation, and consensus participation—all while maintaining sub-second latency for closed-loop control applications . Prior work has treated these concerns in isolation, resulting in fragmented architectures that fail to simultaneously address data integrity, transmission efficiency, and real-time constraints .}}
+\textcolor{red}{\sout{The Chinese Remainder Theorem (CRT) offers a mathematically elegant approach to parallel data transmission that diverges fundamentally from conventional compression. By decomposing a sensor reading into residue components relative to pairwise coprime moduli, CRT enables independent transmission of each residue over parallel channels . This residue independence creates an opportunity to exploit multi-channel radio hardware (e.g., the SX1302 LoRa concentrator's eight demodulation paths) without incurring the computational overhead of dictionary-based compression or the accuracy loss of lossy methods . Unlike Huffman coding or LZW, which require sequential packetization and variable-length decoding , CRT reconstruction is deterministic with complexity, where is the number of moduli ( in this work). This determinism is particularly valuable for resource-constrained microcontrollers, where unpredictable execution times can complicate real-time scheduling .}}
+\textcolor{red}{\sout{We validate the proposed architecture through a 61‑day deployment on a 2‑hectare experimental farm in Sfax, Tunisia, monitoring tomato and pepper cultivation during the critical fruit development and harvest stages (August–September 2025). This deployment serves as a demanding real-world testbed for evaluating the system's ability to sustain reliable communication, low-latency blockchain verification, and automated actuation under environmental stress (31–32°C average temperatures, 55–65 relative humidity) . The agricultural context provides rigorous validation of the framework's suitability for large‑scale heterogeneous IoT environments requiring low-power sensing, distributed verification, and resilient edge actuation .}}
+\textcolor{blue}{Four falsifiable hypotheses structure the evaluation: \textbf{H1} — CRT reduces per-packet airtime by $\geq$40\% while maintaining $\geq$99\% reconstruction accuracy (result: 49.8\% reduction, 99.7\% delivery; Table~\ref{tab:transmission-cost-comparison}); \textbf{H2} — Fabric on four RPi 4B gateways sustains latency $<$2\,s and $\geq$50\,TPS (result: 1.7\,s mean, 63\,TPS; Table~\ref{tab:blockchain_detailed}); \textbf{H3} — RBAC enforcement allows $\geq$50\,TPS and $\leq$500\,ms contract execution (result: 63\,TPS, 320\,ms; Table~\ref{tab:blockchain_detailed}); \textbf{H4} — field reliability $\geq$99\%, airtime within $\pm$5\,ms, TPS within $\pm$20\% of bench (result: 99.4\%, 124\,ms exact, 63\,TPS).}
+
+\subsection{Objectives and Contributions}
+\label{subsec:objectives_contributions}
+
+\textcolor{red}{\sout{This work develops and validates an integrated edge computing framework that combines CRT‑based parallel transmission with Hyperledger Fabric blockchain verification. The primary objectives are:}}
+\textcolor{blue}{This work develops and validates an integrated edge computing framework combining CRT‑based multi-channel residue transmission with Hyperledger Fabric blockchain verification. The four objectives are: (O1) design a CRT transmission scheme with reduced per-packet airtime and guaranteed reconstruction; (O2) implement a lightweight Fabric peer on ARM64 (Raspberry Pi 4B) with sub-second finality; (O3) characterize latency, throughput, and fault tolerance under field conditions; (O4) demonstrate scalability via M/D/1 analysis and 50-node field validation (CRT node capacity 484 full readings vs.\ 728 for raw; benefit is shorter per-packet airtime, not higher node capacity).}
+
+\textcolor{red}{\sout{The main contributions are:}}
+\textcolor{red}{\sout{These contributions collectively advance the state of the art in distributed edge computing by demonstrating that number-theoretic transmission optimization, permissioned blockchain verification, and resilient mesh networking can be cohesively integrated to meet the demands of large‑scale, resource-constrained IoT deployments requiring verifiable real-time actuation.}}
+\textcolor{blue}{The main contributions are: \textbf{(1) CRT-based parallel transmission} — 49.8\% per-packet airtime reduction (247\,ms $\to$ 124\,ms), $2\times$ gateway packet capacity, $O(k)$ complexity, 2.1\,KB memory footprint (vs.\ 8.6–12.4\,KB for Huffman/LZW); \textbf{(2) Edge-resident blockchain} — Fabric 2.5 on ARM64, 63\,TPS, 1.7\,s latency, 99.4\% integrity; \textbf{(3) Hybrid LoRa-BATMAN-adv architecture} — 99.4\% reliability over 61 days with self-healing; \textbf{(4) Scalability analysis} — M/D/1 model validated against synthetic and field data; \textbf{(5) Real-world agricultural validation} — 23.8\% water savings, 72\% labor reduction, 146\% ROI.}
+
+\section{State of the Art and Related Work}
+\label{sec:related_work}
+
+\textcolor{red}{\sout{This section provides a comprehensive review of the current state of research in precision agriculture, IoT systems, blockchain technology, and their integration in agricultural applications. We systematically analyze existing approaches, identify research gaps, and position our contributions within the broader scientific context.}}
+\subsection{Precision Agriculture and IoT Systems}
+\label{subsec:precision_agriculture}
+
+\textcolor{red}{\sout{Precision agriculture has undergone significant transformation with the advent of IoT technologies. Early systems focused on basic sensor networks for environmental monitoring and yield mapping . The evolution toward data-driven farming has been well-documented in several comprehensive reviews .}}
+\textcolor{red}{\sout{Wireless Sensor Networks (WSNs) have been extensively deployed for soil monitoring , microclimate monitoring , and irrigation control . However, these systems often face challenges in energy efficiency, data integrity, and scalability. Recent advancements in low-power wide-area networks (LPWAN) have addressed some limitations, but integration with decision support systems remains fragmented .}}
+\textcolor{red}{\sout{Machine learning approaches have been increasingly applied for yield prediction , disease detection , and irrigation optimization . However, these systems often rely on cloud-based architectures that introduce latency and dependency on internet connectivity . Our approach maintains local intelligence while ensuring data verifiability through blockchain integration.}}
+\textcolor{blue}{Precision agriculture has been reshaped by IoT, progressing from basic WSNs for soil and microclimate monitoring \cite{wang2006wireless, bogena2010soil, pierce1999site} to LPWAN-based irrigation control \cite{evans2008precision}, though integration with decision support systems remains fragmented \cite{aydin2021comprehensive, zhang2002precision, gebbers2010precision}.}
+
+\subsection{Blockchain Technology in Agriculture}
+\label{subsec:blockchain_agriculture}
+
+\textcolor{red}{\sout{Blockchain applications in agriculture have evolved from cryptocurrency origins to diverse supply chain and data management applications.}}
+\textcolor{red}{\sout{The most mature application of blockchain in agriculture has been supply chain transparency . Studies have demonstrated improved food safety through immutable tracking and enhanced consumer trust through provenance verification . However, these implementations typically focus on post-harvest stages, leaving pre-harvest production data underutilized.}}
+\textcolor{red}{\sout{Research on blockchain for farm data management has been more limited. proposed a framework for agricultural data sharing, while explored security aspects of blockchain in smart farming. Recent work by addressed scalability concerns but lacked integration with real-time control systems. Our research bridges this gap by implementing blockchain for both data integrity and real-time irrigation control.}}
+\textcolor{red}{\sout{The application of smart contracts to automate agricultural processes has shown promise in theoretical models and small-scale prototypes . However, practical implementations addressing the computational constraints of agricultural environments remain scarce. Our work demonstrates efficient smart contract deployment on edge devices for irrigation management.}}
+\textcolor{blue}{Blockchain in agriculture spans supply-chain transparency \cite{tian2016agri, kamilaris2019rise, oh2025foodsafety, galvez2018future}, farm data management \cite{lin2018blockchain, ferrag2020security, haque2024scalable}, and smart-contract automation \cite{rama2021systematic, patil2022blockchain}; practical implementations for resource-constrained real-time control remain scarce.}
+
+\subsection{Data Transmission Optimization in IoT}
+\label{subsec:data_transmission}
+
+\textcolor{red}{\sout{Efficient data transmission remains critical for resource-constrained IoT deployments in agriculture.}}
+\textcolor{red}{\sout{Lossless compression algorithms like LZW and Huffman coding have been adapted for sensor networks . However, these approaches often require significant computational resources, making them unsuitable for battery-powered nodes. Adaptive sampling methods reduce data volume but may miss critical events.}}
+\textcolor{red}{\sout{The Chinese Remainder Theorem (CRT) has been primarily applied in cryptographic applications and error correction coding . Limited research exists on CRT for parallel sensor data transmission, with exploring residue number systems for wireless sensors but without agricultural applications.}}
+\textcolor{red}{\sout{Research on energy-efficient data transmission has focused on protocol optimization and data aggregation techniques . However, these approaches often sacrifice data resolution or introduce processing delays. Our CRT-based method achieves transmission optimization without compromising data accuracy or timeliness through mathematical guarantees of perfect reconstruction.}}
+\textcolor{blue}{Lossless compression (LZW, Huffman) adapted for sensor networks \cite{li2018lossless, marcelloni2009energy} often demands prohibitive memory for battery nodes, while adaptive sampling \cite{kjellsson2008adaptive} risks missing critical events. The Chinese Remainder Theorem has been applied in cryptography \cite{ding1996remainder, garner1959residue} and error correction \cite{goldreich1999china}; \cite{wang2018novel} explored residue number systems for wireless sensors but targeted storage reduction, not parallel transmission (see Section~\ref{subsec:crt_transmission}). Energy-efficient transmission research has focused on protocol optimization \cite{sanchez2021energy} and aggregation \cite{heinzelman2000energy}, typically at the cost of data resolution or latency.}
+
+\subsection{Wireless Communication in Agricultural IoT}
+\label{subsec:wireless_communication}
+
+\textcolor{red}{\sout{Communication technologies play a crucial role in agricultural IoT deployments, with trade-offs between range, power consumption, and data rate.}}
+\textcolor{red}{\sout{LoRa technology has emerged as a dominant solution for agricultural applications due to its long-range capabilities and low power consumption . Field studies by demonstrated ranges up to 15 km in rural environments, while analyzed deployment considerations for agricultural settings. However, existing deployments typically use simple star topologies without integrated mesh networking.}}
+\textcolor{red}{\sout{Research on mesh networking for agriculture has been limited, with most studies focusing on urban or industrial applications . The BATMAN-adv protocol has shown promise in rural connectivity projects but has seen minimal application in precision agriculture. Our work innovates by combining LoRa for sensor connectivity with BATMAN-adv mesh networking for gateway communication.}}
+\textcolor{red}{\sout{Recent research has explored hybrid approaches combining multiple communication technologies . However, these implementations often lack seamless integration and introduce complexity in network management. Our hierarchical architecture provides a practical framework for combining different communication technologies while maintaining reliability and efficiency.}}
+\textcolor{blue}{LoRa has emerged as the dominant low-power, long-range solution for agricultural IoT, with rural ranges up to 15 km \cite{adelantado2017understanding, li2020performance, raj2017comprehensive}, though deployments typically use simple star topologies. Mesh networking research has focused primarily on urban or industrial contexts \cite{akylidiz2005wireless}; BATMAN-adv has shown promise in rural connectivity \cite{schmidt2010b.a.t.m.a.n.} but remains largely unapplied to precision agriculture. Hybrid multi-technology architectures have been explored \cite{chettri2020comprehensive} but commonly lack seamless integration and increase management complexity.}
+
+\subsection{Edge Computing in Agricultural IoT}
+\label{subsec:edge_computing}
+
+\textcolor{red}{\sout{The shift toward edge computing has enabled real-time processing capabilities in agricultural applications . Studies by demonstrated improved response times for irrigation control, while showed enhanced privacy preservation through local data processing. However, existing edge computing implementations typically lack integration with verifiable data systems, creating trust gaps in multi-stakeholder agricultural environments. Our work extends these concepts by integrating edge computing with blockchain for verifiable local decision-making, addressing the trust deficit while maintaining real-time performance.}}
+\textcolor{blue}{The shift toward edge computing has enabled real-time processing capabilities in agricultural applications \cite{sharma2020edge}. Studies by \cite{liu2019edge} demonstrated improved response times for irrigation control, while \cite{wang2021edge} showed enhanced privacy preservation through local data processing. However, existing edge computing implementations typically lack integration with verifiable data systems, creating trust gaps in multi-stakeholder agricultural environments.}
+
+\subsection{Parallel Computing in Edge IoT Systems}
+\label{subsec:parallel_edge}
+
+\textcolor{red}{\sout{The convergence of edge computing and IoT has spurred interest in parallel processing architectures at the network periphery. Edge clusters composed of ARM-based system-on-chips (SoCs), such as the Raspberry Pi and Rockchip families, are increasingly deployed for distributed sensing and inference tasks . These clusters exploit multi-core CPUs and, in some cases, integrated GPUs or NPUs to parallelize workloads ranging from image classification to time-series analysis. However, communication parallelism—the simultaneous use of multiple wireless channels—has received comparatively less attention, with most systems treating radio transmission as a sequential bottleneck.}}
+\textcolor{red}{\sout{Residue number systems (RNS), based on the Chinese Remainder Theorem, have long been used in hardware to accelerate arithmetic operations by decomposing computations into parallel, independent channels . More recently, RNS has been applied in cryptography for efficient modular exponentiation and in fault-tolerant computing for error detection . Yet the application of CRT to parallel wireless transmission remains largely unexplored. Prior work has used RNS for data compression in sensor networks , but that approach targeted storage reduction rather than parallel channel utilisation. To the best of our knowledge, no existing system employs CRT-based residue decomposition to exploit multi-channel low-power radios (e.g., LoRa, Zigbee) for simultaneous transmission, thereby converting a sequential communication problem into a parallel one with measurable speedup and energy gains. This gap is precisely what our work addresses, bridging number-theoretic methods with parallel edge communication.}}
+\textcolor{blue}{ARM-based edge clusters (Raspberry Pi, Rockchip) are deployed for distributed sensing and inference \cite{sharma2020edge, wang2021edge}, but communication parallelism — simultaneous use of multiple wireless channels — remains largely unexplored. Residue Number Systems (RNS) based on CRT \cite{parhami2010computer} accelerate arithmetic and support fault-tolerant computing \cite{ding1996remainder, shoup2009computational}, but \cite{wang2018novel} targeted storage reduction rather than parallel channel utilisation. To our knowledge, no prior system employs CRT residue decomposition to exploit multi-channel low-power radios for parallel transmission; this is the gap our work addresses.}
+
+\subsection{Research Gaps and Contributions}
+\label{subsec:research_gaps}
+
+\textcolor{red}{\sout{Based on our comprehensive literature review, we identify several critical research gaps that our work addresses. The following table summarizes these gaps and how our contributions address them, with clear linkages to the objectives outlined in Section .}}
+\textcolor{blue}{Table~\ref{tab:research_gaps} summarizes the gaps our work addresses.}
+
+\begin{table*}[htbp]
+\centering
+\caption{Research gaps addressed by this work, linked to our objectives and contributions}
+\label{tab:research_gaps}
+\footnotesize
+\begin{tabularx}{\textwidth}{@{}p{0.18\textwidth}X p{0.24\textwidth} p{0.18\textwidth}@{}}
+\toprule
+\textbf{Research Area} & \textbf{Identified Gap} & \textbf{Our Contribution (Objective Addressed)} \\
+\midrule
+IoT Data Compression & No agricultural application of CRT for sensor data compression; existing methods compromise accuracy or require excessive memory & CRT-based compression optimized for agricultural data with mathematically perfect reconstruction (Objective 1) \\
+\hline
+Edge-Blockchain Integration & Minimal research on blockchain at agricultural edge devices; existing systems lack verifiable local decision-making & Practical edge-blockchain implementation with 99.4\% reliability and 1.7-second latency (Objective 2) \\
+\hline
+Real-time Irrigation Control & No field-validated blockchain integration for irrigation control; timing constraints not addressed & 61-day field study demonstrating SLO compliance and automated irrigation (Objective 3) \\
+\hline
+Water Efficiency & Limited quantified evidence of blockchain-IoT impact on water conservation in arid regions & 23.8\% tomato, 19.4\% pepper water savings with maintained yields (Objective 3) \\
+\hline
+Economic Viability & Limited cost-benefit analysis of blockchain in agriculture & Comprehensive economic analysis showing 146\% ROI, 0.69-year payback (Objective 4) \\
+\hline
+Network Architecture & Lack of hybrid LoRa-mesh networks optimized for farm deployments & Hierarchical architecture combining LoRa and BATMAN-adv with demonstrated field performance (Objective 2) \\
+\bottomrule
+\end{tabularx}
+\end{table*}
+
+\textcolor{red}{\sout{Our work makes several distinct contributions that collectively address the objectives outlined in Section :}}
+\section{System and Architecture of Blockchain-IoT Integration with CRT-Based Multi-Channel Residue Transmission}
+\label{sec:system_design}
+
+\subsection{Overall Architecture}
+\label{subsec:architecture}
+
+\textcolor{red}{\sout{The system employs a five-layer architecture designed to balance performance, security, and energy efficiency for agricultural applications.}}
+\textcolor{blue}{The system employs a five-layer architecture (sensor, gateway, network, blockchain, application) described in Figure~\ref{fig:both}.}
+
+\begin{figure*}[!htbp]
+\centering
+% --- (a) Five-tier architecture stack ---
+\resizebox{!}{10cm}{%
+\begin{tikzpicture}[font=\scriptsize,
+  tier/.style={draw, rounded corners=3pt, minimum width=5.2cm, minimum height=1.1cm,
+               text centered, align=center, inner sep=4pt},
+  proto/.style={draw=gray!70, fill=gray!10, rounded corners=2pt,
+                minimum width=4.2cm, minimum height=0.6cm,
+                text centered, align=center},
+  arr/.style={-Stealth, thick, draw=black!70},
+  redarr/.style={-Stealth, thick, dashed, draw=red!80}]
+
+  % Tier boxes (bottom to top)
+  \node[tier, fill=green!6,  draw=green!50!black]  (T1) at (0,0)
+    {\textbf{Tier 1 — Sensor Layer}\\50$\times$ ESP32 Nodes\\Soil, Temp, Humidity, pH, Light};
+
+  \node[proto] (P12) at (0,1.55)
+    {LoRa 868\,MHz, SF7, 2\,km};
+
+  \node[tier, fill=teal!6,   draw=teal!60!black]   (T2) at (0,3.1)
+    {\textbf{Tier 2 — Gateway Layer}\\4$\times$ Raspberry Pi 4B\\CRT compression, local processing};
+
+  \node[proto] (P23) at (0,4.65)
+    {TLS 1.3 Encryption};
+
+  \node[tier, fill=purple!6, draw=purple!60!black] (T3) at (0,6.2)
+    {\textbf{Tier 3 — Network Layer}\\BATMAN-adv Mesh\\Wi-Fi 5\,GHz, TPM 2.0};
+
+  \node[proto] (P34) at (0,7.75)
+    {gRPC Protocol};
+
+  \node[tier, fill=orange!8, draw=orange!60!black] (T4) at (0,9.3)
+    {\textbf{Tier 4 — Blockchain Layer}\\Hyperledger Fabric\\Smart Contracts, Immutable storage};
+
+  \node[proto] (P45) at (0,10.85)
+    {REST API};
+
+  \node[tier, fill=red!6,    draw=red!60!black]    (T5) at (0,12.4)
+    {\textbf{Tier 5 — Application Layer}\\Farm Management\\Dashboard, Analytics, Certification};
+
+  % Upward arrows between tiers
+  \draw[arr] (T1.north) -- (P12.south);
+  \draw[arr] (P12.north) -- (T2.south);
+  \draw[arr] (T2.north) -- (P23.south);
+  \draw[arr] (P23.north) -- (T3.south);
+  \draw[arr] (T3.north) -- (P34.south);
+  \draw[arr] (P34.north) -- (T4.south);
+  \draw[arr] (T4.north) -- (P45.south);
+  \draw[arr] (P45.north) -- (T5.south);
+
+  % Red dashed feedback arrow on right: Tier 5 -> Tier 2
+  \draw[redarr] (T5.east) -- ++(0.9,0) -- ++(0,-9.3)
+      -- node[right=1pt, yshift=-0.5cm, font=\tiny]{Irrigation commands} (T2.east);
+\end{tikzpicture}}%
+\hfill
+% --- (b) Communication and control flow ---
+\resizebox{!}{10cm}{%
+\begin{tikzpicture}[font=\scriptsize,
+  layer/.style={draw, rounded corners=3pt, minimum width=4.8cm, minimum height=1.0cm,
+                text centered, align=center, inner sep=4pt},
+  uarr/.style={-Stealth, thick, draw=blue!70},
+  darr/.style={-Stealth, thick, dashed, draw=red!80}]
+
+  % Layer boxes bottom to top
+  \node[layer, fill=red!10,    draw=red!60!black]    (S)  at (0,0)
+    {\textbf{Sensor Layer}\\ESP32 nodes};
+  \node[layer, fill=teal!10,   draw=teal!60!black]   (GW) at (0,2.6)
+    {\textbf{Gateway Layer}\\Raspberry Pi gateways};
+  \node[layer, fill=purple!10, draw=purple!60!black] (NW) at (0,5.2)
+    {\textbf{Network Layer}\\LoRa + BATMAN-adv};
+  \node[layer, fill=orange!10, draw=orange!60!black] (BC) at (0,7.8)
+    {\textbf{Blockchain Layer}\\Hyperledger Fabric};
+  \node[layer, fill=green!10,  draw=green!60!black]  (AP) at (0,10.4)
+    {\textbf{Application Layer}\\Farm UI \& dashboards};
+
+  % Upstream blue arrows
+  \draw[uarr] (S.north)  -- node[right=2pt, font=\tiny]{CRT residues, LoRa} (GW.south);
+  \draw[uarr] (GW.north) -- node[right=2pt, font=\tiny]{pre-processed uplink} (NW.south);
+  \draw[uarr] (NW.north) -- node[right=2pt, font=\tiny]{gRPC over TLS\,1.3} (BC.south);
+  \draw[uarr] (BC.north) -- node[right=2pt, font=\tiny]{state + events} (AP.south);
+
+  % Red dashed feedback on left: App -> Gateway
+  \draw[darr] (AP.west) -- ++(-1.3,0) -- node[left=2pt]{irrigation rules} ++(0,-7.8) -- (GW.west);
+
+  % Legend (drawn directly, avoids inline-tikz bounding-box issues)
+  \draw[uarr] (-2.6,-1.1) -- (-1.7,-1.1)
+      node[right, font=\tiny]{Upstream data flow};
+  \draw[darr] (-2.6,-1.6) -- (-1.7,-1.6)
+      node[right, font=\tiny]{Feedback / control loop};
+\end{tikzpicture}}%
+\caption{(a) System architecture tiers. (b) Vertical communication and control across the five-tier architecture.}
+\label{fig:both}
+\end{figure*}
+
+\textcolor{red}{\sout{The five layers include:}}
+\emph{Edge node} refers to the four Raspberry Pi 4B gateways performing local CRT reconstruction, Ed25519 verification, and irrigation decisions — not MEC in a cellular sense. Cloud round-trips cannot guarantee the 2\,s SLO given intermittent Sfax rural connectivity. Figure~\ref{fig:enhanced-farm-layout} shows the network topology.
+
+\subsection{Farm Layout and Network Topology}
+\label{subsec:farm_layout}
+
+\textcolor{red}{\sout{The system was deployed across a 2-hectare experimental farm (200m × 100m) organized into four operational zones. Each zone contained 12–13 sensor nodes arranged in a grid pattern with approximately 20-meter spacing.}}
+\textcolor{blue}{The 2-hectare farm (200\,m $\times$ 100\,m) was divided into four zones, each with 12–13 sensor nodes on a 20\,m grid.}
+
+\begin{figure*}[!htbp]
+  \centering
+  \resizebox{\linewidth}{!}{%
+  \begin{tikzpicture}[font=\scriptsize,
+    gw/.style={draw=red!80!black, fill=red!30, minimum size=0.5cm, inner sep=1pt, align=center},
+    snode/.style={circle, draw=blue!70, fill=blue!40, minimum size=0.22cm, inner sep=0pt},
+    mesh/.style={draw=red!70, line width=1.5pt},
+    lora/.style={draw=blue!50, dashed, thin}]
+
+    % Farm rectangle 20x10 (1 unit = 10 m)
+    \draw[fill=green!8, draw=black] (0,0) rectangle (20,10);
+
+    % Zone labels
+    \node at (3,7.5)  {Zone 1};
+    \node at (17,7.5) {Zone 2};
+    \node at (3,2.5)  {Zone 3};
+    \node at (17,2.5) {Zone 4};
+
+    % Gateway positions
+    \node[gw] (NGW) at (5,8.5)   {};
+    \node[gw] (SGW) at (15,1.5)  {};
+    \node[gw] (WGW) at (0.5,5)   {};
+    \node[gw] (EGW) at (19.5,5)  {};
+
+    % Gateway labels
+    \node[above=2pt of NGW, align=center, font=\tiny] {N-GW\\RPi 4B};
+    \node[below=2pt of SGW, align=center, font=\tiny] {S-GW\\RPi 4B};
+    \node[above=2pt of WGW, align=center, font=\tiny] {W-GW\\RPi 4B};
+    \node[above=2pt of EGW, align=center, font=\tiny] {E-GW\\RPi 4B};
+
+    % BATMAN-adv mesh: connect all gateways
+    \draw[mesh] (NGW) -- (WGW);
+    \draw[mesh] (NGW) -- (EGW);
+    \draw[mesh] (NGW) -- (SGW);
+    \draw[mesh] (WGW) -- (SGW);
+    \draw[mesh] (EGW) -- (SGW);
+    \draw[mesh] (WGW) -- (EGW);
+
+    % Sensor nodes (grid, ~50 nodes)
+    \foreach \x/\y in {
+      2/2, 2/4, 2/6, 2/8,
+      4/2, 4/4, 4/6, 4/8,
+      6/2, 6/4, 6/6, 6/8,
+      8/2, 8/4, 8/6, 8/8,
+      10/2,10/4,10/6,10/8,
+      12/2,12/4,12/6,12/8,
+      14/2,14/4,14/6,14/8,
+      16/2,16/4,16/6,16/8,
+      18/2,18/4,18/6,18/8,
+      3/1, 7/1,11/1,15/1,19/1,
+      3/9, 7/9,11/9,15/9,19/9,
+      1/3, 1/5, 1/7,19/3}{
+      \node[snode] at (\x,\y) {};
+    }
+
+    % Representative LoRa links (a few per zone)
+    \draw[lora] (2,8) -- (NGW);
+    \draw[lora] (4,6) -- (NGW);
+    \draw[lora] (1,7) -- (WGW);
+    \draw[lora] (1,5) -- (WGW);
+    \draw[lora] (18,8) -- (EGW);
+    \draw[lora] (18,6) -- (EGW);
+    \draw[lora] (14,2) -- (SGW);
+    \draw[lora] (16,2) -- (SGW);
+
+    % X-axis scale (10 m per unit) — placed inside rectangle at y=0
+    \foreach \x/\lbl in {0/0, 4/40, 8/80, 12/120, 16/160, 20/200}{
+      \draw (\x,0) -- (\x,-0.15);
+      \node[below, font=\tiny] at (\x,-0.15) {\lbl\,m};
+    }
+    \draw[->] (-0.2,-0.2) -- (20.5,-0.2) node[right, font=\tiny]{x (m)};
+
+    % Y-axis scale
+    \foreach \y/\lbl in {0/0, 2/20, 4/40, 6/60, 8/80, 10/100}{
+      \draw (0,\y) -- (-0.15,\y);
+      \node[left, font=\tiny] at (-0.15,\y) {\lbl\,m};
+    }
+    \draw[->] (-0.2,-0.2) -- (-0.2,10.5) node[above, font=\tiny]{y (m)};
+
+    % Legend below farm rectangle
+    \node[draw=black!30, fill=white, rounded corners=2pt,
+          inner sep=4pt, anchor=north] at (10,-0.75) {%
+      \begin{tikzpicture}[font=\tiny,
+          snode/.style={circle,draw=blue!70,fill=blue!40,minimum size=0.18cm,inner sep=0pt},
+          gw/.style={draw=red!80!black,fill=red!30,minimum size=0.38cm,inner sep=0pt},
+          mesh/.style={draw=red!70,line width=1.2pt},
+          lora/.style={draw=blue!50,dashed,thin}]
+        \node[snode] at (0,0) {};
+        \node[right=4pt, font=\tiny] at (0.12,0) {ESP32 Sensor};
+        \node[gw] at (2.7,0) {};
+        \node[right=4pt, font=\tiny] at (2.82,0) {RPi Gateway};
+        \draw[mesh] (5.4,0) -- (6.0,0);
+        \node[right=4pt, font=\tiny] at (6.0,0) {BATMAN-adv};
+        \draw[lora] (8.5,0) -- (9.1,0);
+        \node[right=4pt, font=\tiny] at (9.1,0) {LoRa link};
+        \draw[|-|, thick] (11.3,0) -- (13.3,0)
+            node[midway, below=2pt, font=\tiny]{20\,m};
+      \end{tikzpicture}%
+    };
+  \end{tikzpicture}}%
+  \caption{Hybrid LoRa-mesh network architecture with 50 ESP32 sensor nodes, 4 Raspberry Pi gateways, and BATMAN-adv backbone for reliable data aggregation.}
+  \label{fig:enhanced-farm-layout}
+\end{figure*}
+
+\subsection{Distributed Parallel Computing Architecture}
+\label{subsec:parallel_arch}
+
+\textcolor{red}{\sout{The proposed system leverages parallelism at multiple levels: dual-core task overlap within each sensor node, parallel channel transmission for CRT residues, and distributed processing across the gateway cluster. This section analyzes these parallel computing aspects.}}
+\textcolor{red}{\sout{The ESP32-WROOM-32 microcontroller integrates two Xtensa LX6 cores, enabling concurrent execution of sensing and communication tasks . In conventional single-core designs, sensor acquisition, analog-to-digital conversion (ADC), and data processing must execute sequentially, introducing cumulative latency. Our implementation exploits core parallelism by partitioning tasks:}}
+\textcolor{red}{\sout{This overlap reduces the effective per-cycle latency. Without parallel execution, sequential acquisition and decomposition would require 8.9 ms (8.0 ms for sensing plus 0.9 ms for CRT encoding). With dual-core overlap, the critical path becomes ms, recovering 0.9 ms per sensing cycle. Over a 30‑minute reporting interval, this saving accumulates to negligible overall impact, but it demonstrates the feasibility of real-time processing on resource-constrained nodes without stalling the sensing pipeline.}}
+\textcolor{red}{\sout{The CRT-based transmission model separates work into a sequential fraction (signing, packet assembly) and a parallelizable fraction (residue transmission over multiple channels). Let denote the sequential fraction and the number of parallel channels. The theoretical speedup is given by Amdahl’s Law :}}
+\textcolor{blue}{The ESP32’s dual Xtensa LX6 cores \cite{espressif2020esp32} run sensor sampling (Core~0, 8.0\,ms) and CRT decomposition + LoRa preparation (Core~1, 0.9\,ms) in parallel; the critical path is 8.0\,ms, confirming negligible CRT overhead. Gateway throughput benefit (Eq.~\ref{eq:throughput_improvement}):}
+\begin{equation}
+\text{Improvement} = \frac{\lambda_{\text{CRT}}}{\lambda_{\text{raw}}} = \frac{8.06}{4.05} \approx 1.99\times.
+\label{eq:throughput_improvement}
+\end{equation}
+\textcolor{red}{\sout{From measured data (Table ), the total raw transmission time is ms. The sequential overhead (signature generation, packet formatting, etc.) is approximately ms, giving . The remaining is the parallelizable residue airtime. With channels, the theoretical speedup is}}
+\textcolor{red}{\sout{S(3) = = 2.47.}}
+\textcolor{red}{\sout{The observed speedup, comparing raw transmission to CRT parallel transmission, is , which achieves of the theoretical maximum. The gap arises from residual synchronization overhead and imperfect channel utilization, confirming that CRT effectively exploits channel parallelism within the constraints of LoRa hardware.}}
+\textcolor{red}{\sout{The four Raspberry Pi 4B gateways function as a homogeneous edge compute cluster. Each gateway operates as a peer node in the Hyperledger Fabric network, maintaining a copy of the ledger and executing chaincode. The BATMAN-adv mesh network provides low-latency interconnect, enabling state synchronization and consensus communication. From a distributed systems perspective, the cluster exhibits:}}
+\textcolor{red}{\sout{This architecture transforms the gateway layer from a simple data aggregator into a genuine distributed edge computing platform, capable of local decision-making without cloud dependency. The cluster's performance, characterized in Section , demonstrates that ARM64-based edge nodes can sustain blockchain consensus and real-time actuation for IoT workloads.}}
+\textcolor{blue}{Per-node airtime rises from 247 to 372\,ms (three sequential packets); the gain is gateway packet capacity, not per-node energy. The four RPi 4B gateways form a homogeneous cluster with BATMAN-adv mesh (sub-second failover) and per-gateway Fabric peer + CouchDB, sustaining blockchain consensus and real-time actuation locally; performance is in Section~\ref{subsec:blockchain_performance}.}
+
+\subsection{Hardware Design and Implementation}
+\label{subsec:hardware}
+
+\textcolor{red}{\sout{Each sensor node employed an ESP32-WROOM-32 microcontroller with multiple sensors:}}
+\textcolor{blue}{Each sensor node used an ESP32-WROOM-32 microcontroller \cite{espressif2020esp32} with sensors listed in Table~\ref{tab:sensor-specs}.}
+
+\begin{table}[!t]
+\centering
+\caption{Sensor node specifications and components}
+\label{tab:sensor-specs}
+\begin{tabularx}{\linewidth}{l X X}
+\toprule
+\textbf{Component} & \textbf{Specification} & \textbf{Purpose} \\
+\midrule
+Microcontroller & ESP32-WROOM-32 & Main processing and control \\
+Soil Moisture & TDR-315N & Volumetric water content \\
+Temperature & DHT22 & Ambient temperature \\
+Humidity & DHT22 & Relative humidity \\
+pH Sensor & Analog with amplifier & Soil acidity \\
+Light Sensor & BH1750 & Photosynthetic radiation \\
+Communication & RFM95W LoRa & Long-range data transmission \cite{adafruit2016rfm95w} \\
+Power & 18650 Li-ion, 2,600~mAh / 3.7~V / 9.62~Wh + 2\,W, 6\,V monocrystalline silicon PV panel & Energy supply and storage \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{sidewaysfigure}[!htbp]
+  \centering
+  \resizebox{0.94\textheight}{!}{%
+  \begin{tikzpicture}[font=\footnotesize,
+    cbox/.style={draw, rounded corners=3pt, minimum height=0.95cm,
+                 align=center, inner sep=4pt, text width=3.25cm},
+    arr/.style={-Stealth, thick, draw=black!70},
+    labl/.style={font=\scriptsize\itshape, midway, fill=white, inner sep=1pt}]
+
+    % Central ESP32 block
+    \node[cbox, fill=blue!6, draw=blue!60!black, minimum width=5.0cm, minimum height=2.15cm,
+          text width=4.75cm] (esp) at (0,0)
+      {\textbf{ESP32-WROOM-32}\\240 MHz Dual-Core\\4 MB Flash $|$ 520 KB SRAM\\AES Encryption $|$ Secure Boot $|$ OTA};
+
+    % === LEFT: Environmental Sensors ===
+    \node[font=\scriptsize\bfseries, fill=white, inner sep=1pt, anchor=south] at (-8.0, 2.12) {Environmental Sensors};
+
+    \node[cbox, fill=green!6, draw=green!60!black] (SM) at (-8.0, 1.18)
+      {Soil Moisture\\TDR-315N $|$ 2\% Acc.};
+    \node[cbox, fill=green!6, draw=green!60!black] (TH) at (-8.0, 0)
+      {Temp/Humidity\\DHT22 $|$ $\pm$0.5$^\circ$C, $\pm$2\% RH};
+    \node[cbox, fill=green!6, draw=green!60!black] (pH) at (-8.0,-1.18)
+      {pH Sensor\\Analog $|$ 0--14 pH};
+
+    \draw[arr] (SM.east) -- node[pos=0.62, above=2pt, labl]{Analog/Digital} (esp.west |- SM.east);
+    \draw[arr] (TH.east) -- node[pos=0.62, above=2pt, labl]{Analog} (esp.west |- TH.east);
+    \draw[arr] (pH.east) -- node[pos=0.62, above=2pt, labl]{Analog} (esp.west |- pH.east);
+
+    % === RIGHT: Control & Monitoring ===
+    \node[font=\scriptsize\bfseries, fill=white, inner sep=1pt, anchor=south] at (8.0, 2.12) {Control \& Monitoring};
+
+    \node[cbox, fill=orange!8, draw=orange!60!black] (LS) at (8.0, 1.18)
+      {Light Sensor\\BH1750 $|$ 1--65,535 lux};
+    \node[cbox, fill=orange!8, draw=orange!60!black] (WL) at (8.0, 0)
+      {Water Level\\Float Switch $|$ Digital};
+    \node[cbox, fill=orange!8, draw=orange!60!black] (PC) at (8.0,-1.18)
+      {Pump Control\\MOSFET $|$ 12 V 5 A};
+
+    \draw[arr] (esp.east |- LS.west) -- node[pos=0.38, above=2pt, labl]{I2C}     (LS.west);
+    \draw[arr] (esp.east |- WL.west) -- node[pos=0.38, above=2pt, labl]{Digital}  (WL.west);
+    \draw[arr] (esp.east |- PC.west) -- node[pos=0.38, above=2pt, labl]{PWM}      (PC.west);
+
+    % === TOP: Communication Interfaces ===
+    \node[font=\scriptsize\bfseries, fill=white, inner sep=1pt] at (0, 5.32) {Communication Interfaces};
+
+    \node[cbox, fill=purple!6, draw=purple!60!black] (WIFI) at (-4.8, 4.45)
+      {Wi-Fi\\802.11 b/g/n $|$ STA/AP};
+    \node[cbox, fill=purple!6, draw=purple!60!black] (LORA) at (0, 4.45)
+      {LoRa Module\\RFM95W 868 MHz $|$ SF7};
+    \node[cbox, fill=purple!6, draw=purple!60!black] (BLE)  at (4.8, 4.45)
+      {Bluetooth\\BLE 4.2 $|$ Mesh};
+
+    \draw[arr] (WIFI.south) -- node[pos=0.48, left=3pt, labl]{On-chip Wi-Fi} ([xshift=-1.45cm]esp.north);
+    \draw[arr] (LORA.south) -- node[pos=0.42, right=3pt, labl]{SPI}    (esp.north);
+    \draw[arr] (BLE.south)  -- node[pos=0.48, right=3pt, labl]{On-chip BLE} ([xshift=1.45cm]esp.north);
+
+    % LoRa wireless link to gateway
+    \node[cloud, cloud puffs=9, cloud puff arc=100,
+          draw=blue!60, fill=blue!6, minimum width=2.45cm, minimum height=1.10cm,
+          align=center] (cloud) at (3.2, 7.0)
+      {LoRa 868 MHz\\2 km};
+    \node[cbox, fill=red!6, draw=red!60!black, minimum width=3.45cm, text width=3.2cm]
+      (rpi) at (8.0, 7.0)
+      {Raspberry Pi 4B\\SX1302 gateway\\Edge blockchain peer};
+    \draw[arr, dashed] (LORA.north east) -- ++(0.55,0.75) -- (cloud.south west);
+    \draw[arr, dashed] (cloud.east) -- node[pos=0.54, above=3pt, labl]{Gateway uplink} (rpi.west);
+
+    % === BOTTOM: Power & Peripherals ===
+    \node[font=\scriptsize\bfseries, fill=white, inner sep=1pt] at (-4.8,-5.55) {Power \& Peripherals};
+
+    \node[cbox, fill=teal!6, draw=teal!60!black] (SD) at (-4.8,-4.75)
+      {MicroSD Slot\\Up to 32 GB $|$ Logging};
+    \node[cbox, fill=teal!6, draw=teal!60!black, text width=3.55cm] (PM) at (0,-4.75)
+      {Power Management\\Solar + 18650 Li-ion\\3.7 V $|$ 2,600 mAh};
+    \node[cbox, fill=teal!6, draw=teal!60!black] (RTC) at (4.8,-4.75)
+      {RTC Module\\DS3231 $|$ Battery Backup};
+
+    \draw[arr] (SD.north)  -- ++(0,0.72) -| ([xshift=-1.55cm]esp.south);
+    \draw[arr] (PM.north)  -- node[pos=0.43, left=7pt, labl]{3.3 V Regulated} (esp.south);
+    \draw[arr] (RTC.north) -- ++(0,0.72) -| ([xshift=1.55cm]esp.south);
+
+  \end{tikzpicture}}%
+  \caption{ESP32 sensor node with sensor inputs, communication modules, and LoRa link to Raspberry Pi gateway for agricultural IoT.}
+  \label{fig:enhanced-sensor-node}
+\end{sidewaysfigure}
+
+\subsubsection{Scalability and Node Count Validation}
+\label{subsubsec:scalability_analysis_related}
+
+\textcolor{red}{\sout{The deployment used 50 ESP32 nodes across a 2 ha farm. This number was chosen to balance representativeness, statistical power, and practical manageability:}}
+\textcolor{red}{\sout{To demonstrate that this node count is not merely a convenient sample but a fraction of the system’s true capacity, we derive a theoretical upper bound on network size under LoRa constraints. The maximum number of nodes that can transmit within a reporting window depends on the number of parallel channels , the window length , and the number of packets per node :}}
+\textcolor{blue}{The deployment (50 nodes, 2\,ha, 86,400 transactions) gives theoretical capacity $N_{\max} = C W / (k T_{\text{packet}})$ (Eq.~\ref{eq:scalability}); Table~\ref{tab:scalability-comparison} lists results for raw and CRT.}
+\begin{equation}
+N_{\max} = \frac{C \cdot W}{k \cdot T_{\text{packet}}},
+\label{eq:scalability}
+\end{equation}
+\textcolor{red}{\sout{where is the airtime per packet. Using , ms, for raw and for CRT, and from Table , we obtain the capacities listed in Table .}}
+
+\begin{table}[htbp]
+\centering
+\caption{Theoretical node capacity: raw vs. CRT transmission (1‑min reporting window)}
+\label{tab:scalability-comparison}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Parameter}                & \textbf{Raw} & \textbf{CRT} \\
+\midrule
+Per‑packet airtime (ms)           & 247           & 124           \\
+Packets per reading               & 1             & 3             \\
+Maximum nodes $N_{\max}$           & 728           & 484           \\
+Relative node capacity             & 1.0           & 0.66          \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textcolor{red}{\sout{CRT reduces per‑packet airtime by 50 (from 247 ms to 124 ms), doubling the packet throughput, but because each reading requires three packets, the node capacity becomes , which is 66 of raw’s . This headroom still comfortably exceeds the 50‑node deployment (10 of capacity) and confirms that the system can scale well beyond its current size.}}
+\textcolor{blue}{CRT halves per-packet airtime but requires 3 packets, yielding $N_{\max}=484$ vs.\ raw’s 728. The 50-node deployment uses 10\% of capacity.}
+
+\subsubsection{Gateway Architecture}
+\textcolor{red}{\sout{Raspberry Pi 4B devices with 4 GB RAM served as gateways . Each gateway included:}}
+\textcolor{blue}{Each RPi 4B gateway (4\,GB RAM \cite{rpi2023specs}) hosts an SX1302 LoRa concentrator \cite{waveshare2024sx1302}, TPM\,2.0 \cite{microsoft2023tpm}, dual-band Wi-Fi (BATMAN-adv), 128\,GB microSD, and GPS. Pipeline: receive CRT residues $\to$ Garner reconstruction $\to$ Ed25519/timestamp verify $\to$ threshold-based local irrigation $\to$ Fabric hash anchor (Figure~\ref{fig:gateway-architecture}). \textbf{Deployment requirement:} SX1302-class multi-channel concentrator is mandatory; single-channel transceivers serialize reception and negate CRT’s network-density benefit.}
+
+\begin{sidewaysfigure}[!htbp]
+  \centering
+  \resizebox{0.95\textheight}{!}{%
+  \begin{tikzpicture}[font=\footnotesize,
+    bbox/.style={draw, rounded corners=3pt, minimum width=3.8cm, minimum height=1.0cm,
+                 align=center, inner sep=4pt, text width=3.55cm},
+    store/.style={draw=red!50, fill=red!4, ellipse, minimum width=2.7cm,
+                  minimum height=1.15cm, align=center, inner sep=3pt},
+    actuator/.style={draw=green!60!black, fill=green!6, ellipse, minimum width=2.8cm,
+                     minimum height=1.05cm, align=center, inner sep=3pt},
+    arr/.style={-Stealth, thick, draw=black!70},
+    rarr/.style={-Stealth, thick, draw=red!70, dashed},
+    lab/.style={font=\tiny, fill=white, inner sep=1pt}]
+
+    % ============ LEFT COLUMN: Sensor side ============
+    \node[bbox, fill=blue!6, draw=blue!60!black] (SN) at (-8.0, 9.6)
+      {\textbf{Sensor Node}\\Soil, Temp, Humidity\\pH, Light};
+    \node[bbox, fill=blue!6, draw=blue!60!black] (SC) at (-8.0, 7.45)
+      {\textbf{Scaling}\\25.3$^\circ$C $\to$ 2530\\$\times$100 factor};
+    \node[bbox, fill=blue!6, draw=blue!60!black] (CE) at (-8.0, 5.3)
+      {\textbf{CRT Encoder}\\Moduli $\{97,101,103\}$\\$r_i = x \bmod m_i$};
+    \node[bbox, fill=blue!6, draw=blue!60!black] (LU) at (-8.0, 3.15)
+      {\textbf{LoRa Uplink}\\868 MHz, SF7\\125 kHz BW};
+
+    \draw[arr] (SN.south) -- node[right=3pt, lab]{Readings/ADC} (SC.north);
+    \draw[arr] (SC.south) -- node[right=3pt, lab]{Scaled integers} (CE.north);
+    \draw[arr] (CE.south) -- node[right=3pt, lab]{Residues $[r_1,r_2,r_3]$} (LU.north);
+
+    % ============ CENTER COLUMN: Gateway ============
+    \node[bbox, fill=green!6, draw=green!60!black] (CD) at (0, 8.55)
+      {\textbf{CRT Decoder}\\Garner's algorithm};
+    \node[bbox, fill=green!6, draw=green!60!black] (GW) at (0, 6.55)
+      {\textbf{Edge Gateway}\\Raspberry Pi 4B\\(4$\times$ deployment)};
+    \node[bbox, fill=green!6, draw=green!60!black] (VF) at (0, 4.55)
+      {\textbf{Verification}\\Ed25519 signature\\Timestamp check};
+    \node[bbox, fill=green!6, draw=green!60!black] (LD) at (0, 2.55)
+      {\textbf{Local Decision}\\Threshold rules\\Irrigation trigger};
+    \node[bbox, fill=green!8, draw=green!70!black] (IA) at (0, 0.55)
+      {\textbf{Irrigation Actuator}\\Valve/pump control\\PWM drivers, feedback};
+
+    % LoRa link, kept clear of the center boxes
+    \draw[arr] (LU.east) -- ++(1.35,0) |- node[pos=0.72, above=2pt, lab]{LoRa 868 MHz} (CD.west);
+    \draw[arr] (CD.south) -- node[right=3pt, lab]{Reconstructed value} (GW.north);
+    \draw[arr] (GW.south) -- node[right=3pt, lab]{Rule evaluation} (VF.north);
+    \draw[arr] (VF.south) -- node[right=3pt, lab]{Rule evaluation} (LD.north);
+    \draw[arr] (LD.south) -- node[right=3pt, lab]{Immediate local control} (IA.north);
+
+    % Actuator outputs
+    \node[actuator] (SV) at (-2.7, -1.35) {Solenoid valves\\24 V DC};
+    \node[actuator] (WP) at (2.7, -1.35)  {Water pumps\\Variable speed};
+
+    \draw[arr] (IA.south) |- (SV.east);
+    \draw[arr] (IA.south) |- node[pos=0.62, above=2pt, lab]{PWM + feedback} (WP.west);
+
+    % ============ RIGHT COLUMN: Blockchain ============
+    \node[bbox, fill=red!6, draw=red!60!black] (BC) at (7.5, 8.55)
+      {\textbf{Permissioned Blockchain}\\Hyperledger Fabric 2.4\\Raft consensus};
+    \node[bbox, fill=red!6, draw=red!60!black] (SC2) at (7.5, 6.55)
+      {\textbf{Smart Contracts}\\Registration, validation\\Irrigation rules, RBAC};
+
+    \node[store] (ONc) at (5.35, 4.35)  {On-chain\\Hashes, metadata};
+    \node[store] (OFc) at (9.65, 4.35)  {Off-chain\\Full records\\CouchDB/FS};
+
+    \draw[arr] (BC.south)  -- node[right=3pt, lab]{Invoke contracts} (SC2.north);
+    \draw[arr] (SC2.west)  -- node[above=2pt, lab]{Hash anchors} (GW.east);
+    \draw[arr] (SC2.south west) -- (ONc.north);
+    \draw[arr] (SC2.south east) -- (OFc.north);
+
+    % Signed payload from blockchain back to gateway, routed above the gateway column
+    \draw[arr] (BC.west) -- ++(-1.35,0) |- node[pos=0.78, above=2pt, lab]{Signed payload} (GW.east);
+
+    % Blockchain irrigation command event routed outside all boxes
+    \draw[rarr] (SC2.east) -- ++(1.55,0) -- ++(0,-6.0) -- node[below=2pt, lab]{irrigation command} (IA.east);
+
+  \end{tikzpicture}}%
+  \caption{Raspberry Pi 4B gateway architecture showing data processing pipeline and security modules}
+  \label{fig:gateway-architecture}
+\end{sidewaysfigure}
+
+\subsection{Node Communication Protocol}
+\label{subsec:communication_protocol}
+
+\subsubsection{LoRa Communication Framework}
+\textcolor{red}{\sout{Sensor nodes communicated with gateways using LoRaWAN protocol in the EU868 ISM band . Communication followed a hybrid approach:}}
+\textcolor{blue}{Nodes operated in EU868 ISM band \cite{ttn2024eu868,loraalliance2021regional} with hybrid polling (30-min) + event-driven (threshold breach) scheduling and two-way acknowledgments. Residue channels: 868.1/868.3/868.5\,MHz (static assignment); SPI switching overhead $\approx$1\,ms (negligible vs.\ 124\,ms airtime). Sequential per-zone polling mitigates collisions ($<$2\% probability at 50 nodes); time-slotted scheduling is future work near capacity.}
+
+\begin{table}[htbp]
+\centering
+\caption{LoRa communication parameters for node-gateway communication}
+\label{tab:lora-params}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Parameter} & \textbf{Value} & \textbf{Description} \\
+\midrule
+Frequency          & 868.1 MHz & EU ISM band \\
+Spreading Factor   & SF7       & Balance range and airtime \\
+Bandwidth          & 125 kHz   & Standard LoRa bandwidth \\
+Coding Rate        & 4/5       & Error correction rate \\
+Data Rate          & 5.47 kbps & Effective data rate \\
+Airtime (32B)      & 247 ms    & Time-on-air \\
+Airtime (8B)       & 124 ms    & CRT packet \\
+\bottomrule
+\end{tabular}
+\end{table}
+\textcolor{red}{\sout{Sensor data were encoded using compressed frames to minimize airtime.}}
+
+\begin{table}[htbp]
+\centering
+\caption{Data frame structure for sensor node communication}
+\label{tab:data-frame}
+\begin{tabular}{p{2.2cm} c c p{4.5cm}}
+\toprule
+\textbf{Field} & \textbf{Size} & \textbf{CRT} & \textbf{Description} \\
+\midrule
+Node ID        & 2  & 2  & Unique identifier \\
+Timestamp      & 4  & 4  & Unix timestamp \\
+Soil Moisture  & 4  & 2  & VWC value \\
+Temperature    & 4  & 2  & Celsius $\times 100$ \\
+Humidity       & 4  & 2  & RH $\times 100$ \\
+pH Value       & 4  & 2  & pH $\times 100$ \\
+Light Intensity& 4  & 2  & Lux \\
+Battery Level  & 1  & 1  & 0--100\% \\
+Signature      & 32 & 32 & Ed25519 signature \\
+\midrule
+\textbf{Total} & \textbf{59} & \textbf{47} & \textbf{20\% reduction} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textcolor{red}{\sout{Gateways formed a mesh network using B.A.T.M.A.N-adv over 5 GHz Wi-Fi, providing self-healing topology and fault tolerance .}}
+\subsection{CRT-Blockchain Integration Architecture}
+\label{subsec:crt_blockchain_integration}
+
+\textcolor{red}{\sout{The integration of CRT compression with blockchain creates a synergistic system that addresses both efficiency and integrity requirements for agricultural IoT applications. Figure illustrates the complete data flow from sensor to blockchain ledger. Sensor data is scaled, CRT-encoded into residues, signed, and transmitted via LoRa. The gateway verifies, reconstructs, and invokes smart contracts for irrigation decisions. Verified data is anchored on-chain (hashes) and off-chain (full records), accessible to farmers and certifiers. Performance metrics (33 compression, 1.7 s latency, 320 ms contract execution) are achieved throughout the pipeline.}}
+\textcolor{blue}{Figure~\ref{fig:crt_blockchain_flow_unified} illustrates the complete data flow (CRT-encode $\to$ sign $\to$ LoRa $\to$ gateway verify/reconstruct $\to$ smart contract $\to$ on-chain SHA-256 hash + off-chain records), providing tamper-evident audit trail and multi-party access without shared credentials.}
+
+\clearpage
+\begin{sidewaysfigure}[p]
+\centering
+\resizebox{0.98\textheight}{!}{%
+\begin{tikzpicture}[
+  font=\scriptsize,
+  >=Stealth,
+  arrow/.style={-Stealth, thick, draw=black!70},
+  block/.style={draw=blue!60!black, fill=blue!6, rounded corners=2pt, rectangle,
+                minimum height=0.95cm, minimum width=2.75cm, align=center, inner sep=3pt},
+  data/.style={draw=teal!70!black, fill=teal!6, ellipse,
+               minimum height=0.95cm, minimum width=2.55cm, align=center, inner sep=3pt},
+  process/.style={draw=orange!80!black, fill=orange!8, diamond, aspect=1.85,
+                  minimum height=1.15cm, minimum width=2.45cm, align=center, inner sep=1.5pt},
+  storage/.style={draw=purple!70!black, fill=purple!6, trapezium,
+                  trapezium left angle=70, trapezium right angle=110,
+                  minimum height=0.95cm, minimum width=2.85cm, align=center, inner sep=3pt},
+  note/.style={draw, rounded corners=2pt, fill=white, inner sep=2pt, font=\tiny},
+  lab/.style={midway, fill=white, inner sep=1pt, text=black!85, font=\tiny}
+]
+
+% ---------------- Sensor-node processing row ----------------
+\node[data] (acq) at (-6.8, 5.8) {Sensor\\Acquisition};
+\node[block] (scale) at (-3.4, 5.8) {Scale \&\\Quantize};
+\node[block] (crt) at (0, 5.8) {CRT\\Encoding};
+\node[data] (residues) at (3.4, 5.8) {Residues\\(3$\times$1B)};
+\node[block] (sign) at (6.8, 5.8) {Ed25519\\Sign};
+
+% ---------------- Gateway verification/reconstruction row ----------------
+\node[process] (lora) at (6.8, 3.25) {LoRa\\Transmission};
+\node[process] (verify) at (3.4, 1.3) {Signature\\Verify};
+\node[block] (reconstruct) at (0, 1.3) {CRT\\Reconstruct};
+\node[data] (original) at (-3.4, 1.3) {Original\\Data};
+
+% ---------------- Blockchain, storage, and application row ----------------
+\node[block] (irrigation) at (-3.8, -2.15) {Irrigation\\Actuator};
+\node[block] (smart) at (1.2, -2.15) {Smart\\Contract};
+\node[storage] (onchain) at (1.2, -4.85) {On-Chain\\Hashes};
+\node[storage] (offchain) at (6.0, -2.15) {Off-Chain\\Time-Series DB};
+\node[block] (dashboard) at (-2.0, -7.0) {Farmer\\Dashboard};
+\node[block] (certifier) at (4.5, -7.0) {Certifier\\Portal};
+
+% ---------------- Main data path ----------------
+\draw[arrow] (acq) -- node[lab, above] {Raw} (scale);
+\draw[arrow] (scale) -- node[lab, above] {Scaled Int} (crt);
+\draw[arrow] (crt) -- node[lab, above] {Residues} (residues);
+\draw[arrow] (residues) -- (sign);
+\draw[arrow] (sign.south) -- node[lab, right] {Packet (47B)} (lora.north);
+\draw[arrow] (lora.west) -- ++(-1.55,0) |- (verify.north);
+\draw[arrow] (verify.west) -- node[lab, above] {Valid} (reconstruct.east);
+\draw[arrow] (reconstruct.west) -- node[lab, above] {Exact} (original.east);
+
+% ---------------- Decision, actuation, and storage paths ----------------
+\draw[arrow] (original.south) -- ++(0,-1.05) -| node[lab, near end, left] {Actuate} (irrigation.north);
+\draw[arrow] (original.south) -- ++(0,-0.45) -| node[lab, pos=0.72, above] {Data} (smart.north);
+\draw[arrow] (verify.south east) to[out=-55, in=60] node[lab, pos=0.55, right] {Invalid} ([xshift=0.55cm]smart.north);
+\draw[arrow] (smart.west) -- node[lab, pos=0.42, below] {Cmd} (irrigation.east);
+\draw[arrow] (smart.south) -- node[lab, pos=0.62, left] {Hash} (onchain.north);
+\draw[arrow] ([yshift=-0.22cm]smart.east) -- node[lab, pos=0.58, below] {Record} ([yshift=-0.22cm]offchain.west);
+\draw[arrow] (onchain.south) |- (dashboard.east);
+\draw[arrow] (offchain.south) -- ++(0,-2.35) -| node[lab, near end, above] {Audit} (certifier.north);
+\draw[arrow] (dashboard.east) -- node[lab, above] {Audit} (certifier.west);
+
+% ---------------- Performance annotations ----------------
+\node[note, draw=red!50, fill=red!5, above=0.35cm of crt] {33\% reduction};
+\node[note, draw=green!50, fill=green!5, right=0.75cm of verify] {1.7 s latency};
+\node[note, draw=orange!50, fill=orange!5] at (3.7,-3.55) {320 ms exec};
+
+% ---------------- Layer labels ----------------
+\node[font=\tiny\bfseries, text=blue!70!black, above=0.30cm of acq] {Sensor Node (ESP32)};
+\node[font=\tiny\bfseries, text=blue!70!black] at (1.6, 2.75) {Gateway (RPi 4B)};
+\node[font=\tiny\bfseries, text=blue!70!black] at (-5.7, -0.55) {Edge \& Blockchain};
+\node[font=\tiny\bfseries, text=blue!70!black] at (4.1, -4.35) {Storage};
+\node[font=\tiny\bfseries, text=blue!70!black] at (-5.2, -6.55) {Application};
+
+\end{tikzpicture}%
+}
+\caption{Unified CRT-blockchain integration flow: from sensor acquisition to immutable storage and actuation.}
+\label{fig:crt_blockchain_flow_unified}
+\textcolor{red}{\sout{The CRT-blockchain integration follows a systematic process:}}
+\textcolor{red}{\sout{The integration includes several optimizations to ensure practical performance:}}
+\textcolor{red}{\sout{Table summarizes the performance benefits of this integrated approach.}}
+\end{sidewaysfigure}
+\clearpage
+\textcolor{blue}{Table~\ref{tab:integration_performance} summarizes integrated CRT-blockchain performance.}
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\caption{CRT-blockchain integration performance}
+\label{tab:integration_performance}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+\textbf{Metric} & \textbf{No CRT} & \textbf{CRT} & \textbf{CRT+BC} & \textbf{Improv.} \\
+\midrule
+Tx Time         & 247 ms & 124 ms & 142 ms & 42.5\% \\
+Energy/Tx       & 1.8 mJ & 0.9 mJ & 1.1 mJ & 38.9\% \\
+Memory          & 59 B   & 47 B   & 52 B   & 11.9\% \\
+Verif. Time     & --     & --     & 320 ms & -- \\
+Integrity       & Low    & Med    & High   & -- \\
+E2E Latency     & 2.1 s  & 1.5 s  & 1.7 s  & 19.0\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textcolor{red}{\sout{This integrated approach demonstrates that CRT compression and blockchain verification can coexist without significant performance degradation, providing both efficiency and integrity benefits for agricultural IoT applications.}}
+\subsubsection{Threat Model and Blockchain Justification}
+\label{subsubsec:threat_model}
+
+\textcolor{blue}{The blockchain layer addresses: (1) retroactive log tampering by insiders; (2) single-point-of-failure logging servers (Fabric's replicated ledger commits locally and syncs on reconnection); (3) lack of independently auditable records for certification bodies. Smart contracts make irrigation logic auditable. Fabric write overhead: 320\,ms; E2E latency 1.7\,s — within the 2\,s SLO.}
+
+\subsection{Chinese Remainder Theorem for Parallel Transmission Optimization}
+\label{subsec:crt_transmission}
+
+\textcolor{red}{\sout{The Chinese Remainder Theorem (CRT) enables parallel data transmission by decomposing integers into residue systems . Given pairwise coprime moduli , any integer where can be uniquely represented by residues:}}
+\textcolor{red}{\sout{r i = x m i for i = 1, 2, , k}}
+\textcolor{red}{\sout{For temperature 25.30°C scaled to 2530 with moduli [97, 101, 103]:}}
+\textcolor{red}{\sout{r 1 = 2530 97 = 6}}
+\textcolor{red}{\sout{r 2 = 2530 101 = 42}}
+\textcolor{red}{\sout{r 3 = 2530 103 = 67}}
+\textcolor{red}{\sout{The 4-byte original value is decomposed into three 1-byte residues [6, 42, 67] that are transmitted sequentially by the node across different channels.}}
+\subsubsection{Mathematical Foundation}
+\label{subsubsec:parallel_transmission}
+
+\textcolor{red}{\sout{To clearly distinguish CRT-based parallel transmission from conventional compression techniques, we present a step-by-step model of how residue packets are transmitted and processed. This clarification is essential for understanding the latency reductions reported throughout this work.}}
+\textcolor{blue}{Given pairwise coprime moduli $m_1,\ldots,m_k$, any $x \in [0,M)$ where $M=\prod m_i$ is uniquely represented by residues $r_i = x \bmod m_i$ \cite{garner1959residue}. For 25.30°C (scaled to 2530, moduli [97,101,103]): $r_1=6$, $r_2=42$, $r_3=67$ — a 4-byte value becomes three 1-byte residues transmitted sequentially on distinct channels. Reconstruction \cite{knuth1997art}:}
+\begin{equation}
+x = \left(\sum_{i=1}^k r_i M_i N_i\right) \bmod M, \quad M_i=\tfrac{M}{m_i},\; N_i=M_i^{-1}\bmod m_i,
+\end{equation}
+\textcolor{blue}{and is exact since $M_i N_i \equiv 1 \pmod{m_i}$ \cite{hardy2008introduction}. Example: $x=(6{\cdot}10{,}403{\cdot}24+42{\cdot}9{,}991{\cdot}63+67{\cdot}9{,}797{\cdot}24)\bmod 1{,}009{,}091=2530$ (0\% error).}
+
+\textcolor{red}{\sout{The SX1302 LoRa concentrator employed in each gateway (Section ) supports up to 8 parallel demodulation paths. This hardware capability enables simultaneous reception on multiple frequencies or spreading factors, providing the physical layer foundation for parallel residue transmission.}}
+\textcolor{red}{\sout{Each residue packet is transmitted sequentially by the node, but each transmission uses a distinct frequency channel. The node's radio hops between channels—Channel A for residue 1, Channel B for residue 2, Channel C for residue 3—completing the full sensor reading in ms of total airtime. However, because each packet occupies a different channel, the gateway's SX1302 concentrator can receive packets from different nodes simultaneously across its 8 parallel demodulation paths.}}
+\textcolor{red}{\sout{The parallelism in our architecture occurs at the network level, not the node level. While a single node transmits sequentially, multiple nodes can transmit concurrently on different channels. The SX1302 gateway, with its multi-channel reception capability, can demodulate up to 8 overlapping packets from different nodes at once. This concurrency dramatically increases network capacity and reduces effective contention, which is the true source of scalability.}}
+\textcolor{red}{\sout{The effective transmission time for a complete sensor reading is:}}
+\textcolor{blue}{Per-packet airtime reduction: $(247-124)/247=49.8\%$ (Eq.~\ref{eq:latency_reduction}). Packet capacity $P_{\max}=C\cdot W/T_{\text{airtime}}$ gives $P_{\max}^{\text{CRT}}=1{,}451$ vs.\ $P_{\max}^{\text{raw}}=728$ ($\approx2\times$); node capacity $N_{\max}^{\text{CRT}}=484$.}
+\begin{equation}
+\frac{247-124}{247}\times100\%=49.8\%.
+\label{eq:latency_reduction}
+\end{equation}
+\textcolor{red}{\sout{The speedup from CRT is realized at the network level, not per node. For a single node, the total airtime actually increases from 247 ms (raw) to 372 ms (CRT) because three packets are sent instead of one. However, the key metric is **network packet capacity**: how many packets can be carried per window across all channels. Using the formula from Section :}}
+\textcolor{red}{\sout{P = T airtime}}
+\textcolor{red}{\sout{where is the per-packet airtime (124 ms for CRT, 247 ms for raw). This gives packets/min and packets/min (about 2 packet throughput). For full sensor readings, CRT uses three packets, so node capacity is nodes, compared with nodes.}}
+\textcolor{red}{\sout{This packet-level reduction is fundamentally different from compression-based improvements. Conventional algorithms (Huffman, LZW) reduce the size of a single packet but still require sequential transmission of that single packet. CRT-based transmission, by contrast, keeps each residue packet small and schedules residues across channels; the gain appears in packet throughput and contention behavior rather than per-node completion time while maintaining mathematical guarantees for perfect reconstruction.}}
+\textcolor{red}{\sout{The SX1302's 8-channel capability means that up to 8 residues could theoretically be transmitted in parallel. Our current implementation uses only 2–3 residues per sensor reading, leaving substantial headroom for:}}
+\textcolor{red}{\sout{During the 61-day field trial, the parallel transmission model operated as designed, achieving the predicted 124 ms effective transmission time and contributing to the overall 99.4 reliability and 34-day battery life reported in Section . No collisions or packet loss attributable to parallel transmission were observed, confirming that the SX1302 hardware and channel allocation strategy effectively support concurrent residue transmission.}}
+\textcolor{red}{\sout{Original value reconstruction :}}
+\textcolor{red}{\sout{x = ( i=1 k r i M i N i ) M}}
+\textcolor{red}{\sout{where:}}
+\textcolor{red}{\sout{M = i=1 k m i,}}
+\textcolor{red}{\sout{M i = ,}}
+\textcolor{red}{\sout{N i = M i -1 m i}}
+\textcolor{red}{\sout{Using residues [6, 42, 67]:}}
+\textcolor{red}{\sout{M = 97 101 103 = 1,009,091}}
+\textcolor{red}{\sout{M 1 = 10,403, N 1 = 24}}
+\textcolor{red}{\sout{M 2 = 9,991, N 2 = 63}}
+\textcolor{red}{\sout{M 3 = 9,797, N 3 = 24}}
+\textcolor{red}{\sout{x = (6 10,403 24 + 42 9,991 63}}
+\textcolor{red}{\sout{+ 67 9,797 24) 1,009,091}}
+\textcolor{red}{\sout{= 43,703,274 1,009,091 = 2530}}
+\textcolor{red}{\sout{Perfect recovery to 25.30°C demonstrates mathematical guarantees for complete data reconstruction.}}
+\textcolor{red}{\sout{Reconstruction guarantees :}}
+\textcolor{red}{\sout{x m i = r i M i N i m i}}
+\textcolor{red}{\sout{= r i 1 m i = r i}}
+
+\begin{table}[htbp]
+\caption{Moduli Selection and Validation}
+\label{tab:moduli-validation}
+\scriptsize
+\centering
+\begin{tabular}{p{0.18\columnwidth}ccc}
+\toprule
+\textbf{Sensor Type} & \textbf{Moduli} & \textbf{M} & \textbf{Status} \\
+\midrule
+Temperature & [97, 101] & 9,797 & $\checkmark$ Sufficient \\
+Soil Moisture & [97, 101, 103] & 1.0M & $\checkmark$ 10× Margin \\
+pH Sensor & [97, 101, 103] & 1.0M & $\checkmark$ 720× Margin \\
+Humidity & [97, 101] & 9,797 & $\checkmark$ Sufficient \\
+Light & [97, 101] & 9,797 & $\checkmark$ Adjusted \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textcolor{red}{\sout{// Moduli sets for different precision}}
+\textcolor{red}{\sout{const uint8 t PROGMEM moduli high[] =}}
+\textcolor{red}{\sout{97, 101, 103 ;}}
+\textcolor{red}{\sout{const uint8 t PROGMEM moduli medium[] =}}
+\textcolor{red}{\sout{97, 101 ;}}
+\subsubsection{Implementation and Error Resilience}
+\textcolor{blue}{The ESP32 firmware (\texttt{crt\_encode.c}) packs three 1-byte residues (moduli $\leq 103$) in place of a 4-byte raw value (59\,B $\to$ 47\,B); the gateway (\texttt{crt\_decode.py}) reconstructs via \texttt{pow(a,-1,m)} with no persistent state, simplifying concurrent reception. Loss of one residue allows perfect reconstruction (subset CRT \cite{shoup2009computational}): each packet carries a 1-byte residue-index; the gateway buffers by \texttt{(node\_id, timestamp)}, reconstructs from two received residues, or awaits retransmission.}
+
+\textcolor{red}{\sout{uint8 t compute residue(uint32 t value,}}
+\textcolor{red}{\sout{uint8 t modulus)}}
+\textcolor{red}{\sout{return value modulus;}}
+\textcolor{red}{\sout{void decompose sensor data(uint8 t type,}}
+\textcolor{red}{\sout{float value)}}
+\textcolor{red}{\sout{uint32 t scaled;}}
+\textcolor{red}{\sout{const uint8 t* moduli;}}
+\textcolor{red}{\sout{uint8 t count;}}
+\textcolor{red}{\sout{switch(type)}}
+\textcolor{red}{\sout{case SENSOR TEMP:}}
+\textcolor{red}{\sout{scaled = (uint32 t)(value * 100.0);}}
+\textcolor{red}{\sout{moduli = moduli medium;}}
+\textcolor{red}{\sout{count = 2;}}
+\textcolor{red}{\sout{break;}}
+\textcolor{red}{\sout{case SENSOR SOIL:}}
+\textcolor{red}{\sout{scaled = (uint32 t)(value * 1000.0);}}
+\textcolor{red}{\sout{moduli = moduli high;}}
+\textcolor{red}{\sout{count = 3;}}
+\textcolor{red}{\sout{break;}}
+\textcolor{red}{\sout{uint8 t residues[MAX MODULI];}}
+\textcolor{red}{\sout{for(uint8 t i=0; i<count; i++)}}
+\textcolor{red}{\sout{uint8 t m = pgm read byte( moduli[i]);}}
+\textcolor{red}{\sout{residues[i] = scaled m;}}
+\textcolor{red}{\sout{for(uint8 t i=0; i<count; i++)}}
+\textcolor{red}{\sout{transmit residue(residues[i], i, type);}}
+\textcolor{red}{\sout{class CRTReconstructor:}}
+\textcolor{red}{\sout{def init (self):}}
+\textcolor{red}{\sout{self.moduli sets =}}
+\textcolor{red}{\sout{'temperature': [97, 101],}}
+\textcolor{red}{\sout{'soil moisture': [97, 101, 103]}}
+\textcolor{red}{\sout{self.crt params =}}
+\textcolor{red}{\sout{for s type, moduli in self.moduli sets.items():}}
+\textcolor{red}{\sout{self.crt params[s type] = self. precompute(moduli)}}
+\textcolor{red}{\sout{self.buffers =}}
+\textcolor{red}{\sout{def precompute(self, moduli):}}
+\textcolor{red}{\sout{M = 1}}
+\textcolor{red}{\sout{for m in moduli: M *= m}}
+\textcolor{red}{\sout{M i = [M // m for m in moduli]}}
+\textcolor{red}{\sout{inv M i = [pow(M i[i], -1, moduli[i])}}
+\textcolor{red}{\sout{for i in range(len(moduli))]}}
+\textcolor{red}{\sout{return 'M': M, 'M i': M i, 'inv M i': inv M i}}
+\textcolor{red}{\sout{def add residue(self, s type, r val, r idx, ts, node):}}
+\textcolor{red}{\sout{key = f" node s type ts "}}
+\textcolor{red}{\sout{if key not in self.buffers:}}
+\textcolor{red}{\sout{count = len(self.moduli sets[s type])}}
+\textcolor{red}{\sout{self.buffers[key] =}}
+\textcolor{red}{\sout{'residues': [None] * count,}}
+\textcolor{red}{\sout{'count': 0, 'ts': ts, 'node': node}}
+\textcolor{red}{\sout{buf = self.buffers[key]}}
+\textcolor{red}{\sout{if r idx >= len(buf['residues']): return None}}
+\textcolor{red}{\sout{moduli = self.moduli sets[s type]}}
+\textcolor{red}{\sout{if r val >= moduli[r idx]: return None}}
+\textcolor{red}{\sout{buf['residues'][r idx] = r val}}
+\textcolor{red}{\sout{buf['count'] += 1}}
+\textcolor{red}{\sout{if buf['count'] >= len(moduli):}}
+\textcolor{red}{\sout{return self. reconstruct(s type, buf)}}
+\textcolor{red}{\sout{return None}}
+\textcolor{red}{\sout{def reconstruct(self, s type, buffer):}}
+\textcolor{red}{\sout{params = self.crt params[s type]}}
+\textcolor{red}{\sout{residues = buffer['residues']}}
+\textcolor{red}{\sout{if any(r is None for r in residues):}}
+\textcolor{red}{\sout{return None}}
+\textcolor{red}{\sout{x = 0}}
+\textcolor{red}{\sout{for i in range(len(residues)):}}
+\textcolor{red}{\sout{term = residues[i] * params['M i'][i]}}
+\textcolor{red}{\sout{term *= params['inv M i'][i]}}
+\textcolor{red}{\sout{x = (x + term) params['M']}}
+\textcolor{red}{\sout{Convert to physical value}}
+\textcolor{red}{\sout{if s type == 'temperature':}}
+\textcolor{red}{\sout{value = x / 100.0}}
+\textcolor{red}{\sout{elif s type == 'soil moisture':}}
+\textcolor{red}{\sout{value = x / 1000.0}}
+\textcolor{red}{\sout{if self. validate range(s type, value):}}
+\textcolor{red}{\sout{del self.buffers[}}
+\textcolor{red}{\sout{f" buffer['node'] s type buffer['ts'] "]}}
+\textcolor{red}{\sout{return 'value': value, 'node': buffer['node']}}
+\textcolor{red}{\sout{return None}}
+\textcolor{red}{\sout{CRT provides inherent error resilience :}}
+\textcolor{red}{\sout{For 3 moduli, losing one residue permits perfect reconstruction using subset CRT.}}
+\begin{table}[htbp]
+\caption{CRT Multi-Channel Residue Transmission Performance Metrics}
+\label{tab:crt-performance}
+\scriptsize
+\centering
+\begin{tabular}{p{0.18\columnwidth}cc}
+\toprule
+\textbf{Metric} & \textbf{Theoretical} & \textbf{Measured} \\
+\midrule
+Decomposition Time & 0.6 ms & 0.9 ms \\
+Reconstruction Time & 0.8 ms & 1.2 ms \\
+Packet Delivery & 97.9\% & 95.8\% \\
+Battery Life & 34 days & 31.2 days \\
+Data Recovery$^\dagger$ & 66.7\% & 64.1\% \\
+Successful packet delivery & 100\% & 99.7\% \\
+\bottomrule
+\end{tabular}
+{\footnotesize $^\dagger$Data Recovery: fraction reconstructible from $k-1=2$ of 3 residues; unrelated to per-packet airtime figures.}
+\end{table}
+
+\subsubsection{Complexity and Transmission Efficiency}
+\label{subsubsec:complexity_analysis}
+\textcolor{blue}{CRT decomposition and Garner reconstruction are $O(k)$, $k\leq3$ (effectively $O(1)$) vs.\ $O(n\log n)$ (Huffman) and $O(n)$ (LZW); the 2.1\,KB working set fits in ESP32 L1 cache vs.\ 8.6–12.4\,KB for Huffman/LZW. CRT achieves 20.3\% packet size reduction and 48.8\% per-packet energy saving (12.40 vs.\ 24.21\,mJ); total per-reading energy is 37.20\,mJ — the benefit is channel occupancy per slot (Table~\ref{tab:transmission-cost-comparison}).}
+
+\textcolor{red}{\sout{To complement the empirical performance measurements, we analyze the computational complexity of the CRT-based transmission pipeline and compare it with conventional compression algorithms. Let be the number of moduli used in the CRT decomposition.}}
+\textcolor{red}{\sout{T decompose = O(k)}}
+\textcolor{red}{\sout{Each residue computation requires a single constant-time modulo operation per modulus, making decomposition exceptionally lightweight for resource-constrained microcontrollers.}}
+\textcolor{red}{\sout{T reconstruct = O(k)}}
+\textcolor{red}{\sout{Reconstruction using Garner's algorithm involves modular multiplications and additions, all constant-time operations that scale linearly with the number of moduli.}}
+\textcolor{red}{\sout{T huffman = O(n n)}}
+\textcolor{red}{\sout{T lzw = O(n)}}
+\textcolor{red}{\sout{where is the input data size in bytes. While LZW achieves linear complexity, both Huffman and LZW require significant memory for dictionary storage and exhibit variable execution times dependent on data entropy.}}
+\textcolor{red}{\sout{Given that in our implementation (see Table ), CRT achieves deterministic constant-time performance with effective complexity. This theoretical advantage, combined with the minimal memory footprint demonstrated in Table (2.1 KB vs. 8.6–12.4 KB for Huffman/LZW), confirms that CRT is optimally suited for the severe hardware constraints of agricultural IoT nodes.}}
+\textcolor{red}{\sout{Beyond asymptotic complexity, CRT decomposition benefits from superior cache locality on resource‑constrained microcontrollers such as the ESP32. For moduli, the entire working set—the moduli themselves and the precomputed Garner coefficients—occupies only tens of bytes, comfortably fitting within the ESP32's L1 data cache (configurable up to 32 KB on ESP32‑S3 ). Huffman coding requires a full symbol table whose size grows with the input alphabet; a typical implementation maintains several hundred bytes of tree or table data. LZW, the most memory‑intensive, commonly uses a dictionary of entries , each storing variable‑length strings. Even a compact implementation consumes several kilobytes—far exceeding the L1 cache capacity and often spilling into slower L2 or flash memory. Frequent cache misses during dictionary lookups incur additional latency that is not captured by asymptotic or models. The measured runtime advantage of CRT therefore reflects both its lower algorithmic complexity and its substantially reduced memory hierarchy penalties, making it particularly suitable for energy‑constrained edge devices where every memory access contributes to power consumption.}}
+\textcolor{red}{\sout{The CRT-based parallel transmission optimization achieved significant improvements in three key metrics:}}
+\textcolor{red}{\sout{= () 100}}
+\textcolor{red}{\sout{= 100}}
+\textcolor{red}{\sout{= 20.3 [8pt]}}
+\textcolor{red}{\sout{= 100}}
+\textcolor{red}{\sout{= 48.8 [8pt]}}
+\textcolor{red}{\sout{= 100}}
+\textcolor{red}{\sout{= 24.0}}
+\textcolor{red}{\sout{This energy analysis focuses on sensor node transmission energy, the dominant factor in battery-powered IoT deployments. Gateway reception energy and blockchain computation are not included because gateways are mains-powered or equipped with large solar panels and are not energy-constrained. The node-level savings directly extend battery life, as confirmed by the 34‑day deployment.}}
+\textcolor{red}{\sout{Where 24.21 mJ represents the energy per raw transmission and 12.40 mJ represents the energy per CRT-optimized transmission, as detailed in Table .}}
+\begin{table}[htbp]
+\caption{ESP32 Hardware Optimizations for CRT Operations}
+\label{tab:hardware-optimizations}
+\scriptsize
+\centering
+\begin{tabular}{p{0.18\columnwidth}p{0.18\columnwidth}}
+\toprule
+\textbf{Hardware Feature} & \textbf{Benefit} \\
+\midrule
+Hardware Multiplier & 35\% faster computation \\
+RTC Fast Memory & 28\% reduced latency \\
+ULP Coprocessor & 42\% power reduction \\
+Hardware RNG & 28\% lower collisions \\
+Temperature Sensor & Adaptive scaling \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textcolor{red}{\sout{The 61-day deployment achieved 95.8 packet delivery. Of the successfully delivered packets, CRT reconstruction was mathematically exact (0 error). The 99.7 value reported in Table therefore represents the proportion of delivered packets that contained all residues—the remaining 0.3 experienced partial packet loss affecting two or more residues, making reconstruction impossible. System maintained data integrity across 50 nodes with 19.1 battery life improvement.}}
+\subsubsection{Field Deployment Results and Environmental Adaptation}
+\textcolor{blue}{The 61-day deployment achieved 95.8\% packet delivery with mathematically exact reconstruction for all complete residue sets; the 99.7\% figure (Table~\ref{tab:crt-performance}) is the $\geq k-1$ residue delivery rate. The firmware implements four adaptive modes (Table~\ref{tab:env-adaptation}):}
+
+\begin{table}[htbp]
+\centering
+\caption{Environmental adaptation modes observed during 61-day deployment (Sfax, Tunisia)}
+\label{tab:env-adaptation}
+\scriptsize
+\setlength{\tabcolsep}{1pt}
+\begin{tabularx}{\columnwidth}{>{\raggedright\arraybackslash}p{1.85cm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X}
+\toprule
+\textbf{Condition} & \textbf{Trigger} & \textbf{Action} & \textbf{Observed outcome} \\
+\midrule
+High temperature & Core temp $>$55\textdegree{}C (on-chip ADC) & 3$\to$2 moduli [97,101] & Active 14/61 days; TX duty cycle $-$33\%; 0 reconstruction failures \\
+RF & RSSI $<$$-$120\,dBm & TX +14$\to$+20\,dBm & Delivery 71\%$\to$96\% in 2 cycles; active $<$3\% \\
+Low battery & SoC $<$20\% (ESP32 ADC) & 30$\to$60\,min interval; 2-moduli & 3 nodes (Days 38–45); all recovered after solar recharge \\
+Congestion risk & Slot utilisation $>$70\% & $\pm$5\,s random jitter & No congestion at 50-node scale; packet loss stable at 4.1\%; peak measured slot utilisation 10.3\% during concurrent irrigation-triggered uplinks (Day 23, 07:00) \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\textcolor{red}{\sout{The mathematical foundations combined with practical implementation demonstrated robust performance in agricultural IoT deployments.}}
+\textcolor{blue}{All four modes were observed in the field: temperature switch (14/61 days, TX 372→248\,ms, 0 failures); RF boost restored delivery after Day-47 sandstorm; 3 low-battery nodes recovered within 12\,h; jitter prevented clustering during morning/evening peaks.}
+
+\subsubsection{Comparative Analysis and Transmission Cost Reduction}
+\label{subsubsec:compression_comparison}
+
+\textcolor{red}{\sout{C trans = E total + T latency + P overhead}}
+\textcolor{red}{\sout{Where , , and are weighting factors for energy, latency, and processing costs respectively. For agricultural IoT deployments, we assign , , based on the priority of energy efficiency in battery-constrained environments.}}
+\textcolor{blue}{Unlike Huffman/LZW (storage reduction), CRT targets per-packet latency and energy. Transmission cost $C_{\text{trans}} = \alpha E_{\text{total}} + \beta T_{\text{latency}} + \gamma P_{\text{overhead}}$ with $\alpha=0.5$, $\beta=0.3$, $\gamma=0.2$:}
+
+\begin{table}[!tbp]
+\centering
+\caption{Transmission Cost Analysis of Different Methods}
+\label{tab:transmission-cost-comparison}
+\footnotesize
+\begin{tabularx}{\columnwidth}{
+    >{\raggedright\arraybackslash}p{0.25\columnwidth}
+    *{4}{>{\centering\arraybackslash}X}
+}
+\toprule
+\textbf{Metric} & 
+\textbf{CRT Parallel} &
+\textbf{Huffman} &
+\textbf{LZW} &
+\textbf{Raw Transmission} \\
+\midrule
+\textbf{Data Characteristics} \\
+Original Payload Size & 59 bytes & 59 bytes & 59 bytes & 59 bytes \\
+Transmitted Size & 47 bytes (3× residues) & 34.7 bytes & 30.3 bytes & 59 bytes \\
+Theoretical Compression Ratio & N/A (20.3\% size reduction) & 41.2\% & 48.6\% & 0\% \\
+\midrule
+\textbf{Processing Requirements} \\
+Processing Time (sender) & 0.9 ms & 4.2 ms & 7.5 ms & 0 ms \\
+Processing Time (receiver) & 1.2 ms & 0.5 ms & 0.8 ms & 0 ms \\
+Memory Footprint (KB) & 2.1 & 8.6 & 12.4 & 1.5 \\
+\midrule
+\textbf{Transmission Performance} \\
+Airtime per Packet (ms) & 124 (per residue) & 152 & 135 & 247 \\
+Parallel Transmission & Yes (3 channels) & No & No & No \\
+Effective Transmission Time (ms) & 124 & 152 & 135 & 247 \\
+\midrule
+\textbf{Energy Consumption} \\
+Processing Energy (mJ) & 0.22 & 1.13 & 2.02 & 0 \\
+Transmission Energy (mJ) & 12.18 & 14.59 & 12.96 & 24.21 \\
+Total Energy \emph{per packet} (mJ)$^\dagger$ & 12.40 & 15.72 & 14.98 & 24.21 \\
+Per-packet energy savings vs.\ Raw & 48.8\% & 35.1\% & 38.1\% & 0\% \\
+\textbf{Total energy per complete reading (mJ)}$^\ddagger$ & \textbf{37.20} & 15.72 & 14.98 & 24.21 \\
+\midrule
+\textbf{Cost Analysis} \\
+Transmission Cost $C_{\text{trans}}$ (normalized) & 0.61 & 0.72 & 0.68 & 1.00 \\
+Cost Reduction vs. Raw & 39.0\% & 28.0\% & 32.0\% & 0\% \\
+\midrule
+\textbf{Reliability Features} \\
+Error Resilience & High (tolerates 2/3 loss) & Low & Low & Low \\
+Reconstruction Accuracy & 99.7\% & 100\% & 100\% & 100\% \\
+Parallel Transmission Support & Yes & No & No & No \\
+\bottomrule
+\end{tabularx}
+{\footnotesize $^\dagger$ Active LoRa TX (120\,mW, INA219) + MCU wake-up + sensor ADC; excludes LoRa RX, deep sleep, and gateway.}
+\end{table}
+\textcolor{red}{\sout{Table shows that LZW achieves the smallest transmitted size (30.3 bytes, 48.6 reduction), outperforming CRT's 20.3 reduction. However, CRT's advantage lies not in maximizing compression but in enabling parallel transmission. By decomposing data into three independent residues, CRT allows concurrent transmission over multiple channels, reducing effective latency from 247 ,ms (raw) to 124 ,ms---a 49.8 reduction---while LZW and Huffman still require sequential transmission (135 ,ms and 152 ,ms, respectively). The energy savings (48.8 vs. raw) also reflect this parallelism. Thus, CRT trades off a slightly higher packet size for significantly lower latency and energy, a tradeoff well‑suited to time‑sensitive, energy‑constrained IoT applications.}}
+
+\begin{figure}[!htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.9\columnwidth,
+    height=6cm,
+    ybar,
+    bar width=15pt,
+    symbolic x coords={Raw, LZW, Huffman, CRT},
+    xtick=data,
+    ylabel={Time (ms)},
+    ymin=0,
+    ymax=300,
+    nodes near coords,
+    nodes near coords align={vertical},
+    legend style={at={(0.5,-0.2)}, anchor=north},
+    ymajorgrids=true,
+    grid style=dashed,
+    title={Transmission Timeline Comparison},
+    ylabel style={yshift=-0.2cm},
+    xticklabel style={rotate=0, font=\small},
+    ytick={0,50,100,150,200,250,300}
+]
+\addplot[fill=blue!30] coordinates {
+    (Raw, 247)
+    (LZW, 135)
+    (Huffman, 152)
+    (CRT, 124)
+};
+\addplot[fill=red!30] coordinates {
+    (Raw, 0)
+    (LZW, 8.3)
+    (Huffman, 4.7)
+    (CRT, 0.9)
+};
+\legend{Airtime, Processing Time}
+\end{axis}
+\end{tikzpicture}
+\caption{Comparative analysis of transmission timelines showing CRT's advantage through reduced airtime and minimal processing overhead.}
+\label{fig:transmission-timeline}
+\end{figure}
+
+\begin{figure}[!htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.9\columnwidth,
+    height=6cm,
+    ybar,
+    bar width=20pt,
+    symbolic x coords={Raw, LZW, Huffman, CRT},
+    xtick=data,
+    ylabel={Energy Consumption (mJ)},
+    ymin=0,
+    ymax=30,
+    nodes near coords,
+    nodes near coords align={vertical},
+    legend style={at={(0.5,-0.2)}, anchor=north},
+    ymajorgrids=true,
+    grid style=dashed,
+    title={Energy Consumption Breakdown},
+    ylabel style={yshift=-0.2cm},
+    xticklabel style={rotate=0, font=\small},
+    ytick={0,5,10,15,20,25,30}
+]
+\addplot[fill=green!40] coordinates {
+    (Raw, 24.21)
+    (LZW, 12.96)
+    (Huffman, 14.59)
+    (CRT, 12.18)
+};
+\addplot[fill=orange!40] coordinates {
+    (Raw, 0)
+    (LZW, 2.02)
+    (Huffman, 1.13)
+    (CRT, 0.22)
+};
+\legend{Transmission Energy, Processing Energy}
+\end{axis}
+\end{tikzpicture}
+\caption{Per-packet LoRa TX and processing energy for the ESP32 node (RFM95W, INA219 at 2\,kHz). Active TX state (120\,mW) and MCU wake-up overhead included; RX, deep-sleep, and gateway energy excluded. CRT per-packet: 12.40\,mJ; total per-reading: $3\times12.40=37.20$\,mJ (see Table~\ref{tab:transmission-cost-comparison}).}
+\label{fig:energy-comparison}
+\end{figure}
+
+\textcolor{red}{\sout{The transmission cost advantage of CRT arises from two key mathematical properties:}}
+\textcolor{red}{\sout{1. Parallel Transmission Latency Reduction: Given residues transmitted in parallel over channels, the effective transmission time becomes:}}
+\textcolor{red}{\sout{T effective = i=1 k T residue i}}
+\textcolor{red}{\sout{For residues each with ms, ms, compared to sequential transmission requiring ms.}}
+\textcolor{red}{\sout{2. Energy Efficiency Through Smaller Packets: LoRa transmission energy is approximately linear with airtime:}}
+\textcolor{red}{\sout{E TX = P TX T airtime}}
+\textcolor{red}{\sout{Where mW for RFM95W modules. For an 8-byte residue packet ( ms):}}
+\textcolor{red}{\sout{E TX, residue = 120 mW 101.5 ms = 12.18 mJ}}
+\textcolor{red}{\sout{Compared to a 59-byte raw packet ( ms):}}
+\textcolor{red}{\sout{E TX, raw = 120 mW 201.8 ms = 24.21 mJ}}
+\textcolor{red}{\sout{T airtime = T preamble + T payload}}
+\textcolor{red}{\sout{T preamble = (n preamble + 4.25) 2 SF BW [4pt]}}
+\textcolor{red}{\sout{T payload = 8 ceil !() (CR + 4)}}
+\textcolor{red}{\sout{Parameters: (no header), , , kHz, (4/5).}}
+\textcolor{red}{\sout{1. Latency Reduction: CRT achieves 49.8 lower transmission latency than raw transmission (124 ms vs 247 ms) and 18.4-38.4 improvement over compression methods (Table ).}}
+\textcolor{red}{\sout{2. Energy Efficiency: With 48.8 energy savings compared to raw transmission, CRT outperforms both Huffman (35.1 savings) and LZW (38.1 savings). The minimal processing overhead (0.22 mJ) contributes significantly to this advantage.}}
+\textcolor{red}{\sout{3. Network Capacity Improvement: Parallel transmission enables higher network density. For a 10-channel LoRa network, CRT supports 30 nodes transmitting simultaneously (3 residues × 10 channels) versus 10 nodes for traditional methods.}}
+\textcolor{red}{\sout{4. Cost-Per-Transmission Analysis: Using the cost function , CRT reduces transmission costs by 39.0 compared to raw transmission, with most savings coming from reduced airtime (67 ) and lower processing costs (33 ).}}
+\textcolor{red}{\sout{The CRT approach provides specific advantages for agricultural deployments:}}
+\textcolor{red}{\sout{CRT parallel transmission is specifically optimized for:}}
+\textcolor{red}{\sout{For applications requiring maximum storage efficiency or handling non-numeric data, traditional compression methods remain superior. Our contribution demonstrates that for agricultural IoT transmission optimization, CRT-based parallel transmission provides superior energy efficiency and latency reduction compared to both raw transmission and traditional compression approaches.}}
+\textcolor{blue}{Full results in Table~\ref{tab:transmission-cost-comparison}; $C_{\text{trans}}$ falls 39.0\% vs.\ raw. Although three residue packets raise total per-reading airtime to 372\,ms (vs.\ 247\,ms raw), per-packet occupancy drops 49.8\%, enabling parallel channel use.}
+
+\subsection{Blockchain Implementation}
+\label{subsec:blockchain}
+
+\textcolor{red}{\sout{The blockchain implementation provides the foundation for data integrity, smart contract execution, and decentralized verification that distinguishes our system from conventional agricultural IoT approaches. We implemented a permissioned blockchain using Hyperledger Fabric 2.5 (released 2024), selected for its modular architecture, support for smart contracts, and suitability for enterprise applications in agricultural settings. Hyperledger Fabric is a permissioned platform where participants have known identities, and its architecture comprises a membership service provider, an ordering service, and peer nodes, allowing pluggable consensus and membership components . Fabric's ordering service was configured with the Raft consensus protocol, which employs a leader–follower model and majority voting to provide crash-fault tolerance and deterministic transaction ordering; this deterministic ordering avoids forks and improves performance compared with proof-of-work systems . The Certificate Authority issues X.509 certificates to authenticate users and components, ensuring that only authorized parties can join the network .}}
+\textcolor{red}{\sout{Each Raspberry Pi 4B (4 GB RAM) in our deployment runs a full Hyperledger Fabric peer node with the following specific configuration:}}
+\textcolor{blue}{We implemented Hyperledger Fabric~2.5 \cite{ibmFabric, orderingServiceDoc} with Raft ordering and X.509-based CA for identity management \cite{orderingServiceDoc}. Each RPi 4B (4\,GB RAM) runs Fabric 2.5.1 on RPi OS Lite 64-bit (Bullseye), compiled for ARM64 with \texttt{-mcpu=cortex-a72}. LevelDB is used as the state database; CouchDB handles document indexing. Memory allocation: Fabric peer 1024\,MB, CouchDB 512\,MB, chaincode container 256\,MB, system services 512\,MB, buffer 256\,MB (see Table~\ref{tab:memory-allocation}). Network: private Docker network with static IPs and zone-local firewall rules; BATMAN-adv provides inter-gateway mesh. Performance optimizations: 50-transaction blocks with 500\,ms timeout; 256\,MB LRU state cache; reused gRPC connections; zone-local selective endorsement; 90-day archival. The network was deployed with Ansible playbooks and monitored via Prometheus/Grafana.}
+
+\begin{table}[htbp]
+\centering
+\caption{Memory allocation for blockchain components on Raspberry Pi}
+\label{tab:memory-allocation}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\columnwidth}{l c X}
+\toprule
+\textbf{Component} & \textbf{Memory (MB)} & \textbf{Purpose} \\
+\midrule
+Fabric Peer Process       & 1024 & Main blockchain operations \\
+CouchDB State Database    & 512  & Document storage and indexing \\
+Chaincode Container       & 256  & Smart contract execution \\
+System Services           & 512  & OS and monitoring \\
+Reserved Buffer           & 256  & Peak load handling \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\textcolor{red}{\sout{The blockchain network was deployed using Ansible playbooks specifically created for Raspberry Pi clusters. Each Pi underwent:}}
+\subsubsection{Consensus Mechanism Implementation}
+\label{subsubsec:consensus_details}
+
+\textcolor{red}{\sout{We implemented the Raft consensus protocol with the following configurations optimized for agricultural IoT applications:}}
+\textcolor{red}{\sout{The system maintains consensus availability with up to faulty nodes (where , ). During network partitions:}}
+\textcolor{red}{\sout{The system achieved:}}
+\textcolor{red}{\sout{These metrics demonstrate Raft's suitability for agricultural applications where consistency and availability are prioritized over Byzantine fault tolerance.}}
+\textcolor{blue}{Raft configuration: election timeout 2–4\,s, heartbeat 500\,ms, max 5 in-flight blocks, snapshot every 100 blocks, 16\,MB max message. Flow: endorse at gateway peer $\to$ batch (50 tx / 500\,ms) to 3-node orderer $\to$ gossip distribute $\to$ commit to CouchDB. Tolerates $f=1$ failure; measured: 1.2\,s block time, 63\,TPS sustained, 85\,TPS peak, 1.8\,s finality, 8.2\,s leader-recovery, 12\% consensus bandwidth. CFT only (not BFT); TPM\,2.0 and physical access control serve as mitigations; PBFT/RPoE are future work \cite{rbcet2025,rpoe2026,abishu2021consensus}.}
+
+\subsection{Architecture Design}
+\label{subsec:architecture_design}
+
+\textcolor{red}{\sout{Our architecture represents an original five‑tier design specifically optimized for agricultural blockchain‑IoT applications. While building upon established principles in distributed systems and IoT architectures , our design introduces several novel components and integrations:}}
+\textcolor{red}{\sout{This architecture was designed and implemented specifically for our agricultural deployment, with all components configured and optimized for tomato and pepper cultivation in arid Mediterranean conditions. The blockchain network architecture was designed to balance performance, security, and practical implementability for agricultural applications in the 2025 deployment. Key design decisions included:}}
+\textcolor{red}{\sout{The blockchain network consisted of multiple components working together to provide comprehensive blockchain functionality:}}
+\textcolor{red}{\sout{This architecture provides the necessary decentralization and redundancy for reliable operation while maintaining practical performance characteristics for agricultural monitoring and control applications in the 2025 growing season.}}
+\textcolor{blue}{The five-tier design \cite{gubbi2013internet, christidis2016blockchain} integrates LoRa uplink with BATMAN-adv mesh, CRT edge processing, Fabric peers with local chaincode (Raft ordering, 1.2\,s block time; Go chaincode for \texttt{registerSensor}, \texttt{submitReading}, \texttt{evaluateIrrigation}, \texttt{getZoneHistory} \cite{orderingServiceDoc}; on-chain SHA-256 hashes, off-chain CouchDB records \cite{privateDataDoc}; RBAC via MSP \cite{mdpiAccessControl}). The network comprised 3 orderer nodes (Raft), 4 peer nodes (one per zone), 1 CA, and per-peer CouchDB.}
+
+\subsubsection{Role-Based Access Control Implementation}
+\label{subsubsec:rbac_implementation}
+
+\textcolor{red}{\sout{The access control system was implemented as a comprehensive Role‑Based Access Control (RBAC) framework within Hyperledger Fabric, with detailed role assignment and permission management.}}
+\textcolor{red}{\sout{We defined seven distinct roles with hierarchical permissions:}}
+\textcolor{blue}{The RBAC framework within Hyperledger Fabric defines seven roles with hierarchical permissions:}
+
+\begin{table*}[htbp]
+\centering
+\caption{Role definitions and permissions in agricultural blockchain network}
+\label{tab:role-definitions}
+\begin{tabularx}{\textwidth}{p{0.18\textwidth}p{0.25\textwidth}X}
+\toprule
+\textbf{Role} & \textbf{Assigned To} & \textbf{Permissions} \\
+\midrule
+\textbf{Sensor Node} & ESP32 sensor devices & Write sensor data, read own data, update status \\
+\textbf{Gateway} & Raspberry Pi gateways & Aggregate data, invoke irrigation, read zone data \\
+\textbf{Farmer} & Farm owners/operators & Full farm data access, irrigation control, financial data \\
+\textbf{Agronomist} & Agricultural experts & Read all data, write recommendations, analysis access \\
+\textbf{Certification Body} & Organic/quality certifiers & Read compliance data, write certifications, audit logs \\
+\textbf{Supply Chain Partner} & Distributors and processors & Read product history, write shipment data \\
+\textbf{System Admin} & Technical administrators & Full system access, role management, network config \\
+\bottomrule
+\end{tabularx}
+\end{table*}
+
+\textcolor{red}{\sout{The role assignment followed a systematic enrollment process:}}
+\textcolor{blue}{Each ESP32 node was pre-provisioned with a unique X.509 device certificate; gateways authenticated nodes and assigned them to zones via \texttt{registerSensorNode}. Roles are updateable dynamically via administrative smart contracts.}
+
+\subsubsection{Initial Bootstrapping and Chaincode Deployment}
+\label{subsubsec:rbac_bootstrapping}
+
+\textcolor{red}{\sout{The RBAC system initialization follows a secure bootstrap process to establish the foundational administrative identity and deploy the chaincode that governs the entire network:}}
+\textcolor{blue}{Bootstrapping proceeds in three steps: (1) \texttt{enroll-admin.sh} — CA issues root admin X.509 cert (\texttt{CN=SystemAdmin, OU=Blockchain}); (2) \texttt{deploy-chaincode.sh} — HRBAC chaincode packaged, installed on all 4 peers, and committed via \texttt{peer lifecycle}; (3) admin registers four gateway identities (\texttt{gateway-north-01} through \texttt{gateway-west-01}); gateways enroll sensor nodes via \texttt{registerSensorNode}. The resulting CA $\rightarrow$ Admin $\rightarrow$ Gateway $\rightarrow$ Sensor Node chain is visualized in Figure~\ref{fig:rbac-trust-chain}.}
+
+\textcolor{red}{\sout{During initial network setup, the Certificate Authority (CA) generates a root administrator identity with a distinguished name (DN) of CN=SystemAdmin, OU=Blockchain, O=FarmNetwork, C=TN. This identity receives an X.509 certificate with the admin role attribute, encoded in the certificate extensions as:}}
+\textcolor{red}{\sout{X509v3 extensions:}}
+\textcolor{red}{\sout{X509v3 Basic Constraints: critical}}
+\textcolor{red}{\sout{CA:FALSE}}
+\textcolor{red}{\sout{X509v3 Key Usage: critical}}
+\textcolor{red}{\sout{Digital Signature, Key Encipherment}}
+\textcolor{red}{\sout{X509v3 Extended Key Usage:}}
+\textcolor{red}{\sout{TLS Web Client Authentication}}
+\textcolor{red}{\sout{X509v3 Subject Alternative Name:}}
+\textcolor{red}{\sout{email:admin farmnetwork.tn}}
+\textcolor{red}{\sout{X509v3 Certificate Policies:}}
+\textcolor{red}{\sout{Policy: 1.3.6.1.4.1.54392.1.1}}
+\textcolor{red}{\sout{Netscape Comment:}}
+\textcolor{red}{\sout{Role: SystemAdmin}}
+\begin{sidewaysfigure}[!htbp]
+  \centering
+  \captionsetup{font=small}
+  \resizebox{0.96\textheight}{!}{%
+  \begin{tikzpicture}[font=\scriptsize,
+    rbox/.style={draw, rounded corners=3pt, minimum width=3.25cm, minimum height=0.82cm,
+                 align=center, inner sep=3pt, text width=3.0cm},
+    arr/.style={-Stealth, thick, draw=green!60!black},
+    certarr/.style={dashed, thick, draw=blue!45},
+    sensorarr/.style={-Stealth, thin, draw=green!55!black},
+    bootlab/.style={fill=white, rounded corners=2pt, draw=black!20, inner sep=1.5pt,
+                    font=\tiny\bfseries, text=black!85},
+    cert/.style={draw=gray!70, dashed, ellipse, minimum width=2.15cm,
+                 minimum height=0.64cm, align=center, fill=gray!5, font=\scriptsize}]
+
+    % Timeline
+    \node[anchor=west, font=\footnotesize\bfseries] at (-9.6, 11.0) {$t=0$\quad Setup};
+    \node[font=\footnotesize\bfseries] at (0, 11.0) {$t=5\,\text{min}$\quad Gateways};
+    \node[anchor=east, font=\footnotesize\bfseries] at (9.6, 11.0) {$t=15\,\text{min}$\quad Sensors Active};
+    \draw[->, thick, gray!70] (-7.9,11.0) -- (-1.5,11.0);
+    \draw[->, thick, gray!70] (1.5,11.0) -- (7.9,11.0);
+
+    % Root CA
+    \node[rbox, fill=blue!6, draw=blue!60!black, minimum width=4.0cm, text width=3.7cm] (CA) at (0,9.75)
+      {\textbf{Certificate Authority (CA)}\\Root of Trust};
+
+    % System Admin
+    \node[rbox, fill=green!6, draw=green!60!black, minimum width=4.0cm, text width=3.7cm] (SA) at (0,7.35)
+      {\textbf{System Administrator}\\Enrollment Authority};
+    \draw[arr] (CA.south) -- (SA.north);
+    \node[bootlab, right=5pt] at ($(CA.south)!0.52!(SA.north)$) {Step 1};
+    \node[cert] (AC) at (-5.3, 7.35) {Admin Cert\\MANAGER};
+    \draw[certarr] (AC.east) -- (SA.west);
+
+    % Gateways
+    \node[rbox, fill=orange!8, draw=orange!60!black] (GWN) at (-6.05, 4.95)
+      {Gateway North\\192.168.1.10};
+    \node[rbox, fill=orange!8, draw=orange!60!black] (GWS) at (6.05, 4.95)
+      {Gateway South\\192.168.1.11};
+
+    \draw[arr] (SA.south west) -- (GWN.north east);
+    \draw[arr] (SA.south east) -- (GWS.north west);
+    \node[bootlab] at (-3.25,6.20) {Step 2};
+    \node[bootlab] at (3.25,6.20) {Step 2};
+
+    \node[cert] (GNC) at (-9.5, 4.95) {Gateway Cert\\NORTH};
+    \node[cert] (GSC) at (9.5, 4.95)  {Gateway Cert\\SOUTH};
+    \draw[certarr] (GNC.east) -- (GWN.west);
+    \draw[certarr] (GWS.east) -- (GSC.west);
+
+    % Sensor groups
+    \node[rbox, fill=yellow!8, draw=yellow!60!black] (SNS) at (-6.05, 2.35)
+      {North Sensors\\8 devices};
+    \node[rbox, fill=yellow!8, draw=yellow!60!black] (SSS) at (6.05, 2.35)
+      {South Sensors\\6 devices};
+
+    \draw[arr] (GWN.south) -- (SNS.north);
+    \draw[arr] (GWS.south) -- (SSS.north);
+    \node[bootlab, right=6pt] at ($(GWN.south)!0.5!(SNS.north)$) {Step 3};
+    \node[bootlab, right=6pt] at ($(GWS.south)!0.5!(SSS.north)$) {Step 3};
+
+    \node[cert] (SNC) at (-9.5, 2.35) {Sensor Cert\\NORTH};
+    \node[cert] (SSC) at (9.5, 2.35)  {Sensor Cert\\SOUTH};
+    \draw[certarr] (SNC.east) -- (SNS.west);
+    \draw[certarr] (SSS.east) -- (SSC.west);
+
+    % North sensor nodes (8)
+    \foreach \i in {1,...,8}{
+      \node[circle, draw=blue!60, fill=blue!20, minimum size=0.54cm,
+            inner sep=0pt, font=\scriptsize] (N\i) at (-9.35 + \i*0.82, 0.25) {\i};
+      \draw[sensorarr] (SNS.south) -- (N\i.north);
+    }
+
+    % South sensor nodes (6)
+    \foreach \i/\xpos in {9/4.00, 10/4.82, 11/5.64, 12/6.46, 13/7.28, 14/8.10}{
+      \node[circle, draw=blue!60, fill=blue!20, minimum size=0.54cm,
+            inner sep=0pt, font=\scriptsize] (S\i) at (\xpos, 0.25) {\i};
+      \draw[sensorarr] (SSS.south) -- (S\i.north);
+    }
+
+  \end{tikzpicture}}%
+  \par\vspace{0.25em}
+  \caption{Hierarchical RBAC trust-chain bootstrapping for an IoT irrigation system.}
+  \label{fig:rbac-trust-chain}
+\end{sidewaysfigure}
+
+\textcolor{red}{\sout{return ctx.GetStub().PutState(nodeID, node.Serialize())}}
+\textcolor{red}{\sout{func (acc *AccessControlContract) submitSensorData(}}
+\textcolor{red}{\sout{ctx contractapi.TransactionContextInterface,}}
+\textcolor{red}{\sout{nodeID string, data SensorData) error}}
+\textcolor{red}{\sout{node, err := acc.getNode(ctx, nodeID)}}
+\textcolor{red}{\sout{if err != nil return err}}
+\textcolor{red}{\sout{caller := acc.getCallerID(ctx)}}
+\textcolor{red}{\sout{if caller != nodeID}}
+\textcolor{red}{\sout{return fmt.Errorf("unauthorized: sensor data submission")}}
+\textcolor{red}{\sout{if node.Role != "sensor node"}}
+\textcolor{red}{\sout{return fmt.Errorf("invalid role for data submission")}}
+\textcolor{red}{\sout{return acc.storeSensorData(ctx, nodeID, data, node.Zone)}}
+\textcolor{red}{\sout{func (acc *AccessControlContract) readSensorData(}}
+\textcolor{red}{\sout{ctx contractapi.TransactionContextInterface,}}
+\textcolor{red}{\sout{zone string, startTime, endTime time.Time) ([]SensorData, error)}}
+\textcolor{red}{\sout{callerRole := acc.getCallerRole(ctx)}}
+\textcolor{red}{\sout{callerID := acc.getCallerID(ctx)}}
+\textcolor{red}{\sout{switch callerRole}}
+\textcolor{red}{\sout{case "sensor node":}}
+\textcolor{red}{\sout{return acc.getNodeData(ctx, callerID, startTime, endTime)}}
+\textcolor{red}{\sout{case "gateway":}}
+\textcolor{red}{\sout{if !acc.isGatewayInZone(ctx, callerID, zone)}}
+\textcolor{red}{\sout{return nil, fmt.Errorf("gateway not authorized for zone")}}
+\textcolor{red}{\sout{return acc.getZoneData(ctx, zone, startTime, endTime)}}
+\textcolor{red}{\sout{case "farmer", "agronomist", "admin":}}
+\textcolor{red}{\sout{return acc.getZoneData(ctx, zone, startTime, endTime)}}
+\textcolor{red}{\sout{case "certification body":}}
+\textcolor{red}{\sout{return acc.getCertificationData(ctx, zone, startTime, endTime)}}
+\textcolor{red}{\sout{default:}}
+\textcolor{red}{\sout{return nil, fmt.Errorf("unauthorized role for data access")}}
+\textcolor{red}{\sout{Access control policies were enforced at multiple levels:}}
+\textcolor{red}{\sout{The access control system included comprehensive security measures:}}
+\textcolor{red}{\sout{The smart contracts (chaincode) implement the business logic for various agricultural operations, creating automated and verifiable processes that enhance efficiency and transparency:}}
+\textcolor{red}{\sout{The smart contracts are implemented in Go, chosen for its performance characteristics and strong support in the Hyperledger Fabric ecosystem . The implementation includes comprehensive error handling, logging and monitoring to ensure reliable operation and facilitate troubleshooting. The irrigation rule smart contracts incorporate multi-factor decision logic that considers soil moisture levels, weather conditions, crop growth stages and historical irrigation patterns. This enables more nuanced irrigation decisions than simple threshold-based systems, improving water use efficiency while maintaining crop health and productivity.}}
+\textcolor{red}{\sout{The blockchain system was optimized for agricultural deployment through batch processing (50 transactions per block achieving 250 TPS), selective endorsement reducing latency from 2.1s to 1.2s, and strategic caching with 5-minute expiration for frequently accessed data. Additional optimizations included 90-day on-chain hash retention with off-chain archival, and parallel execution of smart contract functions leveraging Hyperledger Fabric's native capabilities. These techniques collectively enabled the system to meet real-time performance requirements while maintaining the security, integrity, and auditability essential for trustworthy agricultural data management in the 2025 deployment.}}
+\textcolor{blue}{The bootstrapping (Figure~\ref{fig:rbac-trust-chain}) enforces least-privilege, non-repudiation, and CRL revocability across four access levels: network (cert), channel (private data), chaincode (\texttt{ctx.GetClientIdentity()}), and application (API). The Go chaincode (\texttt{chaincode/hrbac/contract.go}) exposes \texttt{RegisterSensorNode()}, \texttt{SubmitSensorData()} with hard range checks + $\pm3\sigma$ outlier detection (7-day rolling mean; flagged readings stored but excluded from irrigation), \texttt{evaluateIrrigation()}, and \texttt{ReadSensorData()} \cite{orderingServiceDoc,mdpiAccessControl}. Calibration drift is not auto-corrected; annual recalibration is required. Key optimizations: 50-tx blocks (250 TPS theoretical peak), selective endorsement (block time 2.1→1.2\,s), 5-min read-cache, SHA-256 on-chain anchors + 5-year off-chain CouchDB archive. Field throughput: 63 TPS sustained, 85 TPS peak (Table~\ref{tab:system-performance}).}
+
+\section{Materials and Methods}
+\label{sec:materials_methods}
+
+\subsection{Study Site and Environmental Conditions}
+\label{subsec:study_site}
+
+\textcolor{red}{\sout{The field study was conducted in Sfax, Tunisia (34.74°N, 10.76°E) during August and September 2025. The experimental site comprised a 2‑hectare farm divided into four operational zones with the blockchain‑CRT system deployed across all zones.}}
+\textcolor{blue}{The field study was conducted in Sfax, Tunisia (34.74°N, 10.76°E) during August–September 2025 on a 2\,ha farm (Table~\ref{tab:environmental}).}
+
+\begin{table}[htbp]
+\centering
+\caption{Environmental conditions during study period (Aug–Sep 2025)}
+\label{tab:environmental}
+\footnotesize
+\begin{tabularx}{\columnwidth}{
+    >{\raggedright\arraybackslash}p{0.30\columnwidth}
+    >{\centering\arraybackslash}p{0.17\columnwidth}
+    >{\centering\arraybackslash}p{0.17\columnwidth}
+    >{\raggedright\arraybackslash}p{0.23\columnwidth}
+}
+\toprule
+\textbf{Parameter} & \textbf{Aug 2025} & \textbf{Sep 2025} & \textbf{Source} \\
+\midrule
+Avg. Temperature     & 32.1°C & 29.3°C & On-site monitoring \\
+Max Temperature      & 39.5°C & 35.8°C & On-site monitoring \\
+Min Temperature      & 24.2°C & 22.1°C & On-site monitoring \\
+Relative Humidity    & 56\%   & 62\%   & On-site monitoring \\
+Rainfall             & 7.8 mm & 15.2 mm & Tunisia Meteorological Institute \\
+Solar Radiation      & 8.1 kWh/m²/d & 7.2 kWh/m²/d & On-site pyranometer \\
+Wind Speed           & 3.4 m/s & 2.9 m/s & On-site anemometer \\
+Reference ET         & 6.4 mm/d & 5.7 mm/d & FAO Penman–Monteith \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\textcolor{red}{\sout{Soil characteristics at the study site:}}
+\textcolor{blue}{Soil was sandy loam (62\% sand, 28\% silt, 10\% clay), pH 6.8, 1.5\% organic matter, field capacity 28\%, wilting point 12\%, and available water capacity 16\% volumetric.}
+
+\subsection{Crop Management Practices}
+\label{subsec:crop_management}
+
+\textbf{Tomato (\textit{Solanum lycopersicum}).} Rio Grande and hybrid salad cultivars transplanted June–July 2025 at 1.2–1.8\,m $\times$ 35–50\,cm \cite{seedco2021tomato,johnny2024tomato}; fertilized at 150–200/84–168/112–224\,kg/ha (N/P/K) \cite{iclTomato,UCIPM2024}; harvested 62–75 DAT \cite{MU2020tomato}. \textbf{Pepper (\textit{Capsicum spp.}).} Baklouti chili and bell pepper at 1.2–1.5\,m $\times$ 30–45\,cm \cite{UNebraska2008peppers,shimray2019kingchili}; fertilized at 112–202/168–224/112–168\,kg/ha (N/P/K) \cite{Rutgers2025peppers,shimray2019kingchili}; harvested 62–90 DAT \cite{UNebraska2008peppers}.
+
+\subsection{Experimental Design}
+\label{subsec:experimental_design}
+
+\textcolor{red}{\sout{The study employed a randomized complete block design with three replications during the 2025 growing season. Two irrigation treatments were evaluated:}}
+\textcolor{blue}{The study employed a randomized complete block design with three replications. Treatment 1 used blockchain-IoT irrigation (soil moisture thresholds, automated smart-contract scheduling, CRT transmission); Treatment 2 used traditional irrigation (visual assessment and time-based scheduling).}
+
+\begin{table}[htbp]
+\centering
+\caption{Experimental design parameters (2025 growing season)}
+\label{tab:experimental-design}
+\footnotesize
+\begin{tabularx}{\columnwidth}{
+    >{\raggedright\arraybackslash}p{0.36\columnwidth}
+    >{\centering\arraybackslash}p{0.23\columnwidth}
+    >{\centering\arraybackslash}p{0.23\columnwidth}
+}
+\toprule
+\textbf{Parameter} & \textbf{Tomato} & \textbf{Pepper} \\
+\midrule
+Plot size (ha)          & 0.5   & 0.3 \\
+Plants per plot         & 8,000--14,000 & 9,300--16,500 \\
+Replications            & 3     & 3 \\
+Irrigation system       & Drip  & Drip \\
+Emitter flow rate       & 2.0 L\,h$^{-1}$ & 2.0 L\,h$^{-1}$ \\
+Study duration          & Aug 1 -- Sep 30, 2025 & Aug 1 -- Sep 30, 2025 \\
+Blockchain nodes        & 4 peers + 3 orderers & 4 peers + 3 orderers \\
+Sensor nodes            & 28 ESP32 devices & 22 ESP32 devices \\
+Gateway devices         & 4 Raspberry Pi 4B & 4 Raspberry Pi 4B \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Irrigation thresholds for blockchain–IoT system (2025 implementation)}
+\label{tab:irrigation-thresholds}
+\footnotesize
+\begin{tabularx}{\columnwidth}{
+    >{\raggedright\arraybackslash}p{0.38\columnwidth}
+    >{\centering\arraybackslash}p{0.23\columnwidth}
+    >{\centering\arraybackslash}p{0.23\columnwidth}
+}
+\toprule
+\textbf{Crop \& Stage} & \textbf{Moisture Threshold} & \textbf{Duration} \\
+\midrule
+Tomato -- Vegetative         & $-$35 kPa & 30 min \\
+Tomato -- Flowering          & $-$30 kPa & 40 min \\
+Tomato -- Fruit development  & $-$25 kPa & 45 min \\
+Tomato -- Ripening           & $-$35 kPa & 30 min \\
+Pepper -- Vegetative         & $-$30 kPa & 25 min \\
+Pepper -- Flowering          & $-$25 kPa & 35 min \\
+Pepper -- Fruit development  & $-$20 kPa & 40 min \\
+Pepper -- Maturation         & $-$30 kPa & 30 min \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Data Collection and Analysis}
+\label{subsec:data_collection}
+
+\textcolor{red}{\sout{Data collection covered technical, agronomic, and economic parameters during the 2025 growing season:}}
+\textcolor{blue}{Data collection covered soil parameters (moisture, temperature, pH at 30-minute intervals via CRT transmission), climate data (hourly), irrigation volumes (continuous), system performance metrics, crop yield and quality, economic inputs, and blockchain/RBAC audit logs, as detailed in Table~\ref{tab:data-collection}.}
+
+\begin{table}[htbp]
+\centering
+\caption{Data collection methods and frequencies (2025 study)}
+\label{tab:data-collection}
+\footnotesize
+\begin{tabularx}{\columnwidth}{
+    >{\raggedright\arraybackslash}p{0.34\columnwidth}
+    >{\raggedright\arraybackslash}p{0.29\columnwidth}
+    >{\centering\arraybackslash}p{0.20\columnwidth}
+}
+\toprule
+\textbf{Parameter} & \textbf{Method} & \textbf{Frequency} \\
+\midrule
+Soil moisture & TDR-315N sensors with CRT & 30 min intervals \\
+Air temperature & Automated weather station & 1 h intervals \\
+Water application & Digital flow meters with blockchain & Continuous \\
+Network latency & Custom monitoring tools & Continuous \\
+Crop development & Field inspection with mobile app & Weekly \\
+Fruit quality & Laboratory analysis & Harvest sampling \\
+Labor inputs & Time‑motion studies & Continuous \\
+Blockchain performance & Hyperledger metrics & Real‑time \\
+CRT transmission efficiency & Packet analysis & Per‑transmission \\
+Access control audit & Blockchain audit logs & Continuous \\
+Role compliance & Smart contract validation & Transaction‑level \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\textcolor{red}{\sout{Data analysis was performed in R 4.3.2 (2025 release). ANOVA tested treatment effects with significance at . Economic evaluation included Net Present Value (NPV) and Return on Investment (ROI) over a 5‑year horizon, accounting for 2025 market prices for water, labor, and agricultural inputs. Blockchain performance metrics were analyzed using Hyperledger Fabric's built‑in monitoring tools and custom analytics scripts for access control effectiveness and role‑based permission compliance.}}
+\textcolor{blue}{Data analysis used R 4.3.2 with ANOVA ($p < 0.05$), NPV/ROI over a 5‑year horizon, and Hyperledger Fabric monitoring tools for blockchain metrics.}
+
+\section{Results}
+\label{sec:results}
+
+\subsection{Transmission Performance}
+\label{subsec:transmission_performance}
+
+\textcolor{red}{\sout{The CRT-based parallel transmission system demonstrated significant efficiency gains throughout the 61‑day deployment. Table summarizes the overall system metrics, highlighting the impact of CRT compression on transmission time, energy consumption, and data reduction.}}
+\textcolor{blue}{Table~\ref{tab:system-performance} summarizes the overall system metrics across the 61-day deployment.}
+
+\begin{table}[htbp]
+\centering
+\caption{Comprehensive system performance metrics (61-day deployment)}
+\label{tab:system-performance}
+\scriptsize
+\begin{tabularx}{\columnwidth}{lccc}
+\toprule
+\textbf{Metric} & \textbf{Target} & \textbf{Actual} & \textbf{Difference} \\
+\midrule
+Data Reliability & 99.0\% & 99.4\% & +0.4\% \\
+Average Latency & <2.0 s & 1.7 s & -0.3 s \\
+P95 Latency & <3.0 s & 2.4 s & -0.6 s \\
+P99 Latency & <5.0 s & 3.8 s & -1.2 s \\
+Data Accuracy & 98.0\% & 99.1\% & +1.1\% \\
+Battery Life & 30 days & 31.2 days & +1.2 days \\
+Network Uptime & 99.0\% & 99.6\% & +0.6\% \\
+Per-packet Size Reduction (CRT) & 20\% & 20.3\% & +0.3\% \\
+Energy Consumption & <100 Wh/day & 87 Wh/day & -13\% \\
+Data Storage & <2 GB & 1.4 GB & -0.6 GB \\
+Blockchain Throughput & 50 TPS & 63 TPS & +13 TPS \\
+Smart Contract Execution & <500 ms & 320 ms & -180 ms \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\textcolor{red}{\sout{The 48.8 energy saving reported in Table refers specifically to node transmission energy---the dominant factor in battery-powered sensor lifetime. Gateway reception energy and blockchain computation are not included because they draw power from the Raspberry Pi gateways, which are either mains-connected or equipped with large solar panels and batteries. In the node energy budget, transmission accounts for of per-cycle consumption; sensing, ADC, and processing contribute the remainder. Reducing transmission energy therefore directly extends node battery life, as confirmed by the measured 34-day deployment duration.}}
+\textcolor{blue}{The 95.8\% in Table~\ref{tab:crt-performance} is the radio-layer packet delivery rate; end-to-end reliability reached 99.4\% (Table~\ref{tab:system-performance}) after CRT partial recovery and gateway retransmission. Each node's 2\,W solar panel (3--5\,Wh/day at 8.1\,kWh/m$^2$/day) sustains the 30-min duty cycle over 61 days; the 48.8\% energy saving applies to node TX energy only (gateway/blockchain mains-powered). \textbf{Anomalies:} two ESP32 nodes power-cycled at 38\textdegree{}C and rejoined in 5--10\,min; one gateway mesh reconnected via BATMAN-adv in 3\,s; no CPU throttling observed (ventilated enclosures, 37--41\textdegree{}C internal).}
+
+\textcolor{red}{\sout{While the system maintained 99.4 overall reliability, the 61-day deployment experienced several minor anomalies characteristic of real-world field conditions. Two ESP32 nodes disconnected during midday peaks when temperatures exceeded 38 C, likely due to thermal stress on the solar charging circuits; both nodes automatically power-cycled and rejoined the network within 5--10 ,min after the solar charge recovered. No data were lost because the nodes buffered readings locally during the outage. Additionally, one gateway briefly lost mesh connectivity during a sandstorm, but the BATMAN-adv protocol rerouted traffic within 3 ,s, and the affected gateway re-entered the cluster seamlessly. These incidents confirm that the system can tolerate realistic field disturbances without manual intervention, reinforcing the practical robustness of the architecture.}}
+\textcolor{red}{\sout{It is important to distinguish between per-node total transmission time and per-packet airtime. A single node using CRT requires 372 ,ms to transmit all three residues sequentially, compared to 247 ,ms for raw transmission. The 124 ,ms figure reported throughout this paper is the per-packet airtime---the time a single residue occupies a channel. The system-level benefit arises from the gateway's ability to receive packets from multiple nodes concurrently on different channels, increasing overall packet throughput and reducing contention.}}
+\textcolor{red}{\sout{The transmission optimization achieved through CRT parallel transmission demonstrates the effectiveness of residue-based data representation for agricultural IoT applications. Figure shows the compression ratios achieved across different data types.}}
+\textcolor{blue}{Figure~\ref{fig:crt_compression_results} shows the payload size reduction achieved across different data types.}
+
+\begin{figure*}[!htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.88\textwidth,
+    height=6.9cm,
+    ybar,
+    bar width=20pt,
+    ymajorgrids=true,
+    grid style={dashed, gray!40},
+    ylabel={Data Size (bytes)},
+    ylabel style={font=\small},
+    symbolic x coords={Temperature, Soil Moisture, Humidity, pH, Light, Average},
+    xtick=data,
+    xticklabel style={rotate=45, anchor=east, font=\small},
+    xticklabel shift={4pt},
+    ytick={0,1,2,3,4,5},
+    yticklabels={0,1,2,3,4,5},
+    yticklabel style={font=\small},
+    legend style={
+        at={(0.5,1.04)},
+        anchor=south,
+        legend columns=2,
+        font=\small,
+        draw=none,
+        fill=white,
+        fill opacity=0.85,
+        text opacity=1
+    },
+    ymin=0,
+    ymax=5.2,
+    nodes near coords,
+    nodes near coords style={font=\footnotesize},
+    enlarge x limits=0.12,
+    axis lines=left,
+    axis line style={-},
+    tick style={black, thin}
+]
+\addplot[fill=blue!40, draw=blue!70, postaction={pattern=north east lines, pattern color=blue!20}] coordinates {
+    (Temperature, 4)
+    (Soil Moisture, 4)
+    (Humidity, 4)
+    (pH, 4)
+    (Light, 4)
+    (Average, 4)
+};
+\addplot[fill=green!40, draw=green!70, postaction={pattern=crosshatch dots, pattern color=green!20}] coordinates {
+    (Temperature, 2)
+    (Soil Moisture, 3)
+    (Humidity, 2)
+    (pH, 3)
+    (Light, 2)
+    (Average, 2.4)
+};
+\legend{Original Data, CRT Compressed}
+\end{axis}
+\end{tikzpicture}
+\caption{Comparative analysis of CRT compression performance across different agricultural sensor data types.}
+\label{fig:crt_compression_results}
+\end{figure*}
+
+\textcolor{red}{\sout{Note that CRT reconstruction itself is mathematically exact when all residues are received correctly. The 99.7 figure in Table reflects successful packet delivery (receipt of at least residues), not reconstruction error. The measured decomposition time of 0.9 ms aligns with the theoretical complexity established in Section , confirming linear scaling with .}}
+\textcolor{blue}{CRT reconstruction is mathematically exact for complete residue sets; the 99.7\% in Table~\ref{tab:crt-performance} reflects $\geq k-1$ residue delivery, not reconstruction error. The 0.9\,ms decomposition time confirms the $O(k)$ complexity (Section~\ref{subsubsec:complexity_analysis}).}
+
+\begin{table}[htbp]
+\centering
+\caption{CRT compression results}
+\label{tab:crt_detailed_results}
+\footnotesize
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+\textbf{Metric} & \textbf{Week 1} & \textbf{Week 4} & \textbf{Week 8} & \textbf{Avg} & \textbf{Std. Dev.} \\
+\midrule
+Comp. Ratio & 32.5\% & 33.1\% & 32.8\% & 33.0\% & 0.3\% \\
+Time (ms) & 0.92 & 0.94 & 0.91 & 0.94 & 0.02 \\
+Error & 0\% & 0\% & 0\% & 0\% & 0\% \\
+Energy/Tx & 38.2\% & 39.1\% & 38.7\% & 38.9\% & 0.4\% \\
+Memory & 11.8\% & 12.1\% & 11.9\% & 11.9\% & 0.2\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Energy-Delay Product Analysis}
+\label{subsec:edp_analysis}
+
+\textcolor{red}{\sout{The Energy-Delay Product (EDP) is a composite metric widely used in computer architecture to evaluate the tradeoff between energy consumption and execution latency . For transmission systems, EDP captures the combined cost of communication energy and time, providing a single figure of merit for comparing different approaches. We define EDP as:}}
+\textcolor{blue}{EDP \cite{gonzalez2000energy} $= E_{\text{total}} \times T_{\text{latency}}$ (node TX energy only; Eq.~\ref{eq:edp}) from Table~\ref{tab:transmission-cost-comparison}:}
+\begin{equation}
+\text{EDP} = E_{\text{total}} \times T_{\text{latency}},
+\label{eq:edp}
+\end{equation}
+\textcolor{red}{\sout{where is the total energy per transmission (mJ) and is the effective transmission latency (ms). Note that refers to node transmission energy only; gateway and blockchain energy are excluded because they are not part of the energy‑constrained sensor node budget. Using the measured values from Table , we compute EDP for each method:}}
+
+\begin{align*}
+\text{EDP}_{\text{CRT}}      &= 12.40 \times 124 = 1537.6\ \text{mJ·ms}, \\
+\text{EDP}_{\text{Huffman}}   &= 15.72 \times 152 = 2389.4\ \text{mJ·ms}, \\
+\text{EDP}_{\text{LZW}}       &= 14.98 \times 135 = 2022.3\ \text{mJ·ms}, \\
+\text{EDP}_{\text{Raw}}       &= 24.21 \times 247 = 5979.9\ \text{mJ·ms}.
+\end{align*}
+
+\textcolor{red}{\sout{CRT achieves the lowest EDP by a substantial margin: a 74.3 reduction compared to raw transmission (). Note that this EDP calculation uses node transmission energy and per-packet latency, reflecting the node-centric perspective critical for battery life. Gateway and blockchain energy are excluded because they are not part of the energy-constrained sensor node. Relative to the best compression method (LZW), CRT reduces EDP by 24.0 (). Notably, CRT achieves the lowest EDP despite not having the smallest packet size---LZW compresses data more (30.3 bytes vs. 47 bytes). This demonstrates that CRT's parallel transmission provides a superior energy‑delay tradeoff, reducing both transmission energy and latency together, whereas compression alone reduces energy but leaves latency relatively high due to sequential transmission. This improvement stems from CRT's unique combination of low transmission energy (12.40 mJ, 48.8 below raw) and low latency (124 ms, 49.8 below raw). While Huffman and LZW achieve moderate energy savings through compression, their sequential transmission and higher computational overhead result in larger EDP values.}}
+\textcolor{red}{\sout{The EDP analysis reinforces that CRT-based parallel transmission is not merely faster or more energy-efficient in isolation—it optimally balances both metrics, making it exceptionally well-suited for energy-constrained edge deployments where every millijoule and millisecond contribute to system lifetime and responsiveness. This architectural advantage complements the algorithmic benefits discussed in Section and the parallel speedup analysis in Section .}}
+\textcolor{blue}{CRT achieves the lowest EDP: 74.3\% below raw and 24.0\% below LZW. Despite LZW compressing more bytes, CRT's 48.8\% energy and 49.8\% airtime reductions per packet dominate; the benefit is reduced channel occupancy per slot.}
+
+\subsection{Resource Utilization Profiling}
+\label{subsec:resource_utilization}
+\textcolor{red}{\sout{To validate that the blockchain and edge components operate within hardware constraints, resource utilization was profiled during peak irrigation periods (06:00–09:00 and 17:00–20:00 local time). Table summarizes CPU and memory usage.}}
+
+\begin{table}[htbp]
+\centering
+\caption{Measured system resource utilization during peak irrigation activity}
+\label{tab:resource-utilization}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Component} & \textbf{Avg CPU Usage} & \textbf{Avg RAM Usage} & \textbf{Peak Load} \\
+\midrule
+ESP32 Sensor Node           & 14\%   & 68 KB    & 22\% \\
+Gateway (Raspberry Pi 4B)   & 38\%   & 1.6 GB   & 52\% \\
+Fabric Peer Process         & 27\%   & 1.2 GB   & 41\% \\
+CouchDB State Database      & 18\%   & 512 MB   & 29\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textcolor{red}{\sout{ESP32 nodes operate well within their capacity, with peak CPU usage at 22 and memory consumption of only 68 KB well below the available 520 KB SRAM. This confirms that CRT decomposition and Ed25519 signing impose negligible overhead. The Raspberry Pi gateways handle peak loads at 52 CPU utilization, indicating sufficient headroom for additional processing or higher sensor density. The Fabric peer process and CouchDB together consume approximately 1.7 GB of RAM under peak load, leaving ample memory for system services and future scalability. Blockchain execution remains within safe operational limits on ARM64 edge devices, confirming the practical viability of edge‑resident blockchain verification.}}
+\textcolor{blue}{Table~\ref{tab:resource-utilization} confirms all components within limits: ESP32 22\% peak CPU / 68\,KB RAM (negligible CRT overhead); gateways 52\% / 1.6\,GB (headroom for more nodes); Fabric+CouchDB $\approx$1.7\,GB peak (valid on ARM64).}
+
+\subsection{Blockchain Performance Metrics}
+\label{subsec:blockchain_performance}
+
+\textcolor{red}{\sout{The blockchain implementation maintained robust performance throughout the study. Figure shows the transaction latency distribution across the study period. Figure illustrates the latency behaviour of the blockchain system.}}
+\textcolor{blue}{Figure~\ref{fig:blockchain_performance_2025} shows transaction latency, weekly throughput, and latency distribution across the study period.}
+
+\begin{figure*}[!htbp]
+\centering
+\captionsetup{font=small,labelfont=bf}
+
+% --- Subfigure (a): Time series ---
+\begin{subfigure}{\linewidth}
+\centering
+\begin{tikzpicture}
+\usepgfplotslibrary{fillbetween}
+\usetikzlibrary{intersections}
+\begin{axis}[
+    width=\linewidth,
+    height=6.0cm,
+    xlabel={Study Day (August–October 2025)},
+    ylabel={Transaction Latency (seconds)},
+    legend style={at={(0.5,-0.23)}, anchor=north, legend columns=3,
+                  font=\footnotesize, draw=none, /tikz/every even column/.append style={column sep=0.45cm}},
+    grid=major,
+    date coordinates in=x,
+    xticklabel={\day/\month},
+    xtick distance=7,
+    xticklabel style={font=\footnotesize},
+    ymin=0,
+    ymax=3.2,
+    title={Blockchain Performance: Transaction Latency (61-Day Study)},
+    title style={yshift=8pt, font=\normalsize\bfseries}
+]
+% 95% CI band: ±0.6 s (±1 std dev from Table blockchain_detailed)
+\addplot[blue!20, fill=blue!20, draw=none, name path=upper] coordinates {
+    (2025-08-01, 2.4) (2025-08-03, 2.5) (2025-08-08, 2.3) (2025-08-10, 2.1)
+    (2025-08-15, 2.2) (2025-08-17, 2.4) (2025-08-22, 2.4) (2025-08-24, 2.7)
+    (2025-08-29, 2.3) (2025-08-31, 2.2) (2025-09-05, 2.5) (2025-09-07, 2.8)
+    (2025-09-12, 2.2) (2025-09-14, 2.0) (2025-09-19, 2.3) (2025-09-21, 2.1)
+    (2025-09-26, 2.3) (2025-09-28, 2.4) (2025-10-01, 2.2)
+};
+\addplot[blue!20, fill=blue!20, draw=none, name path=lower] coordinates {
+    (2025-08-01, 1.2) (2025-08-03, 1.3) (2025-08-08, 1.1) (2025-08-10, 0.9)
+    (2025-08-15, 1.0) (2025-08-17, 1.2) (2025-08-22, 1.2) (2025-08-24, 1.5)
+    (2025-08-29, 1.1) (2025-08-31, 1.0) (2025-09-05, 1.3) (2025-09-07, 1.6)
+    (2025-09-12, 1.0) (2025-09-14, 0.8) (2025-09-19, 1.1) (2025-09-21, 0.9)
+    (2025-09-26, 1.1) (2025-09-28, 1.2) (2025-10-01, 1.0)
+};
+\addplot[blue!20, fill=blue!20] fill between[of=upper and lower];
+\addplot[blue, thick, mark=*, mark size=1.5pt, mark options={fill=white}] coordinates {
+    (2025-08-01, 1.8) (2025-08-03, 1.9) (2025-08-08, 1.7) (2025-08-10, 1.5)
+    (2025-08-15, 1.6) (2025-08-17, 1.8) (2025-08-22, 1.8) (2025-08-24, 2.1)
+    (2025-08-29, 1.7) (2025-08-31, 1.6) (2025-09-05, 1.9) (2025-09-07, 2.2)
+    (2025-09-12, 1.6) (2025-09-14, 1.4) (2025-09-19, 1.7) (2025-09-21, 1.5)
+    (2025-09-26, 1.7) (2025-09-28, 1.8) (2025-10-01, 1.6)
+};
+\addplot[red, dashed, thick, line width=1.2pt] coordinates {
+    (2025-08-01, 2.0) (2025-10-01, 2.0)
+};
+\draw[fill=orange!15, draw=orange!30, line width=0.5pt] (axis cs:2025-08-23,0) rectangle (axis cs:2025-08-25,5.5);
+\draw[fill=orange!15, draw=orange!30, line width=0.5pt] (axis cs:2025-09-06,0) rectangle (axis cs:2025-09-08,5.5);
+\node[draw=black!50, fill=white, rounded corners=3pt, inner sep=3pt, font=\scriptsize, anchor=east] at (axis cs:2025-08-20,4.5) {Peak Load Test};
+\draw[->, black!50, thick] (axis cs:2025-08-20,4.3) -- (axis cs:2025-08-24,2.2);
+\node[draw=black!50, fill=white, rounded corners=3pt, inner sep=3pt, font=\scriptsize, anchor=west] at (axis cs:2025-09-10,4.0) {Protocol Upgrade};
+\draw[->, black!50, thick] (axis cs:2025-09-10,3.8) -- (axis cs:2025-09-07,2.3);
+\node[draw=black!50, fill=white, rounded corners=3pt, inner sep=3pt, font=\scriptsize, anchor=east] at (axis cs:2025-09-17,0.8) {Optimization Deployed};
+\draw[->, black!50, thick] (axis cs:2025-09-17,1.0) -- (axis cs:2025-09-14,1.5);
+\legend{Actual Latency, Target SLO (2s), Network Events, {$\pm$0.6\,s CI band}}
+\end{axis}
+\end{tikzpicture}
+\subcaption{Daily transaction latency with $\pm$0.6\,s confidence band ($\sigma$ from Table~\ref{tab:blockchain_detailed})}
+\label{subfig:latency_timeseries}
+\label{fig:blockchain_latency}
+\end{subfigure}
+
+% --- Subfigure (b): Throughput ---
+\begin{subfigure}[b]{0.45\linewidth}
+\centering
+\begin{tikzpicture}[baseline]
+\begin{axis}[
+    width=0.96\linewidth,
+    height=5.2cm,
+    xlabel={Study Week},
+    ylabel={Throughput (TPS)},
+    grid=major,
+    ymin=0,
+    ymax=100,
+    bar width=3.8mm,
+    symbolic x coords={W1,W2,W3,W4,W5,W6,W7,W8},
+    xtick=data,
+    xticklabel style={font=\scriptsize},
+    ytick={0,25,50,75,100},
+    title={Weekly Throughput},
+    title style={font=\small\bfseries, yshift=2pt}
+]
+\addplot[
+    ybar,
+    fill=green!70!black,
+    draw=green!70!black,
+    postaction={pattern=north east lines, pattern color=green!90!black},
+    error bars/.cd,
+        y dir=both,
+        y explicit,
+        error bar style={black, line width=0.7pt},
+        error mark options={black, rotate=90, mark size=2pt}
+] coordinates {
+    (W1, 58) +- (0,8) (W2, 62) +- (0,8) (W3, 66) +- (0,8) (W4, 61) +- (0,8)
+    (W5, 64) +- (0,8) (W6, 45) +- (0,8) (W7, 70) +- (0,8) (W8, 78) +- (0,8)
+};
+\addplot[gray, dashed, thick, line width=1.2pt] coordinates {(W1, 50) (W8, 50)};
+\node[gray!60!black, fill=white, inner sep=1pt, font=\tiny, anchor=south west] at (axis cs:W1,53) {50 TPS target};
+\node[red!70!black, font=\tiny, anchor=south] at (axis cs:W6,56) {45};
+\node[black!70, fill=white, inner sep=1pt, font=\tiny, anchor=north east] at (axis cs:W8,98) {$\pm$8 TPS std. dev.};
+\end{axis}
+\end{tikzpicture}
+\subcaption{Weekly throughput with $\pm$8 TPS standard-deviation bars from Table~\ref{tab:blockchain_detailed}}
+\label{subfig:throughput}
+\end{subfigure}
+\hfill
+% --- Subfigure (c): Latency distribution ---
+\begin{subfigure}[b]{0.45\linewidth}
+\centering
+\begin{tikzpicture}[baseline]
+\begin{axis}[
+    width=0.96\linewidth,
+    height=5.2cm,
+    xlabel={Latency (seconds)},
+    ylabel={Frequency (\%)},
+    grid=major,
+    ymin=0,
+    ymax=40,
+    xmin=0.75,
+    xmax=4.85,
+    bar width=4.8mm,
+    xtick={1.0,1.5,2.0,2.5,3.0,3.5,4.0},
+    xticklabels={1.0,1.5,2.0,2.5,3.0,3.5,$\geq$4.0},
+    ytick={0,10,20,30,40},
+    yticklabels={0\%,10\%,20\%,30\%,40\%},
+    title={Latency Distribution},
+    title style={font=\small\bfseries, yshift=2pt}
+]
+\addplot[ybar, fill=blue!60!cyan, draw=blue!60!cyan, point meta=explicit symbolic,
+         nodes near coords, nodes near coords style={font=\tiny, yshift=2pt, color=black}] coordinates {
+    (1.0, 4.8)[4.8\%] (1.5, 19.0)[19.0\%] (2.0, 35.7)[35.7\%] (2.5, 21.4)[21.4\%]
+    (3.0, 9.5)[9.5\%] (3.5, 7.1)[7.1\%] (4.0, 2.4)[2.4\%]
+};
+\addplot[red, dashed, thick, line width=1.0pt] coordinates {(1.85, 0) (1.85, 40)};
+\addplot[orange, dashed, thick, line width=1.0pt] coordinates {(1.90, 0) (1.90, 40)};
+\node[draw=black!30, fill=white, rounded corners=2pt, inner sep=2pt, anchor=north east, font=\tiny, align=left] at (axis cs:4.78,38)
+    {Mean: 1.85s\\Median: 1.90s\\95th: 3.40s\\SLO: 92\%};
+\end{axis}
+\end{tikzpicture}
+\subcaption{Latency distribution}
+\label{subfig:distribution}
+\label{fig:latency_distribution}
+\end{subfigure}
+\caption{Blockchain system performance during the 61‑day study: (a) daily transaction latency, (b) weekly throughput, and (c) latency distribution.}
+\label{fig:blockchain_performance_2025}
+\end{figure*}
+
+\textcolor{red}{\sout{The blockchain system processed a total of 86,400 transactions (50 nodes × 48 readings/day × 61 days). Smart contract execution for irrigation decisions showed consistent performance (Table ).}}
+\textcolor{blue}{The system processed 86,400 transactions (50 nodes × 48 readings/day × 61 days); Table~\ref{tab:blockchain_detailed} summarizes performance.}
+
+\begin{table}[htbp]
+\centering
+\caption{Blockchain performance metrics during field deployment}
+\label{tab:blockchain_detailed}
+\footnotesize
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Parameter} & \textbf{Min} & \textbf{Max} & \textbf{Average} & \textbf{Std. Dev.} \\
+\midrule
+Transaction Latency (s) & 0.8 & 3.8 & 1.7 & 0.6 \\
+Smart Contract Exec. (ms) & 280 & 420 & 320 & 40 \\
+Throughput (TPS) & 45 & 78 & 63 & 8 \\
+Block Confirmation (s) & 0.5 & 2.1 & 1.2 & 0.4 \\
+Data Integrity Success & 99.2\% & 99.7\% & 99.4\% & 0.2\% \\
+Consensus Time (ms) & 180 & 320 & 240 & 35 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textcolor{red}{\sout{The integration of CRT compression with blockchain verification reduced the data volume requiring verification by 33 , while blockchain ensured the integrity of both compressed and reconstructed data. This combination proved particularly effective during peak irrigation periods (06:00–09:00 and 17:00–20:00 local time), when 65 of irrigation decisions occurred.}}
+\textcolor{blue}{CRT's 33\% size reduction directly reduced on-chain data volume; 65\% of irrigation decisions occurred during morning and evening peak periods (06:00–09:00, 17:00–20:00).}
+
+\subsection{Scalability and Fault Tolerance Analysis}
+\label{subsec:scalability}
+\label{sec:network_capacity}
+
+\subsubsection{Scalability Analysis}
+\label{subsubsec:scalability_analysis}
+
+\textcolor{red}{\sout{To assess the system's capacity for larger deployments, we evaluate scalability from three perspectives: theoretical node limit under LoRa constraints, channel capacity enabled by CRT parallel transmission, and gateway saturation in the blockchain layer.}}
+\textcolor{red}{\sout{The maximum number of sensor nodes that can transmit within a given reporting window is determined by the available airtime, the number of parallel communication channels, and the effective transmission time per node:}}
+\paragraph{Theoretical node limit.} $N_{\max} = C \cdot W / T_{\text{eff}}$ (Eq.~\ref{eq:scalability_general}). With $C=3$, $W=60{,}000$\,ms, $T_{\text{eff}}^{\text{CRT}}=372$\,ms:
+\begin{equation}
+N_{\max} = \frac{C \cdot W}{T_{\text{effective}}}
+\label{eq:scalability_general}
+\end{equation}
+\textcolor{red}{\sout{where is the number of parallel LoRa channels, the airtime window (ms), and the total airtime per complete reading from one node. Using the parameters from Table (, ms, ms for three sequential CRT packets), the theoretical capacity is}}
+\begin{equation}
+N_{\max}^{\text{CRT}} = \frac{3 \times 60\,000}{372} \approx 484 \text{ nodes};
+\label{eq:node_limit}
+\end{equation}
+\textcolor{blue}{raw ($T_{\text{eff}}=247$\,ms): $N_{\max}^{\text{raw}}=728$. CRT trades node capacity for packet throughput; the 50-node deployment uses 10.3\% of capacity.}
+
+\textcolor{red}{\sout{For raw transmission ( ms), the capacity is nodes. Under this corrected model, CRT does not increase node capacity; instead it increases packet throughput while using more packets per reading. The 50‑node field deployment represents of the CRT bound (), confirming substantial headroom for scaling to larger farms without fundamental architectural changes.}}
+\textcolor{red}{\sout{The SX1302 LoRa concentrator supports up to eight parallel demodulation paths. Our implementation uses three channels for residue traffic, but the hardware can accommodate up to eight, allowing further scalability if more moduli or higher data rates are required. The key gain is packet-level throughput (shorter packet airtime), not reduced per-node total transmission time.}}
+\textcolor{red}{\sout{While the LoRa layer can theoretically support about 484 CRT full readings per minute, the blockchain layer introduces another constraint. Throughput scaling tests (Section ) show that the Raft ordering service saturates at approximately TPS, while a single gateway can generate up to TPS. With the current four‑gateway configuration, the aggregate submission rate ( TPS) far exceeds the orderer capacity, making the ordering service the bottleneck. However, for the target farm size (50 nodes, 48 readings/day), the required throughput is only TPS well below saturation. For larger deployments, the system can scale by:}}
+\textcolor{red}{\sout{The architecture exhibits excellent scalability: the LoRa‑mesh network can accommodate about 484 CRT full readings per minute, while CRT improves packet-level channel utilisation, and the blockchain layer, while currently bottlenecked by the orderer, remains adequate for medium‑scale farms and offers clear upgrade paths. The field deployment at of theoretical CRT node capacity demonstrates that the system is not merely a proof‑of‑concept but a robust foundation for future expansion.}}
+\textcolor{blue}{The SX1302 uses 3 of its 8 demodulation paths; the gain is packet-level throughput, not per-node airtime. The Raft orderer saturates at 85\,TPS; the 50-node deployment requires only 0.67\,TPS.}
+
+\subsubsection{Scalability Projection: Latency vs. Node Count}
+\label{subsubsec:scalability_projection}
+
+\textcolor{red}{\sout{To further illustrate the system's scalability, we project the expected average network latency as the number of sensor nodes increases from 50 to 2000, encompassing both the unsaturated and saturated regimes. The projection assumes the same LoRa parameters as the field deployment (Table ) and that nodes transmit at 30‑minute intervals, which corresponds to an offered load of packets per second.}}
+\textcolor{red}{\sout{When the total number of nodes is below the theoretical capacity , the channel accommodates all packets without queuing. Under packet-level analysis, average latency remains at the per-packet airtime ( ,ms for CRT residues).}}
+\textcolor{red}{\sout{Once the number of nodes exceeds the theoretical capacity, the channel becomes saturated. In this regime, packets wait in a queue before transmission. Using a packet-level M/D/1 model (Poisson arrivals, deterministic packet service time ), the average waiting time is:}}
+\textcolor{blue}{Below $N=484$, latency is constant at 124\,ms; above saturation, packets queue. Using M/D/1 (Poisson arrivals, deterministic service $T_{\text{packet}}$), mean waiting time is:}
+
+\begin{equation}
+W_q = \frac{\rho}{2(1-\rho)} \cdot T_{\text{packet}}
+\label{eq:latency_model}
+\end{equation}
+
+where $\rho = \frac{kN \cdot T_{\text{packet}}}{C \cdot W}$ is channel utilisation. For CRT ($k=3$), $\rho = \frac{3N \cdot 124}{3\cdot60,000}=\frac{N}{484}$, so saturation begins at $N=484$. The total average latency is $L = T_{\text{packet}} + W_q$.
+
+\textcolor{red}{\sout{Figure shows the projected latency for both CRT and raw transmission. For , CRT latency is constant at the per-packet airtime (124 ,ms). Beyond this point, latency increases due to queuing. Raw transmission remains unsaturated up to , then also degrades rapidly.}}
+\textcolor{blue}{Figure~\ref{fig:scalability_latency_full} shows projected latency: CRT constant at 124\,ms below 484 nodes, then queuing degrades rapidly; raw saturates at 728 nodes.}
+
+\begin{figure}[!htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.9\columnwidth,
+    height=7cm,
+    xlabel={Number of Sensor Nodes},
+    ylabel={Average Latency (ms)},
+    xmin=0, xmax=2000,
+    ymin=0, ymax=1000,
+    xtick={0,500,1000,1500,2000},
+    ytick={0,200,400,600,800,1000},
+    grid=both,
+    grid style={dotted, gray!50},
+    legend style={
+        at={(0.98,0.98)},
+        anchor=north east,
+        font=\small,
+        draw=black!20,
+        cells={anchor=west}
+    },
+    ticklabel style={font=\small},
+    label style={font=\small},
+    title={Projected Latency Scaling Including Saturation}
+]
+% CRT latency (constant then increasing)
+\addplot[blue, thick, mark=none] coordinates {
+    (0,124)
+    (484,124)
+    (600,155)
+    (700,190)
+    (800,235)
+    (900,295)
+    (1000,380)
+    (1100,500)
+};
+\addlegendentry{CRT transmission}
+
+% Raw transmission latency (constant then increasing)
+\addplot[red, dashed, thick, mark=none] coordinates {
+    (0,247)
+    (728,247)
+    (800,320)
+    (900,420)
+    (1000,550)
+    (1200,850)
+    (1400,1200)
+};
+\addlegendentry{Raw transmission}
+
+% Vertical line at CRT capacity
+\draw[green!50!black, dotted, thick] (axis cs:484,0) -- (axis cs:484,1000);
+\node[anchor=south, font=\tiny, rotate=90, green!50!black] at (axis cs:484,800) {CRT capacity (484)};
+
+% Vertical line at raw capacity
+\draw[orange!50!black, dotted, thick] (axis cs:728,0) -- (axis cs:728,1000);
+\node[anchor=south, font=\tiny, rotate=90, orange!50!black] at (axis cs:728,600) {Raw capacity (728)};
+
+\end{axis}
+\end{tikzpicture}
+\caption{Projected average latency vs.\ node count. CRT saturates at 484 nodes (3 packets/reading); raw at 728. Below saturation, latency equals per-packet airtime; above, M/D/1 queuing degrades rapidly. Vertical lines mark theoretical capacities.}
+\label{fig:scalability_latency_full}
+\end{figure}
+
+\textcolor{red}{\sout{For the target deployment size of 50 nodes, the system operates below saturation, using about 10.3 of the CRT full-reading capacity. If the farm were expanded toward 500 nodes, the LoRa layer would approach saturation under the current reporting assumptions, motivating scheduling and channel-expansion strategies. Should node counts approach the theoretical limit, several mitigation strategies exist:}}
+\textcolor{red}{\sout{Thus, the architecture not only meets current requirements but also offers predictable, graceful degradation and clear scaling paths for larger‑scale deployments.}}
+\textcolor{red}{\sout{To contextualize the scalability benefits of CRT‑based parallel transmission, we compare its projected latency against that of raw transmission and two conventional compression algorithms: Huffman coding and LZW. The comparison blends theoretical projections with empirical measurements from the 61‑day field deployment, validating the model and demonstrating CRT's practical advantages.}}
+\textcolor{red}{\sout{For each method, the effective per-packet airtime is taken from Table :}}
+\textcolor{red}{\sout{The theoretical capacity for each method is given by with channels and ms per reporting window (see Section ). For , latency is constant at ; beyond saturation, latency rises according to the M/D/1 queuing model (Equation ()).}}
+\textcolor{red}{\sout{During the 61‑day trial with 50 sensor nodes, the average transmission latency for CRT was measured at ms, exactly matching the theoretical value. This confirms that at low node counts (well below saturation), the system behaves as predicted and no queuing delays occur. The measured point is indicated in Figure as a solid blue circle, lying precisely on the theoretical CRT curve.}}
+\textcolor{blue}{The 50-node deployment uses $\approx10.3\%$ of CRT capacity. Per-packet airtimes (CRT 124\,ms, LZW 135\,ms, Huffman 152\,ms, raw 247\,ms) yield $N_{\max}$ of 484, 1333, 1184, and 728 nodes; the 61-day measured CRT latency (Figure~\ref{fig:scalability_comparison}) confirms model accuracy within 10.4\%.}
+
+\begin{figure}[!htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.95\columnwidth,
+    height=8cm,
+    xlabel={Number of Sensor Nodes},
+    ylabel={Average Latency (ms)},
+    xmin=0, xmax=2000,
+    ymin=0, ymax=1200,
+    xtick={0,484,728,1184,1333,2000},
+    ytick={0,200,400,600,800,1000,1200},
+    grid=both,
+    grid style={dotted, gray!50},
+    legend style={
+        at={(0.5,1.08)},
+        anchor=south,
+        legend columns=3,
+        font=\footnotesize,
+        draw=none,
+        fill=none,
+        cells={anchor=west},
+        /tikz/every even column/.append style={column sep=0.25cm}
+    },
+    ticklabel style={font=\small},
+    label style={font=\small},
+    title={}
+]
+% CRT
+\addplot[blue, thick, mark=none] coordinates {
+    (0,124)
+    (484,124)
+    (600,155)
+    (700,190)
+    (800,235)
+    (900,295)
+    (1000,380)
+    (1100,500)
+};
+\addlegendentry{CRT (theoretical)}
+% Measured CRT point (50 nodes)
+\addplot[blue, only marks, mark=*, mark size=2.5pt] coordinates {(50,124)};
+\addlegendentry{CRT measured (50 nodes)}
+
+% LZW
+\addplot[orange, thick, mark=none] coordinates {
+    (0,135)
+    (1333,135)
+    (1400,180)
+    (1500,230)
+    (1600,300)
+    (1700,390)
+    (1800,510)
+    (1900,670)
+    (2000,860)
+};
+\addlegendentry{LZW (135 ms)}
+
+% Huffman
+\addplot[green!70!black, thick, mark=none] coordinates {
+    (0,152)
+    (1184,152)
+    (1250,190)
+    (1350,255)
+    (1450,340)
+    (1550,455)
+    (1650,610)
+    (1750,820)
+    (1850,1080)
+    (1950,1200)
+};
+\addlegendentry{Huffman (152 ms)}
+
+% Raw
+\addplot[red, thick, mark=none] coordinates {
+    (0,247)
+    (728,247)
+    (800,320)
+    (900,460)
+    (1000,640)
+    (1100,860)
+    (1200,1120)
+    (1250,1200)
+};
+\addlegendentry{Raw (247 ms)}
+
+% Capacity markers
+\draw[blue!50, dotted, thick] (axis cs:484,0) -- (axis cs:484,1200);
+\draw[orange!50, dotted, thick] (axis cs:1333,0) -- (axis cs:1333,1200);
+\draw[green!50, dotted, thick] (axis cs:1184,0) -- (axis cs:1184,1200);
+\draw[red!50, dotted, thick] (axis cs:728,0) -- (axis cs:728,1200);
+
+\end{axis}
+\end{tikzpicture}
+\par\vspace{0.3em}
+{\footnotesize\emph{Capacity markers:} CRT 484 nodes; raw 728 nodes; Huffman 1,184 nodes; LZW 1,333 nodes. The blue marker shows the measured CRT latency at 50 nodes.}
+\caption{Projected average latency versus node count for CRT, raw transmission, Huffman, and LZW.}
+\label{fig:scalability_comparison}
+\end{figure}
+
+\textcolor{red}{\sout{The figure illustrates the capacity of each method in terms of node count. CRT supports 484 nodes, which is 66 of raw’s 728 nodes. However, the key benefit of CRT is the 50 reduction in per‑packet airtime, which halves the channel occupancy per packet and doubles the packet throughput. Compression methods (Huffman, LZW) provide modest improvements over raw but cannot match CRT because they still transmit sequentially---they only reduce packet size, not the fundamental sequential bottleneck. Their higher leads to earlier saturation and steeper latency curves. Although LZW achieves a higher compression ratio than CRT, its sequential nature results in longer effective latency per reading and higher EDP, as shown in Section . This allows the system to handle higher data rates or more frequent reporting without increasing congestion.}}
+\textcolor{red}{\sout{For the current deployment of 50 nodes, all methods remain below saturation. The close agreement between measured and theoretical CRT latency at 50 nodes validates the corrected model and confirms stable operation with practical headroom under the present reporting schedule.}}
+\textcolor{red}{\sout{The queuing model assumes that transmissions are uniformly distributed over the reporting window and that channel access is fair. In practice, the LoRa MAC layer (ALOHA‑based) may introduce additional variability due to random access collisions, but the relative ordering of the curves remains valid. The theoretical capacities represent upper bounds; real deployments may achieve slightly lower values due to protocol overhead, occasional retransmissions, and environmental interference. Nevertheless, CRT provides strong packet-level efficiency and deterministic reconstruction in theory and measurement, supporting robust operation for agricultural IoT networks when reporting cadence and packet budgets are co-designed.}}
+\textcolor{blue}{CRT’s 50\% per-packet airtime reduction doubles packet throughput despite lower node capacity (484 vs.\ raw’s 728); Huffman/LZW reduce only packet size, not sequential bottlenecks. At 50 nodes all methods remain sub-saturation; measured CRT latency agrees with theory within 10.4\%.}
+
+\subsubsection{Strong and Weak Scaling Analysis}
+\label{subsubsec:scaling_analysis}
+
+\textcolor{red}{\sout{To evaluate the parallel efficiency of the gateway cluster as a distributed computing system, we apply strong and weak scaling models using the number of gateways as the processor count. The workload is defined as the sustained transaction throughput (TPS) processed by the blockchain layer. Measurements are taken from Table and Section .}}
+\textcolor{red}{\sout{Strong scaling fixes the total workload and measures how execution time decreases as more processors are added. Here we fix the offered load at TPS (the maximum throughput achievable with one gateway). The execution time is inversely proportional to throughput: . Speedup and efficiency are defined as:}}
+\textcolor{blue}{Using gateways as processors $p$ and TPS as workload (Table~\ref{tab:blockchain_detailed}), strong scaling ($W=63$ TPS fixed):}
+\begin{equation}
+S_{\text{strong}}(p) = \frac{\text{throughput}(p)}{\text{throughput}(1)}, \quad E_{\text{strong}}(p) = \frac{S_{\text{strong}}(p)}{p}.
+\end{equation}
+\textcolor{red}{\sout{Using the measured throughput values:}}
+\textcolor{red}{\sout{we obtain:}}
+\textcolor{red}{\sout{S strong (2) = 85/63 = 1.35, E strong (2) = 1.35/2 = 0.675,}}
+\textcolor{red}{\sout{S strong (4) = 85/63 = 1.35, E strong (4) = 1.35/4 = 0.338.}}
+\textcolor{red}{\sout{The efficiency drop beyond reflects the Raft ordering service bottleneck: adding more gateways does not increase throughput once the orderer saturates at TPS. This behavior is characteristic of a system with a shared serial resource (the orderer) and aligns with Amdahl's law predictions.}}
+\textcolor{red}{\sout{Weak scaling increases both the number of processors and the workload proportionally, keeping the work per processor constant. We define the per‑gateway offered load as TPS (the maximum a single gateway can generate). For gateways, the total offered load is TPS. The ideal throughput would be TPS; the actual throughput is limited by the orderer capacity TPS. The weak scaling efficiency is:}}
+\textcolor{red}{\sout{E weak (p) = = ,}}
+\textcolor{red}{\sout{where is the execution time for one gateway with workload , and is the execution time for gateways with total workload . Using the measured throughput values:}}
+\textcolor{red}{\sout{p=1: actual = 63, ; E weak = 63/(163) = 1.00,}}
+\textcolor{red}{\sout{p=2: actual = 85, ; E weak = 85/(263) = 0.675,}}
+\textcolor{red}{\sout{p=4: actual = 85, ; E weak = 85/(463) = 0.337.}}
+\textcolor{red}{\sout{As long as the aggregate offered load remains below the orderer capacity TPS, weak scaling efficiency remains high. For , so efficiency is . At , the offered load TPS exceeds capacity, causing saturation and efficiency drop. This confirms that the orderer is the primary scalability bottleneck in the current configuration. Future scaling can be achieved by partitioning the network into multiple channels or deploying a more powerful ordering service.}}
+\textcolor{red}{\sout{This analysis formalizes the cluster's distributed computing characteristics and provides quantitative metrics for scalability, complementing the earlier node‑level capacity projections.}}
+\textcolor{blue}{Throughput: 63 TPS ($p=1$), 85 TPS ($p=2,4$, orderer-saturated): $S_{\text{strong}}(2)=1.35$ ($E=0.675$), $S_{\text{strong}}(4)=1.35$ ($E=0.338$). The flat speedup beyond $p=2$ reflects Raft orderer saturation (Amdahl bottleneck). Weak scaling efficiency $E_{\text{weak}}(p)=\text{throughput}(p)/(p\times63)$ is 1.0 at $p=1$, dropping to 0.675 ($p=2$) and 0.34 ($p=4$). Future scaling requires channel partitioning or a higher-capacity ordering service.}
+
+\subsubsection{Fault Tolerance and Stress Testing}
+\label{subsubsec:fault_tolerance}
+
+\textcolor{red}{\sout{To validate system robustness under adverse conditions representative of real-world agricultural deployments, we conducted controlled stress tests over a 7‑day period. Tests included simulated packet loss, gateway shutdown events, and Raft consensus leader failure. Table summarizes the results.}}
+\textcolor{blue}{Table~\ref{tab:fault-tolerance} summarizes 7-day controlled stress tests (packet loss, gateway shutdown, leader failure).}
+
+\begin{table}[htbp]
+\centering
+\caption{Fault tolerance and recovery metrics (n=50 trials per test)}
+\label{tab:fault-tolerance}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{p{2.0cm}p{2.5cm}p{1.8cm}p{2.2cm}}
+\toprule
+\textbf{Test Scenario} & \textbf{Condition} & \textbf{Result} & \textbf{Notes} \\
+\midrule
+Packet loss simulation  & 10\% random loss   & 99.8\% recovery  & 2 packets unrecoverable \\
+                        & 20\% random loss   & 99.2\% recovery  & 8 packets unrecoverable \\
+                        & 30\% random loss   & 97.6\% recovery  & 24 packets unrecoverable \\
+                        & 33\% structured loss & 100\% recovery & One complete residue lost \\
+\midrule
+Gateway failure         & Single gateway offline (4 h)   & 0\% data loss & Traffic auto-rerouted via mesh \\
+                        & Dual gateway offline (2 h)      & 100\% data retained & Local buffering at nodes \\
+                        & Full gateway recovery sync        & 3.7 min avg & Range: 2.1–6.4 min \\
+\midrule
+Raft consensus failure  & Leader node shutdown (sudden)    & 8.2 s avg recovery & Std dev: 2.1 s, n=20 \\
+                        & Leader node graceful shutdown    & 4.6 s avg recovery & Std dev: 1.3 s, n=20 \\
+                        & Minority partition (2 of 3 nodes) & 0 forks & 12 min partition test \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection{Synthetic Load Test at Elevated Node Density}
+\label{subsubsec:load_test}
+
+\textcolor{blue}{A Python script simulated CRT node traffic at 100, 200, 300, and 484 nodes on the deployed gateway cluster (three 8-byte residue packets per 60-s window per node; 10 min per test; 50-tx warm-up discarded). Table~\ref{tab:load_test} compares measured results against M/D/1 predictions.}
+
+\begin{table}[htbp]
+\centering
+\caption{Synthetic load test results vs M/D/1 model predictions}
+\label{tab:load_test}
+\footnotesize
+\begin{tabular}{r c c c c c c}
+\toprule
+\textbf{Nodes} & \textbf{$\rho$} & \textbf{Predicted} & \textbf{Measured} & \textbf{Delivery} & \textbf{CPU} & \textbf{TPS} \\
+ & & \textbf{Latency (ms)} & \textbf{Latency (ms)} & \textbf{Rate (\%)} & \textbf{Util. (\%)} & \\
+\midrule
+100  & 0.207 & 140 & 146 & 98.2 & 67 & 62 \\
+200  & 0.413 & 168 & 185 & 96.4 & 100 & 25 \\
+300  & 0.620 & 225 & 249 & 93.6 & 100 & 25 \\
+484  & 1.000 & $\infty$ (sat.) & 577 & 88.3 & 100 & 25 \\
+50*  & 0.103   & 131     & 124     & 95.8   & 38      & 63      \\
+\bottomrule
+\end{tabular}
+\vspace{2pt}
+\raggedright\footnotesize *Field-measured result from 61-day deployment (Table~\ref{tab:system-performance}).
+\end{table}
+
+\textcolor{blue}{Measured latency agrees with M/D/1 within 10.4\% for $N \leq 300$. Delivery falls below 95\% at $N=300$ due to ALOHA multi-residue loss; gateway CPU saturates at $N=200$, making the RPi4B blockchain layer—not the radio—the practical scaling ceiling.}
+
+\subsubsection{Crash Faults and Byzantine Fault Considerations}
+\label{subsubsec:byzantine}
+
+\textcolor{red}{\sout{The Raft consensus protocol employed in our Hyperledger Fabric deployment provides crash‑fault tolerance (CFT), meaning it can tolerate up to nodes failing by stopping (crash), but it does not tolerate arbitrary (Byzantine) behavior such as malicious data injection or collusion . This is a deliberate design choice: in a permissioned agricultural network where all participants (gateways, administrators, sensors) are cryptographically identified and authorized via X.509 certificates, the primary threat is node compromise rather than fully Byzantine adversaries. The use of Ed25519 signatures on all sensor data and TPM‑backed key storage on gateways (Section ) further raises the bar against impersonation and tampering.}}
+\textcolor{red}{\sout{Nevertheless, a Byzantine adversary that gains control of a node could potentially disrupt consensus, e.g., by sending conflicting messages or equivocating. However, such attacks are mitigated by the permissioned setting: the Certificate Authority can revoke compromised credentials (Section ) and the mesh network's self‑healing capability limits the blast radius. We therefore consider the crash‑fault model sufficient for the target deployment. Future extensions requiring stronger Byzantine resilience could adopt protocols such as PBFT or HotStuff , at the cost of increased communication overhead and complexity. Hyperledger Fabric itself offers experimental Byzantine fault‑tolerant ordering services (e.g., BFT‑SMaRt ) for deployments where such guarantees are essential.}}
+\textcolor{red}{\sout{With the 3‑moduli CRT configuration described in Section , the system exhibits inherent error resilience. The mathematical property of CRT guarantees:}}
+\textcolor{blue}{Raft provides CFT for $f = \lfloor (n-1)/2 \rfloor$ stopped nodes \cite{ongaro2014raft}; Byzantine tolerance is not required in this permissioned network (X.509, Ed25519, TPM-backed keys, CRL revocation); PBFT/HotStuff \cite{castro1999practical,yin2019hotstuff} are future work. CRT reconstructs perfectly from any $k-1$ residues (Eq.~\ref{eq:crt_recovery}); at 30\% loss, 2.4\% of readings lost $\geq$2 residues.}
+\begin{equation}
+\text{Recovery with exactly } k-1 \text{ complete residues} = 100\%
+\label{eq:crt_recovery}
+\end{equation}
+
+\textcolor{red}{\sout{Empirical testing confirmed that when a single complete residue packet was lost (representing 33 packet loss for one of the three parallel transmissions), perfect reconstruction was always achieved. However, when packet loss was randomized across all residues, some packets experienced corruption of multiple residues, leading to the recovery rates shown in Table . At 30 random loss, 24 of 1000 test packets (2.4 ) lost two or more residues and could not be reconstructed. This aligns with theoretical expectations and highlights that CRT's error resilience is strongest when packet loss affects entire residue channels rather than being randomly distributed.}}
+\textcolor{red}{\sout{The Raft consensus protocol, configured with a 2–4 s election timeout as described in Section , demonstrated robust fault tolerance. Upon sudden shutdown of the leader node (simulating power failure or crash), the system initiated a new leader election with a measured average recovery time of 8.2 s (std dev: 2.1 s). The minimum observed recovery was 5.3 s, and the maximum was 13.7 s during a period of elevated network latency.}}
+\textcolor{red}{\sout{During graceful shutdown with proper leader resignation, recovery time decreased to 4.6 s average (std dev: 1.3 s), as the remaining nodes did not need to wait for election timeout expiration. During the recovery window, write transactions were queued locally at gateways (up to 500 transactions) and successfully committed once the new leader was established. No blockchain forks or ledger inconsistencies were observed across any of the 20 leader failure trials.}}
+\textcolor{red}{\sout{The BATMAN-adv mesh network automatically rerouted traffic within 3–8 s when individual gateways were taken offline, resulting in zero data loss during single‑gateway failures. During dual‑gateway failures affecting an entire zone, sensor nodes buffered data locally in 64 KB circular buffers capable of storing approximately 4 hours of readings (480 samples). Upon gateway restoration, nodes synchronized automatically, with full catch‑up requiring an average of 3.7 min (range: 2.1–6.4 min) depending on the backlog size.}}
+\textcolor{red}{\sout{These results demonstrate that the system possesses the robustness necessary for distributed agricultural deployments. The 97.6 recovery rate at 30 packet loss a severe condition exceeding typical field measurements confirms that CRT provides meaningful resilience even under extreme interference. The 8.2 s leader recovery time is well within the 30‑minute sensor reporting interval, ensuring no data loss during consensus disruptions. Combined with the mesh network's self‑healing capability, these fault tolerance mechanisms ensure continuous operation and data integrity under the adverse conditions common in remote agricultural environments.}}
+\paragraph{Leader and gateway failure.}
+\textcolor{blue}{Sudden leader shutdown: mean 8.2\,s election (std 2.1\,s; includes log replication $\approx$1.5\,s + CouchDB catch-up $\approx$2\,s); graceful: 4.6\,s; 500 queued transactions committed without forks. Single-gateway failure: BATMAN-adv rerouted in 3--8\,s (zero data loss); dual failure: 64\,KB circular buffers ($\approx$4\,h) with 3.7\,min catch-up; Day-47 sandstorm (12\,min): 7 transactions synchronized in 2.8\,min, no inconsistencies.}
+
+\subsection{Application Outcomes: Agricultural Impact}
+\label{subsec:agricultural_impact}
+
+\textcolor{red}{\sout{The combined CRT-blockchain system translated technical innovations into agricultural benefits. Figure shows the correlation between system reliability and water savings.}}
+\textcolor{blue}{Figure~\ref{fig:water_savings_correlation} shows the correlation between system reliability and water savings.}
+
+\begin{figure*}[!htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    width=\linewidth,
+    height=7.2cm,
+    xlabel={System Reliability (\%)},
+    ylabel={Water Savings (\%)},
+    xmin=98.5, xmax=99.8,
+    ymin=15,   ymax=26,
+    xtick={98.6,98.8,99.0,99.2,99.4,99.6,99.8},
+    ytick={15,17,19,21,23,25},
+    grid=both,
+    grid style={dotted, gray!25},
+    legend style={
+        at={(0.5,1.08)}, anchor=south,
+        legend columns=4,
+        font=\footnotesize,
+        draw=none,
+        fill=none,
+        cells={anchor=west},
+        /tikz/every even column/.append style={column sep=0.25cm}
+    },
+    ticklabel style={font=\small},
+    label style={font=\small},
+]
+\addplot [draw=none, fill=green!10] coordinates {(99.2,15) (99.7,15) (99.7,26) (99.2,26)} \closedcycle;
+\addplot [gray, dashed, thick] coordinates {(99.0,15) (99.0,26)};
+\addplot[only marks, mark=square*, mark size=2.6pt] coordinates {
+    (98.8,22.5) (98.9,22.8) (99.0,23.0) (99.1,23.1) (99.2,23.5)
+    (99.3,23.8) (99.4,24.0) (99.5,24.2) (99.6,23.9) (99.7,24.1) };
+\addplot[thick, domain=98.5:99.8, samples=200] {1.88485*x - 163.581};
+\addplot[only marks, mark=triangle*, mark size=3.0pt] coordinates {
+    (98.8,18.2) (98.9,18.5) (99.0,18.7) (99.1,18.8) (99.2,19.1)
+    (99.3,19.4) (99.4,19.6) (99.5,19.7) (99.6,19.5) (99.7,19.8) };
+\addplot[thick, domain=98.5:99.8, samples=200] {1.76364*x - 155.911};
+\legend{Tomato (n=10), Tomato fit, Pepper (n=10), Pepper fit}
+\end{axis}
+\end{tikzpicture}
+\par\vspace{0.25em}
+\textcolor{blue}{{\footnotesize\emph{Note:} the dashed vertical line marks the 99.0\% reliability threshold; the shaded region indicates reliability above 99.2\%.}}
+\caption{Water savings versus system reliability for tomato and pepper crops.}
+\label{fig:water_savings_correlation}
+\end{figure*}
+
+\textcolor{red}{\sout{Strong positive correlations (R² = 0.87 for tomatoes, 0.85 for peppers) indicate that higher reliability enables more precise irrigation. The CRT-blockchain integration was particularly effective during the critical fruit development stage (Weeks 4–6).}}
+\textcolor{red}{\sout{Table quantifies the contribution of each technical component to agricultural outcomes.}}
+\textcolor{blue}{Strong positive correlations (R² = 0.87 tomatoes, 0.85 peppers) confirm higher reliability enables more precise irrigation; the CRT-blockchain integration was particularly effective during Weeks 4–6 (fruit development). Table~\ref{tab:integration_benefits} quantifies each component's contribution.}
+
+\begin{table}[htbp]
+\centering
+\caption{Contribution of technical components to agricultural outcomes}
+\label{tab:integration_benefits}
+\footnotesize
+\begin{tabular}{@{}lccc@{}}
+\toprule
+\textbf{Component} & \textbf{Water} & \textbf{Labor} & \textbf{Quality} \\
+ & \textbf{Savings} & \textbf{Reduction} & \textbf{Improvement} \\
+\midrule
+CRT Compression & 8-12\% & 15-20\% & 5-8\% \\
+Blockchain Verification & 5-8\% & 25-30\% & 10-15\% \\
+Edge Computing & 3-5\% & 20-25\% & 3-5\% \\
+Smart Contracts & 7-10\% & 10-15\% & 7-10\% \\
+\textbf{Combined System} & \textbf{23.8\%} & \textbf{72\%} & \textbf{25-38\%} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection{Water Use Efficiency}
+The system reduced total water use by 23.8\% for tomatoes (525 m³ → 400 m³) and 19.4\% for peppers (310 m³ → 250 m³). Water use efficiency improved by 31.3\% (tomatoes) and 23.8\% (peppers). Detailed monthly breakdowns are given in Tables~\ref{tab:tomato-water-detailed} and~\ref{tab:pepper-water-detailed}.
+
+\begin{table}[htbp]
+\centering
+\caption{Tomato water usage analysis (0.5 ha plot)}
+\label{tab:tomato-water-detailed}
+\scriptsize
+\begin{tabularx}{\columnwidth}{p{2.2cm} *{4}{>{\centering\arraybackslash}X}}
+\toprule
+\textbf{Parameter} & \textbf{Traditional} & \textbf{B-IoT} & \textbf{Savings} & \textbf{Significance} \\
+\midrule
+\textbf{August Usage} \\
+Water Volume (m³) & 280 & 215 & 23.2\% & $p<0.001$ \\
+Daily Average (m³/day) & 9.03 & 6.94 & 23.2\% & $p<0.001$ \\
+Irrigation Events & 28 & 19 & 32.1\% & $p<0.01$ \\
+\midrule
+\textbf{September Usage} \\
+Water Volume (m³) & 245 & 185 & 24.5\% & $p<0.001$ \\
+Daily Average (m³/day) & 8.17 & 6.17 & 24.5\% & $p<0.001$ \\
+Irrigation Events & 25 & 17 & 32.0\% & $p<0.01$ \\
+\midrule
+\textbf{Total Period} \\
+Total Water (m³) & 525 & 400 & 23.8\% & $p<0.001$ \\
+Water Use Efficiency (kg/m³) & 4.76 & 6.25 & +31.3\% & $p<0.001$ \\
+Cost Savings (USD) & -- & -- & \$112.50 & -- \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Pepper water usage analysis (0.3 ha plot)}
+\label{tab:pepper-water-detailed}
+\scriptsize
+\begin{tabularx}{\columnwidth}{p{2.2cm} *{4}{>{\centering\arraybackslash}X}}
+\toprule
+\textbf{Parameter} & \textbf{Traditional} & \textbf{B-IoT} & \textbf{Savings} & \textbf{Significance} \\
+\midrule
+\textbf{August Usage} \\
+Water Volume (m³) & 165 & 135 & 18.2\% & $p<0.01$ \\
+Daily Average (m³/day) & 5.32 & 4.35 & 18.2\% & $p<0.01$ \\
+Irrigation Events & 25 & 18 & 28.0\% & $p<0.05$ \\
+\midrule
+\textbf{September Usage} \\
+Water Volume (m³) & 145 & 115 & 20.7\% & $p<0.01$ \\
+Daily Average (m³/day) & 4.83 & 3.83 & 20.7\% & $p<0.01$ \\
+Irrigation Events & 22 & 16 & 27.3\% & $p<0.05$ \\
+\midrule
+\textbf{Total Period} \\
+Total Water (m³) & 310 & 250 & 19.4\% & $p<0.01$ \\
+Water Use Efficiency (kg/m³) & 3.23 & 4.00 & +23.8\% & $p<0.01$ \\
+Cost Savings (USD) & -- & -- & \$54.00 & -- \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\textcolor{red}{\sout{Crop-specific irrigation strategies maintaining soil tension between –30 and –35 kPa for tomatoes and 80 field capacity for peppers optimized yield and quality while reducing disease incidence.}}
+\subsubsection{Labor Efficiency}
+Automation reduced labor requirements by 72\%, from 15.0 to 4.2 h/hectare/week (Table~\ref{tab:labor-detailed}), addressing critical labor shortages in Mediterranean agriculture.
+
+\begin{table}[htbp]
+\centering
+\caption{Labor efficiency analysis (hours/hectare/week)}
+\label{tab:labor-detailed}
+\scriptsize
+\begin{tabularx}{\columnwidth}{p{2.5cm} *{4}{>{\centering\arraybackslash}X}}
+\toprule
+\textbf{Task Category} & \textbf{Traditional} & \textbf{B-IoT} & \textbf{Reduction} & \textbf{Cost Savings} \\
+\midrule
+\textbf{Monitoring} \\
+Soil Moisture & 3.5 & 0.2 & 94.3\% & \$49.50 \\
+Weather Data & 1.5 & 0.1 & 93.3\% & \$21.00 \\
+Crop Health & 3.0 & 0.7 & 76.7\% & \$34.50 \\
+\midrule
+\textbf{Irrigation} \\
+System Operation & 2.5 & 0.2 & 92.0\% & \$34.50 \\
+Maintenance & 2.0 & 0.3 & 85.0\% & \$25.50 \\
+Troubleshooting & 0.5 & 0.0 & 100.0\% & \$7.50 \\
+\midrule
+\textbf{Data Management} \\
+Record Keeping & 1.5 & 0.1 & 93.3\% & \$21.00 \\
+Reporting & 0.5 & 0.1 & 80.0\% & \$6.00 \\
+Certification & 0.5 & 0.1 & 80.0\% & \$6.00 \\
+\midrule
+\textbf{Total} & \textbf{15.0} & \textbf{4.2} & \textbf{72.0\%} & \textbf{\$162.00} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsubsection{Tomato Yield and Quality}
+\textcolor{red}{\sout{Tomato yields remained stable at 50 t/ha while marketable yield increased by 2.5 t/ha (Table ). Quality improvements included enhanced fruit firmness (13.2 N vs 12.5 N), higher soluble solids (5.1°Brix vs 4.8°Brix), and reduced physiological disorders. The reduction in fruit cracking (from 8.2 to 3.5 ) and blossom end rot (from 5.1 to 2.2 ) directly shifted fruit from unmarketable to marketable grade, explaining the 2.5 t/ha increase in marketable yield without changing total biomass production. These results demonstrate that precision irrigation maintains overall yield while improving quality and marketable proportion.}}
+\textcolor{blue}{Tomato yields remained stable at 50 t/ha while marketable yield increased by 2.5 t/ha (Table~\ref{tab:tomato-yield}), with improved fruit firmness (13.2 vs 12.5 N) and soluble solids (5.1 vs 4.8°Brix). Fruit cracking fell from 8.2\% to 3.5\% and blossom end rot from 5.1\% to 2.2\%, shifting fruit to marketable grade.}
+
+\begin{table}[htbp]
+\centering
+\caption{Tomato yield and quality parameters}
+\label{tab:tomato-yield}
+\scriptsize
+\begin{tabularx}{\columnwidth}{p{2.5cm} *{3}{>{\centering\arraybackslash}X}}
+\toprule
+\textbf{Parameter} & \textbf{Traditional} & \textbf{B-IoT} & \textbf{Significance} \\
+\midrule
+Total Yield (t/ha) & 50.0 & 50.0 & $p>0.05$ \\
+Marketable Yield (t/ha) & 42.5 & 45.0 & $p<0.05$ \\
+Water Use Efficiency (kg/m³) & 4.76 & 6.25 & $p<0.001$ \\
+Fruit Firmness (N) & 12.5 & 13.2 & $p<0.05$ \\
+Soluble Solids (°Brix) & 4.8 & 5.1 & $p<0.05$ \\
+Fruit Cracking & 8.2\% & 3.5\% & $p<0.01$ \\
+Blossom End Rot & 5.1\% & 2.2\% & $p<0.05$ \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsubsection{Pepper Yield and Quality}
+\textcolor{red}{\sout{Pepper production showed maintained total yields (33.3 t/ha) while marketable yield increased by 2.4 t/ha (Table ). Quality parameters improved, with reductions in sunscald (3.2 vs 6.5 ) and blossom end rot (1.8 vs 4.2 ). These reductions explain the rise in marketable yield: previously non‑marketable fruit became marketable due to better irrigation management, increasing the marketable fraction without altering total biomass.}}
+\textcolor{blue}{Pepper total yield held at 33.3 t/ha while marketable yield rose 2.4 t/ha (Table~\ref{tab:pepper-yield}); sunscald fell from 6.5\% to 3.2\% and blossom end rot from 4.2\% to 1.8\%. No significant change in fruit morphology ($p > 0.05$, ANOVA) confirmed the gain reflects grade recovery, not size change.}
+
+\begin{table}[htbp]
+\centering
+\caption{Pepper yield and quality parameters}
+\label{tab:pepper-yield}
+\scriptsize
+\begin{tabularx}{\columnwidth}{p{2.5cm} *{3}{>{\centering\arraybackslash}X}}
+\toprule
+\textbf{Parameter} & \textbf{Traditional} & \textbf{B-IoT} & \textbf{Significance} \\
+\midrule
+Total Yield (t/ha) & 33.3 & 33.3 & $p>0.05$ \\
+Marketable Yield (t/ha) & 28.3 & 30.7 & $p<0.05$ \\
+Water Use Efficiency (kg/m³) & 3.23 & 4.00 & $p<0.01$ \\
+Fruit Length (cm) & 12.5 & 13.2 & $p<0.05$ \\
+Fruit Diameter (cm) & 6.8 & 7.1 & $p<0.05$ \\
+Sunscald Incidence & 6.5\% & 3.2\% & $p<0.05$ \\
+Blossom End Rot & 4.2\% & 1.8\% & $p<0.05$ \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{Discussion of Results}
+\label{subsec:objectives_achievement}
+
+\textcolor{red}{\sout{The field study successfully achieved all four research objectives outlined in Section . The CRT-based compression system achieved 33 reduction in transmission size with mathematically perfect reconstruction, directly addressing IoT memory and energy constraints. This compression reduced transmission time from 247 ms to 124 ms per packet and extended battery life to 34 days, validating the effectiveness of CRT for agricultural IoT applications. Furthermore, the integration of edge computing with Hyperledger Fabric blockchain demonstrated 99.4 reliability and 1.7-second latency, meeting real-time irrigation requirements while providing verifiable data integrity. The hybrid LoRa-BATMAN-adv network architecture provided resilience during connectivity disruptions, with gateways maintaining local operations and synchronizing when connections were restored.}}
+\textcolor{blue}{All four objectives were met: CRT achieved 49.8\% per-packet airtime reduction (2$\times$ gateway packet capacity); Fabric sustained 99.4\% integrity and 1.7\,s latency (below 2\,s SLO); 31.2-day battery validated duty-cycle design; 61-day field results confirmed 23.8\%/19.4\% water savings, 72\% labor reduction, and 146\% ROI. RPi4B gateways achieved 320\,ms smart contract execution, comparing favourably with cloud alternatives (3--5\,s \cite{liu2019edge}); BATMAN-adv mesh sustained local operation during partitions. The 19--24\% water savings address Mediterranean scarcity \cite{benali2024tunisiaWater,adeloye2021tunisiaAgro,brooks2019precisionWater,williams2022savings}; the 72\% labor reduction addresses regional farm-labor shortages \cite{miller2020climateImpact}. CRT trades compression ratio for parallelism (EDP 74.3\% below raw); each RPi 4B gateway draws $\approx$5\,W (four total $\approx$20\,W, mains/solar-powered; Table~\ref{tab:resource-utilization}), which does not affect sensor lifetime but dominates full lifecycle energy.}
+
+\textcolor{red}{\sout{Comprehensive field results showed 23.8 water savings for tomatoes and 19.4 for peppers, with 72 labor reduction through automation. Crop yields were maintained while quality parameters improved, demonstrating the practical agricultural benefits of the integrated system. These results confirm that precision irrigation can achieve significant resource savings without compromising productivity, addressing critical challenges in arid region agriculture.}}
+\subsection{Limitations}
+\label{subsec:limitations}
+
+\textcolor{red}{\sout{The detailed architectural implementation and economic analysis provide practical guidance for similar deployments. The favorable economic metrics, including 146 ROI and 0.69-year payback period, demonstrate viability for medium-scale farms in arid regions. These findings suggest that blockchain-IoT integration can deliver both technical and economic benefits, supporting adoption in water-scarce agricultural environments.}}
+\textcolor{red}{\sout{The integration of Chinese Remainder Theorem compression with blockchain verification created a synergistic system that addressed both efficiency and integrity requirements. CRT compression reduced transmission payloads by 33 , directly addressing IoT memory constraints and enabling more frequent data collection within energy budgets. This richer dataset, when verified through blockchain smart contracts, enabled more precise irrigation decisions. The mathematical perfection of CRT reconstruction (0 error) was crucial for maintaining data integrity throughout the compression-verification-decision pipeline. As shown in Figure , the system maintained end-to-end integrity while achieving efficiency gains, demonstrating that mathematical compression and cryptographic verification can coexist without significant performance degradation.}}
+\textcolor{red}{\sout{The edge computing implementation on Raspberry Pi 4B devices provided sufficient computational resources for both CRT reconstruction and blockchain operations. The average smart contract execution time of 320 ms, combined with 1.7-second end-to-end latency, met real-time irrigation requirements while maintaining verifiable integrity, representing a significant advancement over cloud-dependent systems that typically exhibit 3-5 second latencies in similar agricultural applications . The BATMAN-adv mesh network proved particularly valuable during network partitions, allowing gateways to continue local operations and synchronize with the blockchain when connectivity was restored, a critical resilience feature for agricultural environments with unreliable network infrastructure.}}
+\textcolor{red}{\sout{The demonstrated 19-24 water savings address critical water scarcity challenges in Mediterranean agriculture, where irrigation accounts for approximately 80 of water withdrawals . These savings align with reported ranges for precision irrigation systems while providing the additional benefits of verifiable data integrity through blockchain implementation . The 72 labor reduction is particularly significant given increasing labor shortages in Mediterranean agriculture , enabling farm operators to focus on higher-value activities while maintaining comprehensive operational data.}}
+\textcolor{red}{\sout{The Chinese Remainder Theorem implementation achieved 20.3 reduction in per-packet transmission size while maintaining mathematical guarantees for perfect reconstruction . Hyperledger Fabric demonstrated adequate performance for agricultural monitoring applications, with 63 TPS throughput and 320 ms transaction times sufficient for 50-node networks, confirming previous findings on blockchain suitability for farm data management . The hybrid LoRa-mesh architecture achieved 99.4 reliability under field conditions, exceeding typical LoRaWAN performance in agricultural environments , with BATMAN-adv mesh networking providing essential redundancy for gateway communication.}}
+\textcolor{red}{\sout{The CRT approach deliberately trades off compression ratio for parallelism. While LZW compresses data more aggressively, CRT's ability to transmit residues in parallel reduces both latency and energy, as quantified by the EDP metric. This design choice aligns with the system's primary goals: low‑latency actuation and energy efficiency at the node.}}
+\textcolor{blue}{This work is based on a single 50-node, 2-hectare deployment at $\approx$10\% CRT node capacity. \textbf{High node density:} synthetic load tests at 100--484 nodes (Section~\ref{subsubsec:load_test}) validate M/D/1 behavior, but physical deployment at near-saturation densities was not feasible; a multi-farm study is needed. \textbf{Multi-gateway failures:} systematic concurrent failure of $\geq$2 gateways was not evaluated (one sandstorm event showed buffering held). \textbf{Generalisability:} coverage is one site (Sfax) and two crop types; extreme humidity or temperature climates may affect LoRa link budget and solar harvesting.}
+
+\subsection{Security Considerations}
+\label{subsec:security}
+
+\textcolor{red}{\sout{Although security is not the primary focus of this work, the implemented architecture incorporates several mechanisms that mitigate common IoT and blockchain threats. Replay attacks, where an attacker retransmits valid data to deceive the system , are prevented by including unique timestamps and sequence numbers in each signed sensor transmission; gateways verify freshness before acceptance. Packet injection attacks, which aim to introduce malicious data into the network , are thwarted by Ed25519 digital signatures on all data frames any packet without a valid signature corresponding to a registered sensor node is discarded at the gateway. Key compromise, a critical vulnerability in IoT deployments , is addressed through hardware‑secured storage: each Raspberry Pi gateway includes a TPM2.0 module that protects private keys, and sensor node keys are stored in the ESP32's One‑Time Programmable (OTP) memory. Additionally, the Hyperledger Fabric certificate authority enables rapid revocation of compromised identities via Certificate Revocation List (CRL) updates, a mechanism essential for maintaining trust in permissioned blockchain networks . These layered defences ensure data authenticity and integrity even under adversarial conditions typical of remote agricultural deployments.}}
+\textcolor{blue}{The architecture incorporates layered mitigations: replay attacks \cite{yavari2020blockchain} are prevented by gateway-verified timestamps and sequence numbers; packet injection \cite{kalaimathi2025injection} by Ed25519 signatures; key compromise \cite{kumari2025rom} by TPM2.0 on gateways and ESP32 OTP (blockchain-integrated PUF \cite{pufblockchain2025} is future work); inter-gateway AES-128 uses the dynamic threat-modelling approach of \cite{aesembedded2025} (42\% overhead reduction); identity revocation is via Fabric CA CRL \cite{lu2022revocation, hyperledger2022msp}.}
+
+\subsection{CAP-Theoretic Interpretation of the Edge-Blockchain Architecture}
+\label{subsec:cap_theorem}
+
+\textcolor{red}{\sout{The CAP theorem (Brewer's conjecture) states that a distributed data system can provide at most two of three guarantees: consistency, availability, and partition tolerance . Our architecture embodies a layered tradeoff that separates concerns between the blockchain consensus layer and the edge actuation layer, each prioritizing different CAP properties.}}
+\textcolor{red}{\sout{The Hyperledger Fabric deployment with Raft consensus prioritizes consistency and partition tolerance over availability. During a network partition that isolates some gateways from the orderer cluster, the minority partition ceases to accept new write transactions (e.g., sensor data submissions) to prevent ledger forks. This temporary unavailability ensures that the ledger remains consistent and that any subsequent reads reflect a single, globally ordered history. As measured in Section , leader re‑election incurs an 8.2 s window during which write availability is suspended—a deliberate sacrifice to preserve consistency. This CP choice is appropriate for the immutable audit trail required for certification and traceability, where consistency cannot be compromised.}}
+\textcolor{red}{\sout{In contrast, the local irrigation control logic running on each gateway is designed to favor availability and partition tolerance over strict consistency. Gateways maintain sufficient local state (current soil moisture readings, crop‑specific thresholds, actuator status) to continue making time‑critical irrigation decisions even when isolated from the blockchain network or from other gateways. During a partition, a gateway may temporarily operate on slightly stale data, but this AP design ensures that irrigation events continue without interruption—a requirement for crop health. Once connectivity is restored, the gateway synchronizes its local logs with the blockchain, reconciling any discrepancies. This layered approach aligns with the observation that different system components can exhibit different CAP tradeoffs, a strategy sometimes called “CAP‐aware design” .}}
+\textcolor{red}{\sout{By separating the CP‑bound blockchain layer from the AP‑bound actuation layer, the overall system achieves both strong eventual consistency for auditability and high availability for real‑time control. This hybrid design exemplifies how distributed systems principles can be applied to edge‑IoT architectures, where diverse requirements must be satisfied within a single unified framework.}}
+\textcolor{blue}{Under the CAP theorem \cite{brewer2000towards, gilbert2002brewer}, the \textbf{blockchain layer (CP)} uses Raft for consistency, suspending writes during partitions (8.2\,s unavailability window), while the \textbf{edge actuation layer (AP)} caches local state to continue irrigation and reconciles on reconnection — a “CAP-aware design” \cite{pritchett2008base} decoupling real-time control from consensus.}
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+\textcolor{red}{\sout{This research has successfully developed and validated an integrated blockchain-IoT-edge computing framework with CRT optimization for precision irrigation in arid Mediterranean agriculture, directly addressing the critical research gaps identified in current precision agriculture systems. The work achieved its four primary objectives through a 61-day field deployment in Sfax, Tunisia, providing the first comprehensive validation of such an integrated system for tomato and pepper cultivation.}}
+\textcolor{blue}{This paper has developed and validated an integrated blockchain-IoT-edge framework with CRT optimization for precision irrigation in arid Mediterranean agriculture through a 61-day deployment in Sfax, Tunisia. CRT-based residue decomposition transforms sequential LoRa communication into a parallel transmission problem with measurable speedup and predictable M/D/1 scaling behavior; permissioned ledger verification with sub-2-second end-to-end latency is feasible on ARM64 edge hardware; and a layered CAP-aware architecture reconciles integrity guarantees with real-time actuation.}
+
+\textcolor{red}{\sout{First, the CRT-based compression system addressed the gap in energy- and memory-efficient transmission for low-cost IoT hardware, achieving 33 reduction in transmission size with mathematically perfect reconstruction (0 error) while reducing node transmission energy by 48.8 and extending battery life to 34 days. (Gateway and blockchain energy were not included in this analysis, as they are not part of the energy‑constrained sensor node budget.) This mathematically precise, low-overhead technique guarantees perfect data reconstruction without the computational overhead or accuracy compromises associated with conventional compression algorithms. Second, the edge blockchain integration addressed the absence of verifiable data integrity for real-time sensor streams, demonstrating 99.4 reliability and 1.7 second latency while enabling automated irrigation decisions with cryptographic guarantees a significant advancement over existing systems that lack edge-resident blockchain verification.}}
+\textcolor{blue}{The four objectives were met: (1) CRT achieved 33\% size reduction and 49.8\% per-packet airtime reduction (124 vs.\ 247\,ms), raising gateway packet throughput by 1.99$\times$; (2) Fabric demonstrated 99.4\% reliability and 1.7\,s latency on ARM64 — below the 2\,s SLO; (3) the hybrid LoRa-BATMAN-adv architecture sustained 99.4\% reliability with self-healing under partitions; (4) field validation confirmed 23.8\% water savings (tomatoes), 19.4\% (peppers), 72\% labor reduction, and 146\% ROI.}
+
+\textcolor{red}{\sout{Third, the hybrid LoRa-BATMAN-adv network architecture addressed the gap in reliable, scalable communication across large farms, achieving 99.4 reliability under field conditions without dependency on continuous internet connectivity. This architecture provides the resilience necessary for remote agricultural environments where network infrastructure is unreliable. Fourth, comprehensive field validation quantified significant agricultural benefits: 23.8 water savings for tomatoes, 19.4 for peppers, and 72 labor reduction while maintaining crop yields and improving quality parameters. The economic analysis demonstrated system viability with 146 ROI and 0.69-year payback period for medium scale farms, addressing the need for field validated studies that quantify both agronomic and economic benefits.}}
+\textcolor{red}{\sout{The integrated framework represents a significant advancement over conventional precision agriculture systems by simultaneously addressing the intertwined challenges of data integrity, communication reliability, energy efficiency, and scalability issues previously treated in isolation. The seamless integration of edge intelligence with blockchain enables trust while meeting real-time latency requirements, filling the critical gap in multi-stakeholder agricultural environments.}}
+\textcolor{red}{\sout{Future work should focus on scaling the system to larger farm operations, integrating additional sensor types (nutrient levels, pest detection), and developing simplified deployment tools for smallholder farmers. The framework also shows potential for extension to other water-intensive crops in arid regions and integration with emerging technologies like AI-based predictive analytics and satellite remote sensing for enhanced decision support.}}
+\textcolor{red}{\sout{From a distributed computing perspective, this work demonstrates that CRT-based residue decomposition can transform sequential low-power communication into a parallel transmission problem with measurable speedup and predictable scaling behavior. It further establishes that permissioned ledger verification with sub-2-second end-to-end latency is feasible on ARM64 edge hardware, and that a layered CAP-aware architecture can reconcile integrity guarantees with real-time actuation requirements in heterogeneous edge clusters. The framework's energy-delay product and strong/weak scaling analyses provide quantitative evidence that number-theoretic methods can meaningfully enhance the performance of resource-constrained distributed systems. By validating these contributions in a demanding real-world deployment, we offer a blueprint for integrating parallel communication, edge consensus, and resilient actuation that extends beyond agriculture to any large-scale IoT environment requiring verifiable, low-latency control at the network edge.}}
+\textcolor{blue}{Future work should scale to larger deployments, integrate additional sensor types, and develop simplified tools for smallholder farmers; UAV-mounted nodes for aerial relay are a promising extension \cite{secure2024drone}. The framework generalizes to any large-scale IoT environment requiring verifiable, low-latency edge control.}
+
+\section*{Acknowledgments}
+
+We thank the participating farmers in Sfax for their collaboration and practical insights. We gratefully acknowledge the technical support provided by the University of Sfax IoT Research Group and the funding received from the MIRET (Mobility for Innovation and Research in Emerging Technologies) Intra-Africa Program. We also appreciate the data contributions from the Tunisia Meteorological Institute and the National Water Resources Authority.
+
+\section*{Declaration of Generative AI and AI-assisted technologies in the writing process}
+
+\textcolor{blue}{During the preparation of this work, the author(s) used Grammarly for grammar and language polishing. The author(s) reviewed and edited the output as needed and take full responsibility for the content of the published article.}
+
+\section*{Data and Code availability}
+
+\textcolor{blue}{The 61-day trace dataset, source code, deployment scripts, and chaincode are publicly available at \url{https://github.com/forchag/blockchain-fet}.}
+
+\FloatBarrier
+\bibliography{references}
+
+\end{document}

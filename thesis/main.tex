@@ -1,0 +1,151 @@
+% =============================================================================
+% PhD Thesis, University of Buea, Faculty of Engineering and Technology
+%
+% A Distributed Blockchain-Based Approach to Protect Identity, Integrity and
+% Privacy in Agricultural Data Processing
+%
+% Build:  ./build.sh            (full: tex -> pdf -> docx, versioned)
+%         ./build.sh --quick    (pdf only, no bibliography pass)
+%
+% Formatting follows report/UB-PhD-Thesis-Format-Spec.md
+% =============================================================================
+
+\documentclass[12pt,a4paper,oneside]{book}
+
+\usepackage{ubthesis}
+
+% -----------------------------------------------------------------------------
+% Abbreviations.
+%
+% KEY POINT: the "abbreviations" option plus \printunsrtglossary means the
+% List of Abbreviations is produced by LaTeX alone. No makeglossaries, no
+% makeindex, no -shell-escape. One pdflatex pass gives you Chapter One AND the
+% List of Abbreviations together. See README.md §3.
+%
+%   nomain      : only the abbreviations glossary, not a main glossary
+%   nopostdot   : no trailing full stop after each entry
+%   nogroupskip : no blank line between letter groups (matches UB exemplars)
+% -----------------------------------------------------------------------------
+\usepackage[abbreviations,nomain,nopostdot,nogroupskip]{glossaries-extra}
+\setabbreviationstyle[abbreviation]{long-short}
+% \printunsrtglossary normally opens with its own \glossarysection, which
+% (with hyperref loaded) runs \glsclearpage, i.e. a bare \clearpage, followed
+% by book.cls's empty-titled \chapter* heading band before a single glossary
+% entry is typeset. Combined with \ubfrontheading already printing "LIST OF
+% ABBREVIATIONS" first, that left the heading alone on one page and every
+% entry starting on the next. \ubfrontheading already supplies the heading
+% and the PDF bookmark, so the internal one is disabled outright.
+\renewcommand*{\glossarysection}[2][]{}
+\input{front/abbreviations}
+
+% -----------------------------------------------------------------------------
+% Bibliography, numeric style, IEEE-like, matching the source article
+% -----------------------------------------------------------------------------
+\usepackage[
+  backend=biber,
+  style=numeric-comp,
+  sorting=none,
+  maxbibnames=6,
+  minbibnames=3,
+  giveninits=true,
+  doi=true, isbn=false, url=false
+]{biblatex}
+\addbibresource{references.bib}
+
+\begin{document}
+
+% =============================================================================
+% FRONT MATTER, lowercase roman numerals, top right
+% =============================================================================
+\frontmatter
+\pagestyle{fancy}
+
+\input{front/titlepage}
+
+\clearpage\thispagestyle{empty}\mbox{}   % blank page (guide §3.2.2)
+\clearpage
+\input{front/titlepage}                  % repeat of title page (guide §3.2.3)
+
+\setcounter{page}{2}                     % dedication is ii
+
+% Preliminary-page running text (dedication, acknowledgements, abstract) is
+% set at 1.5 lines rather than the body's full double spacing; see
+% \ubonehalfspace in ubthesis.sty. Certification keeps its own singlespace,
+% it is a fixed-position form rather than running prose.
+\begin{ubonehalfspace}\input{front/dedication}\end{ubonehalfspace}
+\input{front/certification}
+\begin{ubonehalfspace}\input{front/acknowledgements}\end{ubonehalfspace}
+\begin{ubonehalfspace}\input{front/abstract}\end{ubonehalfspace}
+
+\ubfrontheading{Table of Contents}
+\begin{ubonehalfspace}
+\renewcommand{\contentsname}{}
+\tableofcontents
+\end{ubonehalfspace}
+\clearpage
+
+\ubfrontheading{List of Figures}
+\begin{ubonehalfspace}
+\renewcommand{\listfigurename}{}
+\listoffigures
+\end{ubonehalfspace}
+\clearpage
+
+\ubfrontheading{List of Tables}
+\begin{ubonehalfspace}
+\renewcommand{\listtablename}{}
+\listoftables
+\end{ubonehalfspace}
+\clearpage
+
+% -----------------------------------------------------------------------------
+% LIST OF ABBREVIATIONS
+% Printed from front/abbreviations.tex with zero external tooling.
+% -----------------------------------------------------------------------------
+\ubfrontheading{List of Abbreviations}
+\begin{ubonehalfspace}
+\printunsrtglossary[type=abbreviations,title={},style=long]
+\end{ubonehalfspace}
+\clearpage
+
+% =============================================================================
+% MAIN MATTER, arabic numerals restarting at 1
+% =============================================================================
+\mainmatter
+
+\include{chapters/chapter1_introduction}
+\include{chapters/chapter2_literature}
+% \include{chapters/chapter3_methods}
+% \include{chapters/chapter4_results}
+% \include{chapters/chapter5_discussion}
+
+% =============================================================================
+% BACK MATTER
+% =============================================================================
+\backmatter
+
+\ubfrontheading{References}
+\begin{singlespace}
+\printbibliography[heading=none]
+\end{singlespace}
+
+% \appendix resets the chapter counter and switches \thechapter to A, B, C.
+% \thechapterword (ubthesis.sty) normally spells the chapter counter as a
+% word ("ONE", "TWO", ...) for CHAPTER headings; redefined here so appendix
+% headings read "APPENDIX A", "APPENDIX B" instead of a spelled-out number.
+%
+% book.cls's own \chapter macro only prints/numbers the "CHAPTER N" (here
+% "APPENDIX A") label when \if@mainmatter is true; \backmatter above just set
+% it false, so without this the appendix chapter heads would silently print
+% no label at all and the ToC entries would come out unnumbered. Restoring
+% it here is safe: \backmatter's only other effect is a \clearpage already
+% taken.
+\appendix
+\renewcommand{\thechapterword}{\thechapter}
+\makeatletter\global\@mainmattertrue\makeatother
+\include{back/appendices}
+% \include{back/author_index}     % PhD only, guide §4.1(c)
+% \include{back/subject_index}    % PhD only, guide §4.1(c)
+% \include{back/cv}               % PhD only, guide §4.1(d), max 2 pages
+
+\end{document}

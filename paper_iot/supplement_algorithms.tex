@@ -1,0 +1,100 @@
+\begin{widealg}
+\caption{Stage 3: sensor enrollment through the zone gateway}
+\label{alg:enroll}
+\small
+\begin{algorithmic}[1]
+\Require sensor $s$ with declared zone $z_s$, gateway $g$ with zone $z_g$
+\Ensure zone-bound certificate in RTC memory, private key written to eFuse
+\Statex \textbf{On the sensor:}
+\State $(sk, pk) \gets \textproc{Ed25519Keygen}()$
+\State $\textproc{EfuseWrite}(\textsc{Blk}3, sk)$
+  \algcomment{one-time programmable, survives reflash}
+\State $\mathit{csr} \gets \textproc{MakeCSR}(pk, z_s)$;\;
+       $\sigma \gets \textproc{Sign}_{sk}(\mathit{csr})$
+\State send $(\mathit{csr}, \sigma)$ to $g$ over LoRa
+\Statex \textbf{On the gateway:}
+\If{$z_s \neq z_g$}
+  \State \Return reject \algcomment{zone binding enforced at the RA}
+\EndIf
+\If{$\lnot\,\textproc{RateLimitOK}(\mathit{src})$}
+  \State \Return reject
+\EndIf
+\If{$\lnot\,\textproc{VerifySig}(\mathit{csr}, \sigma, pk)$}
+  \State \Return reject
+\EndIf
+\State $\mathit{cert} \gets \textproc{CAIssue}(\mathit{csr},
+        \textsc{San}{=}z_g, \textsc{NotAfter}{=}t{+}6\text{ months})$
+\State return $\mathit{cert}$ to $s$
+\Statex \textbf{On the sensor, each wake:}
+\State $\mathit{cert} \gets \textproc{RtcRead}()$
+\If{$\lnot\,\textproc{MagicOK}() \lor \lnot\,\textproc{CrcOK}(\mathit{cert})$}
+  \State restart enrollment \algcomment{never transmit under unverified identity}
+\EndIf
+\State $t \gets \textproc{GpsTime}()$;\;
+       \textbf{if} unavailable \textbf{then} $t \gets \textproc{NtpTime}()$
+\If{$t$ available $\land\; \mathit{cert}.\textsc{NotAfter} < t$}
+  \State restart enrollment
+\EndIf
+\end{algorithmic}
+\end{widealg}
+\begin{widealg}
+\caption{Residue encoding and two-of-three recovery}
+\label{alg:crt}
+\small
+\begin{algorithmic}[1]
+\Require reading $v$ with $0 \le v < M_2$, moduli
+  $m_1{=}97,\, m_2{=}101,\, m_3{=}103$;\;
+  $M_2 = \min_{i \neq j} m_i m_j = 97 \cdot 101 = 9\,797$
+\Ensure $v$ recovered at the gateway from any two received residues
+\Statex \textbf{Encode (sensor):}
+\For{$i \in \{1,2,3\}$}
+  \State $r_i \gets v \bmod m_i$ \algcomment{one byte each}
+  \State transmit packet $\langle i, r_i \rangle$ at reduced TX power
+\EndFor
+\Statex \textbf{Recover (gateway):}
+\State $S \gets$ set of successfully received $\langle i, r_i\rangle$
+\If{$|S| < 2$}
+  \State \Return $\bot$ \algcomment{unrecoverable, reading dropped}
+\EndIf
+\State pick any two indices $\{j,k\} \subseteq S$;\;
+       $M' \gets m_j m_k$
+  \algcomment{$v < M_2 \le M'$ guarantees uniqueness}
+\State $M_j \gets M'/m_j$;\; $M_k \gets M'/m_k$
+\State $y_j \gets M_j^{-1} \bmod m_j$;\;
+       $y_k \gets M_k^{-1} \bmod m_k$
+\State $v' \gets (r_j M_j y_j + r_k M_k y_k) \bmod M'$
+\If{$|S| = 3$}
+  \State verify $v' \equiv r_l \pmod{m_l}$ for the third index $l$
+  \algcomment{integrity cross-check}
+\EndIf
+\State \Return $v'$
+\end{algorithmic}
+\end{widealg}
+\begin{widealg}
+\caption{Revocation publication and cache invalidation}
+\label{alg:revoke}
+\small
+\begin{algorithmic}[1]
+\Require certificate $C$ to revoke, reason $\rho$, peer set $P$,
+  gateway set $G$
+\Ensure $C$ rejected network-wide; staleness bounded and recorded
+\State $\textproc{CAAppendCRL}(C, \rho)$;\;
+       $\mathit{crl} \gets \textproc{PublishCRL}()$
+  \algcomment{measured: \RevPubMean\,s mean}
+\State $\textproc{LedgerWrite}(\textsc{RevocationEvent}, C, \rho, now)$
+\ForAll{$p \in P$}
+  \State gossip $\mathit{crl}$ to $p$
+  \algcomment{measured: \RevGossipMean\,min to reach all peers}
+\EndFor
+\ForAll{$g \in G$}
+  \If{$\textproc{Reachable}(g)$}
+    \State $\textproc{InvalidatePolicyCache}(g)$
+    \algcomment{staleness bounded by gossip, not by TTL}
+  \Else
+    \State mark event \textsc{Delayed}; retry on reconnect
+    \algcomment{observed for \RevDelayedPct\% of events}
+    \State staleness bounded by scheduled CRL refresh, up to 24\,h
+  \EndIf
+\EndFor
+\end{algorithmic}
+\end{widealg}

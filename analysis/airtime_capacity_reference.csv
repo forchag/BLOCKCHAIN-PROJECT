@@ -1,0 +1,9 @@
+metric,value
+raw_34b_ms,246.784000
+residue_8b_ms,123.904000
+per_packet_reduction_percent,49.792531
+packet_service_ratio,1.991736
+raw_records_per_60s_3ch,729.382780
+crt_packets_per_60s_3ch,1452.737603
+crt_packets_per_five_quantity_record,15
+crt_five_quantity_records_per_60s_3ch,96.849174

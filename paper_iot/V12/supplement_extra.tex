@@ -1,0 +1,355 @@
+\section{Related-system comparison}
+\label{sec:supp_related}
+
+Table~\ref{tab:related} summarises how the systems discussed in the main
+article's Related work section are evaluated, extending the discussion
+there to the full comparison set.
+
+\begin{widetab}
+\caption{Evaluation methods reported by representative blockchain access-control studies.}
+\label{tab:related}
+\small
+\begin{tabularx}{\tblwidth}{@{}l l c c c C@{}}
+\toprule
+System & Platform & Setting & Duration & Auth.\ span timed & Revocation measured \\
+\midrule
+FairAccess \cite{ouaddah2016fairaccess}   & Bitcoin  & Analytical & N/A   & No & No \\
+BlendCAC \cite{xu2018blendcac}            & Ethereum & Testbed    & Hours & No & No \\
+Novo \cite{novo2018blockchain}            & Ethereum & Testbed    & Hours & No & No \\
+Shih et al.\ \cite{shih2022iiot}          & Fabric   & Lab (ARM64)& Days  & No & No \\
+Zaidi et al.\ \cite{zaidi2023fabrication} & Fabric   & Simulation & N/A   & No & No \\
+Pajooh et al.\ \cite{pajooh2022fabric_iot}& Fabric   & Lab        & N/R   & No & No \\
+Putra et al.\ \cite{putra2021trust}       & Fabric   & Lab        & N/R   & No & No \\
+Usman et al.\ \cite{usman2024blockchain}  & Fabric   & Cloud      & Days  & No & No \\
+Gonz\'{a}lez et al.\ \cite{gonzalez2023marketplace} & Fabric & Lab & N/R & No & No \\
+Idrissi \& Palmieri \cite{idrissi2024blockchain_jsupercomput}
+                                          & Fabric   & Lab (ARM)  & N/R   & Partial & No \\
+Bandara et al.\ \cite{bandara2021modeling}& Fabric   & Simulation & N/A   & No & No \\
+\textbf{This work}                        & \textbf{Fabric} &
+  \textbf{Field} & \textbf{\DeployDays{} days} & \textbf{Yes} & \textbf{Yes} \\
+\bottomrule
+\end{tabularx}
+\end{widetab}
+
+\clearpage
+\section{Full permission matrix and protocol diagrams}
+\label{sec:supp_permissions}
+
+The main article's compact permission-difference table (``Access-control
+design'') gives only the rows that differ between the intended, deployed
+and corrected policies. Table~\ref{tab:permissions} is the complete
+effective-permission matrix for all seven roles, generated directly from
+the deployed chaincode (\texttt{roles.go}) rather than transcribed by
+hand, so it cannot silently drift from the code that was measured.
+
+\input{tables/tab_permissions}
+
+Figure~\ref{fig:enrollment} illustrates the three-stage cascading
+enrollment protocol whose pseudocode is Algorithm~S1, and
+Figure~\ref{fig:flow} places the access-control check inside Fabric's
+execute-order-validate pipeline, referenced from the main article's
+Implementation section.
+
+\begin{widefig}
+\centering
+\begin{tikzpicture}[
+    font=\footnotesize, >=Latex,
+    entity/.style={draw=black!55, rounded corners=3pt, minimum width=2.0cm,
+      minimum height=0.68cm, align=center, fill=white, line width=0.5pt},
+    band/.style={draw=none, rounded corners=3pt, minimum width=7.2cm,
+      minimum height=0.42cm, align=center, font=\scriptsize\bfseries},
+    steplbl/.style={font=\scriptsize, text=black!70},
+    a1/.style={->, line width=0.7pt, draw=blue!65!black},
+    a2/.style={->, line width=0.7pt, draw=green!50!black},
+    a3/.style={->, line width=0.7pt, draw=orange!75!black}
+]
+\node[band, fill=blue!10]   at (3.4,5.5) {Stage 1: bootstrap};
+\node[entity] (ca1) at (1.5,4.8) {CA};
+\node[entity] (ad1) at (5.3,4.8) {Admin};
+\draw[a1] ([yshift=3pt]ca1.east) -- node[above,steplbl]{cert, 2\,yr} ([yshift=3pt]ad1.west);
+\draw[a1] ([yshift=-5pt]ad1.west) -- node[below,steplbl]{CSR} ([yshift=-5pt]ca1.east);
+
+\node[band, fill=green!10]  at (3.4,3.7) {Stage 2: gateway registration};
+\node[entity] (ad2) at (1.5,3.0) {Admin};
+\node[entity] (gw2) at (5.3,3.0) {Gateway};
+\draw[a2] ([yshift=3pt]ad2.east) -- node[above,steplbl]{register} ([yshift=3pt]gw2.west);
+\draw[a2] ([yshift=-5pt]gw2.west) -- node[below,steplbl]{CSR, key in TPM} ([yshift=-5pt]ad2.east);
+
+\node[band, fill=orange!12] at (3.4,1.9) {Stage 3: sensor enrollment};
+\node[entity] (gw3) at (1.5,1.2) {Gateway};
+\node[entity] (sn3) at (5.3,1.2) {Sensor};
+\draw[a3] ([yshift=3pt]gw3.east) -- node[above,steplbl]{cert, 6\,mo} ([yshift=3pt]sn3.west);
+\draw[a3] ([yshift=-5pt]sn3.west) -- node[below,steplbl]{CSR, key in eFuse} ([yshift=-5pt]gw3.east);
+
+\node[align=left, font=\scriptsize, text=black!65, anchor=north west]
+  at (-0.2,0.55)
+  {Registration authority moves one tier further from the CA at each stage.\\
+   The sensor never runs a TLS handshake, and its private key is generated\\
+   on-device and never transmitted. It is not read-protected: see the main\\
+   article's ``Cascading enrollment'' section.};
+\end{tikzpicture}
+\caption{Three-stage cascading enrollment.}
+\label{fig:enrollment}
+\end{widefig}
+
+\begin{widefig}
+\centering
+\begin{tikzpicture}[
+    font=\footnotesize, >=Latex,
+    box/.style={draw, rounded corners=4pt, minimum width=3.6cm,
+      minimum height=0.75cm, align=center, line width=0.55pt,
+      fill=blue!8, draw=blue!45!black},
+    dec/.style={draw, diamond, aspect=2.6, align=center, inner sep=1pt,
+      fill=orange!10, draw=orange!55!black, font=\scriptsize,
+      line width=0.5pt},
+    ok/.style={draw, rounded corners=3pt, fill=green!12,
+      draw=green!45!black, minimum width=2.0cm, minimum height=0.68cm,
+      align=center, font=\scriptsize, line width=0.5pt},
+    no/.style={draw, rounded corners=3pt, fill=red!8, draw=red!50!black,
+      minimum width=2.0cm, minimum height=0.68cm, align=center,
+      font=\scriptsize, line width=0.5pt},
+    arr/.style={->, line width=0.6pt},
+    rarr/.style={->, line width=0.6pt, draw=red!55!black},
+    note/.style={draw, dashed, rounded corners=3pt, fill=yellow!8,
+      draw=gray!55, text width=2.9cm, align=left, font=\scriptsize,
+      inner sep=4pt}
+]
+\node[box] (sub) at (0,7.6)  {Client submits\\request + nonce};
+\node[box] (end) at (0,6.2)  {Endorsing peers\\execute chaincode};
+\node[dec] (pol) at (0,4.7)  {endorsement\\valid?};
+\node[box] (ord) at (0,3.2)  {Raft orderer\\batches and sequences};
+\node[box] (val) at (0,1.9)  {Peers validate\\and commit};
+\node[dec] (mvc) at (0,0.6)  {MVCC\\ok?};
+\node[ok]  (gr)  at (2.6,-0.6) {\textbf{GRANT}\\audit written};
+\node[no]  (di)  at (-2.6,-0.6){\textbf{DENY}\\invalidated};
+\node[no]  (rj)  at (-2.9,4.7) {\textbf{REJECT}\\signature or\\policy failure};
+
+\node[note] (n1) at (3.3,6.2)
+  {The access decision\\algorithm runs here.\\
+   Grant \emph{and} deny both\\
+   write an audit entry, so\\
+   both continue to ordering.\\
+   Only endorsement failure\\
+   stops here.};
+\node[note, fill=violet!6, text width=2.9cm] (n2) at (3.3,2.5)
+  {Both operation classes\\traverse these stages;\\end-to-end latency is\\measured across all of\\them together};
+
+\draw[dashed, gray!60, line width=0.4pt] (end.east) -- (n1.west);
+\draw[dashed, gray!60, line width=0.4pt] (ord.east) -- (n2.west);
+\draw[arr]  (sub) -- (end);
+\draw[arr]  (end) -- (pol);
+\draw[arr]  (pol) -- node[right,font=\scriptsize]{yes} (ord);
+\draw[rarr] (pol.west) -- node[above,font=\scriptsize]{no} (rj);
+\draw[arr]  (ord) -- (val);
+\draw[arr]  (val) -- (mvc);
+\draw[arr]  (mvc.east) -- node[above,font=\scriptsize]{valid} (gr.north);
+\draw[rarr] (mvc.west) -- node[above,font=\scriptsize]{stale} (di.north);
+\end{tikzpicture}
+\caption{Access control within the Fabric execute-order-validate transaction flow.}
+\label{fig:flow}
+\end{widefig}
+
+Algorithm~\ref{alg:decision} states the access-decision procedure the main
+article's Equation~(3) describes in full (moved here from the main text
+to save space; two of its properties are summarised in the main article's
+``Zone and temporal scoping'' section).
+
+\begin{widealg}
+\caption{Access decision (\texttt{CheckAccess})}
+\label{alg:decision}
+\small
+\begin{algorithmic}[1]
+\Require request $(u, \mathit{op}, \mathit{res}, t)$, caller certificate $C$
+\Ensure \textsc{Grant} or \textsc{Deny}. Every path writes an audit entry,
+  so every invocation mutates state and commits through ordering.
+\State $n \gets \textproc{Nonce}(\mathit{req})$
+\If{$\textproc{SeenBefore}(n)$}
+  \State $\textproc{Audit}(\textsc{Deny}, \textsc{ReplayDetected})$;\;
+         \Return \textsc{Deny}
+\EndIf
+\State $z_u \gets \textproc{ParseZoneASN1}(C)$
+  \algcomment{DER bytes, not PEM text}
+\If{$\textproc{OnCRL}(C)$}
+  \State $\textproc{Audit}(\textsc{Deny}, \textsc{CertRevoked})$;\;
+         \Return \textsc{Deny}
+\EndIf
+\State $A \gets \textproc{RoleAssignments}(u)$
+\State $R_{\text{act}} \gets \emptyset$
+\For{$a \in A$}
+  \If{$a.\mathit{ExpiresAt} < t$}
+    \State $\textproc{RevokeRole}(a)$
+      \algcomment{state-mutating: forces endorsement}
+  \Else
+    \State $R_{\text{act}} \gets R_{\text{act}} \cup \{a.\mathit{role}\}$
+  \EndIf
+\EndFor
+\If{$R_{\text{act}} = \emptyset$}
+  \State $\textproc{Audit}(\textsc{Deny}, \textsc{RoleInsufficient})$;\;
+         \Return \textsc{Deny}
+\EndIf
+\State $P \gets \bigcup_{r \in R_{\text{act}}}
+        \bigcup_{r' \preceq r} pa(r')$
+  \algcomment{inheritance closure, depth $\le 3$}
+\If{$(\mathit{op}, \mathit{res}) \notin P$}
+  \State $\textproc{Audit}(\textsc{Deny}, \textsc{OpNotPermitted})$;\;
+         \Return \textsc{Deny}
+\EndIf
+\State $z_r \gets \textproc{ZoneOf}(\mathit{res})$
+\If{$z_u \neq z_r \;\land\; \lnot\,\textproc{ValidCZT}(u, z_r, t)$}
+  \State $\textproc{Audit}(\textsc{Deny}, \textsc{ZoneMismatch})$;\;
+         \Return \textsc{Deny}
+\EndIf
+\State $\textproc{RecordNonce}(n)$;\;
+       $\textproc{Audit}(\textsc{Grant}, (\mathit{op}, \mathit{res}, z_r))$
+\State \Return \textsc{Grant}
+\end{algorithmic}
+\end{widealg}
+
+\clearpage
+\section{Experimental design detail}
+\label{sec:supp_design}
+
+These tables give the full experimental-design detail behind the main
+article's Measurement methodology section: the peer-scaling topology, the
+independent experimental unit used for every comparison in the article,
+and (in Section~\ref{sec:supp_results} below) the counterbalanced
+execution order.
+
+\begin{widetab}
+\caption{Topology and routing used for each peer-scaling configuration.}
+\label{tab:topology}
+\small
+\begin{tabularx}{\tblwidth}{@{}lX@{}}
+\toprule
+Parameter & Value \\
+\midrule
+Configured logical peers  & 4, 8, 16, 32 \\
+Physical hosts            & 4 (Raspberry Pi~4B, one per zone) \\
+Peers per host            & 1, 2, 4, 8 respectively \\
+Endorsement policy        & \texttt{OR('FarmMSP.member')}, one endorsement \\
+Endorsements required     & 1 per transaction, any peer \\
+Proposal selection        & Fabric Gateway service default (discovery-based);
+                            not application-controlled \\
+Load balancing            & Delegated to Gateway service discovery; the
+                            client issues one submission per transaction \\
+State database            & CouchDB 3.2, one instance per peer \\
+Block cut                 & \texttt{BatchTimeout} 2\,s, max 10 messages,
+                            512\,kB preferred size \\
+Orderer topology          & 3 Raft orderers, $f{=}1$, unchanged across rows \\
+CPU / memory allocation   & No cgroup limits set; peers above 4 share the
+                            host of the corresponding zone's deployed peer \\
+\bottomrule
+\end{tabularx}
+\end{widetab}
+
+\begin{widetab}
+\caption{Experimental unit used for each analysis in the main article.}
+\label{tab:units}
+\small
+\begin{tabularx}{\tblwidth}{@{}lX@{}}
+\toprule
+Analysis & Independent unit \\
+\midrule
+Throughput vs.\ concurrency &
+  Independent, interleaved benchmark run (5 per cell per arm) \\
+Access-control invariance across peer counts &
+  Independent run, 5 per configuration, counterbalanced order \\
+Peer-count latency comparison &
+  Independent run, 5 per configuration, counterbalanced order \\
+Operation-label diagnostic &
+  Deployment day (61 days) \\
+Revocation stage records &
+  Reported descriptively; stages do not resolve into independent episodes \\
+Security campaign &
+  Executed test corpus, not a random sample of attacks; no interval given \\
+\bottomrule
+\end{tabularx}
+\end{widetab}
+
+\clearpage
+\section{Additional results detail}
+\label{sec:supp_results}
+
+This section gives the tables and figures behind the main article's Results
+section that are not needed to follow the headline findings: the
+operation-class latency breakdown, the full throughput and peer-scaling
+latency tables (the main article keeps the figures), the peer-scaling
+execution order, the revocation lifecycle breakdown, the CRT residue
+recovery bounds, and the authorization-boundary denial-mechanism breakdown.
+
+\subsection{Latency by operation class}
+
+\input{tables/tab_latency_ops}
+
+\begin{widefig}
+\centering
+\begin{tikzpicture}
+\begin{axis}[paperplot,
+  width=\linewidth, height=5.8cm,
+  xlabel={End-to-end latency (ms)},
+  ylabel={Cumulative probability},
+  xmin=150, xmax=1600, ymin=0, ymax=1,
+  legend pos=south east]
+\addplot[blue!65!black] table[x=decision, y=p] {figdata/latency_cdf.dat};
+\addlegendentry{Policy evaluation}
+\addplot[red!65!black] table[x=write, y=p] {figdata/latency_cdf.dat};
+\addlegendentry{Sensor write}
+\end{axis}
+\end{tikzpicture}
+\caption{Empirical latency distributions for the two committed transaction classes.}
+\label{fig:cdf}
+\end{widefig}
+
+\subsection{Throughput}
+
+\input{tables/tab_throughput}
+
+\subsection{Peer-scaling latency and execution order}
+
+\input{tables/tab_scaling}
+
+\input{tables/tab_peerorder}
+
+\input{tables/tab_scalingruns}
+
+\subsection{Revocation lifecycle}
+
+\input{tables/tab_revocation}
+
+\begin{widefig}
+\centering
+\begin{tikzpicture}
+\begin{axis}[paperplot,
+  width=\linewidth, height=5.0cm,
+  xlabel={Gossip propagation to all peers (min)},
+  ylabel={Events},
+  ybar, bar width=8pt,
+  xmin=2.6, xmax=5.9, ymin=0]
+\addplot[fill=blue!30, draw=blue!60!black]
+  table[x=centre, y=count] {figdata/revocation_hist.dat};
+\end{axis}
+\end{tikzpicture}
+\caption{Gossip propagation across \RevEvents{} revocation-lifecycle events.}
+\label{fig:revocation}
+\end{widefig}
+
+\subsection{CRT residue recovery bounds}
+
+\begin{table}[t]
+\caption{Pairwise recovery bounds for the deployed residue moduli.}
+\label{tab:crtpairs}
+\small
+\begin{tabularx}{\columnwidth}{@{}lX@{}}
+\toprule
+Residues present (missing modulus) & Recovery bound \\
+\midrule
+97, 101 (missing 103) & $97\times 101 = 9\,797$ \\
+97, 103 (missing 101) & $97\times 103 = 9\,991$ \\
+101, 103 (missing 97) & $101\times 103 = 10\,403$ \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Authorization-boundary denial mechanisms}
+
+\input{tables/tab_security}

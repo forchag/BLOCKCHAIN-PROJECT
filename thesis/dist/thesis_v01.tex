@@ -1,0 +1,582 @@
+
+
+\documentclass[12pt,a4paper,oneside]{book}
+
+\usepackage{ubthesis}
+
+\usepackage[abbreviations,nomain,nopostdot,nogroupskip]{glossaries-extra}
+\setabbreviationstyle[abbreviation]{long-short}
+
+
+\newabbreviation{abac}{ABAC}{Attribute-Based Access Control}
+\newabbreviation{ack}{ACK}{Acknowledgement}
+\newabbreviation{adc}{ADC}{Analogue-to-Digital Converter}
+\newabbreviation{api}{API}{Application Programming Interface}
+\newabbreviation{arm64}{ARM64}{64-bit Advanced RISC Machine architecture}
+
+\newabbreviation{batman}{BATMAN-adv}{Better Approach To Mobile Ad-hoc Networking, advanced}
+\newabbreviation{ble}{BLE}{Bluetooth Low Energy}
+\newabbreviation{bft}{BFT}{Byzantine Fault Tolerance}
+
+\newabbreviation{ca}{CA}{Certificate Authority}
+\newabbreviation{cap}{CAP}{Consistency, Availability, Partition tolerance}
+\newabbreviation{cpu}{CPU}{Central Processing Unit}
+\newabbreviation{crt}{CRT}{Chinese Remainder Theorem}
+
+\newabbreviation{did}{DID}{Decentralised Identifier}
+\newabbreviation{dlt}{DLT}{Distributed Ledger Technology}
+\newabbreviation{dp}{DP}{Differential Privacy}
+
+\newabbreviation{edp}{EDP}{Energy-Delay Product}
+\newabbreviation{esp32}{ESP32}{Espressif 32-bit microcontroller with integrated Wi-Fi and Bluetooth}
+
+\newabbreviation{gdpr}{GDPR}{General Data Protection Regulation}
+\newabbreviation{gw}{GW}{Gateway}
+
+\newabbreviation{hlf}{HLF}{Hyperledger Fabric}
+\newabbreviation{hrbac}{HRBAC}{Hierarchical Role-Based Access Control}
+
+\newabbreviation{iot}{IoT}{Internet of Things}
+\newabbreviation{ipfs}{IPFS}{InterPlanetary File System}
+
+\newabbreviation{json}{JSON}{JavaScript Object Notation}
+
+\newabbreviation{lora}{LoRa}{Long Range (sub-GHz spread-spectrum radio modulation)}
+\newabbreviation{lorawan}{LoRaWAN}{Long Range Wide Area Network}
+\newabbreviation{lzw}{LZW}{Lempel-Ziv-Welch compression}
+
+\newabbreviation{mac}{MAC}{Medium Access Control}
+\newabbreviation{mcu}{MCU}{Microcontroller Unit}
+\newabbreviation{msp}{MSP}{Membership Service Provider}
+
+\newabbreviation{pbft}{PBFT}{Practical Byzantine Fault Tolerance}
+\newabbreviation{pki}{PKI}{Public Key Infrastructure}
+
+\newabbreviation{ram}{RAM}{Random Access Memory}
+\newabbreviation{rbac}{RBAC}{Role-Based Access Control}
+\newabbreviation{rf}{RF}{Radio Frequency}
+\newabbreviation{roi}{ROI}{Return on Investment}
+\newabbreviation{rpi}{RPi}{Raspberry Pi}
+\newabbreviation{rtc}{RTC}{Real-Time Clock}
+
+\newabbreviation{sf}{SF}{Spreading Factor}
+\newabbreviation{sha}{SHA}{Secure Hash Algorithm}
+\newabbreviation{slo}{SLO}{Service Level Objective}
+\newabbreviation{sss}{SSS}{Shamir Secret Sharing}
+
+\newabbreviation{tee}{TEE}{Trusted Execution Environment}
+\newabbreviation{tps}{TPS}{Transactions Per Second}
+\newabbreviation{tpm}{TPM}{Trusted Platform Module}
+
+\newabbreviation{zkp}{ZKP}{Zero-Knowledge Proof}
+ 
+\usepackage[
+  backend=biber,
+  style=numeric-comp,
+  sorting=none,
+  maxbibnames=6,
+  minbibnames=3,
+  giveninits=true,
+  doi=true, isbn=false, url=false
+]{biblatex}
+\addbibresource{references.bib}
+
+\begin{document}
+
+\frontmatter
+\pagestyle{fancy}
+
+\thispagestyle{empty}
+\begin{center}
+\begin{singlespace}
+
+{\fontsize{14}{17}\selectfont\bfseries UNIVERSITY OF BUEA}\\[0.4\baselineskip]
+{\fontsize{14}{17}\selectfont\bfseries FACULTY OF ENGINEERING AND TECHNOLOGY}\\[0.3\baselineskip]
+{\fontsize{14}{17}\selectfont\bfseries DEPARTMENT OF COMPUTER ENGINEERING}
+
+\vspace{2.5\baselineskip}
+
+{\fontsize{16}{19}\selectfont\bfseries
+A DISTRIBUTED BLOCKCHAIN-BASED APPROACH TO PROTECT IDENTITY,
+INTEGRITY AND PRIVACY IN AGRICULTURAL DATA PROCESSING}
+
+\vspace{2.5\baselineskip}
+
+{\fontsize{14}{17}\selectfont BY}\\[0.4\baselineskip]
+{\fontsize{14}{17}\selectfont\bfseries FORCHA GLEN BELOA}\\[0.3\baselineskip]
+{\fontsize{12}{14}\selectfont (Matriculation Number: XXXXXXXX)}\\
+{\fontsize{12}{14}\selectfont M.Eng. in Computer Engineering}
+
+\vspace{2\baselineskip}
+
+{\fontsize{12}{14}\selectfont
+A thesis submitted to the Faculty of Engineering and Technology of the\\
+University of Buea in partial fulfilment of the requirements for the\\
+degree of Doctor of Philosophy (PhD) in Computer Engineering}
+
+\vspace{2.5\baselineskip}
+
+{\fontsize{14}{17}\selectfont\bfseries Supervisor}\\[0.3\baselineskip]
+{\fontsize{12}{14}\selectfont Michael Ekonde SONE, PhD\\ Professor}
+
+\vspace{1.2\baselineskip}
+
+{\fontsize{14}{17}\selectfont\bfseries Co-Supervisor}\\[0.3\baselineskip]
+{\fontsize{12}{14}\selectfont Elie FUTE TAGNE, PhD\\ Associate Professor}
+
+\vfill
+
+{\fontsize{14}{17}\selectfont\bfseries \monthyear}
+
+\end{singlespace}
+\end{center}
+\clearpage
+ 
+\clearpage\thispagestyle{empty}\mbox{}   \clearpage
+\thispagestyle{empty}
+\begin{center}
+\begin{singlespace}
+
+{\fontsize{14}{17}\selectfont\bfseries UNIVERSITY OF BUEA}\\[0.4\baselineskip]
+{\fontsize{14}{17}\selectfont\bfseries FACULTY OF ENGINEERING AND TECHNOLOGY}\\[0.3\baselineskip]
+{\fontsize{14}{17}\selectfont\bfseries DEPARTMENT OF COMPUTER ENGINEERING}
+
+\vspace{2.5\baselineskip}
+
+{\fontsize{16}{19}\selectfont\bfseries
+A DISTRIBUTED BLOCKCHAIN-BASED APPROACH TO PROTECT IDENTITY,
+INTEGRITY AND PRIVACY IN AGRICULTURAL DATA PROCESSING}
+
+\vspace{2.5\baselineskip}
+
+{\fontsize{14}{17}\selectfont BY}\\[0.4\baselineskip]
+{\fontsize{14}{17}\selectfont\bfseries FORCHA GLEN BELOA}\\[0.3\baselineskip]
+{\fontsize{12}{14}\selectfont (Matriculation Number: XXXXXXXX)}\\
+{\fontsize{12}{14}\selectfont M.Eng. in Computer Engineering}
+
+\vspace{2\baselineskip}
+
+{\fontsize{12}{14}\selectfont
+A thesis submitted to the Faculty of Engineering and Technology of the\\
+University of Buea in partial fulfilment of the requirements for the\\
+degree of Doctor of Philosophy (PhD) in Computer Engineering}
+
+\vspace{2.5\baselineskip}
+
+{\fontsize{14}{17}\selectfont\bfseries Supervisor}\\[0.3\baselineskip]
+{\fontsize{12}{14}\selectfont Michael Ekonde SONE, PhD\\ Professor}
+
+\vspace{1.2\baselineskip}
+
+{\fontsize{14}{17}\selectfont\bfseries Co-Supervisor}\\[0.3\baselineskip]
+{\fontsize{12}{14}\selectfont Elie FUTE TAGNE, PhD\\ Associate Professor}
+
+\vfill
+
+{\fontsize{14}{17}\selectfont\bfseries \monthyear}
+
+\end{singlespace}
+\end{center}
+\clearpage
+ 
+
+\setcounter{page}{2}                     
+
+\ubfrontheading{Dedication}
+\vspace{2\baselineskip}
+\begin{center}
+To \dots
+\end{center}
+\clearpage
+ \ubfrontheading{Certification}
+\begin{singlespace}
+\vspace{\baselineskip}
+\begin{center}{\bfseries UNIVERSITY OF BUEA}\\
+{\bfseries FACULTY OF ENGINEERING AND TECHNOLOGY}\end{center}
+\vspace{2\baselineskip}
+
+This is to certify that the work described in the thesis entitled
+\textbf{``A Distributed Blockchain-Based Approach to Protect Identity,
+Integrity and Privacy in Agricultural Data Processing''}
+
+\vspace{\baselineskip}
+By \hrulefill
+
+\vspace{\baselineskip}
+Was carried out in the Department of Computer Engineering
+
+\vspace{\baselineskip}
+Under the supervision of
+
+\vspace{2\baselineskip}
+\hrulefill\\
+(Name and Signature of Supervisor)
+
+\vspace{2\baselineskip}
+Date \hrulefill
+\end{singlespace}
+\clearpage
+ \ubfrontheading{Acknowledgements}
+
+\clearpage
+ \ubfrontheading{Abstract}
+
+\clearpage
+ 
+\ubfrontheading{Table of Contents}
+\begin{singlespace}
+\renewcommand{\contentsname}{}
+\vspace{-3\baselineskip}
+\tableofcontents
+\end{singlespace}
+\clearpage
+
+\ubfrontheading{List of Figures}
+\begin{singlespace}
+\renewcommand{\listfigurename}{}
+\vspace{-3\baselineskip}
+\listoffigures
+\end{singlespace}
+\clearpage
+
+\ubfrontheading{List of Tables}
+\begin{singlespace}
+\renewcommand{\listtablename}{}
+\vspace{-3\baselineskip}
+\listoftables
+\end{singlespace}
+\clearpage
+
+\ubfrontheading{List of Abbreviations}
+\begin{singlespace}
+\printunsrtglossary[type=abbreviations,title={},style=long]
+\end{singlespace}
+\clearpage
+
+\mainmatter
+
+\clearpage{}
+
+\chapter{Introduction}
+\label{ch:introduction}
+
+\section{Background to the Study}
+\label{sec:background}
+
+Agriculture is undergoing a transition from experience-driven practice to
+data-driven decision making. Networks of low-cost sensors now measure soil
+moisture, canopy temperature, humidity and nutrient status continuously, and
+the resulting streams feed irrigation controllers, yield models and
+certification schemes~\cite{rathi2025smart, brooks2019precisionWater}. In
+water-stressed regions this shift is not a convenience but a necessity:
+irrigation accounts for the dominant share of freshwater withdrawal, and
+climate variability has compressed the margin for error in scheduling
+decisions~\cite{miller2020climateImpact, williams2022savings}.
+
+The sensing layer of such systems is built from severely constrained devices.
+An \gls{esp32} node operating on battery and harvested solar power must
+transmit over kilometre-scale distances using \gls{lora}, a modulation scheme
+that trades data rate for range and therefore charges a high airtime cost per
+packet~\cite{raza2018lorawan, adelantado2017understanding}. Airtime is the
+binding constraint: it determines energy consumption at the node, and, through
+duty-cycle regulation and collision probability, it determines how many nodes a
+single gateway can serve~\cite{mohammed2025loraEnergy}. Conventional responses
+compress the payload, but general-purpose compressors such as Huffman and
+\gls{lzw} carry dictionary and buffer overheads that a microcontroller with a
+few kilobytes of free \gls{ram} can ill afford~\cite{marcelloni2009energy,
+chen2025compression}.
+
+The \gls{crt} offers a different route. Decomposing a reading into residues
+modulo pairwise coprime moduli yields several short packets in place of one long
+one~\cite{garner1959residue, ding1996remainder}. Because a multi-channel
+concentrator such as the SX1302 demodulates channels concurrently, the short
+residue packets can be received simultaneously, and the original value is
+recovered in $O(k)$ operations for $k$ moduli. The practical effect is a
+reduction in per-packet occupancy rather than in total transmitted volume, which
+is precisely the quantity that governs gateway capacity.
+
+Data that has been collected cheaply must then be trusted. Agricultural records
+increasingly carry consequences beyond the farm gate: they substantiate organic
+and fair-trade certification, they underwrite index-based crop insurance, and
+they inform subsidy allocation. Each of these uses creates an incentive to
+falsify. A centralised database concentrates that risk in a single
+administrator, and an unprotected sensor network invites the injection of
+fabricated readings by any party with a compatible radio. \gls{dlt} addresses
+the tamper-evidence requirement by binding records into a hash-linked chain
+replicated across mutually distrusting parties, and permissioned platforms such
+as \gls{hlf} add an identity layer through a \gls{msp} and \gls{pki}, making it
+feasible to say not merely that a record is unaltered but who produced
+it~\cite{tar2023fabric, jayaram2023hyperledger, dube2024fabricIrrigation}.
+
+Running that machinery at the edge is the difficulty. Consensus, endorsement and
+world-state maintenance were designed for datacentre hardware, whereas an
+agricultural deployment must place gateways in the field, on \gls{arm64}
+single-board computers, behind intermittent connectivity. Whether a permissioned
+ledger can meet irrigation-control timing requirements on such hardware has
+until recently been asserted rather than measured.
+
+Finally, protection is not exhausted by integrity. A soil-moisture trace is also
+a disclosure: it reveals plot productivity, irrigation strategy and, in
+aggregate, the commercial position of the farmer. Where records are replicated
+across a consortium that includes buyers, insurers and cooperatives, the same
+replication that secures integrity enlarges the audience for private
+information. Identity, integrity and privacy therefore have to be treated as one
+design problem rather than three independent ones — which is the position this
+thesis takes.
+
+\section{Statement of the Problem}
+\label{sec:problem}
+
+Agricultural data processing systems are currently forced into a choice between
+three properties that ought to hold simultaneously.
+
+\textbf{Identity is weak at the sensing layer.} Constrained nodes seldom carry
+credentials strong enough to authenticate individual readings. Where
+authentication exists it typically terminates at the gateway, so the ledger
+attests to what the gateway submitted rather than to what the sensor measured.
+The provenance chain has a gap exactly where falsification is cheapest.
+
+\textbf{Integrity guarantees do not survive the move to the edge.} Permissioned
+ledgers provide tamper evidence, but their published performance
+characterisations assume server-class hosts. On \gls{arm64} gateways with
+constrained memory and intermittent links, it is not established that
+endorsement and ordering can complete inside the control loop of an irrigation
+decision, nor how the ledger behaves during network partition and recovery.
+
+\textbf{Privacy is sacrificed to obtain integrity.} Replicating raw agronomic
+readings to every consortium member is the simplest way to make them verifiable
+and the worst way to keep them confidential. Existing deployments largely accept
+this trade, or push confidential data off-chain in a way that reintroduces the
+trusted intermediary the ledger was meant to remove.
+
+Underlying all three is a resource problem. The transmission budget that would
+pay for per-reading signatures, encryption and privacy-preserving encodings is
+already consumed by the raw payload itself. Any scheme that adds cryptographic
+protection without first reducing transmission cost will exhaust the node's
+energy budget or the gateway's channel capacity.
+
+The problem this thesis addresses is therefore: \emph{how can identity,
+integrity and privacy be protected simultaneously in an agricultural data
+processing pipeline, end to end from constrained sensing node to distributed
+ledger, within the energy, memory and channel-capacity budgets that field
+deployment actually permits?}
+
+\section{Rationale of the Study}
+\label{sec:rationale}
+
+The rationale rests on an observation about where the budget comes from. If
+\gls{crt} residue decomposition reduces per-packet airtime substantially, it
+frees channel capacity and node energy that can be reinvested in protection
+rather than merely banked as efficiency. The same decomposition has a second,
+less obvious property: an individual residue discloses little about the original
+value, so residues distributed across channels or custodians provide a natural
+substrate for confidentiality and for threshold reconstruction. A mechanism
+introduced for efficiency can thus be made to serve privacy, which is what makes
+the combination worth studying rather than treating transmission and security as
+separate layers.
+
+The work is further motivated by an evidential gap. Claims about edge blockchain
+feasibility are typically supported by simulation or short laboratory runs. A
+sustained field deployment on real hardware, through real weather and real
+connectivity failures, produces a different and more useful class of evidence —
+including the failure modes that simulation does not generate.
+
+Finally, the applied case is direct. Smallholder and arid-region agriculture is
+where both the water-efficiency gains and the certification-fraud exposure are
+largest, and where infrastructure assumptions of existing systems are least
+likely to hold.
+
+\section{Objectives of the Study}
+\label{sec:objectives}
+
+Objectives are formulated using Bloom's revised taxonomy, with the cognitive
+level of each objective stated explicitly so that the verb, the expected
+evidence and the assessment criterion remain aligned.
+
+\subsection{Main Objective}
+\label{subsec:main_objective}
+
+\textbf{To design, implement and evaluate a distributed blockchain-based
+framework that protects identity, integrity and privacy in agricultural data
+processing, and to validate it in a sustained field deployment on constrained
+edge hardware.} \emph{(Bloom level: Create)}
+
+\subsection{Specific Objectives}
+\label{subsec:specific_objectives}
+
+\begin{enumerate}
+  \item \textbf{Analyse} the identity, integrity and privacy requirements of
+        agricultural data pipelines, and decompose the threat surface from
+        sensing node through gateway to ledger into an attacker model with
+        stated capabilities and assumptions. \emph{(Analyse)}
+
+  \item \textbf{Design} a \gls{crt}-based multi-channel residue transmission
+        scheme that lowers per-packet airtime while preserving exact
+        reconstruction, and formulate the conditions under which individual
+        residues leak no usable information about the underlying reading.
+        \emph{(Create)}
+
+  \item \textbf{Develop} an identity and access-control layer that binds each
+        reading to an authenticated originating node, combining \gls{hlf}
+        \gls{msp} credentials with \gls{hrbac} policy enforced in chaincode.
+        \emph{(Create)}
+
+  \item \textbf{Implement} the integrated framework on a heterogeneous edge
+        cluster of \gls{esp32} sensing nodes and \gls{arm64} \gls{rpi} gateways
+        running \gls{hlf} under Raft ordering. \emph{(Apply)}
+
+  \item \textbf{Evaluate} the transmission, blockchain and access-control layers
+        against compression and centralised baselines on airtime, energy,
+        throughput, latency and memory footprint, using a sustained field
+        deployment rather than simulation alone. \emph{(Evaluate)}
+
+  \item \textbf{Assess} the scalability and fault-tolerance envelope of the
+        framework through queuing-theoretic analysis validated against measured
+        load, and determine the conditions under which the architecture
+        saturates or degrades. \emph{(Evaluate)}
+
+  \item \textbf{Formulate} design guidance for deploying privacy-preserving
+        distributed ledgers in resource-constrained agricultural settings,
+        generalising beyond the specific deployment studied. \emph{(Create)}
+\end{enumerate}
+
+\section{Research Questions}
+\label{sec:research_questions}
+
+\begin{enumerate}[label=\textbf{RQ\arabic*.}]
+  \item To what extent can \gls{crt} residue decomposition reduce per-packet
+        airtime and increase gateway packet capacity without loss of
+        reconstruction fidelity?
+  \item Can a permissioned distributed ledger sustain the throughput and latency
+        required by real-time irrigation control when hosted entirely on
+        \gls{arm64} edge gateways?
+  \item What identity binding is required for a ledger record to attest to the
+        originating sensing node rather than merely to the submitting gateway,
+        and what does that binding cost?
+  \item What confidentiality is obtained by distributing residues across
+        channels and custodians, and under what adversary model does it hold?
+  \item How does the integrated framework behave as offered load approaches
+        gateway and ledger saturation, and where are its practical limits?
+\end{enumerate}
+
+\section{Research Hypotheses}
+\label{sec:hypotheses}
+
+\begin{description}
+  \item[\textnormal{\textbf{H1 — Transmission efficiency.}}] \gls{crt} residue
+        transmission reduces per-packet airtime by at least 40\% relative to raw
+        transmission while maintaining at least 99\% reconstruction accuracy.
+
+  \item[\textnormal{\textbf{H2 — Edge ledger performance.}}] \gls{hlf} hosted on
+        four \gls{rpi} 4B gateways sustains a mean transaction latency below
+        \SI{2}{\second} at an average throughput of at least \SI{50}{\tps}.
+
+  \item[\textnormal{\textbf{H3 — Access-control overhead.}}] Enforcing
+        \gls{rbac} in chaincode preserves at least \SI{50}{\tps} and keeps mean
+        smart-contract execution below \SI{500}{\milli\second}.
+
+  \item[\textnormal{\textbf{H4 — Field robustness.}}] Sustained field operation
+        maintains at least 99\% end-to-end reliability, with measured airtime
+        within \SI{5}{\milli\second} of the analytical model.
+
+  \item[\textnormal{\textbf{H5 — Privacy preservation.}}] An adversary observing
+        fewer than $k$ of the $k$ residue channels cannot reconstruct the
+        original reading, and the residual information leakage remains below a
+        stated bound.
+\end{description}
+
+
+
+\section{Scope and Delimitations}
+\label{sec:scope}
+
+\textbf{In scope.} Sub-GHz \gls{lora} sensing networks of the order of fifty
+nodes; permissioned ledgers of the \gls{hlf} family under Raft ordering;
+gateway hardware in the \gls{rpi} 4B class; agronomic telemetry, specifically
+soil moisture, temperature, humidity and irrigation actuation; and the
+identity, integrity and privacy properties of that pipeline.
+
+\textbf{Out of scope.} Public permissionless blockchains and their consensus
+economics; cellular and satellite backhaul; image-based and remote-sensing
+agronomy; agronomic model accuracy as such, which is treated as given rather
+than as an object of study; and formal cryptographic proofs of the underlying
+primitives, which are cited rather than re-derived.
+
+\textbf{Delimitations.} Field validation is drawn from a single deployment site
+and a single cropping season, which bounds the claims that can be made about
+generalisation across soil types and climates. Node population is bounded by
+what could be instrumented; behaviour beyond that population is established
+analytically and by synthetic load rather than by direct measurement.
+
+\section{Significance of the Study}
+\label{sec:significance}
+
+For \textbf{engineering practice}, the work supplies measured rather than
+simulated evidence about what a permissioned ledger costs on edge hardware, and
+a transmission scheme that reduces that cost enough to make protection
+affordable.
+
+For \textbf{the research literature}, it connects two bodies of work that have
+developed separately — residue arithmetic for communication efficiency, and
+distributed ledgers for data provenance — and shows that the first can subsidise
+the second.
+
+For \textbf{agricultural stakeholders}, it offers a path to verifiable
+certification and insurance records that does not require farmers to surrender
+commercially sensitive detail to every consortium member.
+
+\section{Definition of Key Terms}
+\label{sec:definitions}
+
+\begin{description}
+  \item[Airtime] The time a radio occupies a channel to transmit one packet. It
+        governs both node energy consumption and gateway capacity.
+
+  \item[Residue] The remainder of a reading modulo one of a set of pairwise
+        coprime moduli. A complete residue set uniquely determines the original
+        value below the product of the moduli.
+
+  \item[Integrity] The property that a record has not been altered since it was
+        committed, and that alteration would be detectable.
+
+  \item[Identity] The property that a record can be attributed to a specific
+        authenticated principal — here, a specific sensing node rather than
+        merely a gateway.
+
+  \item[Privacy] The property that a record's content is disclosed only to
+        principals authorised to see it, notwithstanding replication of the
+        ledger.
+
+  \item[Endorsement] In \gls{hlf}, the process by which designated peers
+        simulate a transaction and sign the result before ordering.
+\end{description}
+
+\section{Organisation of the Thesis}
+\label{sec:organisation}
+
+\textbf{Chapter One} states the background, problem, rationale, objectives,
+questions and hypotheses. \textbf{Chapter Two} reviews the literature on
+precision agriculture and \gls{iot} sensing, transmission optimisation,
+distributed ledgers in agriculture, edge-resident consensus and
+privacy-preserving data processing, and identifies the gap this work addresses.
+\textbf{Chapter Three} presents the materials and methods: system architecture,
+\gls{crt} formulation, identity and access-control design, hardware
+implementation, deployment protocol and evaluation methodology.
+\textbf{Chapter Four} reports results and applications across the transmission,
+ledger, access-control and agricultural-outcome dimensions. \textbf{Chapter
+Five} discusses the findings against the hypotheses, states limitations and
+threats to validity, and sets out conclusions, recommendations and perspectives
+for further research.
+\clearpage{}
+
+
+\backmatter
+
+\ubfrontheading{References}
+\begin{singlespace}
+\printbibliography[heading=none]
+\end{singlespace}
+
+
+
+\end{document}

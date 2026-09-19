@@ -1,0 +1,125 @@
+\begin{thebibliography}{11}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\href}[2]{#2}
+\providecommand{\path}[1]{#1}
+\providecommand{\DOIprefix}{doi:}
+\providecommand{\ArXivprefix}{arXiv:}
+\providecommand{\URLprefix}{URL: }
+\providecommand{\Pubmedprefix}{pmid:}
+\providecommand{\doi}[1]{\href{http://dx.doi.org/#1}{\path{#1}}}
+\providecommand{\Pubmed}[1]{\href{pmid:#1}{\path{#1}}}
+\providecommand{\bibinfo}[2]{#2}
+\ifx\xfnm\relax \def\xfnm[#1]{\unskip,\space#1}\fi
+%Type = Article
+\bibitem[{Bandara et~al.(2021)Bandara, Liang, De~Zoysa, Foytik and
+  Shetty}]{bandara2021modeling}
+\bibinfo{author}{Bandara, E.}, \bibinfo{author}{Liang, X.},
+  \bibinfo{author}{De~Zoysa, K.}, \bibinfo{author}{Foytik, P.},
+  \bibinfo{author}{Shetty, S.}, \bibinfo{year}{2021}.
+\newblock \bibinfo{title}{Fabric-based access control for agricultural
+  supply-chain traceability: A multi-layer policy model}.
+\newblock \bibinfo{journal}{IEEE Transactions on Dependable and Secure
+  Computing} \bibinfo{volume}{18}, \bibinfo{pages}{2089--2101}.
+\newblock \DOIprefix\doi{10.1109/TDSC.2021.3092089}.
+%Type = Article
+\bibitem[{Gonz\'{a}lez et~al.(2023)Gonz\'{a}lez, S\'{a}nchez, Lanza, Santana,
+  Sotres and Garc\'{i}a}]{gonzalez2023marketplace}
+\bibinfo{author}{Gonz\'{a}lez, V.}, \bibinfo{author}{S\'{a}nchez, L.},
+  \bibinfo{author}{Lanza, J.}, \bibinfo{author}{Santana, J.R.},
+  \bibinfo{author}{Sotres, P.}, \bibinfo{author}{Garc\'{i}a, A.E.},
+  \bibinfo{year}{2023}.
+\newblock \bibinfo{title}{On the use of blockchain to enable a highly scalable
+  {I}nternet of {T}hings data marketplace}.
+\newblock \bibinfo{journal}{Internet of Things} \bibinfo{volume}{22},
+  \bibinfo{pages}{100722}.
+\newblock \DOIprefix\doi{10.1016/j.iot.2023.100722}.
+%Type = Article
+\bibitem[{Idrissi and Palmieri(2024)}]{idrissi2024blockchain_jsupercomput}
+\bibinfo{author}{Idrissi, M.}, \bibinfo{author}{Palmieri, F.},
+  \bibinfo{year}{2024}.
+\newblock \bibinfo{title}{Blockchain-based authentication and authorization for
+  {IoT} systems: An end-to-end latency analysis on constrained hardware}.
+\newblock \bibinfo{journal}{The Journal of Supercomputing}
+  \bibinfo{volume}{80}, \bibinfo{pages}{1--32}.
+\newblock \DOIprefix\doi{10.1007/s11227-024-06001-7}.
+%Type = Article
+\bibitem[{Novo(2018)}]{novo2018blockchain}
+\bibinfo{author}{Novo, O.}, \bibinfo{year}{2018}.
+\newblock \bibinfo{title}{Blockchain meets {IoT}: An architecture for scalable
+  access management in {IoT}}.
+\newblock \bibinfo{journal}{IEEE Internet of Things Journal}
+  \bibinfo{volume}{5}, \bibinfo{pages}{1184--1195}.
+\newblock \DOIprefix\doi{10.1109/JIOT.2018.2812239}.
+%Type = Article
+\bibitem[{Ouaddah et~al.(2016)Ouaddah, Abou~Elkalam and
+  Ait~Ouahman}]{ouaddah2016fairaccess}
+\bibinfo{author}{Ouaddah, A.}, \bibinfo{author}{Abou~Elkalam, A.},
+  \bibinfo{author}{Ait~Ouahman, A.}, \bibinfo{year}{2016}.
+\newblock \bibinfo{title}{{FairAccess}: A new blockchain-based access control
+  framework for the {Internet of Things}}.
+\newblock \bibinfo{journal}{Security and Communication Networks}
+  \bibinfo{volume}{9}, \bibinfo{pages}{5943--5964}.
+\newblock \DOIprefix\doi{10.1002/sec.1748}.
+%Type = Article
+\bibitem[{Pajooh et~al.(2021)Pajooh, Hammoudeh, Alam and
+  Brocklehurst}]{pajooh2022fabric_iot}
+\bibinfo{author}{Pajooh, H.H.}, \bibinfo{author}{Hammoudeh, M.},
+  \bibinfo{author}{Alam, F.}, \bibinfo{author}{Brocklehurst, S.},
+  \bibinfo{year}{2021}.
+\newblock \bibinfo{title}{Hyperledger fabric blockchain for securing the edge
+  {IoT}: Systems architecture, experiments and critical observations}.
+\newblock \bibinfo{journal}{Electronics} \bibinfo{volume}{10},
+  \bibinfo{pages}{1338}.
+\newblock \DOIprefix\doi{10.3390/electronics10111338}.
+%Type = Inproceedings
+\bibitem[{Putra et~al.(2021)Putra, Dedeoglu, Kanhere and
+  Jurdak}]{putra2021trust}
+\bibinfo{author}{Putra, G.D.}, \bibinfo{author}{Dedeoglu, V.},
+  \bibinfo{author}{Kanhere, S.S.}, \bibinfo{author}{Jurdak, R.},
+  \bibinfo{year}{2021}.
+\newblock \bibinfo{title}{Trust management in decentralized {IoT} access
+  control system}, in: \bibinfo{booktitle}{Proc. IEEE BCCA}, pp.
+  \bibinfo{pages}{1--8}.
+\newblock \DOIprefix\doi{10.1109/BCCA53669.2021.9657049}.
+%Type = Article
+\bibitem[{Shih et~al.(2022)Shih, Jheng, Yen and Huang}]{shih2022iiot}
+\bibinfo{author}{Shih, D.H.}, \bibinfo{author}{Jheng, P.Y.},
+  \bibinfo{author}{Yen, D.C.}, \bibinfo{author}{Huang, C.L.},
+  \bibinfo{year}{2022}.
+\newblock \bibinfo{title}{A blockchain-based access control model for
+  industrial {IoT}}.
+\newblock \bibinfo{journal}{Sensors} \bibinfo{volume}{22},
+  \bibinfo{pages}{2188}.
+\newblock \DOIprefix\doi{10.3390/s22062188}.
+%Type = Article
+\bibitem[{Usman et~al.(2024)Usman, Jolfaei and Tariq}]{usman2024blockchain}
+\bibinfo{author}{Usman, M.}, \bibinfo{author}{Jolfaei, A.},
+  \bibinfo{author}{Tariq, M.U.}, \bibinfo{year}{2024}.
+\newblock \bibinfo{title}{Blockchain-based access control for industrial {IoT}:
+  Domain policy architecture with smart contracts}.
+\newblock \bibinfo{journal}{Computer Networks} \bibinfo{volume}{243},
+  \bibinfo{pages}{110286}.
+\newblock \DOIprefix\doi{10.1016/j.comnet.2024.110286}.
+%Type = Inproceedings
+\bibitem[{Xu et~al.(2018)Xu, Chen, Blasch and Chen}]{xu2018blendcac}
+\bibinfo{author}{Xu, R.}, \bibinfo{author}{Chen, Y.}, \bibinfo{author}{Blasch,
+  E.}, \bibinfo{author}{Chen, G.}, \bibinfo{year}{2018}.
+\newblock \bibinfo{title}{{BlendCAC}: A blockchain-enabled decentralized
+  capability-based access control for {IoTs}}, in:
+  \bibinfo{booktitle}{Proceedings of the 2018 {IEEE} International Conference
+  on Internet of Things ({iThings})}, pp. \bibinfo{pages}{1027--1034}.
+\newblock \DOIprefix\doi{10.1109/Cybermatics_2018.2018.00191}.
+%Type = Article
+\bibitem[{Zaidi et~al.(2023)Zaidi, Al-Qurishi, Abidin, Almakdi and
+  Asiri}]{zaidi2023fabrication}
+\bibinfo{author}{Zaidi, S.M.S.}, \bibinfo{author}{Al-Qurishi, M.},
+  \bibinfo{author}{Abidin, M.Z.u.}, \bibinfo{author}{Almakdi, S.},
+  \bibinfo{author}{Asiri, Y.}, \bibinfo{year}{2023}.
+\newblock \bibinfo{title}{Fabrication: A hyperledger fabric framework for
+  scalable {IoT} access control}.
+\newblock \bibinfo{journal}{IEEE Internet of Things Journal}
+  \bibinfo{volume}{10}, \bibinfo{pages}{12636--12649}.
+\newblock \DOIprefix\doi{10.1109/JIOT.2023.3254978}.
+
+\end{thebibliography}

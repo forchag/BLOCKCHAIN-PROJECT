@@ -1,0 +1,99 @@
+{
+  "_comment": [
+    "Independent, requirements-derived access-control policy oracle for the",
+    "HRBAC manuscript, added in response to a reviewer premortem: a permission",
+    "table or test suite generated from roles.go cannot validate roles.go,",
+    "because a defect shared between the implementation and its own",
+    "self-description would not appear as a failure. This file is authored",
+    "from the manuscript's stakeholder requirements (Introduction and",
+    "Section 'Access-control design') without reference to either",
+    "chaincode/hrbac/roles.go or chaincode/hrbac-corrected/roles.go, and is",
+    "reviewed as an independent document before being used to score either",
+    "package. TestMatchesRequirementsOracle in",
+    "chaincode/hrbac-corrected/contract_test.go loads this file and checks",
+    "GetEffectivePermissions() against every cell; it fails against the",
+    "historical chaincode/hrbac hierarchy (confirmed by a throwaway copy of",
+    "the same test run against that package during development, the same",
+    "way TestAuditorSeparationHolds and TestAgronomistCannotControlZone were",
+    "verified) and passes against chaincode/hrbac-corrected."
+  ],
+  "requirements_basis": [
+    "Farmers need operational control (write sensor data, actuate zone",
+    "devices).",
+    "Agronomists need history but no actuation rights: zone-scoped read",
+    "access and the ability to issue cross-zone tokens, not ControlZone.",
+    "Certification bodies need compliance evidence (audit records) without",
+    "visibility into raw zone sensor data or actuation.",
+    "Supply-chain partners need provenance (their own records) but not",
+    "real-time zone operations.",
+    "Sensors and gateways are device-tier roles: sensors only write;",
+    "gateways read and control their own zone as the sensors' registration",
+    "authority.",
+    "Admin holds every permission."
+  ],
+  "roles": ["SupplyChain", "Certifier", "Agronomist", "Farmer", "Sensor",
+            "Gateway", "Admin"],
+  "permissions": ["ReadOwn", "ReadZone", "ReadAll", "WriteSensor",
+                  "ControlZone", "ControlAll", "ReadAudit", "IssueCrossZone",
+                  "ManageRoles", "AdminAll"],
+  "hierarchy_note": [
+    "The intended hierarchy is not the single chain SupplyChain-Certifier-",
+    "Agronomist-Farmer-Admin the manuscript's Equation (human chain)",
+    "originally displayed: that total order is exactly what makes the",
+    "auditor-separation defect possible, since it forces Certifier's grants",
+    "to be inherited by everything above it. The intended structure is a",
+    "branch at SupplyChain: one branch is Certifier alone (audit), the",
+    "other is Agronomist then Farmer (operations), both merging only at",
+    "Admin. The matrix below is this branching structure's transitive",
+    "closure, independent of how any chaincode file happens to implement",
+    "it.",
+    "Symmetrically for the device chain, Gateway inherits Sensor's",
+    "WriteSensor (a gateway is a superset of the sensor it registers), so",
+    "Gateway's row includes WriteSensor even though it is not Gateway's",
+    "own distinguishing grant."
+  ],
+  "matrix": {
+    "SupplyChain": {
+      "ReadOwn": true, "ReadZone": false, "ReadAll": false,
+      "WriteSensor": false, "ControlZone": false, "ControlAll": false,
+      "ReadAudit": false, "IssueCrossZone": false, "ManageRoles": false,
+      "AdminAll": false
+    },
+    "Certifier": {
+      "ReadOwn": true, "ReadZone": false, "ReadAll": false,
+      "WriteSensor": false, "ControlZone": false, "ControlAll": false,
+      "ReadAudit": true, "IssueCrossZone": false, "ManageRoles": false,
+      "AdminAll": false
+    },
+    "Agronomist": {
+      "ReadOwn": true, "ReadZone": true, "ReadAll": false,
+      "WriteSensor": false, "ControlZone": false, "ControlAll": false,
+      "ReadAudit": false, "IssueCrossZone": true, "ManageRoles": false,
+      "AdminAll": false
+    },
+    "Farmer": {
+      "ReadOwn": true, "ReadZone": true, "ReadAll": false,
+      "WriteSensor": true, "ControlZone": true, "ControlAll": false,
+      "ReadAudit": false, "IssueCrossZone": true, "ManageRoles": false,
+      "AdminAll": false
+    },
+    "Sensor": {
+      "ReadOwn": false, "ReadZone": false, "ReadAll": false,
+      "WriteSensor": true, "ControlZone": false, "ControlAll": false,
+      "ReadAudit": false, "IssueCrossZone": false, "ManageRoles": false,
+      "AdminAll": false
+    },
+    "Gateway": {
+      "ReadOwn": false, "ReadZone": true, "ReadAll": false,
+      "WriteSensor": true, "ControlZone": true, "ControlAll": false,
+      "ReadAudit": false, "IssueCrossZone": false, "ManageRoles": false,
+      "AdminAll": false
+    },
+    "Admin": {
+      "ReadOwn": true, "ReadZone": true, "ReadAll": true,
+      "WriteSensor": true, "ControlZone": true, "ControlAll": true,
+      "ReadAudit": true, "IssueCrossZone": true, "ManageRoles": true,
+      "AdminAll": true
+    }
+  }
+}

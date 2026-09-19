@@ -1,0 +1,3 @@
+Version 11 artifact merge commit: 447a4ed3abc06252362055e82081a1b209dad34f
+Repository: https://github.com/forchag/project-fet2
+Artifact path: paper_iot/V11

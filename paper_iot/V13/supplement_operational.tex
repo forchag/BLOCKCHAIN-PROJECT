@@ -1,0 +1,97 @@
+\subsection{Operational observations}
+\label{subsec:operational}
+
+Two aspects of running the system for two months do not show up in any
+performance metric.
+
+Zone certificate binding solved an administrative problem it was not designed
+for. Worker assignments spanning cooperating farms, which would otherwise
+need separately maintained access-control configuration, resolved through the
+zone attribute already embedded in device and user certificates for
+operational reasons. Temporal role expiry removed another class of manual
+work, with seasonal credentials lapsing on schedule without administrator
+intervention or database editing, each lapse leaving an audit record rather
+than a silent deletion.
+
+The enrollment protocol needed three firmware iterations before it survived
+multi-hour gateway outages, and the recurring failure mode was time. A sensor
+waking with an unsynchronised clock cannot evaluate certificate expiry, and
+early firmware either refused to transmit or transmitted under an identity it
+could not validate. The fix appears as the final block of
+Supplement~S1: acquire time from GPS first with NTP as fallback,
+and skip expiry enforcement for a single cycle rather than strand the node
+when neither is available. A testbed that never loses its time source cannot
+surface this class of fault.
+
+\subsection{Energy-measurement scope}
+\label{subsec:energy_detail}
+
+The main article's ``Transmission energy and cryptographic cost'' section
+reports only the headline reduction in per-event transmission energy
+between single-channel and residue-coded LoRa modes. The full measurement:
+per-event energy falls from \EnergySingle\,mJ (SD \EnergySingleSD) to
+\EnergyCRT\,mJ (SD \EnergyCRTSD), a reduction of \EnergyReductionPct\%
+[\EnergyReductionCILow, \EnergyReductionCIHigh]; per-packet airtime falls
+from \AirtimeSingle\,ms to \AirtimeCRT\,ms; and the instrumented packets
+average \PayloadSingle\,B and \PayloadCRT\,B respectively. Cryptographic
+cost on the sensor is negligible at this duty cycle: the signing pipeline
+takes \SignTotal\,\textmu{}s (SD \SignTotalSD), comprising Ed25519 signing
+at \SignEdDSA\,\textmu{}s, hardware SHA-256 at \SignSHA\,\textmu{}s, eFuse
+key read at \SignEfuse\,\textmu{}s and context management at
+\SignContext\,\textmu{}s, or \SignMilli\,ms per wake against the
+\DutyCycleMinutes-minute cycle. Three qualifications bound what the energy
+reduction describes, given here in full since the main text states only
+their conclusion.
+
+First, the instrumented payloads are smaller than a complete authenticated
+frame: an Ed25519 signature alone is 64\,B before nonce, timestamp and
+identity fields are added, so the measured percentage is a reduction on the
+instrumented payload, not on the frame a corrected, fully authenticated
+deployment would actually transmit. Second, the energy and airtime samples
+come from repeated measurement of one instrumented sensor node on the bench,
+so the reported interval reflects measurement repeatability on that node
+rather than variation across the fifty deployed devices; a multi-device
+energy campaign, ideally over the corrected full frame, would be needed to
+generalise the reduction across the fleet. Third, at the deployed
+30-minute duty cycle, transmission energy is a small fraction of a node's
+daily budget against deep-sleep consumption, so even the full measured
+reduction moves estimated battery life by roughly one percent; the value of
+the measurement is that it is cleanly attributable to the encoding choice,
+not that it materially extends field battery life. We report the reduction
+because it is cleanly measured and make no stronger battery-life claim than
+that.
+
+\subsection{Signature test vector}
+\label{subsec:sig_vector}
+
+A fixed, reproducible vector for the firmware's sign path
+(\texttt{esp32/main/signing.c}: SHA-256 the packed struct, then Ed25519-sign
+the 32-byte digest), so an independent reimplementation in any language can
+check byte-for-byte agreement without running this repository's code.
+Field order for the packed struct is little-endian
+\texttt{device\_id~(u32)}, \texttt{reading\_id~(u16)},
+\texttt{soil\_raw~(u16)}, \texttt{temperature\_centi\_c~(i16)},
+\texttt{timestamp~(i64)}; the example uses device id 42, reading id 7, raw
+soil 2048, temperature 25.00\,\textdegree{}C (centi-degrees 2500) and
+timestamp 1735689600 (2025-01-01T00:00:00Z). The private key is the
+Ed25519 seed \texttt{00 01 02 \ldots{} 1e 1f} (32 bytes, byte $i$ has value
+$i$), used only to make this vector reproducible and not a key from any
+deployed device.
+
+\begin{quote}\small\ttfamily\raggedright
+seed:~~~~ 000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f\\
+pubkey:~~ 03a107bff3ce10be1d70dd18e74bc09967e4d6309ba50d5f1ddc8664125531b8\\
+payload:~ 2a00000007000008c4098085746700000000\\
+digest:~~ 29cf4c16f38f0a5bc8cef0da69ed7c9e4d570579fcd2d347a8d063895b49599a\\
+sig:~~~~~ 5c59e0f3fef48a23c09ae90c1ac638d179e1058569f2469323f43907b4ab8c4\\
+\phantom{sig:~~~~~} d701931da85a762a019cda7174e5a6e418326990f5b51207119e7bd83f124fc08
+\end{quote}
+
+Ed25519-verifying \texttt{sig} against \texttt{digest} with \texttt{pubkey}
+must succeed; verifying it against the SHA-256 digest of \texttt{payload}
+with any single byte flipped must fail. \texttt{gateway/tests/test\_signature\_binding.py}
+(\texttt{test\_canonical\_vector\_matches\_firmware\_format} and
+\texttt{test\_canonical\_vector\_rejects\_single\_byte\_modification}) checks
+both directions and is the executable form of this vector.
+
+

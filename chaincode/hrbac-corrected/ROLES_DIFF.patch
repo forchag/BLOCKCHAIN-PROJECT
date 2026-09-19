@@ -1,0 +1,61 @@
+--- chaincode/hrbac/roles.go	2026-08-16 10:03:50.275988865 +0000
++++ chaincode/hrbac-corrected/roles.go	2026-08-21 14:52:59.872645784 +0000
+@@ -1,5 +1,34 @@
+ package main
+ 
++// This file is the corrected role hierarchy released alongside the
++// historical, unpatched chaincode/hrbac package. It fixes two defects
++// documented in the manuscript's implementation postmortem.
++//
++// First, the auditor-separation defect: the deployed hierarchy placed
++// Certifier on the human inheritance chain (SupplyChain -> Certifier ->
++// Agronomist -> Farmer -> Admin) rather than beside it, so Agronomist and
++// Farmer inherited ReadAudit, and Certifier itself held ReadZone, letting
++// an auditor read raw zone sensor data rather than only compliance/audit
++// records. The fix removes Certifier from Agronomist's and Farmer's
++// ancestor sets and drops ReadZone from Certifier's direct grants,
++// replacing it with a direct ReadZone grant on Agronomist and Farmer so
++// neither loses the zone visibility the design intends them to have.
++//
++// Second, the Agronomist-actuation defect, found in review of an earlier
++// draft of this correction: Agronomist retained a direct ControlZone
++// grant, contradicting the introduction's "history but no actuation
++// rights" description of the role. ControlZone is removed from
++// Agronomist's direct grants here; Farmer, which no longer inherits it
++// from Agronomist once Agronomist's own grant is removed, receives its
++// own direct ControlZone grant so operational control stays where the
++// design intends it. TestAgronomistCannotControlZone in contract_test.go
++// is the regression test for this specific defect.
++//
++// Every other effective permission is unchanged: this is a minimal patch
++// to the two defects above, not a redesign of the role hierarchy. See
++// ROLES_DIFF.patch for the exact diff against chaincode/hrbac/roles.go
++// and the manuscript's deployed-vs-corrected policy table.
++
+ // Role identifies an HRBAC actor role.
+ type Role string
+ 
+@@ -31,9 +60,9 @@
+ 
+ var rolePermissions = map[Role][]Permission{
+ 	SupplyChain: {ReadOwn},
+-	Certifier:   {ReadZone, ReadAudit},
+-	Agronomist:  {ControlZone, IssueCrossZone},
+-	Farmer:      {WriteSensor},
++	Certifier:   {ReadAudit},
++	Agronomist:  {ReadZone, IssueCrossZone},
++	Farmer:      {WriteSensor, ReadZone, ControlZone},
+ 	Sensor:      {WriteSensor},
+ 	Gateway:     {ReadZone, ControlZone},
+ 	Admin:       {ReadAll, ControlAll, ManageRoles, AdminAll},
+@@ -42,8 +71,8 @@
+ var roleAncestors = map[Role][]Role{
+ 	SupplyChain: {SupplyChain},
+ 	Certifier:   {Certifier, SupplyChain},
+-	Agronomist:  {Agronomist, Certifier, SupplyChain},
+-	Farmer:      {Farmer, Agronomist, Certifier, SupplyChain},
++	Agronomist:  {Agronomist, SupplyChain},
++	Farmer:      {Farmer, Agronomist, SupplyChain},
+ 	Sensor:      {Sensor},
+ 	Gateway:     {Gateway, Sensor},
+ 	Admin:       {Admin, Farmer, Agronomist, Certifier, SupplyChain, Gateway, Sensor},

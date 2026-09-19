@@ -1,0 +1,1139 @@
+
+
+\documentclass[12pt,a4paper,oneside]{book}
+
+\usepackage{ubthesis}
+
+\usepackage[abbreviations,nomain,nopostdot,nogroupskip]{glossaries-extra}
+\setabbreviationstyle[abbreviation]{long-short}
+
+
+\newabbreviation{abac}{ABAC}{Attribute-Based Access Control}
+\newabbreviation{ack}{ACK}{Acknowledgement}
+\newabbreviation{adc}{ADC}{Analogue-to-Digital Converter}
+\newabbreviation{api}{API}{Application Programming Interface}
+\newabbreviation{arm64}{ARM64}{64-bit Advanced RISC Machine architecture}
+
+\newabbreviation{batman}{BATMAN-adv}{Better Approach To Mobile Ad-hoc Networking, advanced}
+\newabbreviation{ble}{BLE}{Bluetooth Low Energy}
+\newabbreviation{bft}{BFT}{Byzantine Fault Tolerance}
+
+\newabbreviation{ca}{CA}{Certificate Authority}
+\newabbreviation{cap}{CAP}{Consistency, Availability, Partition tolerance}
+\newabbreviation{cpu}{CPU}{Central Processing Unit}
+\newabbreviation{crt}{CRT}{Chinese Remainder Theorem}
+
+\newabbreviation{did}{DID}{Decentralised Identifier}
+\newabbreviation{dlt}{DLT}{Distributed Ledger Technology}
+\newabbreviation{dp}{DP}{Differential Privacy}
+
+\newabbreviation{edp}{EDP}{Energy-Delay Product}
+\newabbreviation{esp32}{ESP32}{Espressif 32-bit microcontroller with integrated Wi-Fi and Bluetooth}
+
+\newabbreviation{gdpr}{GDPR}{General Data Protection Regulation}
+\newabbreviation{gw}{GW}{Gateway}
+
+\newabbreviation{hlf}{HLF}{Hyperledger Fabric}
+\newabbreviation{hrbac}{HRBAC}{Hierarchical Role-Based Access Control}
+
+\newabbreviation{iot}{IoT}{Internet of Things}
+\newabbreviation{ipfs}{IPFS}{InterPlanetary File System}
+
+\newabbreviation{json}{JSON}{JavaScript Object Notation}
+
+\newabbreviation{lora}{LoRa}{Long Range (sub-GHz spread-spectrum radio modulation)}
+\newabbreviation{lorawan}{LoRaWAN}{Long Range Wide Area Network}
+\newabbreviation{lzw}{LZW}{Lempel-Ziv-Welch compression}
+
+\newabbreviation{mac}{MAC}{Medium Access Control}
+\newabbreviation{mcu}{MCU}{Microcontroller Unit}
+\newabbreviation{msp}{MSP}{Membership Service Provider}
+
+\newabbreviation{pbft}{PBFT}{Practical Byzantine Fault Tolerance}
+\newabbreviation{pki}{PKI}{Public Key Infrastructure}
+
+\newabbreviation{ram}{RAM}{Random Access Memory}
+\newabbreviation{rbac}{RBAC}{Role-Based Access Control}
+\newabbreviation{rf}{RF}{Radio Frequency}
+\newabbreviation{roi}{ROI}{Return on Investment}
+\newabbreviation{rpi}{RPi}{Raspberry Pi}
+\newabbreviation{rtc}{RTC}{Real-Time Clock}
+
+\newabbreviation{sf}{SF}{Spreading Factor}
+\newabbreviation{sha}{SHA}{Secure Hash Algorithm}
+\newabbreviation{slo}{SLO}{Service Level Objective}
+\newabbreviation{sss}{SSS}{Shamir Secret Sharing}
+
+\newabbreviation{tee}{TEE}{Trusted Execution Environment}
+\newabbreviation{tps}{TPS}{Transactions Per Second}
+\newabbreviation{tpm}{TPM}{Trusted Platform Module}
+
+\newabbreviation{zkp}{ZKP}{Zero-Knowledge Proof}
+ 
+\usepackage[
+  backend=biber,
+  style=numeric-comp,
+  sorting=none,
+  maxbibnames=6,
+  minbibnames=3,
+  giveninits=true,
+  doi=true, isbn=false, url=false
+]{biblatex}
+\addbibresource{references.bib}
+
+\begin{document}
+
+\frontmatter
+\pagestyle{fancy}
+
+
+
+\thispagestyle{empty}
+\begin{singlespace}
+\fontsize{14}{16.1}\selectfont
+
+\vspace*{-0.9\baselineskip}
+
+\begin{center}
+  \textbf{UNIVERSITY OF BUEA}
+\end{center}
+
+\vspace{3.72\baselineskip}
+
+\noindent
+\begin{minipage}[t]{0.56\textwidth}
+  \raggedright
+  \textbf{FACULTY OF ENGINEERING\\AND TECHNOLOGY}
+\end{minipage}\begin{minipage}[t]{0.44\textwidth}
+  \raggedright
+  \textbf{DEPARTMENT OF\\COMPUTER ENGINEERING}
+\end{minipage}
+
+\vspace{4.59\baselineskip}
+
+\begin{center}
+\textbf{A DISTRIBUTED BLOCKCHAIN-BASED APPROACH TO\\
+          PROTECT IDENTITY, INTEGRITY AND PRIVACY IN\\
+          AGRICULTURAL DATA PROCESSING}
+
+  \vspace{4.34\baselineskip}
+
+  {\fontsize{12}{14}\selectfont By}
+
+  \vspace{3.56\baselineskip}
+
+  \textbf{FORCHA GLEN BELOA}\\
+  (FE22P049)\\
+  M.Eng. in Telecommunications and Networks
+
+  \vspace{2.52\baselineskip}
+
+  A Thesis submitted to the Faculty of Engineering and Technology of the\\
+  University of Buea in partial fulfilment of the requirements\\
+  for the degree of Doctor of Philosophy (PhD)\\
+  in Computer Engineering.
+\end{center}
+
+\vspace{2.52\baselineskip}
+
+\noindent\textbf{Supervisors}
+
+\vspace{1.0\baselineskip}
+
+\noindent\textbf{Michael Ekonde SONE, PhD}\\
+Associate Professor
+
+\vspace{0.8\baselineskip}
+
+\noindent\textbf{Elie FUTE TAGNE, PhD}\\
+Associate Professor
+
+\vfill
+
+\begin{center}
+  \textbf{\monthyear}
+\end{center}
+
+\vspace{1.5\baselineskip}
+
+\end{singlespace}
+\clearpage
+ 
+\clearpage\thispagestyle{empty}\mbox{}   \clearpage
+
+
+\thispagestyle{empty}
+\begin{singlespace}
+\fontsize{14}{16.1}\selectfont
+
+\vspace*{-0.9\baselineskip}
+
+\begin{center}
+  \textbf{UNIVERSITY OF BUEA}
+\end{center}
+
+\vspace{3.72\baselineskip}
+
+\noindent
+\begin{minipage}[t]{0.56\textwidth}
+  \raggedright
+  \textbf{FACULTY OF ENGINEERING\\AND TECHNOLOGY}
+\end{minipage}\begin{minipage}[t]{0.44\textwidth}
+  \raggedright
+  \textbf{DEPARTMENT OF\\COMPUTER ENGINEERING}
+\end{minipage}
+
+\vspace{4.59\baselineskip}
+
+\begin{center}
+\textbf{A DISTRIBUTED BLOCKCHAIN-BASED APPROACH TO\\
+          PROTECT IDENTITY, INTEGRITY AND PRIVACY IN\\
+          AGRICULTURAL DATA PROCESSING}
+
+  \vspace{4.34\baselineskip}
+
+  {\fontsize{12}{14}\selectfont By}
+
+  \vspace{3.56\baselineskip}
+
+  \textbf{FORCHA GLEN BELOA}\\
+  (FE22P049)\\
+  M.Eng. in Telecommunications and Networks
+
+  \vspace{2.52\baselineskip}
+
+  A Thesis submitted to the Faculty of Engineering and Technology of the\\
+  University of Buea in partial fulfilment of the requirements\\
+  for the degree of Doctor of Philosophy (PhD)\\
+  in Computer Engineering.
+\end{center}
+
+\vspace{2.52\baselineskip}
+
+\noindent\textbf{Supervisors}
+
+\vspace{1.0\baselineskip}
+
+\noindent\textbf{Michael Ekonde SONE, PhD}\\
+Associate Professor
+
+\vspace{0.8\baselineskip}
+
+\noindent\textbf{Elie FUTE TAGNE, PhD}\\
+Associate Professor
+
+\vfill
+
+\begin{center}
+  \textbf{\monthyear}
+\end{center}
+
+\vspace{1.5\baselineskip}
+
+\end{singlespace}
+\clearpage
+ 
+
+\setcounter{page}{2}                     
+
+\ubfrontheading{Dedication}
+\vspace{2\baselineskip}
+\begin{center}
+To \dots
+\end{center}
+\clearpage
+ \ubfrontheading{Certification}
+\begin{singlespace}
+\vspace{\baselineskip}
+\begin{center}{\bfseries UNIVERSITY OF BUEA}\\
+{\bfseries FACULTY OF ENGINEERING AND TECHNOLOGY}\end{center}
+\vspace{2\baselineskip}
+
+This is to certify that the work described in the thesis entitled
+\textbf{``A Distributed Blockchain-Based Approach to Protect Identity,
+Integrity and Privacy in Agricultural Data Processing''}
+
+\vspace{\baselineskip}
+By \hrulefill
+
+\vspace{\baselineskip}
+Was carried out in the Department of Computer Engineering
+
+\vspace{\baselineskip}
+Under the supervision of
+
+\vspace{2\baselineskip}
+\hrulefill\\
+(Name and Signature of Supervisor)
+
+\vspace{2\baselineskip}
+Date \hrulefill
+\end{singlespace}
+\clearpage
+ \ubfrontheading{Acknowledgements}
+
+\clearpage
+ \ubfrontheading{Abstract}
+
+\clearpage
+ 
+\ubfrontheading{Table of Contents}
+\begin{singlespace}
+\renewcommand{\contentsname}{}
+\vspace{-3\baselineskip}
+\tableofcontents
+\end{singlespace}
+\clearpage
+
+\ubfrontheading{List of Figures}
+\begin{singlespace}
+\renewcommand{\listfigurename}{}
+\vspace{-3\baselineskip}
+\listoffigures
+\end{singlespace}
+\clearpage
+
+\ubfrontheading{List of Tables}
+\begin{singlespace}
+\renewcommand{\listtablename}{}
+\vspace{-3\baselineskip}
+\listoftables
+\end{singlespace}
+\clearpage
+
+\ubfrontheading{List of Abbreviations}
+\begin{singlespace}
+\printunsrtglossary[type=abbreviations,title={},style=long]
+\end{singlespace}
+\clearpage
+
+\mainmatter
+
+\clearpage{}
+
+\chapter{Introduction}
+\label{ch:introduction}
+
+\section{Background to the Study}
+\label{sec:background}
+
+Agriculture is undergoing a transition from experience-driven practice to
+data-driven decision making. Networks of low-cost sensors now measure soil
+moisture, canopy temperature, humidity and nutrient status continuously, and
+the resulting streams feed irrigation controllers, yield models and
+certification schemes~\cite{rathi2025smart, brooks2019precisionWater}. In
+water-stressed regions this shift is not a convenience but a necessity.
+Irrigation accounts for the dominant share of freshwater withdrawal, and
+climate variability has compressed the margin for error in scheduling
+decisions~\cite{miller2020climateImpact, williams2022savings}.
+
+A measurement taken in a field does not stop at the field. It becomes a record,
+and that record is consumed by parties with interests of their own, as
+Figure~\ref{fig:lifecycle} sets out. The value of the record to those parties
+is exactly what creates the incentive to falsify it, and the further a record
+travels from the instrument that produced it, the weaker the evidence that it
+is genuine.
+
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}[
+      box/.style={draw, rounded corners=2pt, align=center, font=\small,
+                  minimum height=9mm, inner sep=4pt},
+      use/.style={box, fill=black!4, text width=26mm},
+      flow/.style={-{Stealth[length=2mm]}, thick},
+      note/.style={font=\footnotesize\itshape, align=center, text width=90mm}
+    ]
+    \node[box, text width=23mm] (field)  at (0,0)      {Field\\measurement};
+    \node[box, text width=23mm] (record) at (3.7,0)    {Agricultural\\record};
+
+    \node[use] (cert) at (8.0, 1.5)  {Certification\\(organic, fair trade)};
+    \node[use] (ins)  at (8.0, 0)    {Index-based\\crop insurance};
+    \node[use] (sub)  at (8.0,-1.5)  {Subsidy\\allocation};
+
+    \draw[flow] (field) -- (record);
+    \draw[flow] (record.east) -- (cert.west);
+    \draw[flow] (record.east) -- (ins.west);
+    \draw[flow] (record.east) -- (sub.west);
+
+\node[note] (inc) at (4.0,-2.9)
+      {Each downstream use attaches value to the record,\\
+       and therefore creates an incentive to falsify it.};
+  \end{tikzpicture}
+  \caption{Lifecycle of an agricultural measurement. A reading becomes a record
+           that is consumed by parties outside the farm, and the value those
+           parties attach to it is what makes falsification worthwhile.}
+  \label{fig:lifecycle}
+\end{figure}
+
+The economics of the sensing layer explain why the problem is hard rather than
+merely tedious. A deployment that is worth installing on a smallholding must
+cost a small fraction of the crop value it protects, which forces the node bill
+of materials down to a level at which neither a hardware security module nor a
+generous energy budget is affordable. The same economics rule out mains power
+and wired backhaul across a field, so the design space collapses onto
+battery-powered microcontrollers speaking a long-range, low-rate radio. Every
+protection mechanism proposed in this thesis has to survive inside that
+envelope, and a mechanism that works only on a mains-powered gateway has solved
+the easier half of the problem.
+
+The sensing layer of such systems is built from severely constrained devices.
+An \gls{esp32} node operating on battery and harvested solar power must
+transmit over kilometre-scale distances using \gls{lora}, a modulation scheme
+that trades data rate for range and therefore charges a high airtime cost per
+packet~\cite{raza2018lorawan, adelantado2017understanding}. Airtime is the
+binding constraint. It determines energy consumption at the node, and, through
+duty-cycle regulation and collision probability, it determines how many nodes a
+single gateway can serve~\cite{mohammed2025loraEnergy}. Conventional responses
+compress the payload, but general-purpose compressors such as Huffman and
+\gls{lzw} carry dictionary and buffer overheads that a microcontroller with a
+few kilobytes of free \gls{ram} can ill
+afford~\cite{marcelloni2009energy, chen2025compression}.
+
+Two further constraints sharpen this. Sub-GHz \gls{iot} bands are governed by a
+duty-cycle limit, so a node that has just transmitted must stay silent for a
+period proportional to the airtime it consumed. Airtime is therefore not only
+an energy cost but a rate limit: it caps how often a node may report, and no
+increase in battery capacity relaxes it. Second, because \gls{lora} uses
+unslotted access, packets collide whenever two nodes transmit on the same
+channel at the same time, and the collision probability grows with the square
+of offered traffic in the regime that matters. Halving per-packet occupancy
+therefore buys more than a proportional reduction in collisions, which is why
+the mechanism studied here is worth the arithmetic it costs.
+
+The \gls{crt} offers a different route. Decomposing a reading into residues
+modulo pairwise coprime moduli yields several short packets in place of one
+long one~\cite{garner1959residue, ding1996remainder}. Because a multi-channel
+concentrator such as the SX1302 demodulates channels concurrently, the short
+residue packets can be received simultaneously, and the original value is
+recovered in $O(k)$ operations for $k$ moduli. The practical effect is a
+reduction in per-packet occupancy rather than in total transmitted volume,
+which is precisely the quantity that governs gateway capacity. The detailed
+encoding and reconstruction path is presented in Chapter Three.
+
+Residue arithmetic is not new to distributed systems. The same decomposition has
+been applied to the throughput problem in permissionless blockchains, where
+splitting work across residue classes permits parallel processing of operations
+that would otherwise serialise. That line of work establishes the arithmetic and
+the parallelisation argument; what it does not address is the constrained radio
+link, where the payoff is airtime rather than processor cycles, nor the identity
+and confidentiality questions that arise when the residues cross a shared
+medium. This thesis takes the arithmetic as established and asks what it is
+worth on the edge of the network rather than at its centre.
+
+
+
+Data that has been collected cheaply must then be trusted. Agricultural records
+increasingly carry consequences beyond the farm gate. They substantiate organic
+and fair-trade certification, they underwrite index-based crop insurance, and
+they inform subsidy allocation. Each of these uses creates an incentive to
+falsify. A centralised database concentrates that risk in a single
+administrator, and an unprotected sensor network invites the injection of
+fabricated readings by any party with a compatible radio. \gls{dlt} addresses
+the tamper-evidence requirement by binding records into a hash-linked chain
+replicated across mutually distrusting parties, and permissioned platforms such
+as \gls{hlf} add an identity layer through a \gls{msp} and \gls{pki}, making it
+feasible to say not merely that a record is unaltered but who produced
+it~\cite{tar2023fabric, jayaram2023hyperledger, dube2024fabricIrrigation}.
+
+Running that machinery at the edge is the difficulty. Consensus, endorsement and
+world-state maintenance were designed for datacentre hardware, whereas an
+agricultural deployment must place gateways in the field, on \gls{arm64}
+single-board computers, behind intermittent connectivity. Whether a permissioned
+ledger can meet irrigation-control timing requirements on such hardware has
+until recently been asserted rather than measured.
+
+Finally, protection is not exhausted by integrity. A soil-moisture trace is also
+a disclosure. It reveals plot productivity, irrigation strategy and, in
+aggregate, the commercial position of the farmer. Where records are replicated
+across a consortium that includes buyers, insurers and cooperatives, the same
+replication that secures integrity enlarges the audience for private
+information. Identity, integrity and privacy therefore have to be treated as one
+design problem rather than three independent ones, which is the position this
+thesis takes.
+
+\section{Statement of the Problem}
+\label{sec:problem}
+
+Three properties that ought to hold simultaneously are, in current systems,
+traded against one another.
+
+\textbf{Identity is weak at the sensing layer.} Constrained nodes seldom carry
+credentials strong enough to authenticate individual readings. Where
+authentication exists it typically terminates at the gateway, so the ledger
+attests to what the gateway submitted rather than to what the sensor measured.
+The provenance chain has a gap exactly where falsification is cheapest, at the
+final hop between an individual node and the record that claims to represent
+it.
+
+\textbf{Integrity guarantees do not survive the move to the edge.} Permissioned
+ledgers provide tamper evidence, but their published performance
+characterisations assume server-class hosts. On \gls{arm64} gateways with
+constrained memory and intermittent links, it is not established that
+endorsement and ordering can complete inside the control loop of an irrigation
+decision, nor how the ledger behaves during network partition and recovery.
+
+\textbf{Privacy is sacrificed to obtain integrity.} Replicating raw agronomic
+readings to every consortium member is the simplest way to make them verifiable
+and the worst way to keep them confidential. Existing deployments largely accept
+this trade, or push confidential data off chain in a way that reintroduces the
+trusted intermediary the ledger was meant to remove.
+
+The three shortfalls, shown together in Figure~\ref{fig:three-properties}, are
+not independent faults to be repaired one at a time. Each follows from the same
+scarcity, and a remedy applied to one is paid for out of the budget available
+to the others.
+
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}[
+      prop/.style={draw, thick, rounded corners=2pt, align=center,
+                   font=\small\bfseries, minimum height=8mm, inner sep=4pt,
+                   fill=white},
+      gap/.style={font=\footnotesize\itshape, align=center, text width=34mm},
+      link/.style={{Stealth[length=2mm]}-{Stealth[length=2mm]}, gray, thin}
+    ]
+    \node[prop] (id)  at (0,2.5)   {Identity};
+    \node[prop] (int) at (-3.2,0)  {Integrity};
+    \node[prop] (pri) at (3.2,0)   {Privacy};
+
+    \draw[link] (id)  -- (int);
+    \draw[link] (int) -- (pri);
+    \draw[link] (pri) -- (id);
+
+\node[gap] (gid)  at (0,3.5)     {authentication stops\\at the gateway};
+    \node[gap] (gint) at (-3.2,-1.1) {ledger cost unproven\\on edge hardware};
+    \node[gap] (gpri) at (3.2,-1.1)  {confidentiality traded\\away for verifiability};
+
+    \begin{scope}[on background layer]
+      \node[draw, dashed, thick, rounded corners=4pt, fill=black!3,
+            fit=(id)(int)(pri)(gid)(gint)(gpri), inner sep=5mm] (budget) {};
+    \end{scope}
+    \node[font=\small\itshape, below=1.5mm of budget.south]
+      {bounded by one shared energy, memory and channel budget};
+  \end{tikzpicture}
+  \caption{The three protection properties and the shortfall in each. Because
+           all three draw on a single constrained budget, they form one design
+           problem rather than three independent ones.}
+  \label{fig:three-properties}
+\end{figure}
+
+Underlying all three is a resource problem. The transmission budget that would
+pay for per-reading signatures, encryption and privacy-preserving encodings is
+already consumed by the raw payload itself. Any scheme that adds cryptographic
+protection without first reducing transmission cost will exhaust the node's
+energy budget or the gateway's channel capacity.
+
+How, then, can identity, integrity and privacy be protected simultaneously in an agricultural data
+processing pipeline, end to end from constrained sensing node to distributed
+ledger, within the energy, memory and channel-capacity budgets that field
+deployment actually permits?
+
+\section{Rationale of the Study}
+\label{sec:rationale}
+
+The budget for protection has to come from somewhere. If
+\gls{crt} residue decomposition reduces per-packet airtime substantially, it
+frees channel capacity and node energy that can be reinvested in protection
+rather than merely banked as efficiency. The same decomposition has a second,
+less obvious property. An individual residue discloses little about the original
+value, so residues distributed across channels or custodians provide a natural
+substrate for confidentiality and for threshold reconstruction. A mechanism
+introduced for efficiency can thus be made to serve privacy, which is what makes
+the combination worth studying rather than treating transmission and security as
+separate layers.
+
+The two mechanisms also compose cleanly. Residue
+decomposition and ledger verification operate on the same object at different
+points in its life, the first on the reading in flight and the second on the
+record at rest, and the quantity each is sensitive to is different: the radio
+cares about occupancy, the ledger about the size and count of committed
+transactions. A scheme that reduces occupancy without increasing transaction
+count therefore improves one without taxing the other, which is not generally
+true of protection mechanisms and is worth demonstrating rather than assuming.
+
+There is also an evidential gap. Claims about edge blockchain feasibility are
+typically supported by simulation or short laboratory runs. A
+sustained field deployment on real hardware, through real weather and real
+connectivity failures, produces a different and more useful class of evidence,
+including the failure modes that simulation does not generate.
+
+The applied case is direct. Smallholder and arid-region agriculture is where
+both the water-efficiency gains and the certification-fraud exposure are
+largest, and where infrastructure assumptions of existing systems are least
+likely to hold.
+
+\section{Objectives of the Study}
+\label{sec:objectives}
+
+\subsection{Main Objective}
+\label{subsec:main_objective}
+
+\textbf{To design, implement and evaluate a distributed blockchain-based
+framework that protects identity, integrity and privacy in agricultural data
+processing, and to validate it in a sustained field deployment on constrained
+edge hardware.}
+
+\subsection{Specific Objectives}
+\label{subsec:specific_objectives}
+
+\begin{enumerate}
+  \item \textbf{Analyse} the identity, integrity and privacy requirements of
+        agricultural data pipelines, decomposing the threat surface from
+        sensing node through gateway to ledger into an attacker model with
+        stated capabilities and assumptions.
+
+  \item \textbf{Design} an integrated protection scheme combining \gls{crt}
+        multi-channel residue transmission, which lowers per-packet airtime
+        while preserving exact reconstruction, with an identity layer that
+        binds each reading to an authenticated originating node through
+        \gls{hlf} \gls{msp} credentials and \gls{hrbac} policy enforced in
+        chaincode.
+
+  \item \textbf{Implement} the framework on a heterogeneous edge cluster of
+        \gls{esp32} sensing nodes and \gls{arm64} \gls{rpi} gateways running
+        \gls{hlf} under Raft ordering, deployed under real agricultural
+        operating conditions.
+
+  \item \textbf{Evaluate} the transmission, ledger and access-control layers
+        against compression and centralised baselines on airtime, energy,
+        throughput, latency and memory footprint, and assess the scalability
+        and fault-tolerance envelope through queuing-theoretic analysis
+        validated against measured load.
+\end{enumerate}
+
+\section{Research Questions}
+\label{sec:research_questions}
+
+\begin{enumerate}[label=\textbf{RQ\arabic*.}]
+  \item To what extent can \gls{crt} residue decomposition reduce per-packet
+        airtime and increase gateway packet capacity without loss of
+        reconstruction fidelity?
+  \item Can a permissioned distributed ledger sustain the throughput and latency
+        required by real-time irrigation control when hosted entirely on
+        \gls{arm64} edge gateways?
+  \item What identity binding is required for a ledger record to attest to the
+        originating sensing node rather than merely to the submitting gateway,
+        and what does that binding cost?
+  \item What confidentiality is obtained by distributing residues across
+        channels and custodians, and under what adversary model does it hold?
+  \item How does the integrated framework behave as offered load approaches
+        gateway and ledger saturation, and where are its practical limits?
+\end{enumerate}
+
+\section{Research Hypotheses}
+\label{sec:hypotheses}
+
+\begin{description}
+  \item[\textnormal{\textbf{H1 (Transmission efficiency).}}] \gls{crt} residue
+        transmission reduces per-packet airtime by at least 40\% relative to raw
+        transmission while maintaining at least 99\% reconstruction accuracy.
+
+  \item[\textnormal{\textbf{H2 (Edge ledger performance).}}] \gls{hlf} hosted on
+        four \gls{rpi} 4B gateways sustains a mean transaction latency below
+        \SI{2}{\second} at an average throughput of at least \SI{50}{\tps}.
+
+  \item[\textnormal{\textbf{H3 (Access-control overhead).}}] Enforcing
+        \gls{rbac} in chaincode preserves at least \SI{50}{\tps} and keeps mean
+        smart-contract execution below \SI{500}{\milli\second}.
+
+  \item[\textnormal{\textbf{H4 (Field robustness).}}] Sustained field operation
+        maintains at least 99\% end-to-end reliability, with measured airtime
+        within \SI{5}{\milli\second} of the analytical model.
+
+  \item[\textnormal{\textbf{H5 (Privacy preservation).}}] An adversary observing
+        fewer than $k$ of the $k$ residue channels cannot reconstruct the
+        original reading, and the residual information leakage remains below a
+        stated bound.
+\end{description}
+
+
+
+\section{Scope and Delimitations}
+\label{sec:scope}
+
+\textbf{In scope.} Sub-GHz \gls{lora} sensing networks of the order of fifty
+nodes; permissioned ledgers of the \gls{hlf} family under Raft ordering;
+gateway hardware in the \gls{rpi} 4B class; agronomic telemetry, specifically
+soil moisture, temperature, humidity and irrigation actuation; and the
+identity, integrity and privacy properties of that pipeline.
+
+\textbf{Out of scope.} Public permissionless blockchains and their consensus
+economics; cellular and satellite backhaul; image-based and remote-sensing
+agronomy; agronomic model accuracy as such, which is treated as given rather
+than as an object of study; and formal cryptographic proofs of the underlying
+primitives, which are cited rather than re-derived.
+
+\textbf{Delimitations.} Field validation is drawn from a single deployment site
+and a single cropping season, which bounds the claims that can be made about
+generalisation across soil types and climates. Node population is bounded by
+what could be instrumented. Behaviour beyond that population is established
+analytically and by synthetic load rather than by direct measurement.
+
+\section{Significance of the Study}
+\label{sec:significance}
+
+For \textbf{engineering practice}, the work supplies measured rather than
+simulated evidence about what a permissioned ledger costs on edge hardware, and
+a transmission scheme that reduces that cost enough to make protection
+affordable.
+
+For \textbf{the research literature}, it connects two bodies of work that have
+developed separately, namely residue arithmetic for communication efficiency and
+distributed ledgers for data provenance, and shows that the first can subsidise
+the second.
+
+\textbf{Methodologically}, the work contributes a characterisation obtained under
+field conditions rather than in a laboratory. Failures that a testbed does not
+generate, mesh partitions, thermal derating, intermittent backhaul and the
+recovery behaviour that follows each, are exactly the ones that determine
+whether such a system is deployable, and they only appear when the system is
+left running.
+
+For \textbf{agricultural stakeholders}, it offers a path to verifiable
+certification and insurance records that does not require farmers to surrender
+commercially sensitive detail to every consortium member.
+
+\section{Definition of Key Terms}
+\label{sec:definitions}
+
+\begin{description}
+  \item[Airtime] The time a radio occupies a channel to transmit one packet. It
+        governs both node energy consumption and gateway capacity.
+
+  \item[Residue] The remainder of a reading modulo one of a set of pairwise
+        coprime moduli. A complete residue set uniquely determines the original
+        value below the product of the moduli.
+
+  \item[Integrity] The property that a record has not been altered since it was
+        committed, and that alteration would be detectable.
+
+  \item[Identity] The property that a record can be attributed to a specific
+        authenticated principal, here a specific sensing node rather than
+        merely a gateway.
+
+  \item[Privacy] The property that a record's content is disclosed only to
+        principals authorised to see it, notwithstanding replication of the
+        ledger.
+
+  \item[Endorsement] In \gls{hlf}, the process by which designated peers
+        simulate a transaction and sign the result before ordering.
+\end{description}
+
+\section{Organisation of the Thesis}
+\label{sec:organisation}
+
+\textbf{Chapter One} states the background, problem, rationale, objectives,
+questions and hypotheses. \textbf{Chapter Two} reviews the literature on
+precision agriculture and \gls{iot} sensing, transmission optimisation,
+distributed ledgers in agriculture, edge-resident consensus and
+privacy-preserving data processing, and identifies the gap this work addresses.
+\textbf{Chapter Three} presents the materials and methods: system architecture,
+\gls{crt} formulation, identity and access-control design, hardware
+implementation, deployment protocol and evaluation methodology.
+\textbf{Chapter Four} reports results and applications across the transmission,
+ledger, access-control and agricultural-outcome dimensions. \textbf{Chapter
+Five} discusses the findings against the hypotheses, states limitations and
+threats to validity, and sets out conclusions, recommendations and perspectives
+for further research.
+\clearpage{}
+\clearpage{}
+
+\chapter{Review of the Literature}
+\label{ch:literature}
+
+\section{Introduction}
+\label{sec:lit_intro}
+
+This chapter surveys the five bodies of work on which the thesis draws:
+precision agriculture and \gls{iot} sensing; low-power wide-area transmission
+and the airtime constraint that governs it; residue arithmetic and the
+\gls{crt}; distributed ledgers in agriculture and their migration to the
+network edge; and identity, access control and privacy for replicated records.
+Each is treated on its own terms, then criticised, and the chapter closes by
+naming what the five leave undone.
+
+\section{Precision Agriculture and IoT Sensing}
+\label{sec:lit_precag}
+
+\subsection{From Wireless Sensor Networks to Managed Irrigation}
+
+Precision agriculture began as site-specific crop management, matching inputs
+to measured within-field variability rather than to field
+averages~\cite{pierce1999site, zhang2002precision}. Early instrumentation used
+wireless sensor networks for soil and microclimate
+monitoring~\cite{wang2006wireless, bogena2010soil}, and the subsequent decade
+moved the field from measurement to actuation, with \gls{lorawan} irrigation
+control among the clearest applications~\cite{evans2008precision}. Reviews of
+the area agree on the technical progress and on a persistent
+weakness~\cite{gebbers2010precision, aydin2021comprehensive}: integration
+between the sensing layer and the decision-support systems that consume it
+remains fragmented, so measurement quality is rarely the limiting factor on
+outcomes.
+
+\subsection{What the Sensing Literature Does Not Settle}
+
+Two questions are left open. First, almost all of this work treats the reading
+as trustworthy by construction: the sensor reports, the system believes it, and
+no mechanism attests that the value committed to storage is the value measured.
+Second, the economics that make a deployment viable on a smallholding, which
+force the node bill of materials to a few tens of dollars, are seldom carried
+through to the security design. A protection mechanism that assumes a secure
+element or a mains supply has assumed away the constraint that defines the
+problem.
+
+\section{Low-Power Wide-Area Transmission and the Airtime Constraint}
+\label{sec:lit_lora}
+
+\subsection{The Airtime Model}
+
+\gls{lora} is the dominant physical layer for agricultural telemetry, with
+demonstrated rural ranges of several kilometres and, in favourable terrain, up
+to \SI{15}{\kilo\metre}~\cite{adelantado2017understanding, li2020performance,
+raj2017comprehensive}. Its cost is airtime. For a spreading factor $SF$,
+bandwidth $BW$ and coding rate $CR$, the symbol duration and the time on air of
+a packet carrying $PL$ payload bytes are
+
+\begin{equation}
+  T_{\text{sym}} = \frac{2^{SF}}{BW},
+  \label{eq:symbol_time}
+\end{equation}
+
+\begin{equation}
+  T_{\text{air}} = T_{\text{preamble}}
+    + T_{\text{sym}}\!\left(8 + \max\!\left(
+      \left\lceil \frac{8PL - 4SF + 28 + 16}{4(SF - 2DE)} \right\rceil
+      (CR + 4),\; 0 \right)\right),
+  \label{eq:airtime}
+\end{equation}
+
+where $DE$ is the low-data-rate optimisation flag. The term that matters is the
+ceiling: airtime grows in discrete steps with payload length, and every
+additional symbol is charged at $T_{\text{sym}}$, which doubles with each
+increment of $SF$~\cite{adelantado2017understanding, bor2016lorawan}.
+
+Airtime is not merely an energy cost. Sub-GHz bands impose a duty-cycle limit,
+so a node that has transmitted for $T_{\text{air}}$ must remain silent for a
+proportional interval, which caps reporting frequency independently of battery
+capacity. Under the unslotted access that \gls{lorawan} class A uses, the
+offered load per channel over a reporting window $T_w$ for $N$ nodes is
+
+\begin{equation}
+  G = \frac{N \cdot T_{\text{air}}}{T_w},
+  \label{eq:offered_load}
+\end{equation}
+
+and the pure-ALOHA collision probability follows as
+
+\begin{equation}
+  P_{\text{coll}} = 1 - e^{-2G} \approx 2G \quad \text{for small } G,
+  \label{eq:collision}
+\end{equation}
+
+which is linear in $T_{\text{air}}$ in the low-load regime and degrades sharply
+as $G$ approaches unity~\cite{bor2016lorawan, adelantado2017understanding}.
+Reducing per-packet airtime therefore buys capacity twice over, once through
+the duty cycle and once through the collision term.
+
+\subsection{Compression and Sampling Responses}
+
+The conventional response is to shorten the payload. Lossless coders adapted to
+sensor streams, principally \gls{lzw} and Huffman variants, achieve useful
+ratios on agronomic data~\cite{li2018lossless, marcelloni2009energy}, but their
+dictionary and buffer requirements are measured in kilobytes, which is a
+significant fraction of the free \gls{ram} on a microcontroller already running
+a radio stack and a sensor driver~\cite{chen2025compression}. Adaptive sampling
+transmits only when a reading departs from a predicted
+trajectory~\cite{kjellsson2008adaptive}, at the risk of suppressing exactly the
+transient that mattered. Aggregation and protocol-level
+optimisation~\cite{heinzelman2000energy, sanchez2021energy} reduce traffic at
+the cost of resolution or latency.
+
+\subsection{The Common Limitation}
+
+Every one of these approaches reduces the number of bytes sent. None reduces
+the occupancy of an individual packet while preserving the reading exactly, and
+occupancy is what Equations~\ref{eq:offered_load} and~\ref{eq:collision} are
+sensitive to. This distinction, between total volume and per-packet occupancy,
+is where the present work departs from the compression literature.
+
+\section{Residue Arithmetic and the Chinese Remainder Theorem}
+\label{sec:lit_crt}
+
+\subsection{Statement and Reconstruction}
+
+Let $m_1, m_2, \ldots, m_k$ be pairwise coprime moduli and
+$M = \prod_{i=1}^{k} m_i$. For any integer $x$ with $0 \le x < M$, the residue
+vector
+
+\begin{equation}
+  \mathbf{r} = (r_1, r_2, \ldots, r_k), \qquad r_i = x \bmod m_i,
+  \label{eq:residues}
+\end{equation}
+
+determines $x$ uniquely, and $x$ is recovered by
+
+\begin{equation}
+  x = \left( \sum_{i=1}^{k} r_i M_i N_i \right) \bmod M,
+  \qquad M_i = \frac{M}{m_i}, \quad N_i = M_i^{-1} \bmod m_i .
+  \label{eq:crt_reconstruction}
+\end{equation}
+
+Reconstruction is exact because $M_i N_i \equiv 1 \pmod{m_i}$ and
+$M_i \equiv 0 \pmod{m_j}$ for $j \neq i$~\cite{hardy2008introduction,
+ding1996remainder}. Evaluated by Garner's algorithm the cost is $O(k)$ modular
+operations with no division in the inner loop~\cite{garner1959residue}, which is
+what makes the scheme viable on a gateway rather than only on a workstation.
+Figure~\ref{fig:crt-concept} shows the decomposition and its inverse.
+
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}[
+      b/.style={draw, rounded corners=2pt, align=center, font=\small,
+                minimum height=8mm, inner sep=3pt},
+      r/.style={b, fill=black!5, text width=17mm},
+      a/.style={-{Stealth[length=2mm]}, thick},
+      lbl/.style={font=\footnotesize\itshape, align=center}
+    ]
+    \node[b, text width=22mm] (x)  at (0,0) {reading\\$x < M$};
+    \node[r] (r1) at (3.6, 1.4) {$r_1 = x \bmod m_1$};
+    \node[r] (r2) at (3.6, 0)   {$r_2 = x \bmod m_2$};
+    \node[r] (r3) at (3.6,-1.4) {$r_3 = x \bmod m_3$};
+    \node[b, text width=24mm] (rec) at (7.8,0) {Garner\\reconstruction\\$O(k)$};
+    \node[b, text width=22mm] (y)  at (11.4,0) {$x$ recovered\\exactly};
+
+    \foreach \n in {r1,r2,r3} { \draw[a] (x.east) -- (\n.west);
+                                \draw[a] (\n.east) -- (rec.west); }
+    \draw[a] (rec) -- (y);
+    \node[lbl] at (3.6,-2.4) {three short packets,\\demodulated concurrently};
+  \end{tikzpicture}
+  \caption{Residue decomposition and reconstruction. One long packet is
+           replaced by $k$ short ones that a multi-channel concentrator can
+           demodulate simultaneously, and the original value is recovered
+           exactly in $O(k)$ operations.}
+  \label{fig:crt-concept}
+\end{figure}
+
+\subsection{Where Residue Systems Have Been Applied}
+
+Residue number systems built on Equation~\ref{eq:crt_reconstruction} are long
+established in computer arithmetic, where carry-free addition and
+multiplication across residue channels accelerate arithmetic and support
+fault-tolerant computation~\cite{parhami2010computer, shoup2009computational}.
+The theorem is equally standard in cryptography~\cite{ding1996remainder,
+garner1959residue} and in error correction~\cite{goldreich1999china}. Within
+sensor networks, \textcite{wang2018novel} applied residue representations to
+reduce stored data volume.
+
+\subsection{The Gap in the Residue Literature}
+
+The sensor-network application targeted storage, not transmission, and
+therefore did not exploit the property that matters here: that $k$ residues are
+$k$ independent short packets which a multi-channel concentrator can receive at
+the same instant. The computer-arithmetic literature exploits parallelism, but
+across arithmetic units rather than across radio channels, where the currency
+is occupancy rather than processor cycles. No prior system, to the author's
+knowledge, uses residue decomposition to drive parallel demodulation on a
+low-power radio.
+
+
+
+\section{Distributed Ledgers in Agriculture}
+\label{sec:lit_blockchain}
+
+\subsection{Supply-Chain Transparency}
+
+The earliest and best-developed application is provenance along the food
+supply chain. \textcite{tian2016agri} combined RFID with a blockchain to trace
+agri-food products end to end, and subsequent surveys map the
+field~\cite{kamilaris2019rise, galvez2018future} and its food-safety
+consequences~\cite{oh2025foodsafety}. The common architecture places the ledger
+between organisations that have commercial reason to distrust one another,
+which is precisely the setting in which replicated tamper-evident storage earns
+its cost.
+
+\subsection{Farm Data Management and Smart-Contract Automation}
+
+A second line applies the ledger inside the farm, to data ownership and access
+rather than to product movement~\cite{lin2018blockchain, ferrag2020security,
+haque2024scalable}. A third automates agreements, using smart contracts to
+trigger payments, insurance settlement or irrigation
+actions~\cite{rama2021systematic, patil2022blockchain}. Both assume a ledger
+that is reachable and responsive.
+
+\subsection{The Recurring Weakness}
+
+Across all three lines, implementations that operate under the constraints of
+real-time control on resource-constrained hardware remain scarce. Where
+performance is reported it is typically obtained on server-class hosts, and the
+question of whether endorsement and ordering complete inside an irrigation
+control loop is not usually asked.
+
+\section{Edge-Resident Consensus and Constrained Hardware}
+\label{sec:lit_edge}
+
+\subsection{Edge Computing in Agricultural Systems}
+
+Moving computation to the field reduces round-trip latency and reduces
+dependence on backhaul that rural sites often lack~\cite{sharma2020edge}.
+\textcite{liu2019edge} reported improved response times for irrigation control
+under edge processing, and \textcite{wang2021edge} showed that keeping data
+local improves privacy by limiting what leaves the site. \gls{arm64}
+single-board clusters are now routinely used for distributed sensing and
+inference~\cite{sharma2020edge, wang2021edge}.
+
+\subsection{Networking the Edge}
+
+Agricultural deployments overwhelmingly use star topologies, in which a single
+gateway failure removes a zone. Mesh routing has been studied mostly in urban
+and industrial settings~\cite{akylidiz2005wireless}; BATMAN-adv has shown
+promise for rural connectivity~\cite{schmidt2010b.a.t.m.a.n.} without being
+taken up in precision agriculture. Hybrid multi-technology architectures have
+been proposed~\cite{chettri2020comprehensive} but tend to add management
+complexity without integrating cleanly.
+
+\subsection{Capacity Limits}
+
+Where a gateway serves $C$ channels over a window $W$ and each node consumes
+$T_{\text{eff}}$ of effective airtime per reporting cycle, the node ceiling is
+
+\begin{equation}
+  N_{\max} = \frac{C \cdot W}{T_{\text{eff}}},
+  \label{eq:node_ceiling}
+\end{equation}
+
+and per-channel packet throughput, for a concentrator that demodulates one
+packet per channel concurrently, is
+
+\begin{equation}
+  \lambda = \frac{1}{T_{\text{air}}}.
+  \label{eq:packet_rate}
+\end{equation}
+
+Equations~\ref{eq:node_ceiling} and~\ref{eq:packet_rate} pull in different
+directions once a reading is split across channels: splitting raises the total
+airtime a node consumes, and so lowers $N_{\max}$, while lowering
+$T_{\text{air}}$ per packet, and so raising $\lambda$. Which of the two binds
+depends on whether the deployment is limited by node count or by packet
+capacity, a distinction the existing literature does not draw.
+
+\subsection{What Is Missing at the Edge}
+
+Edge implementations rarely integrate with verifiable storage, so the trust gap
+that motivates the ledger reappears the moment computation is moved off the
+ledger. Communication parallelism, meaning simultaneous use of multiple
+wireless channels by one logical reading, is essentially unexplored.
+
+\section{Identity, Access Control and Privacy}
+\label{sec:lit_privacy}
+
+\subsection{Identity and Access Control}
+
+Permissioned ledgers supply identity through a \gls{msp} backed by a
+\gls{pki}, which allows a record to be attributed to an enrolled principal
+rather than merely to an address~\cite{tar2023fabric, jayaram2023hyperledger}.
+\gls{rbac} and its hierarchical variants are the usual policy layer, enforced
+in chaincode so that the authorisation decision is itself
+auditable~\cite{ferrag2020security}.
+
+\subsection{Privacy Under Replication}
+
+Replication is what makes a ledger tamper-evident and is also what makes it
+leak. Where a consortium includes buyers, insurers and cooperatives, every
+member sees every replicated record, and agronomic traces disclose plot
+productivity and irrigation strategy. Keeping data local reduces the exposure
+but reintroduces the trusted party the ledger was meant to
+remove~\cite{wang2021edge}.
+
+\subsection{The Unresolved Tension}
+
+The literature offers identity and integrity together, and privacy separately,
+usually by withholding data from the ledger. What it does not offer is a
+mechanism in which the same operation that makes transmission affordable also
+constrains disclosure. That possibility, latent in the residue representation
+of Equation~\ref{eq:residues}, is the opening this thesis works in.
+
+\section{Research Gaps}
+\label{sec:lit_gaps}
+
+Table~\ref{tab:gaps} states the gaps that follow from the five preceding
+sections and the objective that addresses each.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Gaps identified in the literature and the objective addressing each.}
+  \label{tab:gaps}
+  \begin{singlespace}
+  \small
+  \begin{tabular}{@{}p{3.1cm}p{6.6cm}p{2.6cm}@{}}
+    \toprule
+    \textbf{Area} & \textbf{Gap} & \textbf{Objective} \\
+    \midrule
+    Transmission cost
+      & Compression reduces total volume, not per-packet occupancy, and costs
+        memory a constrained node does not have
+      & O2 \\
+    Residue arithmetic
+      & Applied to storage and to arithmetic units, never to parallel
+        demodulation on a low-power radio
+      & O2 \\
+    Edge ledgers
+      & Performance characterised on server hardware; behaviour on \gls{arm64}
+        gateways under partition unmeasured
+      & O3, O4 \\
+    Identity
+      & Authentication terminates at the gateway, so the record attests to the
+        submitter rather than the sensor
+      & O1, O2 \\
+    Privacy
+      & Confidentiality obtained by withholding data, which reinstates a
+        trusted intermediary
+      & O1, O2 \\
+    Capacity
+      & No validated model distinguishing node-count from packet-capacity
+        limits for multi-channel residue traffic
+      & O4 \\
+    \bottomrule
+  \end{tabular}
+  \end{singlespace}
+\end{table}
+
+\section{Partial Conclusion}
+\label{sec:lit_conclusion}
+
+The sensing literature establishes what to measure and treats the measurement
+as trustworthy. The transmission literature establishes that airtime binds and
+attacks it by shortening payloads, which does not address per-packet occupancy.
+Residue arithmetic supplies a decomposition whose parallelism has been
+exploited in silicon but not on the air. The ledger literature supplies
+tamper evidence and identity, characterised on hardware that agricultural
+deployments do not have. The privacy literature obtains confidentiality by
+withholding, which forfeits verifiability.
+
+The four therefore leave a single composite question, which the remainder of
+this thesis addresses: whether a decomposition adopted to reduce per-packet
+occupancy can simultaneously carry node-level identity and bound disclosure,
+and whether the resulting system holds up on the hardware and in the conditions
+that field deployment actually imposes.
+\clearpage{}
+
+
+\ubfrontheading{References}
+\begin{singlespace}
+\printbibliography[heading=none]
+\end{singlespace}
+
+\appendix
+\titleformat{\chapter}[display]
+  {\normalfont\bfseries\centering\singlespacing\fontsize{16}{18.4}\selectfont}
+  {\MakeUppercase{Appendix \thechapter}}
+  {0pt}
+  {\MakeUppercase}
+\clearpage{}
+
+\chapter{Supplementary Material}
+\label{app:supplementary}
+
+\clearpage{}
+
+
+\end{document}

@@ -1,0 +1,16 @@
+claim_id,claim,source_dataset,derived_output,V11_treatment
+C01,61-day deployment,data/raw/raw_uptime_events.csv,derived_results.json:deployment.days,retain
+C02,50 sensors 4 gateways 4 zones,raw_field_topology.csv,derived_results.json:deployment,retain
+C03,146400 sensor writes,raw_sensor_transactions.csv,derived_results.json:deployment.sensor_writes,retain as observed ledger-table rows
+C04,209000 decisions and 4860 denied,raw_access_decisions.csv,derived_results.json:decisions,retain
+C05,32 peer runs and 8 per configuration,raw_latency_samples.csv,derived_results.json:decomposition,retain run-level unit
+C06,100 throughput runs and 10 levels,raw_throughput_samples.csv,derived_results.json:throughput,retain
+C07,70.392 and 63.518 TPS observed peaks,raw_throughput_samples.csv,derived_results.json:throughput,call observed peaks
+C08,9.551 percent mean tested difference,raw_throughput_samples.csv,derived_results.json:throughput.reduction_mean_pct,retain with blocked-model limits
+C09,3 outages and 9.3 hours,data/raw/raw_uptime_events.csv,derived_results.json:deployment,retain availability only
+C10,zero sensor-data loss,data/raw/raw_uptime_events.csv + raw_sensor_transactions.csv,not identifiable,withdraw and report unresolved
+C11,8000 scripted refusals,raw_security_attempts.csv,derived_results.json:security,retain as scripted conformance
+C12,59 of 200 delayed stages,raw_crl_revocation_events.csv,derived_results.json:revocation,retain as stage label only
+C13,131795 invalid two-residue reconstructions,raw_sensor_transactions.csv,derived_results.json:integrity,retain as postmortem finding
+C14,corrected-code performance,corrected artifacts,not available,do not claim
+

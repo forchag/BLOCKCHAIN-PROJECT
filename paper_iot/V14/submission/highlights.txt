@@ -1,0 +1,5 @@
+- A 61-day farm deployment recorded 209,000 access decisions
+- Counterbalanced tests linked more configured peers with lower write latency
+- Access control reduced tested throughput by 9.6% on average
+- A code audit exposed policy, residue, signature and revocation defects
+- Released data and code support independent reproduction

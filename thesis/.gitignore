@@ -1,0 +1,24 @@
+# LaTeX build intermediates
+build/
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.glo
+*.gls
+*.glg
+*.ist
+*.lof
+*.log
+*.lot
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+
+# Keep dist/ artifacts — the versioned record of each iteration.
+!dist/*.pdf
+!dist/*.tex
+!dist/*.docx
