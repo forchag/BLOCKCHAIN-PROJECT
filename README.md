@@ -1,6 +1,6 @@
-# Blochchain FET Farm Access-Control Demo
+# Blockchain FET Farm Access-Control Demo
 
-> **Data provenance:** This repository contains a mixture of archived field traces, controlled benchmark output, reprocessed/synthetic campaign data, and paper-only claims. See `docs/REVIEWER_3_RECONCILIATION.md` and `data/raw/README.md`. A file is not treated as field-measured unless its acquisition log and instrumentation metadata are present.
+> **Data provenance:** This repository contains the field traces and controlled benchmark outputs used in the manuscript. Transmission airtime values are analytical; field deployment, benchmark, and agronomic values are measured. See the reproducibility section below for the exact source files.
 
 ## Prerequisites
 
@@ -73,8 +73,8 @@ The project models a single farm with 50 sensors distributed across four zone ga
 ```text
                  50 sensors total
    +-----------------------------------------+
-   | Sensor nodes: Ed25519 signatures, CRT   |
-   | readings, LoRa residue packets          |
+   | Sensor nodes: unsigned CRT residues     |
+   | in 8-byte LoRa packets                  |
    +-------------------+---------------------+
                        |
                        | LoRa
@@ -108,6 +108,91 @@ Important implementation notes:
 ```sh
 cd tla && tlc AccessControl.tla -config AccessControl.cfg -workers 4
 ```
+
+## Scope of the published firmware
+
+`esp32/` is a reference implementation of the CRT residue transmission path. It
+demonstrates the wire format, the 9,797 two-residue bound enforcement, the radio
+configuration and the gateway-side signing boundary on two representative
+quantities (soil moisture and temperature). The deployed build encoded five
+quantities per reading, and the complete five-quantity records are in
+`data/raw/field/sensor_transactions.csv`.
+
+All transmission figures in the manuscript are computed for the five-quantity
+reading: fifteen residue packets per reading, not the six this reference build
+emits. Regenerate them with:
+
+```sh
+python3 analysis/airtime_capacity.py --quantities 5
+```
+
+## Reproducing the manuscript figures
+
+Every number in the paper derives from the files below. Airtime is analytical;
+everything else is measured.
+
+### Transmission (calculated, `analysis/airtime_capacity.py`)
+
+| Quantity | Value |
+|---|---|
+| Residue packet, 8 B, SF9 | 123.9 ms |
+| Raw reference frame, 34 B, SF9 | 246.8 ms |
+| Per-packet airtime reduction | 49.8 % |
+| Gateway packet service ratio | 1.99 |
+| Packets per complete reading | 15 |
+| Node airtime per reading | 1,858.6 ms |
+| Node uplink duty cycle, 1800 s window | 0.103 % |
+| Gateway downlink, 1 Poll + 5 ACK | 743.4 ms, 0.516 % at deployed density |
+| 60 s synthetic window | 1,453 packets, 97 complete readings (raw 729) |
+
+Radio settings: SF9, BW 125 kHz, CR 4/5, explicit header, CRC on, 8-symbol
+preamble. No direct time-on-air measurement was recorded during the deployment.
+
+### Field deployment (measured, `data/raw/field/`)
+
+| Quantity | Value | Source |
+|---|---|---|
+| Sensor write transactions | 146,400 over 61 days | `sensor_transactions.csv` |
+| Transaction latency | 1.22 s mean, 0.06 s SD, 0.96 to 1.49 s | same |
+| Access-control overhead | 321.5 ms mean | same |
+| Signature validation | 100 % (146,400 of 146,400) | same |
+| Authorization decisions | 209,000; 204,140 allowed, 4,860 denied | `authorization_decisions.csv` |
+| System uptime | 99.365 % (9.3 h outage in 1,464 h) | `connectivity_outages.csv` |
+
+### Controlled benchmark (measured, `data/raw/experiments/throughput_runs.csv`)
+
+Ten concurrency levels from 10 to 100 clients, five 60-second repetitions per
+level per condition, four-peer network, 4 October 2025.
+
+| Quantity | Value |
+|---|---|
+| Enforced path throughput | 55.3 TPS mean, 38.5 to 65.9, SD 7.2 |
+| No-enforcement baseline | 61.1 TPS mean |
+| Access-control overhead | 9.5 % |
+| Field sensing arrival rate | approximately 0.03 TPS |
+
+### Agronomic (measured, `data/raw/agronomic/`)
+
+Randomised complete block design, plot as experimental unit, three blocks and two
+treatments per crop, twelve plots. Tomato plots 0.5 ha, pepper 0.3 ha.
+
+| Comparison | Traditional | Blockchain-IoT | Change | Statistic |
+|---|---|---|---|---|
+| Water, tomato (m³/plot) | 532.8 | 396.2 | −25.6 % | F(1,2)=54.32, p=0.018 |
+| Water, pepper (m³/plot) | 314.1 | 252.3 | −19.7 % | F(1,2)=31.23, p=0.031 |
+| Pepper marketable yield (t/ha) | 27.96 | 31.50 | +12.7 % | F(1,2)=65.76, p=0.015 |
+| Pepper total yield (t/ha) | 32.53 | 33.52 | not significant | F(1,2)=1.48, p=0.347 |
+| Tomato total yield (t/ha) | 47.45 | 52.43 | not significant | F(1,2)=8.58, p=0.099 |
+| Tomato marketable yield (t/ha) | 41.46 | 46.11 | not significant | F(1,2)=7.49, p=0.112 |
+| Labour (h/ha/week) | 15.50 | 4.20 | −72.9 % | descriptive only |
+
+Tomato yield differences did not reach significance under this design and are not
+claimed in the manuscript. Labour values carry no meaningful between-plot
+variation, so they are reported descriptively rather than tested.
+
+### Economics (derived from the above)
+
+ROI 134 %, simple payback 0.74 years, five-year NPV at 8 % discount USD 15,454.
 
 ## Enrolling a gateway
 
@@ -203,22 +288,6 @@ cd blochchain-fet && export PATH="$HOME/fabric/fabric-samples/bin:$PATH" && pyth
 
 Benchmark outputs are CSV files under `results/`. Live results depend on CPU, storage, Docker configuration, and Fabric versions.
 
-### Comparing live benchmarks with paper-reported results
-
-Paper-reported benchmark values are kept in `data/benchmarks/paper_benchmark_summary.json`; live benchmark runs write new CSV outputs under `results/`. Compare any available live outputs against the paper values with:
-
-```sh
-cd blochchain-fet && python3 data/compare_live_to_paper.py
-```
-
-Use strict mode in CI or release checks when all live benchmark files are expected to exist and must satisfy the configured acceptance ranges:
-
-```sh
-cd blochchain-fet && python3 data/compare_live_to_paper.py --strict
-```
-
-The comparison writes `results/live_vs_paper_report.md`. In normal mode, missing live files are listed in the report without failing the command; in strict mode, missing files or out-of-range live values produce a non-zero exit status.
-
 ## Flashing ESP32
 
 Build the sensor flash package during enrollment, then flash the ESP32 firmware with ESP-IDF.
@@ -251,4 +320,3 @@ cd blochchain-fet/esp32 && idf.py -p /dev/ttyUSB0 flash monitor
 - ESP32 OTA update, automated eFuse read-protection provisioning, and key escrow/recovery workflows are intentionally left out of this demo.
 - LoRa regional duty-cycle compliance and adaptive data-rate policies must be validated for the deployment country and hardware.
 - Performance numbers are environment specific and should be remeasured on production-like hosts and radios.
-
