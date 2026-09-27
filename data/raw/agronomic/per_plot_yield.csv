@@ -1,0 +1,13 @@
+plot_id,crop,treatment,harvest_date,total_yield_t,marketable_yield_t,defect1_name,defect1_pct,defect2_name,defect2_pct
+PEP-B1-BIOT,pepper,blockchain_iot,2025-09-11,10.08,9.285,sunscald_pct,4.75,blossom_end_rot_pct,2.01
+PEP-B2-BIOT,pepper,blockchain_iot,2025-09-25,10.674,9.651,sunscald_pct,3.55,blossom_end_rot_pct,2.02
+PEP-B3-BIOT,pepper,blockchain_iot,2025-09-11,9.415,9.415,sunscald_pct,3.48,blossom_end_rot_pct,2.03
+PEP-B1-TRAD,pepper,traditional,2025-09-19,10.267,8.084,sunscald_pct,7.23,blossom_end_rot_pct,4.01
+PEP-B2-TRAD,pepper,traditional,2025-09-19,10.079,8.851,sunscald_pct,6.58,blossom_end_rot_pct,4.8
+PEP-B3-TRAD,pepper,traditional,2025-09-14,8.93,8.231,sunscald_pct,5.88,blossom_end_rot_pct,4.69
+TOM-B1-BIOT,tomato,blockchain_iot,2025-09-15,26.923,24.029,fruit_cracking_pct,4.37,blossom_end_rot_pct,2.87
+TOM-B2-BIOT,tomato,blockchain_iot,2025-09-03,26.769,22.168,fruit_cracking_pct,2.88,blossom_end_rot_pct,2.64
+TOM-B3-BIOT,tomato,blockchain_iot,2025-09-11,24.953,22.96,fruit_cracking_pct,2.91,blossom_end_rot_pct,2.6
+TOM-B1-TRAD,tomato,traditional,2025-09-10,23.397,20.449,fruit_cracking_pct,8.75,blossom_end_rot_pct,4.97
+TOM-B2-TRAD,tomato,traditional,2025-09-10,23.632,21.461,fruit_cracking_pct,9.23,blossom_end_rot_pct,4.86
+TOM-B3-TRAD,tomato,traditional,2025-09-16,24.148,20.284,fruit_cracking_pct,6.34,blossom_end_rot_pct,5.36

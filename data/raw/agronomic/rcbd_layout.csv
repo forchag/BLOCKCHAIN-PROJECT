@@ -1,0 +1,13 @@
+plot_id,crop,block,treatment,plot_area_ha,plants_per_plot
+TOM-B1-TRAD,tomato,1,traditional,0.5,8204
+TOM-B1-BIOT,tomato,1,blockchain_iot,0.5,10253
+TOM-B2-TRAD,tomato,2,traditional,0.5,9828
+TOM-B2-BIOT,tomato,2,blockchain_iot,0.5,9143
+TOM-B3-TRAD,tomato,3,traditional,0.5,13543
+TOM-B3-BIOT,tomato,3,blockchain_iot,0.5,12467
+PEP-B1-TRAD,pepper,1,traditional,0.3,14137
+PEP-B1-BIOT,pepper,1,blockchain_iot,0.3,12756
+PEP-B2-TRAD,pepper,2,traditional,0.3,9544
+PEP-B2-BIOT,pepper,2,blockchain_iot,0.3,10067
+PEP-B3-TRAD,pepper,3,traditional,0.3,11205
+PEP-B3-BIOT,pepper,3,blockchain_iot,0.3,13439

@@ -1,0 +1,4 @@
+start_time,end_time,event_type,duration_hours,affected_component,notes
+2025-08-26T03:15:00+01:00,2025-08-26T11:57:00+01:00,lora_link_failure,8.7,gw-east,LoRa backhaul link to base station dropped.
+2025-09-20T18:15:00+01:00,2025-09-20T18:39:00+01:00,power_fluctuation,0.4,gw-south,Brief brownout at the gateway power supply.
+2025-09-22T06:45:00+01:00,2025-09-22T06:57:00+01:00,firmware_watchdog_reset,0.2,gw-north,Gateway firmware watchdog forced a reboot.
