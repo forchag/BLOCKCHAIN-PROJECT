@@ -23,6 +23,8 @@
 #define MIN_SLEEP_US (5ULL * 1000000ULL)
 #define QUANTITY_SOIL 0u
 #define QUANTITY_TEMPERATURE 1u
+#define QUANTITY_COUNT 5u
+#define PACKETS_PER_READING (QUANTITY_COUNT * CRT_RESIDUE_COUNT)
 
 static const char *TAG = "main";
 
@@ -58,8 +60,17 @@ void app_main(void) {
   ESP_ERROR_CHECK(sensor_init()); ESP_ERROR_CHECK(lora_init());
   sensor_reading_t reading={0}; ESP_ERROR_CHECK(sensor_read(&reading));
   const uint16_t node_id=node_id_from_mac(); const uint32_t reading_id=esp_random();
-  transmit_quantity(node_id,reading_id,QUANTITY_SOIL,scale_soil(reading.soil_moisture_raw));
-  transmit_quantity(node_id,reading_id,QUANTITY_TEMPERATURE,scale_temperature(reading.temperature_centi_c));
-  ESP_LOGI(TAG,"sent two measured quantities as six unsigned 8-byte LoRa packets; gateway signing follows reconstruction");
+  const uint32_t quantities[QUANTITY_COUNT] = {
+      scale_soil(reading.soil_moisture_raw),
+      scale_temperature(reading.temperature_centi_c),
+      reading.aux_adc_raw[0],
+      reading.aux_adc_raw[1],
+      reading.aux_adc_raw[2],
+  };
+  for (uint8_t quantity = 0; quantity < QUANTITY_COUNT; ++quantity) {
+    transmit_quantity(node_id, reading_id, quantity, quantities[quantity]);
+  }
+  ESP_LOGI(TAG, "sent %u measured quantities as %u unsigned 8-byte LoRa packets",
+           (unsigned)QUANTITY_COUNT, (unsigned)PACKETS_PER_READING);
   esp_deep_sleep(SLEEP_CYCLE_US < MIN_SLEEP_US ? MIN_SLEEP_US : SLEEP_CYCLE_US);
 }
