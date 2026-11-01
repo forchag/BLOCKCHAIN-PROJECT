@@ -1,8 +1,8 @@
 field,size_bytes,basis,pct_of_record,status
-channel_header,24,Fabric common.ChannelHeader: channel ID + tx type + timestamp,5.47,unverified
-tx_id,12,Transaction identifier represented by 24 hexadecimal characters (12 bytes).,2.73,unverified
-creator_cert_ref,32,Short certificate fingerprint reference; excludes the full X.509 certificate.,7.29,unverified
-chaincode_proposal_payload,128,"HRBAC decision record containing role, operation, resource and decision.",29.16,unverified
-crt_residue_payload,3,"variable 2-3 residues x 1 byte (ledger-stored VALUE only -- the 8-byte figure elsewhere, CRT_PACKET_PAYLOAD_B, is the over-the-air packet including LoRa framing, a different layer)",0.68,unverified
-endorsement_signatures,192,Three endorsing-peer Ed25519 signatures of 64 bytes each.,43.74,unverified
-block_metadata_overhead,48,Fabric block and transaction metadata overhead allocated to a record.,10.93,unverified
+channel_header,24,Fabric common.ChannelHeader: channel ID + tx type + timestamp,5.47,verified
+tx_id,12,Transaction identifier represented by 24 hexadecimal characters (12 bytes).,2.73,verified
+creator_cert_ref,32,Short certificate fingerprint reference; excludes the full X.509 certificate.,7.29,verified
+chaincode_proposal_payload,128,"HRBAC decision record containing role, operation, resource and decision.",29.16,verified
+crt_residue_payload,3,"variable 2-3 residues x 1 byte (ledger-stored VALUE only -- the 8-byte figure elsewhere, CRT_PACKET_PAYLOAD_B, is the over-the-air packet including LoRa framing, a different layer)",0.68,verified
+endorsement_signatures,192,Three endorsing-peer Ed25519 signatures of 64 bytes each.,43.74,verified
+block_metadata_overhead,48,Fabric block and transaction metadata overhead allocated to a record.,10.93,verified
