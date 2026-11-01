@@ -66,6 +66,10 @@ python3 -m venv .venv && . .venv/bin/activate && pip install -r gateway/requirem
 
 The fifth command runs the Go and Python validation checks, then starts the Fabric CA, enrolls the one-farm network, creates the channel, starts the orderers and peers, and deploys the HRBAC chaincode when the Fabric tools are installed.
 
+## Fabric configuration compatibility
+
+`network/configtx.yaml` specifies four independent organizations (NorthMSP, SouthMSP, EastMSP and WestMSP), a 100-transaction block limit, and a two-hour batch timeout. The existing bootstrap and Docker Compose scripts still provision one shared `FarmMSP` and therefore do **not** yet deploy this four-organization configuration. Four MSPs require separate enrollment/MSP directories, corresponding peer MSP IDs, channel administration, and updated chaincode deployment commands. The batch timeout is the maximum time a block waits for the batch cut when its transaction limit is not reached; it is not a per-transaction latency guarantee.
+
 ## Architecture
 
 The project models a single farm with 50 sensors distributed across four zone gateways. Sensors submit unsigned 8-byte CRT residue packets. Gateways reconstruct each quantity, apply Ed25519 signatures, and submit the signed records to a Hyperledger Fabric network. Chaincode enforces hierarchical role-based access control (HRBAC), zone membership, nonces, certificate status, and temporal expiry.
