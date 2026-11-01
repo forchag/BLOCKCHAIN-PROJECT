@@ -181,7 +181,7 @@ variation, so they are reported descriptively rather than tested.
 
 ### Economics (derived from the above)
 
-ROI 134 %, simple payback 0.74 years, five-year NPV at 8 % discount USD 15,454.
+The manuscript reports **99% ROI** and **1.01-year payback**, using an irrigation water tariff of **0.100 TND/m³ (approximately USD 0.032/m³)** rather than USD 0.60/m³. The earlier scenario totals in `data/data_fet_reference/experiments/economic_reconciliation.csv` still require an itemized reconciliation before they can substantiate these headline results. The five-year NPV is not independently confirmed under the corrected tariff.
 
 ## Enrolling a gateway
 
