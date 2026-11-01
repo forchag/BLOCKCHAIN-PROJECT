@@ -1,3 +1,4 @@
-area_ha,capex_usd,opex_annual_usd,gross_benefit_annual_usd,net_benefit_annual_usd,roi_pct,payback_years,basis
-0.8,3540.0,551.33,9507.73,8956.4,253.0,0.395,"Calculated from annualized block-1 tomato and pepper treatment-control differences in recorded water application, yield and labour. CAPEX is the full USD 3540 for all 50 deployed nodes."
-2.4,3540.0,1431.82,23309.32,21877.51,618.0,0.162,"Calculated from annualized tomato and pepper treatment-control differences across all three blocks in recorded water application, yield and labour. CAPEX is the full USD 3540 for all 50 deployed nodes."
+scenario,area_ha,capex_usd,opex_annual_usd,gross_benefit_annual_usd,net_benefit_annual_usd,roi_pct,payback_years,water_price_tnd_per_m3,water_price_usd_per_m3,status,basis
+manuscript_reported,,3540.0,,,,99.0,1.01,0.100,0.032,reported_pending_itemized_verification,"Manuscript headline figures; corrected local irrigation water tariff. Itemized economic inputs have not been reconciled."
+previous_block_1,0.8,3540.0,551.33,9507.73,8956.4,253.0,0.395,,,superseded_unreconciled,"Earlier block-1 calculation retained for audit. Do not cite as current result; its price assumptions need verification."
+previous_all_blocks,2.4,3540.0,1431.82,23309.32,21877.51,618.0,0.162,,,superseded_unreconciled,"Earlier three-block calculation retained for audit. Do not cite as current result; its price assumptions need verification."
