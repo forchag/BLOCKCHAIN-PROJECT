@@ -26,7 +26,39 @@
 #define QUANTITY_COUNT 5u
 #define PACKETS_PER_READING (QUANTITY_COUNT * CRT_RESIDUE_COUNT)
 
+#ifndef HUMIDITY_ADC_DRY
+#define HUMIDITY_ADC_DRY 0u
+#endif
+#ifndef HUMIDITY_ADC_WET
+#define HUMIDITY_ADC_WET 0u
+#endif
+#ifndef PH_ADC_ZERO
+#define PH_ADC_ZERO 0u
+#endif
+#ifndef PH_ADC_FOURTEEN
+#define PH_ADC_FOURTEEN 0u
+#endif
+#ifndef LIGHT_ADC_DARK
+#define LIGHT_ADC_DARK 0u
+#endif
+#ifndef LIGHT_ADC_65000_LUX
+#define LIGHT_ADC_65000_LUX 0u
+#endif
+
 static const char *TAG = "main";
+
+/* Two-point sensor calibration maps physical endpoints into documented CRT units. */
+static esp_err_t scale_adc(uint16_t raw, uint32_t at_zero, uint32_t at_max,
+                           uint32_t encoded_max, uint32_t *out) {
+  if (out == NULL || at_zero == at_max || at_zero > 4095u || at_max > 4095u)
+    return ESP_ERR_INVALID_STATE;
+  const int32_t numerator = ((int32_t)raw - (int32_t)at_zero) * (int32_t)encoded_max;
+  const int32_t denominator = (int32_t)at_max - (int32_t)at_zero;
+  const int32_t value = numerator / denominator;
+  if (value < 0 || value > (int32_t)encoded_max) return ESP_ERR_INVALID_SIZE;
+  *out = (uint32_t)value;
+  return ESP_OK;
+}
 
 static uint16_t node_id_from_mac(void) {
   uint8_t mac[6]; ESP_ERROR_CHECK(esp_read_mac(mac, ESP_MAC_WIFI_STA));
@@ -60,13 +92,21 @@ void app_main(void) {
   ESP_ERROR_CHECK(sensor_init()); ESP_ERROR_CHECK(lora_init());
   sensor_reading_t reading={0}; ESP_ERROR_CHECK(sensor_read(&reading));
   const uint16_t node_id=node_id_from_mac(); const uint32_t reading_id=esp_random();
-  const uint32_t quantities[QUANTITY_COUNT] = {
+  uint32_t quantities[QUANTITY_COUNT] = {
       scale_soil(reading.soil_moisture_raw),
-      scale_temperature(reading.temperature_centi_c),
-      reading.aux_adc_raw[0],
-      reading.aux_adc_raw[1],
-      reading.aux_adc_raw[2],
+      scale_temperature(reading.temperature_centi_c), 0, 0, 0,
   };
+  /* Do not label raw ADC counts as humidity, pH or illuminance. */
+  err = scale_adc(reading.aux_adc_raw[0], HUMIDITY_ADC_DRY,
+                  HUMIDITY_ADC_WET, 1000u, &quantities[2]);
+  if (err == ESP_OK) err = scale_adc(reading.aux_adc_raw[1], PH_ADC_ZERO,
+                  PH_ADC_FOURTEEN, 1400u, &quantities[3]);
+  if (err == ESP_OK) err = scale_adc(reading.aux_adc_raw[2], LIGHT_ADC_DARK,
+                  LIGHT_ADC_65000_LUX, 6500u, &quantities[4]);
+  if (err != ESP_OK) {
+    ESP_LOGE(TAG, "Humidity, pH and light calibration required; no invalid CRT records sent");
+    esp_deep_sleep(MIN_SLEEP_US);
+  }
   for (uint8_t quantity = 0; quantity < QUANTITY_COUNT; ++quantity) {
     transmit_quantity(node_id, reading_id, quantity, quantities[quantity]);
   }
