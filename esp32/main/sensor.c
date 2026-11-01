@@ -9,6 +9,9 @@
 
 static const char *TAG = "sensor";
 static adc_oneshot_unit_handle_t s_adc;
+static const adc_channel_t s_aux_channels[AUX_ADC_COUNT] = {
+    ADC_CHANNEL_3, ADC_CHANNEL_4, ADC_CHANNEL_5,
+};
 
 static void ow_drive_low(void) {
   gpio_set_direction(DS18B20_GPIO, GPIO_MODE_OUTPUT_OD);
@@ -108,6 +111,11 @@ esp_err_t sensor_init(void) {
     return err;
   }
 
+  for (size_t i = 0; i < AUX_ADC_COUNT; ++i) {
+    err = adc_oneshot_config_channel(s_adc, s_aux_channels[i], &chan_cfg);
+    if (err != ESP_OK) return err;
+  }
+
   gpio_config_t io_conf = {
       .pin_bit_mask = BIT64(DS18B20_GPIO),
       .mode = GPIO_MODE_INPUT_OUTPUT_OD,
@@ -129,6 +137,13 @@ esp_err_t sensor_read(sensor_reading_t *reading) {
     return err;
   }
   reading->soil_moisture_raw = (uint16_t)adc_raw;
+
+  for (size_t i = 0; i < AUX_ADC_COUNT; ++i) {
+    int value = 0;
+    err = adc_oneshot_read(s_adc, s_aux_channels[i], &value);
+    if (err != ESP_OK) return err;
+    reading->aux_adc_raw[i] = (uint16_t)value;
+  }
 
   err = read_ds18b20(&reading->temperature_centi_c);
   if (err != ESP_OK) {
