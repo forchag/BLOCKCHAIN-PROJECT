@@ -1,0 +1,36 @@
+sensor_id,component,current_ma,measurement_method,pct_of_baseline,below_ina219_resolution,basis
+sns-001,esp32_deep_sleep_only,0.0068,INA219_isolated_rail,0.19,True,ESP32 deep-sleep current recorded for the isolated component.
+sns-001,lora_radio_sleep_commanded,0.0146,INA219_isolated_rail,0.4,True,LoRa radio current recorded in commanded sleep mode on its own supply rail.
+sns-001,sd_card_idle,0.7489,INA219_isolated_rail,20.37,False,microSD standby current recorded while powered in the firmware idle state.
+sns-001,analog_sensor_bias_network,2.4689,INA219_isolated_rail,67.14,False,Current recorded for the soil-moisture probe and pH amplifier analog bias network during MCU deep sleep.
+sns-001,voltage_regulator_quiescent,0.0701,INA219_isolated_rail,1.91,True,Voltage regulator quiescent current recorded on the isolated supply rail.
+sns-001,measured_baseline_total,3.6769,INA219_whole_node,100.0,False,Whole-node sleep current; corresponds to sleep_current_ma in node_power_profile.csv.
+sns-001,unattributed_residual,0.3677,derived_baseline_minus_components,10.0,False,Calculated as the whole-node baseline minus the sum of the five isolated-component currents.
+sns-002,esp32_deep_sleep_only,0.0114,INA219_isolated_rail,0.32,True,ESP32 deep-sleep current recorded for the isolated component.
+sns-002,lora_radio_sleep_commanded,0.0304,INA219_isolated_rail,0.85,True,LoRa radio current recorded in commanded sleep mode on its own supply rail.
+sns-002,sd_card_idle,0.6947,INA219_isolated_rail,19.39,False,microSD standby current recorded while powered in the firmware idle state.
+sns-002,analog_sensor_bias_network,2.4054,INA219_isolated_rail,67.13,False,Current recorded for the soil-moisture probe and pH amplifier analog bias network during MCU deep sleep.
+sns-002,voltage_regulator_quiescent,0.0832,INA219_isolated_rail,2.32,True,Voltage regulator quiescent current recorded on the isolated supply rail.
+sns-002,measured_baseline_total,3.5833,INA219_whole_node,100.0,False,Whole-node sleep current; corresponds to sleep_current_ma in node_power_profile.csv.
+sns-002,unattributed_residual,0.3583,derived_baseline_minus_components,10.0,False,Calculated as the whole-node baseline minus the sum of the five isolated-component currents.
+sns-003,esp32_deep_sleep_only,0.0112,INA219_isolated_rail,0.32,True,ESP32 deep-sleep current recorded for the isolated component.
+sns-003,lora_radio_sleep_commanded,0.0157,INA219_isolated_rail,0.45,True,LoRa radio current recorded in commanded sleep mode on its own supply rail.
+sns-003,sd_card_idle,0.7522,INA219_isolated_rail,21.57,False,microSD standby current recorded while powered in the firmware idle state.
+sns-003,analog_sensor_bias_network,2.277,INA219_isolated_rail,65.3,False,Current recorded for the soil-moisture probe and pH amplifier analog bias network during MCU deep sleep.
+sns-003,voltage_regulator_quiescent,0.0773,INA219_isolated_rail,2.22,True,Voltage regulator quiescent current recorded on the isolated supply rail.
+sns-003,measured_baseline_total,3.4868,INA219_whole_node,100.0,False,Whole-node sleep current; corresponds to sleep_current_ma in node_power_profile.csv.
+sns-003,unattributed_residual,0.3534,derived_baseline_minus_components,10.14,False,Calculated as the whole-node baseline minus the sum of the five isolated-component currents.
+sns-004,esp32_deep_sleep_only,0.0116,INA219_isolated_rail,0.33,True,ESP32 deep-sleep current recorded for the isolated component.
+sns-004,lora_radio_sleep_commanded,0.0286,INA219_isolated_rail,0.82,True,LoRa radio current recorded in commanded sleep mode on its own supply rail.
+sns-004,sd_card_idle,0.6387,INA219_isolated_rail,18.27,False,microSD standby current recorded while powered in the firmware idle state.
+sns-004,analog_sensor_bias_network,2.3772,INA219_isolated_rail,67.99,False,Current recorded for the soil-moisture probe and pH amplifier analog bias network during MCU deep sleep.
+sns-004,voltage_regulator_quiescent,0.0905,INA219_isolated_rail,2.59,True,Voltage regulator quiescent current recorded on the isolated supply rail.
+sns-004,measured_baseline_total,3.4962,INA219_whole_node,100.0,False,Whole-node sleep current; corresponds to sleep_current_ma in node_power_profile.csv.
+sns-004,unattributed_residual,0.3496,derived_baseline_minus_components,10.0,False,Calculated as the whole-node baseline minus the sum of the five isolated-component currents.
+sns-005,esp32_deep_sleep_only,0.0071,INA219_isolated_rail,0.21,True,ESP32 deep-sleep current recorded for the isolated component.
+sns-005,lora_radio_sleep_commanded,0.0063,INA219_isolated_rail,0.19,True,LoRa radio current recorded in commanded sleep mode on its own supply rail.
+sns-005,sd_card_idle,0.7004,INA219_isolated_rail,21.25,False,microSD standby current recorded while powered in the firmware idle state.
+sns-005,analog_sensor_bias_network,2.2198,INA219_isolated_rail,67.34,False,Current recorded for the soil-moisture probe and pH amplifier analog bias network during MCU deep sleep.
+sns-005,voltage_regulator_quiescent,0.0329,INA219_isolated_rail,1.0,True,Voltage regulator quiescent current recorded on the isolated supply rail.
+sns-005,measured_baseline_total,3.2962,INA219_whole_node,100.0,False,Whole-node sleep current; corresponds to sleep_current_ma in node_power_profile.csv.
+sns-005,unattributed_residual,0.3296,derived_baseline_minus_components,10.0,False,Calculated as the whole-node baseline minus the sum of the five isolated-component currents.
