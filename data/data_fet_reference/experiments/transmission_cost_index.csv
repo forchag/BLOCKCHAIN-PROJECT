@@ -1,0 +1,6 @@
+mode,energy_ratio_of_max,airtime_ratio_of_max,processing_ratio_of_max,ctrans_normalized,cost_reduction_pct_vs_baseline
+crt,1.0,1.0,1.0,1.0,-834.1
+fixed_point,0.0885,0.0887,0.0128,0.0734,31.4
+huffman,0.0994,0.0995,0.1476,0.109,-1.8
+lzw,0.1123,0.1107,0.2626,0.1419,-32.6
+single_channel,0.1345,0.1326,0.0,0.107,0.0
