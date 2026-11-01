@@ -11,6 +11,16 @@ I describe each result by its actual basis:
 - **Calculated:** I compute it from stated inputs.
 - **Unverified:** I cannot establish its source from the available files.
 
+## Implementation and evidence status
+
+The manuscript describes sequential gateway polling and per-quantity acknowledgments. The current node firmware follows a periodic wake/transmit/sleep cycle. The available code has not been established as the original deployed firmware and does not implement the documented gateway polling/ACK exchange. A gateway poll packet definition, receiver, ACK validation and retry behavior remain necessary before claiming protocol parity.
+
+The firmware now defines scaling for humidity (0.1% RH), pH (0.01 pH) and light (10 lux), with mandatory instrument-specific ADC calibration. Calibration endpoints are not present in the archived files, so the firmware rejects uncalibrated transmissions instead of treating raw ADC counts as physical measurements. Calibration coefficients and sensor models must be supplied from the actual hardware.
+
+The power-profile CSV retains its recorded 120 mW entries. Approximately 100 mW is the manuscript's stated power assumption, not a verified correction to those entries. Average lifetime and transmit-energy fields must be reconciled against the original measurement conditions before updating the observations.
+
+For economics, the reported USD 3,497 annual net benefit divided by USD 3,540 investment is 98.79% ROI (99% rounded), and USD 3,540 divided by USD 3,497 is 1.0123 years (1.01 rounded). Gross benefits and operating costs remain unitemized.
+
 ## Open evidence questions
 
 - TODO(owner): Confirm which transaction export is the source of record. The 200-transaction audit extract differs from the field CSV in individual latency and energy values.
