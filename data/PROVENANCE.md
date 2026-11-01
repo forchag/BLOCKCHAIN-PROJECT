@@ -32,3 +32,12 @@ For economics, the reported USD 3,497 annual net benefit divided by USD 3,540 in
 - TODO(owner): Confirm the exact deployed five-quantity firmware and its original build configuration.
 
 I do not claim that the analysis scripts recover missing observations.
+
+## Reconciliation snapshot (2026-11-01)
+
+- **Five-quantity code:** Current `esp32/main/main.c` supports five scaled values and fifteen CRT residue packets, but requires actual calibration inputs for humidity, pH and light. This does not prove the original deployed firmware identity.
+- **Radio handshake:** The available node firmware sends on its 30-minute duty cycle; a historically deployed sequential polling and ACK exchange is not established. Gateway receive/reassembly exists, but a verified compatible node and gateway polling/ACK protocol with retries has not been demonstrated.
+- **Transmit power:** The reference node profile records 120 mW in `active_tx_power_mw`. The quoted 100 mW is close to the ratio of mean `tx_energy_mj_mean` to `tx_duration_s_per_cycle`, but whether that represents a different measurement boundary, active-state average, or a mistaken nominal field cannot be established. Both must remain labeled separately.
+- **Reading energy:** The manuscript quotes 184.8 mJ while the 50-node profile reportedly averages approximately 185.893 mJ. Different measurement sets must not be conflated without identifying their acquisition protocol, date, sample and boundary. No original entry has been overwritten.
+- **Economics:** The annual net benefit of USD 3,497 and CAPEX of USD 3,540 arithmetically imply 98.79% annual ROI and 1.0123-year payback. The water tariff assumption is 0.100 TND/m³ (about USD 0.032/m³). The original itemized gross benefit and operating-cost inputs have not been found in the reconciliation record.
+- **Historical identity:** Original binary hash, firmware build settings, full peer logs, and controlled-benchmark Fabric channel configuration remain unidentified. Later repository commits show changes to current code, not what ran during the experiment. 
