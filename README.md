@@ -115,7 +115,11 @@ cd tla && tlc AccessControl.tla -config AccessControl.cfg -workers 4
 
 ## ESP32 firmware packet format
 
-The ESP32 transmission loop encodes five quantities per reading with three CRT residues per quantity, for **15 eight-byte LoRa packets**. The reading contains soil moisture, DS18B20 temperature, and three additional raw ADC1 inputs (GPIO39, GPIO32, GPIO33). Each ADC input must be connected to its intended sensor and calibrated before its readings can be interpreted as a physical quantity. Unconnected ADC inputs do not provide valid sensor observations.
+The ESP32 transmission loop encodes five quantities per reading with three CRT residues per quantity, for **15 eight-byte LoRa packets**. The reading includes soil moisture, DS18B20 temperature and three ADC1 channels for humidity, pH and light (GPIO39, GPIO32 and GPIO33). Auxiliary readings pass through bounded two-point calibration into 0.1% RH, 0.01 pH and 10-lux CRT units. Actual sensor-specific calibration endpoints must be supplied as build definitions (`HUMIDITY_ADC_DRY`, `HUMIDITY_ADC_WET`, `PH_ADC_ZERO`, `PH_ADC_FOURTEEN`, `LIGHT_ADC_DARK`, `LIGHT_ADC_65000_LUX`). Without calibration, the firmware refuses transmission. These endpoints and the linear calibration assumption must be validated against the physical sensor hardware.
+
+**Protocol limitation:** Current node code still uses periodic 30-minute wake/transmit/sleep. It does not receive sequential gateway polls or wait for per-quantity ACKs. The manuscript's polling and ACK behavior cannot be claimed as implemented by this firmware until compatible gateway and node receive/retry paths are developed and verified.
+
+**Power-profile limitation:** `data/data_fet_reference/field/node_power_profile.csv` records 120 mW active-transmit entries. The manuscript's approximately 100 mW figure is not interchangeable with those values. The original power measurement basis and calculated lifetimes need reconciliation; recorded values have not been overwritten.
 
 The field dataset remains the source for the reported deployment measurements. The current ESP32 source describes the packet transmission implementation; the three auxiliary inputs do not by themselves establish which physical quantities were measured during the original deployment.
 
