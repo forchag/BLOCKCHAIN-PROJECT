@@ -1,60 +1,34 @@
-# Analysis pipeline
+# Analysis of the completed deployment
 
-Everything reported in the manuscript is derived from the traces in
-`data/raw/` by the scripts in this directory. No measured value is typed into
-the LaTeX source by hand.
+I use the scripts in this directory to examine the recorded deployment data and check the results reported in the manuscript. The input records are maintained in `data/raw/`. Calculations and statistical summaries remain traceable to those records.
 
-## Regenerate the paper's numbers
+## Results and supporting files
+
+| File | Description |
+|---|---|
+| `derive_results.py` | Statistical analysis of the recorded observations |
+| `derived_results.json` | Detailed numerical results |
+| `derived_results.md` | Summary of the reported findings |
+| `derive_policy_table.py` | Authorization matrix taken from the HRBAC chaincode |
+| `independent_check.py` | Separate verification of selected statistics |
+| `test_manuscript_consistency.py` | Checks the agreement between reported results and the analysis outputs |
+| `airtime_capacity.py` | Analytical LoRa airtime and capacity calculations |
+| `transmission/` | Transmission comparisons, service-rate analyses and the separately identified collision model |
+| `run_campaign.py` | Measurement procedure for a separately configured Fabric network |
+| `requirements.txt` | Python dependencies |
+
+The analysis writes numerical summaries in `analysis/` and the corresponding manuscript tables, figures and macros in `paper_iot/`.
+
+## Statistical methods
+
+I use Welch's t-test for two-group comparisons, one-way ANOVA for comparisons involving more than two groups, and effect sizes alongside confidence intervals. I use Student-t or percentile-bootstrap intervals for means as appropriate, order-statistic intervals for quantiles, and Wilson score intervals for proportions near their limits. The bootstrap seed is fixed at `20250801` for repeatability.
+
+## Reviewing the results
 
 ```sh
 python3 analysis/derive_results.py
+python3 analysis/independent_check.py
+python3 analysis/test_manuscript_consistency.py
 ```
 
-Reads `data/raw/*.csv` and writes:
-
-| Output | Purpose |
-|---|---|
-| `analysis/derived_results.json` | complete statistical summary, machine-readable |
-| `analysis/derived_results.md` | human-readable audit table |
-| `paper_iot/derived_numbers.tex` | LaTeX macros the manuscript expands |
-| `paper_iot/tables/*.tex` | complete table environments |
-| `paper_iot/figdata/*.dat` | pgfplots data tables |
-
-Then `bash paper_iot/build.sh` compiles the manuscript against them.
-
-## Statistical conventions
-
-- **Group comparisons** use Welch's *t*-test (no equal-variance assumption),
-  reported with the mean difference, its 95% CI, and Cohen's *d*. At these
-  sample sizes significance is nearly automatic, so the effect size is the
-  informative quantity.
-- **More than two groups** use one-way ANOVA — this is what establishes that
-  decision cost does not vary by operation type.
-- **CIs on means** use the Student-*t* interval for n ≥ 1000 and a percentile
-  bootstrap (10,000 resamples) below that.
-- **CIs on quantiles** use the exact order-statistic (binomial) construction,
-  so no distributional assumption is imposed on the latency tail.
-- **Proportions at or near 1.0** use Wilson score intervals. A
-  normal-approximation interval has zero width at p = 1 and would overstate
-  the evidence behind the 100% block rate.
-
-Bootstrap resampling is seeded (`SEED = 20250801`) so runs are reproducible.
-
-## Re-measure on your own Fabric network
-
-```sh
-python3 analysis/run_campaign.py --dry-run          # validate configuration
-python3 analysis/run_campaign.py --out-dir results/raw
-python3 analysis/derive_results.py --raw-dir results/raw \
-    --out-dir results/analysis
-```
-
-The campaign driver writes CSVs in the same schema as `data/raw/`, so the
-analysis consumes its output unchanged and the paper regenerates against
-independent measurements. It requires a bootstrapped Fabric network with the
-`peer` CLI on PATH.
-
-The driver covers the throughput, latency and decision-cost campaigns. It
-does **not** reproduce the energy or cryptographic-timing traces: those need
-the INA219 instrumentation and ESP32 bench described in the paper, and the
-driver analyses the real measured records consolidated from the two merged source folders.
+I keep measured observations distinct from analytical calculations and modeled results. The scripts for a separate measurement campaign do not substitute for the original deployment records.
