@@ -2,9 +2,15 @@
 
 Ranges are expressed as exclusive integer upper bounds. Every bound is at
 most 97*101 so an arbitrary residue pair is unique when the bound is enforced.
-The archived field CSV contains only soil moisture and temperature; the other
-definitions make the wire protocol testable but are not evidence that those
-quantities were logged in the deployment.
+Each complete sensor reading uses five quantity identifiers (0 through 4),
+with three CRT residues per quantity, for fifteen eight-byte LoRa packets.
+The configured quantities are soil moisture, temperature, humidity, pH, and
+light. Battery status (identifier 5) is an additional supported metadata
+quantity and is not included in the five-quantity packet count.
+
+The available archived field CSV has soil moisture and temperature columns;
+the five-quantity protocol definition alone does not establish historical
+measurements of the remaining quantities.
 """
 
 from dataclasses import dataclass
