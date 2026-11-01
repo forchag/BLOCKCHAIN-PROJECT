@@ -1557,10 +1557,10 @@ def emit_markdown(results: dict, path: Path) -> None:
     thr, sec = results["throughput"], results["security"]
     rev, eng = results["revocation"], results["energy"]
 
-    out = ["# Derived results audit",
+    out = ["# Deployment results and statistical summary",
            "",
-           "Calculated with `analysis/derive_results.py` from `data/raw/`. Every "
-           "number in the manuscript expands from these values.",
+           "I calculated these statistics from the records under `data/raw/` "
+           "using `analysis/derive_results.py`. The manuscript uses the corresponding numerical results.",
            "",
            "## Deployment",
            "",
