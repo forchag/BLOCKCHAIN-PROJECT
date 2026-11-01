@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Re-run the measurement campaign against a live Fabric network.
+"""Run an independent measurement campaign on a live Fabric network.
 
 The campaign writes CSVs using exactly the schema of ``data/raw/``, so the
 analysis pipeline consumes its output unchanged::
@@ -8,10 +8,8 @@ analysis pipeline consumes its output unchanged::
     python3 analysis/derive_results.py --raw-dir results/raw \
         --out-dir results/analysis --fig-dir paper_iot/figdata
 
-That second command regenerates every number, table and figure in the
-manuscript from the new measurements, which is what makes the reported
-results checkable on an independent installation rather than merely
-published.
+The second command calculates results from the new measurement records.
+These records remain separate from the completed deployment dataset.
 
 Requirements: a bootstrapped Fabric network with the ``peer`` CLI on PATH
 (see README quick start).  Three campaigns are covered:
@@ -312,7 +310,7 @@ def main() -> int:
         write_csv(args.out_dir / "raw_access_decisions.csv", rows)
         summarise(rows, "operation", "latency_ms")
 
-    print(f"\nNow regenerate the paper against these measurements:\n"
+    print(f"\nTo analyze these measurements:\n"
           f"  python3 analysis/derive_results.py --raw-dir {args.out_dir}")
     return 0
 
