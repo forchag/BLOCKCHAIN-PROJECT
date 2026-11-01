@@ -2,14 +2,11 @@
 """Independent re-derivation of two headline statistics, using a different
 implementation path than analysis/derive_results.py.
 
-Why this exists
----------------
-A reviewer premortem asked that the generative-AI declaration name
-something more concrete than "the authors reviewed the code": an
-independently coded check that a second implementation reaches the same
-number, not a re-read of the first one. This script recomputes two of the
-manuscript's primary statistics straight from the raw CSVs with a
-different toolchain than derive_results.py's:
+Purpose
+-------
+I use a separate calculation path to verify two manuscript statistics
+against the recorded CSV data. This script uses different statistical
+implementations from derive_results.py:
 
 * derive_results.py's peer-scaling Welch test uses this project's own
   hand-written ``welch()`` helper (analysis/derive_results.py); this
