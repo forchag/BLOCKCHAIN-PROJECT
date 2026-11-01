@@ -4,7 +4,7 @@ I can reconstruct documentation, analysis code and tests from files that remain.
 
 | Item | Status |
 | --- | --- |
-| Five-quantity ESP32 deployment firmware | Missing: the archived `esp32/main/main.c` sends only two quantities |
+| Five-quantity ESP32 deployment firmware | Current reference firmware supports five quantities and fifteen packets; original deployed firmware remains unconfirmed |
 | Existing CRT encoder and gateway decoder | Available |
 | Existing transmission analysis | Available |
 | Complete peer acquisition logs | Not deposited |
