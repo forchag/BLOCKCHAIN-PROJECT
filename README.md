@@ -109,22 +109,11 @@ Important implementation notes:
 cd tla && tlc AccessControl.tla -config AccessControl.cfg -workers 4
 ```
 
-## Scope of the published firmware
+## ESP32 firmware packet format
 
-`esp32/` is a reference implementation of the CRT residue transmission path. It
-demonstrates the wire format, the 9,797 two-residue bound enforcement, the radio
-configuration and the gateway-side signing boundary on two representative
-quantities (soil moisture and temperature). The deployed build encoded five
-quantities per reading, and the complete five-quantity records are in
-`data/raw/field/sensor_transactions.csv`.
+The ESP32 transmission loop encodes five quantities per reading with three CRT residues per quantity, for **15 eight-byte LoRa packets**. The reading contains soil moisture, DS18B20 temperature, and three additional raw ADC1 inputs (GPIO39, GPIO32, GPIO33). Each ADC input must be connected to its intended sensor and calibrated before its readings can be interpreted as a physical quantity. Unconnected ADC inputs do not provide valid sensor observations.
 
-All transmission figures in the manuscript are computed for the five-quantity
-reading: fifteen residue packets per reading, not the six this reference build
-emits. Regenerate them with:
-
-```sh
-python3 analysis/airtime_capacity.py --quantities 5
-```
+The field dataset remains the source for the reported deployment measurements. The current ESP32 source describes the packet transmission implementation; the three auxiliary inputs do not by themselves establish which physical quantities were measured during the original deployment.
 
 ## Reproducing the manuscript figures
 
