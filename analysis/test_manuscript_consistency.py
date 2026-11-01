@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
-"""Assert that the manuscript cannot disagree with the derived results.
+"""Check manuscript consistency against the recorded-data analysis.
 
-The paper claims every reported number is generated from the traces.  The
-check that actually establishes that is regeneration: run the pipeline into a
-scratch directory and compare its output byte-for-byte with the committed
-files.  Anything hand-edited, stale, or cross-assigned shows up as a diff.
+I verify the numerical outputs by running the analysis in a temporary
+directory and comparing them with the committed results. Differences identify
+values that require review.
 
 A weaker check that merely asks whether each macro value appears *somewhere*
 in the results would pass if two same-scale statistics were swapped, which is
@@ -55,7 +54,7 @@ NON_PIPELINE = {
 
 
 def regenerate_into(tmp: Path) -> subprocess.CompletedProcess:
-    """Run the pipeline, writing all generated artifacts under `tmp`."""
+    """Run the analysis and write its outputs under `tmp`."""
     return subprocess.run(
         [sys.executable, str(PIPELINE),
          "--out-dir", str(tmp / "analysis"),
@@ -126,7 +125,7 @@ def main() -> int:
         referenced |= set(re.findall(r"(?<!\\)\\([A-Z]\w{2,})", text))
     unknown = referenced - defined - NON_PIPELINE
     if unknown:
-        failures.append(f"macros used but not generated: {sorted(unknown)}")
+        failures.append(f"macros used but not defined: {sorted(unknown)}")
 
     if failures:
         print("FAIL")
