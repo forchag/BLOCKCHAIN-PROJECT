@@ -1,31 +1,84 @@
 Organizations:
-  - &FarmOrg
-    Name: FarmMSP
-    ID: FarmMSP
-    MSPDir: crypto-config/peerOrganizations/farm.tn/msp
+  - &NorthOrg
+    Name: NorthMSP
+    ID: NorthMSP
+    MSPDir: crypto-config/peerOrganizations/north.farm.tn/msp
     Policies:
       Readers:
         Type: Signature
-        Rule: "OR('FarmMSP.admin', 'FarmMSP.peer', 'FarmMSP.client')"
+        Rule: "OR('NorthMSP.admin', 'NorthMSP.peer', 'NorthMSP.client')"
       Writers:
         Type: Signature
-        Rule: "OR('FarmMSP.admin', 'FarmMSP.client')"
+        Rule: "OR('NorthMSP.admin', 'NorthMSP.client')"
       Admins:
         Type: Signature
-        Rule: "OR('FarmMSP.admin')"
+        Rule: "OR('NorthMSP.admin')"
       Endorsement:
         Type: Signature
-        Rule: "OR('FarmMSP.member')"
+        Rule: "OR('NorthMSP.peer')"
     AnchorPeers:
       - Host: peer0.north.farm.tn
         Port: 7051
+  - &SouthOrg
+    Name: SouthMSP
+    ID: SouthMSP
+    MSPDir: crypto-config/peerOrganizations/south.farm.tn/msp
+    Policies:
+      Readers:
+        Type: Signature
+        Rule: "OR('SouthMSP.admin', 'SouthMSP.peer', 'SouthMSP.client')"
+      Writers:
+        Type: Signature
+        Rule: "OR('SouthMSP.admin', 'SouthMSP.client')"
+      Admins:
+        Type: Signature
+        Rule: "OR('SouthMSP.admin')"
+      Endorsement:
+        Type: Signature
+        Rule: "OR('SouthMSP.peer')"
+    AnchorPeers:
       - Host: peer0.south.farm.tn
         Port: 8051
+  - &EastOrg
+    Name: EastMSP
+    ID: EastMSP
+    MSPDir: crypto-config/peerOrganizations/east.farm.tn/msp
+    Policies:
+      Readers:
+        Type: Signature
+        Rule: "OR('EastMSP.admin', 'EastMSP.peer', 'EastMSP.client')"
+      Writers:
+        Type: Signature
+        Rule: "OR('EastMSP.admin', 'EastMSP.client')"
+      Admins:
+        Type: Signature
+        Rule: "OR('EastMSP.admin')"
+      Endorsement:
+        Type: Signature
+        Rule: "OR('EastMSP.peer')"
+    AnchorPeers:
       - Host: peer0.east.farm.tn
         Port: 9051
+  - &WestOrg
+    Name: WestMSP
+    ID: WestMSP
+    MSPDir: crypto-config/peerOrganizations/west.farm.tn/msp
+    Policies:
+      Readers:
+        Type: Signature
+        Rule: "OR('WestMSP.admin', 'WestMSP.peer', 'WestMSP.client')"
+      Writers:
+        Type: Signature
+        Rule: "OR('WestMSP.admin', 'WestMSP.client')"
+      Admins:
+        Type: Signature
+        Rule: "OR('WestMSP.admin')"
+      Endorsement:
+        Type: Signature
+        Rule: "OR('WestMSP.peer')"
+    AnchorPeers:
       - Host: peer0.west.farm.tn
         Port: 10051
-
 Capabilities:
   Channel: &ChannelCapabilities
     V2_0: true
@@ -51,7 +104,7 @@ Application: &ApplicationDefaults
       Rule: "MAJORITY Endorsement"
     Endorsement:
       Type: Signature
-      Rule: "OR('FarmMSP.member')"
+      Rule: "MAJORITY Endorsement"
   Capabilities:
     <<: *ApplicationCapabilities
 
@@ -61,9 +114,9 @@ Orderer: &OrdererDefaults
     - orderer0.farm.tn:7050
     - orderer1.farm.tn:8050
     - orderer2.farm.tn:9050
-  BatchTimeout: 2s
+  BatchTimeout: 2h
   BatchSize:
-    MaxMessageCount: 10
+    MaxMessageCount: 100
     AbsoluteMaxBytes: 99 MB
     PreferredMaxBytes: 512 KB
   EtcdRaft:
@@ -123,15 +176,24 @@ Profiles:
     Orderer:
       <<: *OrdererDefaults
       Organizations:
-        - *FarmOrg
+        - *NorthOrg
+        - *SouthOrg
+        - *EastOrg
+        - *WestOrg
     Consortiums:
       FarmConsortium:
         Organizations:
-          - *FarmOrg
+          - *NorthOrg
+        - *SouthOrg
+        - *EastOrg
+        - *WestOrg
   FarmChannel:
     Consortium: FarmConsortium
     <<: *ChannelDefaults
     Application:
       <<: *ApplicationDefaults
       Organizations:
-        - *FarmOrg
+        - *NorthOrg
+        - *SouthOrg
+        - *EastOrg
+        - *WestOrg
