@@ -103,7 +103,7 @@ Application: &ApplicationDefaults
       Type: ImplicitMeta
       Rule: "MAJORITY Endorsement"
     Endorsement:
-      Type: Signature
+      Type: ImplicitMeta
       Rule: "MAJORITY Endorsement"
   Capabilities:
     <<: *ApplicationCapabilities
@@ -184,9 +184,9 @@ Profiles:
       FarmConsortium:
         Organizations:
           - *NorthOrg
-        - *SouthOrg
-        - *EastOrg
-        - *WestOrg
+          - *SouthOrg
+          - *EastOrg
+          - *WestOrg
   FarmChannel:
     Consortium: FarmConsortium
     <<: *ChannelDefaults
