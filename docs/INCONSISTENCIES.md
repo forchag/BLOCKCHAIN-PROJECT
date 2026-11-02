@@ -111,7 +111,7 @@ FGCS's 1.7 s / 63 TPS and V14's 1.22 s / 55.3 TPS can't both come from the same 
 40. `network/CONFIGURATION_PROVENANCE.md` refers to `network/field/configtx.yaml`; that directory does not exist.
 41. `docs/api.md`, `docs/architecture.md` and `docs/security.md` are empty (0 bytes).
 42. README cites `cd blochchain-fet` (misspelt, and not this repository's directory name) in every enrollment, test and flash command.
-43. An Ethereum stack (`contracts/*.sol`, `hardhat.config.js`, `backend/`, `frontend/`) sits alongside the Fabric system with no reference in either manuscript; `frontend/src/services/contract.js` targets Solidity contracts, not HRBAC chaincode.
+43. `contracts/`, `backend/`, `frontend/` and `test/` (an apparent Ethereum/Hardhat stack) contain 44 files, all 0 bytes. `hardhat.config.js` and the root `package.json` refer to them. Neither manuscript mentions this stack; treat it as dead scaffolding.
 44. `chaincode/hrbac` (deployed by `deploy-chaincode.sh`) fails the requirements oracle `chaincode/policy-requirements.json`; only `hrbac-corrected` passes. The deploy script still points at the defective package. **(known in V14 postmortem)**
 
 ## What a reproduction can claim today
